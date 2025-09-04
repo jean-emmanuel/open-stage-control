@@ -33,11 +33,11 @@
       }
     ],
     "space-before-function-paren": [
-      "error",
+      "warn",
       "never"
     ],
     "indent": [
-      "error",
+      "warn",
       4,
       {
         "SwitchCase": 1,
@@ -52,13 +52,13 @@
       "unix"
     ],
     "quotes": [
-      "error",
-      "single",
+      "warn",
+      "double",
        { "allowTemplateLiterals": true }
     ],
     "semi": [
-      "error",
-      "never"
+      "warn",
+      "always"
     ]
   },
   "globals": {
