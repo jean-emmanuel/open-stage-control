@@ -135,7 +135,7 @@
 
         | property | type |default | description |
         | --- | --- | --- | --- |
-            | <h6 id="dropdown_label">label<a class="headerlink" href="#dropdown_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Displayed text (defaults to current value). Keywords `%key` and `%value` will be replaced by the widget's selected key/value. |
+            | <h6 id="dropdown_label">label<sup><i class="fas fa-bolt" title="dynamic"></i></sup><a class="headerlink" href="#dropdown_label" title="Permanent link">#</a></h6> | `string`&vert;<br/>`boolean` | <code>"auto"</code> | Displayed text (defaults to current value). Keywords `%key` and `%value` will be replaced by the widget's selected key/value. |
             | <h6 id="dropdown_icon">icon<a class="headerlink" href="#dropdown_icon" title="Permanent link">#</a></h6> | `boolean` | <code>"true"</code> | Set to `false` to hide the dropdown icon |
             | <h6 id="dropdown_align">align<a class="headerlink" href="#dropdown_align" title="Permanent link">#</a></h6> | `string` | <code>"center"</code> | Set to `left` or `right` to change text alignment (otherwise center)<br/><br/>Choices: `center`, `left`, `right` |
 

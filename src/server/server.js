@@ -41,6 +41,7 @@ if (settings.read("client-options")) {
     }
 }
 
+
 var resolveDirs = theme.files.map((x) => path.dirname(x));
 resolveDirs = resolveDirs.filter((x, index) => {
     return resolveDirs.indexOf(x) === index;

@@ -137,7 +137,6 @@ class Dropdown extends MenuBase {
                 this.parseValues();
                 this.setValue(this.value);
                 return;
-        }
 
         return ret;
     }
