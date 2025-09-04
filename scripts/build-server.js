@@ -1,5 +1,13 @@
 var build = require('./build'),
-    babelify = require('babelify')
+    babelify = require('babelify'),
+    fs = require('fs'),
+    path = require('path')
+
+// Ensure output directory exists
+var outputDir = path.resolve(__dirname + '/../app/server')
+if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true })
+}
 
 build({
     input: '../src/server/index.js',

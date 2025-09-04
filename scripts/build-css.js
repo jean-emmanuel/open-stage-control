@@ -5,6 +5,10 @@ var sass = require('sass'),
 var indir = path.resolve(__dirname + '/../src/scss/'),
     outdir= path.resolve(__dirname + '/../app/assets/')
 
+// Create output directories if they don't exist
+fs.mkdirSync(outdir, { recursive: true })
+fs.mkdirSync(outdir + '/themes/', { recursive: true })
+
 fs.readdirSync(indir + '/themes/').forEach(file => {
 
     if (file.includes('.scss') && file !== 'default.scss') {

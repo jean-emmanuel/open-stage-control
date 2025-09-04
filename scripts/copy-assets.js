@@ -20,6 +20,21 @@ if (process.platform === 'darwin') {
     files.push(['../resources/images/logo_16x16.png', '../app/assets/logo_16x16.png'])
 }
 
+// Create necessary directories
+var directories = [
+    '../app',
+    '../app/assets',
+    '../app/assets/themes',
+    '../app/client',
+    '../app/client/workers',
+    '../app/launcher',
+    '../app/server'
+]
+
+for (var dir of directories) {
+    fs.mkdirSync(path.resolve(__dirname + '/' + dir), { recursive: true })
+}
+
 for (var i in files) {
     cpr(...files[i].map(f => path.resolve(__dirname + '/' + f)), {
         overwrite: true
@@ -63,3 +78,7 @@ var clientHtml = fs.readFileSync(path.resolve(__dirname + '/../src/html/client.h
     .replace(/\$\{([^\}]+)\}/g, (m, p1)=>{return appJson[p1]})
 
 fs.writeFileSync(path.resolve(__dirname + '/../app/client/index.html'), clientHtml)
+
+// Generate main entry point
+var mainJs = "require('./server/open-stage-control-server')\n"
+fs.writeFileSync(path.resolve(__dirname + '/../app/index.js'), mainJs)

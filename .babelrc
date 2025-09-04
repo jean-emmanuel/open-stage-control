@@ -1,13 +1,16 @@
 {
-  "presets": [
-    ["@babel/env", {
-      "targets": {
-        "ios": "10.3",
-        "chrome": "60"
-      },
-      "useBuiltIns": "usage",
-      "corejs": 3
-    }]
-  ],
-  "plugins": ["@babel/plugin-proposal-object-rest-spread"]
+    "presets": [
+        [
+            "@babel/env",
+            {
+                "targets": {
+                    "ios": "10.3",
+                    "chrome": "60"
+                },
+                "useBuiltIns": "usage",
+                "corejs": 3
+            }
+        ]
+    ],
+    "plugins": ["@babel/plugin-transform-object-rest-spread"]
 }
