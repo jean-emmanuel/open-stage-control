@@ -12,7 +12,11 @@ packager({
     dir: path.resolve(__dirname + "/../app"),
     name: appData.name,
     platform: all ? ["linux", "win32", "darwin"] : process.env.PLATFORM,
-    arch: process.env.ARCH || "x64",
+    arch:
+        process.env.ARCH ||
+        (process.platform === "darwin" && process.arch === "arm64"
+            ? "arm64"
+            : "x64"),
     electronVersion:
         process.env.ARCH === "armv7l"
             ? "1.7.11"
