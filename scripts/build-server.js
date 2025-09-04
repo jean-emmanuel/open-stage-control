@@ -1,9 +1,17 @@
-var build = require('./build'),
-    babelify = require('babelify')
+var build = require("./build"),
+    babelify = require("babelify"),
+    fs = require("fs"),
+    path = require("path");
+
+// Ensure output directory exists
+var outputDir = path.resolve(__dirname + "/../app/server");
+if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+}
 
 build({
-    input: '../src/server/index.js',
-    output: '../app/server/open-stage-control-server.js',
+    input: "../src/server/index.js",
+    output: "../app/server/open-stage-control-server.js",
     options: {
         commonDir: false,
         ignoreMissing: true,
@@ -17,11 +25,11 @@ build({
             electron: true,
             global: true
         },
-        browserField: false,
+        browserField: false
     },
-    ignore: 'serialport',
+    ignore: "serialport",
     exclude: [
-        'electron',
-        './fsevents.node'  // osx binary module, to be copied as is
+        "electron",
+        "./fsevents.node" // osx binary module, to be copied as is
     ]
-})()
+})();
