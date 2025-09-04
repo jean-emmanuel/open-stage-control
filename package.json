@@ -2,11 +2,18 @@
     "name": "open-stage-control",
     "productName": "Open Stage Control",
     "description": "Libre and modular OSC / MIDI controller",
-    "version": "1.29.8",
+    "version": "1.29.9-dev",
     "author": {
         "name": "Jean-Emmanuel Doucet",
         "email": "jean-emmanuel@ammd.net"
     },
+    "contributors": [
+        {
+            "name": "Alex Ruger",
+            "email": "alexrugermusic@gmail.com",
+            "url": "https://github.com/rewgs"
+        }
+    ],
     "keywords": [
         "osc",
         "midi",
@@ -118,5 +125,8 @@
         "semi": true,
         "singleQuote": false,
         "useTabs": false
+    },
+    "volta": {
+        "node": "20.19.4"
     }
 }

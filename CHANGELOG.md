@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.29.9-dev
+
+### branch `build-improvements`
+
+- Changed build scripts so that all assets in `app` are either generated or copied to it. `app` can now be deleted and re-created via `npm run build`.
+
 ## 1.29.8
 
 - client
@@ -9,7 +15,6 @@
 
 - launcher
     - add tray icon and menu (landed in 1.29.6 accidentally), disabled by default (can be enabled from the launcher's menu)
-
 
 ## 1.29.6
 
@@ -30,7 +35,6 @@
     - keyboard: regression (1.27.5) breaking `velocity` property
     - editor: retain scroll position in code editors
     - cli: regression (1.28) preventing from setting options from a terminal on windows
-
 
 ## 1.29.4
 
@@ -122,8 +126,6 @@
     - inspector: `F2` now focuses the `html` property in the inpector if `label` is not present
     - tree: add `mod + f` to focus the search input
 
-
-
 ## 1.27.5
 
 - bug fixes
@@ -166,7 +168,7 @@
 
 - bug fixes
     - server: `fullscreen` option not working when `read-only` is set
-    - led and text widgets not client-syncing  
+    - led and text widgets not client-syncing
     - patchbay: `address` not working properly when set to `auto`
     - patchbay: `ignoreDefaults` not working properly
     - editor: missing position indicator in color picker pad
@@ -175,8 +177,7 @@
 - mobile
     - apply root's (or themes) background color the the browser's topbar when possible
 
-
-##  1.27.0
+## 1.27.0
 
 - bug fixes
     - app address / qr code not updating when network changes
@@ -240,7 +241,7 @@
     - rare issue that made the last widget(s) in a container disappear when other widgets in the same container had a specific property dependency pattern
 
 - remote control
-    - `/EDIT*` commands sent by a custom module are not affected by the server's `read-only` option anymore  
+    - `/EDIT*` commands sent by a custom module are not affected by the server's `read-only` option anymore
 
 - widgets
     - input: allow using a number in `numeric` to specify stepping value for mousewheel interaction
@@ -275,12 +276,12 @@
 ## 1.25.3
 
 - bug fixes
-     - input: rendering issues with big font sizes
-     - panel: tab rendering issue when initialized with a non-numeric value
-     - panel: minor style issue in tab navigation bar
-     - scripting: scripting functions not working inside `browseFile()` callback
-     - scripting: using `external: true` in `set()` should prevent affected widget from sending any message
-     - button: inconsistent value in `push` mode with `decoupled` enabled when setting value from script
+    - input: rendering issues with big font sizes
+    - panel: tab rendering issue when initialized with a non-numeric value
+    - panel: minor style issue in tab navigation bar
+    - scripting: scripting functions not working inside `browseFile()` callback
+    - scripting: using `external: true` in `set()` should prevent affected widget from sending any message
+    - button: inconsistent value in `push` mode with `decoupled` enabled when setting value from script
 
 ## 1.25.2
 
@@ -301,7 +302,7 @@
 
 - bug fixes
     - multixy: doubleTap not working on touch devices
-    - button: `x` and `y` variables not passed to `onValue` when `doubleTap` is true on touch devices  
+    - button: `x` and `y` variables not passed to `onValue` when `doubleTap` is true on touch devices
     - advanced syntax: update issue with clones using their own value in their properties
     - client: minor keyboard shortcut issues
     - panel: mitigate client synchronization issue with scrollbars
@@ -319,7 +320,6 @@
 - bug fixes
     - editor: regression breaking widget context menu actions under "Position" submenu
     - touch devices: touchend event not fired on elements removed/detached during touchstart/touchmove callbacks (caused issues when switching tabs using a button inside a tab)
-
 
 ## 1.24.1
 
@@ -568,9 +568,9 @@
 ## 1.16.1
 
 - bug fixes
-     - eq widgets not properly converted when importing v0 sessions
-     - image paths with url queries not loaded properly
-     - @{} syntax not returning truncated value according to the widget's precision property (fixed for primitive values only, object values are still returned as is)
+    - eq widgets not properly converted when importing v0 sessions
+    - image paths with url queries not loaded properly
+    - @{} syntax not returning truncated value according to the widget's precision property (fixed for primitive values only, object values are still returned as is)
 
 ## 1.16.0
 
@@ -659,7 +659,7 @@
 ## 1.14.6
 
 - bug fixes
-    - inspector: script editor: cursor alignment issue in indented lines  
+    - inspector: script editor: cursor alignment issue in indented lines
     - clone: prevent freeze and print an error when attempting to create a circular clone
     - modal: regression on android that prevents focusing input widgets in modals
 
@@ -701,7 +701,7 @@
 
 - bug fixes
     - context-menu: double click issue in submenus on small touch screens
-    - clone/fragment: broken onDraw / onTouch scripts if cloned widget is a canvas   
+    - clone/fragment: broken onDraw / onTouch scripts if cloned widget is a canvas
 
 ## 1.14.0, 1.14.1
 
@@ -715,7 +715,7 @@
     - added `onCreate` script property to all widgets
     - added `onTouch` script to widgets that supported the touch state variable in scripts (now deprecated)
     - script: added `onKeyboard` property, removed `event` property
-    - canvas: expose additional touch event informations (`radiusX`, `radiusY`, `rotationAngle` and iOS-only  `altitudeAngle`, `azimuthAngle` and `touchType`)
+    - canvas: expose additional touch event informations (`radiusX`, `radiusY`, `rotationAngle` and iOS-only `altitudeAngle`, `azimuthAngle` and `touchType`)
 
 - scripting
     - special keyword `this` now returns the string `"this"`
@@ -738,7 +738,7 @@
 ## 1.13.1
 
 - bug fixes
-    - editor: data loss when leaving the editor's focus with no modifications  
+    - editor: data loss when leaving the editor's focus with no modifications
 
 ## 1.13.0
 
@@ -749,7 +749,7 @@
     - new code editor for `script`, `touch`, `draw` and `props` properties with syntax highlighting, line numbers, etc
 
 - scripting
-    - `set()`: add an option to prevent target widget's script  
+    - `set()`: add an option to prevent target widget's script
 
 - widgets
     - root: add `hideMenu` property
@@ -838,7 +838,6 @@
 - misc
     - (built-in client only) add `nofocus` client option to prevent the client window from taking focus unless a text input or a dropdown is clicked.
 
-
 ## 1.9.10
 
 - bug fixes
@@ -886,7 +885,7 @@
     - editor: fix "Bring to front" and "Send to back" context menu actions
 
 - ui
-  - add keyboard shortcuts `mod + "+"` and `mod + "-"` to control zoom level
+    - add keyboard shortcuts `mod + "+"` and `mod + "-"` to control zoom level
 
 - widgets
     - input: add `numeric` property (allows numeric values only and displays numeric keyboard on mobile devices)
@@ -988,7 +987,7 @@
 
 ## 1.9.0
 
-**Warning** Sessions saved with this version will not open in older versions (sessions saved with older version will open in this version).  
+**Warning** Sessions saved with this version will not open in older versions (sessions saved with older version will open in this version).
 
 - bug fixes
     - remote-root option not applied on resources loaded by the client app (css images, etc)
@@ -1015,7 +1014,7 @@
     - regression breaking style attribute in html property
 
 - misc
-    - faster local zoom  
+    - faster local zoom
 
 ## 1.8.14
 
@@ -1032,7 +1031,6 @@
 - misc
     - inspector: move `script` property to `scripting` category
     - ui: minor style tweaks
-
 
 ## 1.8.13
 
@@ -1096,9 +1094,9 @@
 
 - bug fixes
     - script: issue when using the `options` argument in `set()` (options leaked to subsequent set() calls in the script)
-     - multixy: `decimals` property not applied
-     - multixy: spring behavior not working until all points are released  
-     - custom module: prevent require() from reading submodules files each time and instead return the object in memory
+    - multixy: `decimals` property not applied
+    - multixy: spring behavior not working until all points are released
+    - custom module: prevent require() from reading submodules files each time and instead return the object in memory
 
 ## 1.8.8
 
@@ -1107,7 +1105,6 @@
 
 - windows
     - remove `ctrl+w` shortcut for closing a window (use `alt+f4` instead)
-
 
 ## 1.8.7
 
@@ -1157,7 +1154,6 @@
     - server: return http 404 error when a user-requested resource is not found instead of keeping a pending request
     - modal: `visible` property not applied correctly
 
-
 - project tree
     - add an input for filtering displayed widget by id
 
@@ -1169,7 +1165,6 @@
 
 - widgets
     - html property: allow "href" attribute on "a" elements
-
 
 ## 1.8.1
 
@@ -1239,14 +1234,13 @@
     - modal/button: prevent error when `label` is updated
 
 - widgets
-    - encoder: add  `ticks` property back
+    - encoder: add `ticks` property back
 
 ## 1.7.2
 
 - bug fixes
     - midi: mtc parsing error
     - custom module: hot reload cache issue on windows
-
 
 ## 1.7.1
 
@@ -1265,14 +1259,13 @@ As of this version, packages except the `node` package are bundled with a midi b
 
 **Changelog**
 
-
 - bug fixes
     - editor: missing context menu (copy, paste) in inspector inputs
     - widgets: osc listeners not resolving "auto" address
     - cli: `ELECTRON_RUN_AS_NODE` headless mode not working without `--no-gui` option
     - ios: clone widget not laid out properly in horizontal panels
     - ui: missing vertical scrollbar when root's height overflows the workspace
-    - server: provide readable error when a file requested by the client file is not found  
+    - server: provide readable error when a file requested by the client file is not found
     - tab: content not drawn when changing visible property
     - matrix: addresses not generated property when matrix' address is `auto`
 
@@ -1340,7 +1333,7 @@ As of this version, packages except the `node` package are bundled with a midi b
 - remote control
     - add `/STATE/OPEN` and `/STATE/SAVE` commands
     - ignore unsaved changes when loading a session with `/SESSION/OPEN`
-    - resolve relative file paths against `remote-root` setting  
+    - resolve relative file paths against `remote-root` setting
 
 ## 1.5.3
 
@@ -1411,7 +1404,7 @@ As of this version, packages except the `node` package are bundled with a midi b
 ## 1.3.0
 
 - bug fixes
-    - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)  
+    - editor: hide impossible actions from context-menu (eg adding widgets in tab containers)
     - editor: error when selecting a tab/root widget while a property field contains unsubmitted changes
     - panel: layout issue with tabs & lineWidth property
     - input: extend focusable area
@@ -1421,7 +1414,6 @@ As of this version, packages except the `node` package are bundled with a midi b
     - add support for sending sysex bytes as integers
     - allow sending any system message (eg MIDI time code)
     - add support for receiving MIDI time code messages (as raw sysex) (requires adding the `mtc` flag to the midi configuration)
-
 
 ## 1.2.1
 
@@ -1470,7 +1462,6 @@ As of this version, packages except the `node` package are bundled with a midi b
     - script: broken `storage.getItem` and `storage.removeItem`
     - regression breaking `remote-root` option when starting with the launcher
 
-
 ## 1.0.3
 
 - bug fixes
@@ -1482,12 +1473,11 @@ As of this version, packages except the `node` package are bundled with a midi b
 - midi
     - add support for named ports in midi configuration
 
-
 ## 1.0.2
 
 - bug fixes
     - broken scrolling on iPhone iOS 13
-    - window geometry issue  
+    - window geometry issue
 
 ## 1.0.1
 
@@ -1496,7 +1486,7 @@ As of this version, packages except the `node` package are bundled with a midi b
 
 ## 1.0.0
 
-*This list is not exhaustive*
+_This list is not exhaustive_
 
 - compatibility
     - dropped support for iOS 9
@@ -1530,7 +1520,6 @@ As of this version, packages except the `node` package are bundled with a midi b
     - prevent interaction with widgets when `shift` or `ctrl` is held
     - ensure @{} bindings are always updated upon edition
 
-
 - widget changes
     - all: removed `label` option except for buttons, tabs and modals (one should use `text` widgets if needed)
     - all: removed support for `null` and `"self"` targets
@@ -1540,7 +1529,7 @@ As of this version, packages except the `node` package are bundled with a midi b
     - all: multiple style properties to control visibility, colors, alphas and padding
     - all: added `interaction` (=> css `pointer-events: none;`)
     - all: added `expand` (=> css `flex: 1;`)
-    - all:  prevent html tags in label
+    - all: prevent html tags in label
     - pads: removed `split` property -> use custom-module or script instead
     - root: can contain widgets or tabs
     - panels: added `layout`, `justify` and `gridTemplate` to help managing layouts (especially responsive ones)
@@ -1579,7 +1568,6 @@ As of this version, packages except the `node` package are bundled with a midi b
     - `keys`: merged with `script`
     - `gyroscope`: not compatible since chrome 74 unless o-s-c goes HTTPS
 
-
 - remote control
     - removed /TABS
     - added /NOTIFY
@@ -1598,7 +1586,6 @@ As of this version, packages except the `node` package are bundled with a midi b
     - added `storage` object, proxy to the document's localStorage object (allows storing data that persist after refresh/close (cleared with the browser's cache)
     - added `setTimeout`, `clearTimeout`, `setInterval`, `clearInterval` function proxies with an extra `id` argument (they clear automatically when called multiple times and upon widget removal. `id` is scoped to the widget)
 
-
 - state
     - quickstate (store/recall from menu) is now stored in the clients cache and persists after refresh/close (cleared with the browser's cache)
 
@@ -1606,7 +1593,6 @@ As of this version, packages except the `node` package are bundled with a midi b
     - `settings.read(name)`: `name` is now the long name of command-line options (not a camelCased one)
     - `receive()`: optional last argument to pass extra options such as `clientId`
     - client id persist upon page refresh and can be set manually with the client url option `id`
-
 
 - launcher
     - config save/load
@@ -1620,7 +1606,6 @@ As of this version, packages except the `node` package are bundled with a midi b
     - added cli-only `--cache-dir` and `--config-file`
     - added `--authentication` option
     - added `--use-ssl` option
-
 
 - misc
     - canvas: better visibility checks to avoid unnecessary draw calls
