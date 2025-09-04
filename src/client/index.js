@@ -1,46 +1,38 @@
-document.addEventListener('DOMContentLoaded', function(event) {
+document.addEventListener("DOMContentLoaded", function(event) {
+    require("./globals");
+    require("./stacktrace");
 
-    require('./globals')
-    require('./stacktrace')
+    var locales = require("./locales");
 
-    var locales = require('./locales')
+    DOM.init();
 
-    DOM.init()
-
-    var uiLoading = require('./ui/ui-loading')
-    uiLoading(locales('loading_server'))
+    var uiLoading = require("./ui/ui-loading");
+    uiLoading(locales("loading_server"));
 
     function init() {
+        setTimeout(() => {
+            var ipc = require("./ipc/"),
+                backup = require("./backup");
 
-        setTimeout(()=>{
+            ipc.init();
 
-            var ipc = require('./ipc/'),
-                backup = require('./backup')
+            require("./ui/init");
 
-            ipc.init()
+            document.title = TITLE;
 
+            ipc.send("open", { hotReload: backup.exists });
 
-            require('./ui/init')
+            window.onunload = () => {
+                ipc.send("close");
+            };
 
-            document.title = TITLE
-
-            ipc.send('open', {hotReload: backup.exists})
-
-            window.onunload = ()=>{
-                ipc.send('close')
-            }
-
-            backup.load()
-
-
-        }, 100)
-
+            backup.load();
+        }, 100);
     }
 
     if (document.requestStorageAccess) {
-        document.requestStorageAccess().then(init, init)
+        document.requestStorageAccess().then(init, init);
     } else {
-        init()
+        init();
     }
-
-})
+});

@@ -1,5 +1,4 @@
 #drag-resize {
-
     --color-fill: var(--color-accent);
     --color-stroke: var(--color-accent);
 
@@ -10,9 +9,10 @@
     left: var(--left);
 
     &:before {
-        content:"";
+        content: "";
         position: absolute;
-        top:0;left:0;
+        top: 0;
+        left: 0;
         width: calc(var(--width) - 2rem);
         height: calc(var(--height) - 2rem);
         border: 1rem solid var(--color-accent);
@@ -21,10 +21,9 @@
     }
 
     .helper {
-
         position: absolute;
-        top:0;
-        left:0;
+        top: 0;
+        left: 0;
         width: var(--width);
         height: var(--height);
         pointer-events: none;
@@ -45,7 +44,6 @@
     }
 
     .handle {
-
         $size: 10rem;
 
         position: absolute;
@@ -61,33 +59,27 @@
         }
 
         &.e {
-
             top: calc(var(--height) / 2);
             left: var(--width);
             margin-left: -$size;
             margin-top: -$size / 2;
             cursor: e-resize;
-
         }
 
         &.se {
-
             top: var(--height);
             left: var(--width);
             margin-left: -$size;
             margin-top: -$size;
             cursor: se-resize;
-
         }
 
         &.s {
-
             top: var(--height);
             left: calc(var(--width) / 2);
             margin-left: -$size / 2;
             margin-top: -$size;
             cursor: s-resize;
-
         }
 
         &.full {
@@ -97,8 +89,7 @@
             left: 0;
             opacity: 0.1;
             z-index: 1;
-            margin:0;
+            margin: 0;
         }
     }
-
 }

@@ -1,117 +1,100 @@
-var UiWidget = require('./ui-widget'),
-    Rgb = require('../widgets/pads/rgb'),
-    html = require('nanohtml'),
-    chroma = require('chroma-js'),
-    resize = require('../events/resize')
-
+var UiWidget = require("./ui-widget"),
+    Rgb = require("../widgets/pads/rgb"),
+    html = require("nanohtml"),
+    chroma = require("chroma-js"),
+    resize = require("../events/resize");
 
 class ColorPicker extends UiWidget {
-
     constructor() {
+        super({});
 
-        super({})
+        this.name = "";
+        this.value = "";
 
-        this.name = ''
-        this.value = ''
-
-        this.rgb = new Rgb({props: {
-            ...Rgb.defaults()._props(),
-            type: 'rgb',
-            width: 'auto',
-            height: 'auto',
-            alphaStroke: 0,
-            snap: true,
-            alpha: true
-        }, parent: this})
-        this.rgb.container.classList.add('not-editable')
+        this.rgb = new Rgb({
+            props: {
+                ...Rgb.defaults()._props(),
+                type: "rgb",
+                width: "auto",
+                height: "auto",
+                alphaStroke: 0,
+                snap: true,
+                alpha: true
+            },
+            parent: this
+        });
+        this.rgb.container.classList.add("not-editable");
 
         this.container = html`
-            <div class="color-picker">
-                ${this.rgb.container}
-             </div>
-        `
+            <div class="color-picker">${this.rgb.container}</div>
+        `;
 
-        this.rgb.on('value-changed', (e)=>{
-            e.stopPropagation = true
-            this.value = chroma(this.rgb.value).hex()
-            this.trigger('change', {preventHistory: true})
-        })
+        this.rgb.on("value-changed", (e) => {
+            e.stopPropagation = true;
+            this.value = chroma(this.rgb.value).hex();
+            this.trigger("change", { preventHistory: true });
+        });
 
-        this.rgb.on('dragend', (e)=>{
-            this.value = chroma(this.rgb.value).hex()
-            this.trigger('change')
-        })
+        this.rgb.on("dragend", (e) => {
+            this.value = chroma(this.rgb.value).hex();
+            this.trigger("change");
+        });
 
+        this.opened = 0;
 
-        this.opened = 0
+        this.escKeyHandler = ((e) => {
+            if (e.key == "Escape") this.close();
+        }).bind(this);
 
-        this.escKeyHandler = ((e)=>{
-            if (e.key == 'Escape') this.close()
-        }).bind(this)
-
-        this.enterKeyHandler = ((e)=>{
-            if (e.key == 'Enter') this.confirm()
-        }).bind(this)
-
+        this.enterKeyHandler = ((e) => {
+            if (e.key == "Enter") this.confirm();
+        }).bind(this);
     }
 
     open() {
+        this.parentNode.appendChild(this.container);
+        resize.check(this.rgb.container);
+        this.opened = 1;
 
-        this.parentNode.appendChild(this.container)
-        resize.check(this.rgb.container)
-        this.opened = 1
-
-        document.addEventListener('keydown', this.escKeyHandler)
-        document.addEventListener('keydown', this.enterKeyHandler)
+        document.addEventListener("keydown", this.escKeyHandler);
+        document.addEventListener("keydown", this.enterKeyHandler);
     }
 
     close() {
-
         if (this.parentNode && this.parentNode.contains(this.container)) {
-            this.parentNode.removeChild(this.container)
+            this.parentNode.removeChild(this.container);
         }
-        this.setName()
-        this.opened = 0
+        this.setName();
+        this.opened = 0;
 
-        document.removeEventListener('keydown', this.escKeyHandler)
-        document.removeEventListener('keydown', this.enterKeyHandler)
+        document.removeEventListener("keydown", this.escKeyHandler);
+        document.removeEventListener("keydown", this.enterKeyHandler);
     }
 
     confirm() {
-
-        this.value = chroma(this.rgb.getValue(true)).css('rgba')
-        this.trigger('change')
-        this.close()
-
+        this.value = chroma(this.rgb.getValue(true)).css("rgba");
+        this.trigger("change");
+        this.close();
     }
 
     isVisible() {
-
-        return true
-
+        return true;
     }
 
-    setName(n = '') {
-
-        this.name = n
-
+    setName(n = "") {
+        this.name = n;
     }
 
     setValue(v) {
+        if (v === "transparent") v = "#00000000";
 
-        if (v === 'transparent') v = '#00000000'
-
-        this.rgb.setValue(chroma(v).rgba())
-
+        this.rgb.setValue(chroma(v).rgba());
     }
 
     setParent(node) {
-
-        if (this.opened && node !== this.parentNode) this.close()
-        this.parentNode = node
-
+        if (this.opened && node !== this.parentNode) this.close();
+        this.parentNode = node;
     }
-
 }
 
-module.exports = ColorPicker
+module.exports = ColorPicker;

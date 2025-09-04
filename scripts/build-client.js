@@ -49,25 +49,22 @@ var bundle = build({
     ]
 });
 
+// Declare functions at module scope
+var send, hotBundle;
 if (watch) {
     var ansiHTML = require("ansi-html"),
         WS = require("../node_modules/ws");
 
-    function send(msg, data) {
+    send = function (msg, data) {
         var ipc = new WS("ws://127.0.0.1:8080/dev/");
         ipc.on("error", () => {});
         ipc.on("open", () => {
             ipc.send(JSON.stringify([msg, data]));
             ipc.close();
         });
-    }
+    };
 
-    bundle.b.on("update", hotBundle);
-    bundle.b.on("log", function (msg) {
-        console.warn("\x1b[36m%s\x1b[0m", msg);
-    });
-
-    function hotBundle() {
+    hotBundle = function () {
         var output = bundle();
 
         output.on("end", (err) => {
@@ -82,7 +79,7 @@ if (watch) {
                 '<div class="error-stack">' +
                     ansiHTML(
                         err.stack
-                            .replace(/^    at .*/gm, "") // remove useless stack
+                            .replace(/^ {4}at .*/gm, "") // remove useless stack
                             .replace(
                                 new RegExp(
                                     path.resolve(__dirname + "/.."),
@@ -96,7 +93,12 @@ if (watch) {
                     "</div>"
             );
         });
-    }
+    };
+
+    bundle.b.on("update", hotBundle);
+    bundle.b.on("log", function (msg) {
+        console.warn("\x1b[36m%s\x1b[0m", msg);
+    });
 
     hotBundle();
 } else {

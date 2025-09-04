@@ -1,5 +1,4 @@
 var build = require("./build"),
-    babelify = require("babelify"),
     fs = require("fs"),
     path = require("path");
 

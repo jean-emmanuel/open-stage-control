@@ -19,7 +19,7 @@ $padding: 8rem;
     }
     .file-list {
         overflow-y: auto;
-        flex:1;
+        flex: 1;
         background: var(--color-background);
         padding: 0 $padding;
         margin: 1rem 0;
@@ -30,14 +30,14 @@ $padding: 8rem;
         line-height: 40rem;
         input {
             position: absolute;
-            width:100%;
+            width: 100%;
             height: 100%;
             opacity: 0;
             cursor: pointer;
         }
         .label {
             position: absolute;
-            width:100%;
+            width: 100%;
             height: 100%;
             pointer-events: none;
             white-space: nowrap;
@@ -51,10 +51,10 @@ $padding: 8rem;
         input:checked + .label {
             color: var(--color-widget);
             &:before {
-                content:"";
+                content: "";
                 position: absolute;
-                left:-$padding;
-                right:-$padding;
+                left: -$padding;
+                right: -$padding;
                 height: 100%;
                 background: var(--color-widget);
                 opacity: 0.1;
@@ -83,7 +83,7 @@ $padding: 8rem;
             pointer-events: none;
         }
         .save-as {
-            flex:1;
+            flex: 1;
             border: 0;
             margin: 1rem;
             padding: 0 10rem;

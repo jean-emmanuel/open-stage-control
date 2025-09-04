@@ -2,7 +2,7 @@
 
 ::-webkit-scrollbar {
     width: var(--scrollbar-size);
-    height:var(--scrollbar-size);
+    height: var(--scrollbar-size);
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -28,7 +28,8 @@
     }
 }
 
-::-webkit-scrollbar-button:decrement:start, ::-webkit-scrollbar-button:increment:end {
+::-webkit-scrollbar-button:decrement:start,
+::-webkit-scrollbar-button:increment:end {
     height: 0;
     width: 0;
 }
@@ -38,7 +39,6 @@
     width: 0rem;
     background: var(--color-background);
 }
-
 
 // Firefox
 

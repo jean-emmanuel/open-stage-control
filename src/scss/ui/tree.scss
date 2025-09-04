@@ -1,5 +1,4 @@
 #osc-tree {
-
     --alpha-fill: 0.5;
     --widget-padding: -1rem;
 
@@ -21,20 +20,19 @@
         flex: 1;
         position: relative;
         overflow: auto;
-        padding-left:$padding + 4rem;
-        padding-right:$padding;
-        border-top:1rem solid var(--color-background);
+        padding-left: $padding + 4rem;
+        padding-right: $padding;
+        border-top: 1rem solid var(--color-background);
         box-shadow: 0 1rem 0 0 inset rgba(white, 0.025);
-        padding-top:1rem;
+        padding-top: 1rem;
 
-        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
-            border-color: var(--color-background)!important;
+        &::-webkit-scrollbar-thumb,
+        &::-webkit-scrollbar-track-piece {
+            border-color: var(--color-background) !important;
         }
-
     }
 
     ol {
-
         list-style: none;
         position: relative;
         padding-left: 16rem;
@@ -54,8 +52,8 @@
     }
 
     li {
-
-        position: relative;user-select: none;
+        position: relative;
+        user-select: none;
         > ol {
             // display: none;
             display: block;
@@ -73,7 +71,6 @@
             > li {
                 display: list-item;
             }
-
         }
 
         &.sortable-ghost {
@@ -82,7 +79,7 @@
             margin-top: 4rem;
             color: transparent;
             overflow: hidden;
-            display: list-item!important
+            display: list-item !important;
         }
 
         > i {
@@ -122,11 +119,10 @@
         .fa-lock {
             position: relative;
             margin-left: 4rem;
-            top:0;
+            top: 0;
             font-size: 80%;
             opacity: 0.8;
         }
-
     }
 
     .toggle {
@@ -162,8 +158,12 @@
             animation: tree-editor-blink 0.51s steps(3) infinite;
         }
         @keyframes tree-editor-blink {
-            from {--color-fill: var(--color-warning)}
-            to {--color-fill: inherit}
+            from {
+                --color-fill: var(--color-warning);
+            }
+            to {
+                --color-fill: inherit;
+            }
         }
     }
 
@@ -179,7 +179,6 @@
         }
     }
 
-
     .filter {
         display: block;
         font-family: $font;
@@ -194,7 +193,7 @@
     }
 
     .filter-active .filter-hide {
-        display:none;
+        display: none;
     }
 
     .fragment-mode-warning {
@@ -206,9 +205,8 @@
         border-bottom: 1rem solid var(--color-background);
         display: none;
     }
-
 }
 
 .fragment-mode .fragment-mode-warning {
-    display: block!important;
+    display: block !important;
 }

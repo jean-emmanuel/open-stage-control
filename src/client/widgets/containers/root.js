@@ -1,26 +1,26 @@
-var Panel = require('./panel'),
-    StaticProperties = require('../mixins/static_properties'),
-    {updateMobileThemeColor} = require('../../ui/utils'),
-    mainMenu
+var Panel = require("./panel"),
+    StaticProperties = require("../mixins/static_properties"),
+    { updateMobileThemeColor } = require("../../ui/utils"),
+    mainMenu;
 
-class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {
-
+class Root extends StaticProperties(Panel, {
+    visible: true,
+    label: false,
+    id: "root"
+}) {
     static description() {
-
-        return 'Main (unique) container'
-
+        return "Main (unique) container";
     }
 
     static defaults() {
-
         return super.defaults().extend({
             widgets: {
-                visible: null,
+                visible: null
             },
             geometry: {
                 left: null,
                 top: null,
-                expand: null,
+                expand: null
             },
             style: {
                 colorFill: null,
@@ -28,90 +28,83 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
                 alphaStroke: null,
                 alphaFillOff: null,
                 lineWidth: null,
-                _separator_root_style: 'Root style',
-                hideMenu: {type: 'boolean', value: false, help: 'Set to `true` to hide the main menu button.'},
-
+                _separator_root_style: "Root style",
+                hideMenu: {
+                    type: "boolean",
+                    value: false,
+                    help: "Set to `true` to hide the main menu button."
+                }
             },
             scripting: {
-                onPreload: {type: 'script', value: '', editor: 'javascript', help: ['Script executed before any other widget is created. See <a href="https://openstagecontrol.ammd.net/docs/widgets/scripting/">documentation</a>.']},
+                onPreload: {
+                    type: "script",
+                    value: "",
+                    editor: "javascript",
+                    help: [
+                        "Script executed before any other widget is created. See <a href=\"https://openstagecontrol.ammd.net/docs/widgets/scripting/\">documentation</a>."
+                    ]
+                }
             }
-        })
-
+        });
     }
 
     constructor(options) {
+        options.root = true;
+        options.props.id = "root";
 
-        options.root = true
-        options.props.id = 'root'
+        super(options);
 
-        super(options)
+        this.widget.classList.add("root");
+        this.root = true;
 
-        this.widget.classList.add('root')
-        this.root = true
+        this.checkMenuVisibility();
 
-        this.checkMenuVisibility()
-
-        DOM.each(this.widget, '> .navigation', (el)=>{
-            el.classList.add('main')
-        })
-
+        DOM.each(this.widget, "> .navigation", (el) => {
+            el.classList.add("main");
+        });
     }
 
     checkMenuVisibility() {
+        mainMenu = mainMenu || require("../../ui/main-menu");
 
-        mainMenu = mainMenu || require('../../ui/main-menu')
-
-        if (this.getProp('hideMenu')) {
-            mainMenu.container.style.display = 'none'
+        if (this.getProp("hideMenu")) {
+            mainMenu.container.style.display = "none";
         } else {
-            mainMenu.container.style.display = ''
+            mainMenu.container.style.display = "";
         }
-
     }
 
     isVisible() {
-
-        return true
-
+        return true;
     }
 
     onPropChanged(propName, options, oldPropValue) {
-
-        if (super.onPropChanged(...arguments)) return true
+        if (super.onPropChanged(...arguments)) return true;
 
         switch (propName) {
-
-            case 'hideMenu':
-                this.checkMenuVisibility()
-                return
-            case 'colorBg':
-                updateMobileThemeColor(this)
-
+            case "hideMenu":
+                this.checkMenuVisibility();
+                return;
+            case "colorBg":
+                updateMobileThemeColor(this);
         }
-
     }
 
-
     setContainerStyles(styles) {
+        super.setContainerStyles(styles);
 
-        super.setContainerStyles(styles)
-
-        this.container.classList.toggle('auto-height', this.getProp('height') === 'auto')
-
+        this.container.classList.toggle(
+            "auto-height",
+            this.getProp("height") === "auto"
+        );
     }
 
     setCssVariables() {
-
-        super.setCssVariables()
-        updateMobileThemeColor(this)
-
+        super.setCssVariables();
+        updateMobileThemeColor(this);
     }
-
 }
 
-Root.dynamicProps = Root.prototype.constructor.dynamicProps.concat(
-    'hideMenu'
-)
+Root.dynamicProps = Root.prototype.constructor.dynamicProps.concat("hideMenu");
 
-
-module.exports = Root
+module.exports = Root;

@@ -1,99 +1,96 @@
-var html = require('nanohtml')
+var html = require("nanohtml");
 
 class UiSelectArea {
+    constructor(selector, callback) {
+        this.startX = 0;
+        this.startY = 0;
+        this.curX = 0;
+        this.curY = 0;
 
-    constructor(selector, callback){
+        this.rectCoords = [0, 0, 0, 0];
+        this.rectSize = [0, 0];
+        this.elements = [];
 
-        this.startX = 0
-        this.startY = 0
-        this.curX = 0
-        this.curY = 0
+        this.rect = document.body.appendChild(
+            html`<div class="select-area hidden"></div>`
+        );
 
-        this.rectCoords = [0, 0, 0, 0]
-        this.rectSize = [0, 0]
-        this.elements = []
+        this.selector = selector;
+        this.callback = callback;
 
-        this.rect = document.body.appendChild(html`<div class="select-area hidden"></div>`)
-
-        this.selector = selector
-        this.callback = callback
-
-        this.boundMousedown = this.mousedown.bind(this)
-        this.boundMousemove = this.mousemove.bind(this)
-        this.boundMouseup = this.mouseup.bind(this)
-
+        this.boundMousedown = this.mousedown.bind(this);
+        this.boundMousemove = this.mousemove.bind(this);
+        this.boundMouseup = this.mouseup.bind(this);
     }
 
     mousedown(e) {
-        if (!e.shiftKey || event.altKey || event.button === 2 || (event.shiftKey && event.metaKey)) return
-        this.startX = this.curX = e.clientX
-        this.startY = this.curY = e.clientY
-        this.down = true
-        this.updateRect()
+        if (
+            !e.shiftKey ||
+            event.altKey ||
+            event.button === 2 ||
+            (event.shiftKey && event.metaKey)
+        )
+            return;
+        this.startX = this.curX = e.clientX;
+        this.startY = this.curY = e.clientY;
+        this.down = true;
+        this.updateRect();
     }
 
     mousemove(e) {
-        if (!this.down) return
-        e.preventDefault()
-        e.stopPropagation()
-        this.curX = e.clientX
-        this.curY = e.clientY
-        this.updateRect()
+        if (!this.down) return;
+        e.preventDefault();
+        e.stopPropagation();
+        this.curX = e.clientX;
+        this.curY = e.clientY;
+        this.updateRect();
     }
 
     mouseup(e) {
-        if (!this.down) return
-        this.down = false
+        if (!this.down) return;
+        this.down = false;
 
         if (this.rectSize[0] > 0 && this.rectSize[1] > 0) {
-            this.callback(this.getElements(), e)
-            this.rect.classList.add('hidden')
+            this.callback(this.getElements(), e);
+            this.rect.classList.add("hidden");
         }
 
-        this.elements = []
-
+        this.elements = [];
     }
 
     updateRect() {
-
         var x0 = Math.min(this.startX, this.curX),
             y0 = Math.min(this.startY, this.curY),
             x1 = Math.max(this.startX, this.curX),
             y1 = Math.max(this.startY, this.curY),
             w = x1 - x0,
-            h = y1 - y0
+            h = y1 - y0;
 
         if (w < 1 || h < 1) {
-            this.rect.classList.add('hidden')
+            this.rect.classList.add("hidden");
         } else {
-            this.rect.classList.remove('hidden')
-            this.rect.setAttribute('style', `width:${w}px;height:${h}px;left:${x0}px;top:${y0}px`)
+            this.rect.classList.remove("hidden");
+            this.rect.setAttribute(
+                "style",
+                `width:${w}px;height:${h}px;left:${x0}px;top:${y0}px`
+            );
         }
 
-        this.rectSize = [w, h]
-        this.rectCoords = [x0, x1, y0, y1]
-
+        this.rectSize = [w, h];
+        this.rectCoords = [x0, x1, y0, y1];
     }
 
-    getElements(){
-
+    getElements() {
         var [x0, x1, y0, y1] = this.rectCoords,
             startEl = document.elementFromPoint(this.startX, this.startY),
-            elements = [startEl]
+            elements = [startEl];
 
-        this.elements = DOM.each(document, this.selector, (el)=>{
-
-            var {left, right, top, bottom} = el.getBoundingClientRect()
-            if (!(
-                left > x1  ||
-                right < x0 ||
-                top > y1   ||
-                bottom < y0
-            )) {
-                if (el !== startEl) elements.push(el)
+        this.elements = DOM.each(document, this.selector, (el) => {
+            var { left, right, top, bottom } = el.getBoundingClientRect();
+            if (!(left > x1 || right < x0 || top > y1 || bottom < y0)) {
+                if (el !== startEl) elements.push(el);
             }
-
-        })
+        });
 
         // slower implementation...
         // for (var x = x0; x <= x1; x += 10) {
@@ -103,26 +100,20 @@ class UiSelectArea {
         //     }
         // }
 
-        return elements
-
+        return elements;
     }
 
     enable() {
-
-        document.addEventListener('pointerdown',  this.boundMousedown)
-        document.addEventListener('pointermove', this.boundMousemove, true)
-        document.addEventListener('pointerup', this.boundMouseup)
-
+        document.addEventListener("pointerdown", this.boundMousedown);
+        document.addEventListener("pointermove", this.boundMousemove, true);
+        document.addEventListener("pointerup", this.boundMouseup);
     }
 
     disable() {
-
-        document.removeEventListener('pointerdown',  this.boundMousedown)
-        document.removeEventListener('pointermove', this.boundMousemove, true)
-        document.removeEventListener('pointerup', this.boundMouseup)
-
+        document.removeEventListener("pointerdown", this.boundMousedown);
+        document.removeEventListener("pointermove", this.boundMousemove, true);
+        document.removeEventListener("pointerup", this.boundMouseup);
     }
-
 }
 
-module.exports = UiSelectArea
+module.exports = UiSelectArea;

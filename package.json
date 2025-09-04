@@ -117,6 +117,7 @@
         "node": ">=16 <=20"
     },
     "devDependencies": {
+        "prettier": "^3.6.2",
         "watchify": "4.0.0"
     },
     "prettier": {

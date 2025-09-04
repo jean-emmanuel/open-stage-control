@@ -1,3 +1,3 @@
-var zeroconf = require('bonjour')()
+var zeroconf = require("bonjour")();
 
-module.exports = zeroconf
+module.exports = zeroconf;

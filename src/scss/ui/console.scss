@@ -13,9 +13,10 @@ $padding: 8rem;
     display: flex;
     position: relative;
     flex-direction: column;
-    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
-        border-left-color: var(--color-background)!important;
-        border-top-color: var(--color-background)!important;
+    ::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-track-piece {
+        border-left-color: var(--color-background) !important;
+        border-top-color: var(--color-background) !important;
     }
 
     .actions {
@@ -28,7 +29,7 @@ $padding: 8rem;
             color: var(--color-text);
             opacity: 0.25;
             &:hover {
-                opacity: 0.5
+                opacity: 0.5;
             }
         }
         i {
@@ -40,7 +41,6 @@ $padding: 8rem;
         flex-direction: column;
         font-family: $font-mono;
     }
-
 }
 
 .editor-disabled #osc-console.minimized {
@@ -58,12 +58,11 @@ osc-console {
     height: 100%;
     padding: $padding 0;
     overflow-y: auto;
-    border-bottom: 1rem dotted rgba(255,255,255,0.2);
+    border-bottom: 1rem dotted rgba(255, 255, 255, 0.2);
     user-select: text;
 }
 
 osc-console-message {
-
     user-select: text;
     cursor: text;
     display: block;
@@ -72,7 +71,7 @@ osc-console-message {
     padding-left: $padding + 18rem;
     padding-right: $padding;
     padding-bottom: 6rem;
-    border-bottom: 1rem dotted rgba(255,255,255,0.1);
+    border-bottom: 1rem dotted rgba(255, 255, 255, 0.1);
     &:before {
         font-family: FontAwesome;
         width: 12rem;
@@ -82,12 +81,12 @@ osc-console-message {
         left: $padding;
     }
     &.log:before {
-        content: "\f105\f105"
+        content: "\f105\f105";
     }
     &.error {
         color: var(--color-error);
         &:before {
-            content: "x"
+            content: "x";
         }
     }
     &.input {
@@ -97,13 +96,13 @@ osc-console-message {
     }
     &.output {
         &:before {
-            content: "\f104\f104"
+            content: "\f104\f104";
         }
 
         &.undefined {
             // color: var(--color-text)
             opacity: 0.5;
-            border-bottom: 1rem dotted rgba(255,255,255,0.20);
+            border-bottom: 1rem dotted rgba(255, 255, 255, 0.2);
         }
 
         &.value {
@@ -111,7 +110,6 @@ osc-console-message {
             opacity: 1;
         }
     }
-
 
     margin-bottom: 4rem;
 
@@ -138,7 +136,7 @@ osc-console-message {
         user-select: inherit;
     }
 
-    flex:1;
+    flex: 1;
 }
 
 osc-console-input {

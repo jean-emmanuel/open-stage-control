@@ -1,5 +1,4 @@
 .led-container {
-
     width: 30rem;
     height: 30rem;
 
@@ -10,10 +9,11 @@
     will-change: --opacity;
 
     inner {
-
-
         --color-fill: var(--color-led);
-        --alpha-fill: calc(var(--alpha-fill-off) + var(--opacity) * (var(--alpha-fill-on) - var(--alpha-fill-off)));
+        --alpha-fill: calc(
+            var(--alpha-fill-off) + var(--opacity) *
+                (var(--alpha-fill-on) - var(--alpha-fill-off))
+        );
 
         position: relative;
         flex: 1;
@@ -22,16 +22,15 @@
         @include pseudo-stroke();
         @include pseudo-fill();
 
-        &:before, &:after {
+        &:before,
+        &:after {
             border-radius: var(--border-radius);
             will-change: opacity;
         }
     }
-
 }
 
 .text-container {
-
     width: 90rem;
     height: 60rem;
 
@@ -49,11 +48,9 @@
 
         display: flex;
         width: 100%;
-
     }
 
     label {
-
         opacity: var(--alpha-fill-on);
         width: 100%;
         height: 100%;
@@ -86,13 +83,13 @@
             word-break: break-all;
         }
         &.wrap-soft {
-            word-break: normal
+            word-break: normal;
         }
         &.vertical {
             transform: rotate(180deg);
             text-overflow: ellipsis;
-            -webkit-writing-mode:vertical-rl;
-            writing-mode:vertical-rl;
+            -webkit-writing-mode: vertical-rl;
+            writing-mode: vertical-rl;
             i {
                 transform: rotate(180deg);
                 writing-mode: initial;

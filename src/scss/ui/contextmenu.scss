@@ -1,11 +1,10 @@
 $line-height: 30rem;
 
 .context-menu {
-
     --widget-padding: 0rem;
     --alpha-fill: 1;
 
-    position:fixed;
+    position: fixed;
     z-index: 9999999;
     background: var(--color-context-menu);
     box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.15) inset;
@@ -21,24 +20,24 @@ $line-height: 30rem;
 
     .context-menu {
         position: absolute;
-        left:100%;
-        top:-3rem;
-        opacity:0;
+        left: 100%;
+        top: -3rem;
+        opacity: 0;
         pointer-events: none;
         margin-left: -1rem;
         &:before {
-            content:"";
+            content: "";
             position: absolute;
-            top:0;
-            bottom:0;
-            left:-2rem;
-            width:2rem;
+            top: 0;
+            bottom: 0;
+            left: -2rem;
+            width: 2rem;
         }
     }
     > .item {
         padding-left: 30rem;
         padding-right: 30rem;
-        position:relative;
+        position: relative;
         cursor: pointer;
         display: flex;
         flex-direction: row;
@@ -60,7 +59,7 @@ $line-height: 30rem;
             color: var(--color-context-menu);
         }
         &.has-sub:before {
-            content:"\f105";
+            content: "\f105";
             display: block;
             font-family: FontAwesome;
             text-align: right;
@@ -74,7 +73,7 @@ $line-height: 30rem;
             pointer-events: none;
             opacity: 0.5;
         }
-        &.toggle:before  {
+        &.toggle:before {
             content: "";
             display: block;
             font-family: FontAwesome;
@@ -90,7 +89,7 @@ $line-height: 30rem;
             text-align: right;
         }
         &.toggle.on:before {
-            content:"\f00c";
+            content: "\f00c";
         }
         .shortcut {
             display: inline-block;
@@ -105,7 +104,7 @@ $line-height: 30rem;
             pointer-events: none;
         }
     }
-    .separator{
+    .separator {
         margin: 2rem 1rem;
         height: 1rem;
         background-color: var(--color-context-menu-text);

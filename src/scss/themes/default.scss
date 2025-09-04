@@ -1,15 +1,12 @@
-$font: 'Roboto';
-$font-mono: 'Roboto Mono';
+$font: "Roboto";
+$font-mono: "Roboto Mono";
 $font-menu: sans-serif;
 
-
-@import '../colors/nord';
+@import "../colors/nord";
 
 :root {
-
     --nav-height: 40rem;
     --grid-width: 10;
-
 
     --color-background: #21252b;
     --color-ui-foreground: hsl(219, 14%, 23%);
@@ -20,7 +17,6 @@ $font-menu: sans-serif;
     --color-text: #{$nord4};
     --color-text-solid: #{$nord6};
 
-
     --color-accent: #6db5fd;
     --color-error: #{$nord11};
     --color-warning: #{$nord13};
@@ -29,15 +25,13 @@ $font-menu: sans-serif;
     --color-context-menu: #{$nord6};
     --color-context-menu-text: #{$nord1};
 
-
     --line-width: 1rem;
 
     --alpha-scrollbar: 0.25;
     --alpha-scrollbar-on: 0.75;
     --scrollbar-size: 12rem;
 
-    --color-grid: rgba(0,0,0, 0.1);
+    --color-grid: rgba(0, 0, 0, 0.1);
     --color-notification: #{rgba(black, 0.8)};
     --color-widget: var(--color-accent);
-
 }

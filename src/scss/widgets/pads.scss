@@ -6,8 +6,8 @@
     height: 200rem;
 }
 
-.xy-container, .multixy-container {
-
+.xy-container,
+.multixy-container {
     --alpha-fill-off: 0.05;
     --alpha-fill: var(--alpha-fill-off);
     --widget-padding: 20rem;
@@ -25,11 +25,9 @@
         width: 100%;
         text-align: center;
     }
-
 }
 
 .multixy-container {
-
     --point-size: 20rem;
 
     canvas {
@@ -40,15 +38,12 @@
         width: 100%;
         pointer-events: none;
     }
-
 }
 
 .rgb-container {
-
     --widget-padding: 4rem;
 
     > inner {
-
         display: grid;
 
         @include pseudo-stroke($z: 1);
@@ -57,9 +52,7 @@
 
         padding: calc(var(--line-width) + var(--widget-spacing));
 
-        grid-template:
-            "a a b" auto / 1fr;
-
+        grid-template: "a a b" auto / 1fr;
     }
 
     &.contains-alpha > inner {
@@ -80,14 +73,25 @@
         grid-area: a;
 
         background-color: red;
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%), linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        background-image:
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 1) 100%
+            ),
+            linear-gradient(
+                to right,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0) 100%
+            );
         --color-fill: black;
         --color-stroke: white;
         --alpha-fill-off: 1;
         --alpha-fill-on: 1;
         --alpha-stroke: 1;
         inner {
-            &:after, &:before {
+            &:after,
+            &:before {
                 content: none;
             }
         }
@@ -105,13 +109,29 @@
         --widget-padding: 0rem;
 
         &:after {
-            content:"";
+            content: "";
             position: absolute;
             top: 0;
             left: 2rem;
             right: 2rem;
             bottom: 0;
-            background: linear-gradient(to bottom, #F00, #FF0080, #F0F, #8000FF, #00F, #0080FF, #0FF, #00FF80, #0F0, #80FF00, #FF0, #FF8000, #F00) repeat scroll 0% 0%;
+            background: linear-gradient(
+                    to bottom,
+                    #f00,
+                    #ff0080,
+                    #f0f,
+                    #8000ff,
+                    #00f,
+                    #0080ff,
+                    #0ff,
+                    #00ff80,
+                    #0f0,
+                    #80ff00,
+                    #ff0,
+                    #ff8000,
+                    #f00
+                )
+                repeat scroll 0% 0%;
             opacity: 0.75;
             z-index: -1;
         }
@@ -119,39 +139,35 @@
 
     .alpha {
         grid-area: c;
-        height: auto!important;
-        width: auto!important;
+        height: auto !important;
+        width: auto !important;
         --alpha-stroke: 0;
         --alpha-fill-off: 0.1;
         --alpha-fill-on: 0.25;
         --widget-padding: 0rem;
     }
-
 }
 
-
 .canvas-container {
+    --alpha-fill-off: 0.05;
+    --alpha-fill-on: 0.75;
+    --alpha-fill: var(--alpha-fill-off);
+    --widget-padding: 0rem;
+    .html {
+        pointer-events: auto;
+    }
 
-   --alpha-fill-off: 0.05;
-   --alpha-fill-on: 0.75;
-   --alpha-fill: var(--alpha-fill-off);
-   --widget-padding: 0rem;
-   .html {
-       pointer-events: auto;
-   }
+    inner {
+        position: relative;
+        flex: 1;
+        display: flex;
 
-   inner {
-       position: relative;
-       flex: 1;
-       display: flex;
+        @include pseudo-fill($z: -1);
+        @include pseudo-stroke();
+    }
 
-       @include pseudo-fill($z: -1);
-       @include pseudo-stroke();
-   }
-
-   canvas {
-       width: 100%;
-       text-align: center;
-   }
-
+    canvas {
+        width: 100%;
+        text-align: center;
+    }
 }

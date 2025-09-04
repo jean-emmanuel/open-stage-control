@@ -1,63 +1,51 @@
-var UiWidget = require('./ui-widget'),
-    ContextMenu = require('./context-menu')
+var UiWidget = require("./ui-widget"),
+    ContextMenu = require("./context-menu");
 
 class UiToolbar extends UiWidget {
-
     constructor(options) {
-
-        super(options)
+        super(options);
 
         this.menu = new ContextMenu({
             position: options.position
-        })
-        this.opened = false
-        this.entries = options.entries
+        });
+        this.opened = false;
+        this.entries = options.entries;
 
-        this.menu.bindShortcuts(this.entries)
+        this.menu.bindShortcuts(this.entries);
 
-        this.container.addEventListener('fast-click', (e)=>{
-            if (this.opened) this.close()
-            else this.open(e)
-        })
+        this.container.addEventListener("fast-click", (e) => {
+            if (this.opened) this.close();
+            else this.open(e);
+        });
 
-        this.menu.on('close', ()=>{
-            setTimeout(()=>{
-                this.opened = false
-                this.toggleState()
-            })
-        })
-
+        this.menu.on("close", () => {
+            setTimeout(() => {
+                this.opened = false;
+                this.toggleState();
+            });
+        });
     }
 
     open(e) {
+        if (this.opened) return;
+        this.menu.open(e.detail, this.entries);
 
-        if (this.opened) return
-        this.menu.open(e.detail, this.entries)
-
-        this.opened = true
-        this.toggleState()
-
-
+        this.opened = true;
+        this.toggleState();
     }
 
     close() {
+        if (this.opened) return;
 
-        if (this.opened) return
+        this.menu.close();
 
-        this.menu.close()
-
-        this.opened = false
-        this.toggleState()
-
+        this.opened = false;
+        this.toggleState();
     }
 
     toggleState() {
-
-        this.container.classList.toggle('on', this.opened)
-
+        this.container.classList.toggle("on", this.opened);
     }
-
 }
 
-
-module.exports = UiToolbar
+module.exports = UiToolbar;

@@ -1,12 +1,12 @@
 #notifications {
     position: fixed;
-    bottom:0;
-    right:0;
+    bottom: 0;
+    right: 0;
     display: flex;
     flex-direction: column-reverse;
     z-index: 9999999;
-    padding:10rem;
-    width:300rem;
+    padding: 10rem;
+    width: 300rem;
     &:empty {
         display: none;
     }
@@ -22,8 +22,8 @@
         align-items: center;
         &.remove {
             animation: toast_fade-out 0.2s forwards;
-            height: 0!important;
-            margin-top: 0!important;
+            height: 0 !important;
+            margin-top: 0 !important;
         }
         i {
             margin-left: 10rem;
@@ -43,15 +43,26 @@
             line-height: normal;
         }
     }
-
 }
 
 @keyframes toast_fade-in {
-    from {opacity: 0; transform: rotateX(90deg)}
-    to {opacity: 1; transform: rotateX(0)}
+    from {
+        opacity: 0;
+        transform: rotateX(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
 }
 
 @keyframes toast_fade-out {
-    from {opacity: 1; transform: rotateX(0)}
-    to {opacity: 0; transform: rotateX(90deg)}
+    from {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: rotateX(90deg);
+    }
 }

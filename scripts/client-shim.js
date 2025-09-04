@@ -1,88 +1,98 @@
 // Dirty browser window shim
 
-document = {
-    createElement: x=>({
+const mockDocument = {
+    createElement: (x) => ({
         ownerDocument: document,
         style: {},
-        contentWindow: {},
-        nodeName: '',
+        nodeName: "",
         childNodes: [],
-        setAttribute: ()=>{},
-        appendChild: ()=>{},
+        setAttribute: () => {},
+        appendChild: () => {},
         lastChild: {},
-        toString: ()=>' ',
-        removeChild: ()=>{},
+        toString: () => " ",
+        removeChild: () => {},
         contentWindow: {
             document: {
-                open: ()=>{},
-                close: ()=>{},
-                write: ()=>{},
+                open: () => {},
+                close: () => {},
+                write: () => {}
             }
         }
     }),
-    createTextNode: x=>({
-        nodeValue: '',
-        nodeName: '',
+    createTextNode: (x) => ({
+        nodeValue: "",
+        nodeName: "",
         childNodes: [],
-        setAttribute: ()=>{},
-        appendChild: ()=>{},
+        setAttribute: () => {},
+        appendChild: () => {},
         lastChild: {},
-        toString: ()=>' '
+        toString: () => " "
     }),
-    createElementNS: x=>[],
-    addEventListener: ()=>{},
-    createRange: ()=>{
+    createElementNS: (x) => [],
+    addEventListener: () => {},
+    createRange: () => {
         return {
-            createContextualFragment:()=>{return {
-                firstChild: {
-                    querySelectorAll: x=>[]
-                }
-            }},
-            selectNode: ()=>{}
-        }
+            createContextualFragment: () => {
+                return {
+                    firstChild: {
+                        querySelectorAll: (x) => []
+                    }
+                };
+            },
+            selectNode: () => {}
+        };
     },
     body: {
-        appendChild: ()=>{},
-        addEventListener: ()=>{}
+        appendChild: () => {},
+        addEventListener: () => {}
     },
     location: {},
     documentElement: {
-        appendChild: ()=>{},
-        removeChild: ()=>{}
+        appendChild: () => {},
+        removeChild: () => {}
     }
-}
+};
 
-window = {
-    screen: {width: 800, height: 600},
-    addEventListener: ()=>{},
-    location: {},
+const mockWindow = {
+    screen: { width: 800, height: 600 },
+    addEventListener: () => {},
+    location: {},
     Image: Function,
-    document: document,
+    document: mockDocument,
     navigator: {
-        platform:'',
-        userAgent: ''
+        platform: "",
+        userAgent: ""
     },
     NodeList: Array,
     WebSocket: Object,
     localStorage: {
-        getItem(){return null}
+        getItem() {
+            return null;
+        }
     },
     sessionStorage: {
-        getItem(){return null},
-            setItem(){},
+        getItem() {
+            return null;
+        },
+        setItem() {}
     },
-    MutationObserver: class MutationObserver{}
-}
+    MutationObserver: class MutationObserver {}
+};
 
-Object.assign(global, window)
+// Create a copy for globals
+const globalWindow = { ...mockWindow };
+globalWindow.document = mockDocument;
+
+// Assign to globals in a way that doesn't modify read-only globals
+Object.assign(global, globalWindow);
 
 // Required globals
 
-DOM = require('../src/client/dom')
-DOM.get = x=>[{addEventListener:()=>{}, style:{}}]
-DOM.init()
-ELECTRON_NOGPU = false
-CANVAS_FRAMERATE = 1
-LANG = 'en'
-ENV = {id: ''}
-IP = ''
+DOM = require("../src/client/dom");
+DOM.get = (x) => [{ addEventListener: () => {}, style: {} }];
+DOM.init();
+ELECTRON_NOGPU = false;
+CANVAS_FRAMERATE = 1;
+LANG = "en";
+ENV = { id: "" };
+IP = "";

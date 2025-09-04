@@ -6,47 +6,41 @@
 
 */
 
-
-var I = new WebKitCSSMatrix()
+var I = new WebKitCSSMatrix();
 
 function Point(x, y, z) {
-    this.x = x
-    this.y = y
-    this.z = z
+    this.x = x;
+    this.y = y;
+    this.z = z;
 }
 
 Point.prototype.transformBy = function(matrix) {
-    var tmp = matrix.multiply(I.translate(this.x, this.y, this.z))
-    return new Point(tmp.m41, tmp.m42, tmp.m43)
-}
+    var tmp = matrix.multiply(I.translate(this.x, this.y, this.z));
+    return new Point(tmp.m41, tmp.m42, tmp.m43);
+};
 
 function getTransformationMatrix(w) {
-
     var transformationMatrix = I,
-        node = w
+        node = w;
 
     while (node) {
-        if (node._ignore_css_transforms) break
+        if (node._ignore_css_transforms) break;
         if (node._drag_widget) {
+            var transform = node._drag_widget.cssTransform || "none",
+                c = transform === "none" ? I : new WebKitCSSMatrix(transform);
 
-            var transform = node._drag_widget.cssTransform || 'none',
-                c = transform === 'none' ? I : new WebKitCSSMatrix(transform)
-
-            transformationMatrix = c.multiply(transformationMatrix)
-
+            transformationMatrix = c.multiply(transformationMatrix);
         }
-        node = node.parentNode
-
+        node = node.parentNode;
     }
 
-    transformationMatrix = I.multiply(transformationMatrix)
+    transformationMatrix = I.multiply(transformationMatrix);
 
-    return transformationMatrix
-
+    return transformationMatrix;
 }
 
 module.exports = function cssTransformCoords(node, x, y) {
-
-    return new Point(x, y, 0).transformBy(getTransformationMatrix(node).inverse())
-
-}
+    return new Point(x, y, 0).transformBy(
+        getTransformationMatrix(node).inverse()
+    );
+};

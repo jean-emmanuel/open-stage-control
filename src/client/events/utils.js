@@ -1,15 +1,11 @@
-const Touch = window.Touch || class Touch {}
-const zoom = require('../ui/zoom')
+const Touch = window.Touch || class Touch {};
+const zoom = require("../ui/zoom");
 
 // const cssTransformCoords = require('./transform-coords')
 
-
 module.exports = {
-
     fix: function(e) {
-
         return {
-
             target: e.target,
             firstTarget: null,
             offsetX: e.offsetX,
@@ -18,8 +14,14 @@ module.exports = {
             pageY: e.pageY,
             clientX: e.clientX,
             clientY: e.clientY,
-            movementX: e.movementX === undefined ? undefined : e.movementX / zoom.localZoom,
-            movementY: e.movementY === undefined ? undefined : e.movementY / zoom.localZoom,
+            movementX:
+                e.movementX === undefined
+                    ? undefined
+                    : e.movementX / zoom.localZoom,
+            movementY:
+                e.movementY === undefined
+                    ? undefined
+                    : e.movementY / zoom.localZoom,
             pointerId: e.pointerId,
             pointerType: e.pointerType,
             button: e.button,
@@ -39,52 +41,47 @@ module.exports = {
             altitudeAngle: e.altitudeAngle,
             azimuthAngle: e.azimuthAngle,
             touchType: e.touchType
-        }
-
+        };
     },
 
     normalizeDragEvent: function(event, previousEvent) {
+        event = module.exports.fix(event);
 
-        event = module.exports.fix(event)
-
-        event.firstTarget = previousEvent ? previousEvent.firstTarget : event.target
+        event.firstTarget = previousEvent
+            ? previousEvent.firstTarget
+            : event.target;
 
         if (event.movementX === undefined) {
-
-            event.movementX = previousEvent ? event.pageX - previousEvent.pageX : 0
-            event.movementY = previousEvent ? event.pageY - previousEvent.pageY : 0
-
+            event.movementX = previousEvent
+                ? event.pageX - previousEvent.pageX
+                : 0;
+            event.movementY = previousEvent
+                ? event.pageY - previousEvent.pageY
+                : 0;
         }
 
         if (event.isTouch && !previousEvent) {
-
-            module.exports.resetEventOffset(event, event.target)
-
+            module.exports.resetEventOffset(event, event.target);
         } else if (event.isTouch && previousEvent) {
-
-            event.offsetX = previousEvent.offsetX + event.movementX
-            event.offsetY = previousEvent.offsetY + event.movementY
-
+            event.offsetX = previousEvent.offsetX + event.movementX;
+            event.offsetY = previousEvent.offsetY + event.movementY;
         }
 
         if (event.inertia === undefined) {
-
-            event.inertia = 1
-
+            event.inertia = 1;
         }
 
         if (previousEvent) {
-
-            if (previousEvent.traversing) event.traversing = previousEvent.traversing
-            if (previousEvent.traversingStack) event.traversingStack = previousEvent.traversingStack
+            if (previousEvent.traversing)
+                event.traversing = previousEvent.traversing;
+            if (previousEvent.traversingStack)
+                event.traversingStack = previousEvent.traversingStack;
 
             if (previousEvent.multitouch) {
-                event.multitouch = previousEvent.multitouch
-                event.inertia = 1
+                event.multitouch = previousEvent.multitouch;
+                event.inertia = 1;
             }
-
         }
-
 
         // if (!event.traversing) {
         //     // css transform fix (doesn't work well with traversing gestures)
@@ -93,16 +90,14 @@ module.exports = {
         //     event.movementY = transformedCoords.y
         // }
 
-        return event
-
+        return event;
     },
 
     resetEventOffset: function(event, target) {
+        var off = DOM.offset(target);
 
-        var off = DOM.offset(target)
-
-        event.offsetX = event.pageX - off.left
-        event.offsetY = event.pageY - off.top
+        event.offsetX = event.pageX - off.left;
+        event.offsetY = event.pageY - off.top;
 
         // if (!event.traversing) {
         //     // css transform fix (doesn't work well with traversing gestures)
@@ -110,9 +105,7 @@ module.exports = {
         //     event.offsetX = transformedCoords.x
         //     event.offsetY = transformedCoords.y
         // }
-
     },
 
     TRAVERSING_SAMEWIDGET: 1
-
-}
+};

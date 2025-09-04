@@ -1,68 +1,56 @@
-var scriptVm = require('./script-vm'),
-    noop = ()=>{}
+var scriptVm = require("./script-vm"),
+    noop = () => {};
 
 class Script {
-
     constructor(options) {
-
-        this.lock = false
-        this.timeouts = {}
-        this.intervals = {}
-        this.widget = options.widget
-        this.property = options.property
+        this.lock = false;
+        this.timeouts = {};
+        this.intervals = {};
+        this.widget = options.widget;
+        this.property = options.property;
 
         if (!options.code) {
-
-            this.script = noop
-
+            this.script = noop;
         } else {
-
             try {
-                this.script = scriptVm.compile(options.code, options.context)
-            } catch(err) {
-                this.widget.errorProp(this.property, 'javascript', err)
-                this.script = noop
+                this.script = scriptVm.compile(options.code, options.context);
+            } catch (err) {
+                this.widget.errorProp(this.property, "javascript", err);
+                this.script = noop;
             }
-
         }
-
     }
 
     run(context, options) {
+        if (this.lock) return;
 
-        if (this.lock) return
+        scriptVm.setValueOptions(options);
+        scriptVm.setWidget(this.widget);
 
-        scriptVm.setValueOptions(options)
-        scriptVm.setWidget(this.widget)
-
-        this.lock = true
-        var returnValue
+        this.lock = true;
+        var returnValue;
         try {
-            returnValue = this.script(context, this.widget.parsersLocalScope)
-        } catch(err) {
-            this.widget.errorProp(this.property, 'javascript', err)
+            returnValue = this.script(context, this.widget.parsersLocalScope);
+        } catch (err) {
+            this.widget.errorProp(this.property, "javascript", err);
         }
-        this.lock = false
+        this.lock = false;
 
-        scriptVm.setWidget()
-        scriptVm.setValueOptions()
+        scriptVm.setWidget();
+        scriptVm.setValueOptions();
 
-        return returnValue
-
+        return returnValue;
     }
 
     onRemove() {
-
         for (let k in this.widget.timeouts) {
-            clearTimeout(this.widget.timeouts[k])
+            clearTimeout(this.widget.timeouts[k]);
         }
 
         for (let k in this.widget.intervals) {
-            clearInterval(this.widget.intervals[k])
+            clearInterval(this.widget.intervals[k]);
         }
-
     }
-
 }
 
-module.exports = Script
+module.exports = Script;

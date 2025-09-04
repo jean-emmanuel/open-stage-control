@@ -1,47 +1,41 @@
-@import 'reset';
-@import 'mixins';
-@import 'themes/default';
-@import 'ui';
-@import 'widgets';
-
+@import "reset";
+@import "mixins";
+@import "themes/default";
+@import "ui";
+@import "widgets";
 
 input,
-textarea,
-{
+textarea {
     caret-color: var(--color-widget);
 }
 
 input:focus::selection,
-textarea:focus::selection,
-{
-    background:var(--color-widget);
+textarea:focus::selection {
+    background: var(--color-widget);
     color: var(--color-text);
 }
 input {
     cursor: text;
 }
 
-
-
-
 .fa {
     font-weight: 900;
 }
 
-html, body {
-
+html,
+body {
     position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-    overflow:hidden;
+    overflow: hidden;
     overscroll-behavior: none;
     background-color: var(--color-background);
 }
 
-html{
+html {
     // global pixel scaling
     font-size: 1px;
 
@@ -49,41 +43,39 @@ html{
     max-height: 999999px;
 
     // prevent pinch-zoom
-    touch-action:none;
+    touch-action: none;
 }
 
 body {
-    color:  var(--color-text);
-    white-space:nowrap;
-    opacity:1;
+    color: var(--color-text);
+    white-space: nowrap;
+    opacity: 1;
     cursor: default;
     font-family: $font;
-    font-size:11rem;
-    line-height:100%;
+    font-size: 11rem;
+    line-height: 100%;
     font-weight: 400;
     // text-transform: uppercase;
     letter-spacing: 1rem;
     text-rendering: optimizeSpeed;
-
 }
-
 
 .error-stack {
     > span {
-        background: none!important;
-        color: inherit!important;
+        background: none !important;
+        color: inherit !important;
     }
-    padding:10rem;
-    user-select:text;
+    padding: 10rem;
+    user-select: text;
     cursor: text;
     * {
-        user-select:text;
+        user-select: text;
         cursor: text;
     }
-    overflow:auto;
-    white-space:pre;
+    overflow: auto;
+    white-space: pre;
     font-family: $font-mono;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .translation-missing {
@@ -91,7 +83,7 @@ body {
 }
 
 .fa-osc:before {
-    content:"\f111";
+    content: "\f111";
     color: transparent;
     background-image: url(../assets/favicon.png?__OSC_ASSET__=1);
     background-size: contain;

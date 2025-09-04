@@ -62,10 +62,11 @@ if (process.platform === "darwin") {
 
 for (var i in files) {
     var [src, dest] = files[i].map((f) => path.resolve(__dirname + "/" + f));
-    
+
     // Special handling for index.js to transform require path
     if (dest.endsWith("app/index.js")) {
-        var content = fs.readFileSync(src, "utf8")
+        var content = fs
+            .readFileSync(src, "utf8")
             .replace("./server/index", "./server/open-stage-control-server");
         fs.writeFileSync(dest, content);
     } else {

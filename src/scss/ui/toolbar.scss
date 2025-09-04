@@ -3,19 +3,19 @@ osc-toolbar {
     position: absolute;
     top: 0;
     left: -1rem;
-    height:var(--size);
-    width:var(--size);
-    max-width:var(--size);
-    min-width:var(--size);
+    height: var(--size);
+    width: var(--size);
+    max-width: var(--size);
+    min-width: var(--size);
     text-align: center;
     z-index: 99999999;
     cursor: pointer;
     &:after {
-        content:"\f0c9";
+        content: "\f0c9";
         width: 3rem;
         display: inline-block;
         overflow: hidden;
-        font-size:13rem;
+        font-size: 13rem;
         font-family: FontAwesome;
         line-height: calc(var(--size) + 6rem);
     }
@@ -28,16 +28,14 @@ osc-toolbar {
 }
 
 osc-toolbar#start {
-
     left: var(--size);
     &:after {
         font-size: 11rem;
         content: "\f04b";
         width: auto;
-        margin-top:-1rem;
+        margin-top: -1rem;
     }
     &.started:after {
         content: "\f04d";
     }
-
 }

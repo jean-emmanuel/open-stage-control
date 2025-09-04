@@ -1,126 +1,102 @@
-var EventEmitter = require('events').EventEmitter
+var EventEmitter = require("events").EventEmitter;
 
 var hearbeatInterval = 25000,
     hearbeatTimeout = 5000,
-    dieTimeout = 60000
+    dieTimeout = 60000;
 
 class Socket extends EventEmitter {
-
     constructor(ws, id, address) {
+        super();
 
-        super()
+        this.id = id;
 
-        this.id = id
+        this.address = address.replace("::ffff:", "");
 
-        this.address = address.replace('::ffff:', '')
+        this.socket = null;
 
-        this.socket = null
+        this.sessionPath = "";
 
-        this.sessionPath = ''
+        this.queue = [];
 
-        this.queue = []
+        this.hearbeat = undefined;
+        this.hearbeatTimeout = undefined;
+        this.on("pong", () => {
+            this.hearbeatTimeout = clearTimeout(this.hearbeatTimeout);
+        });
+        this.on("ping", () => {
+            this.socket.send("[\"pong\"]");
+        });
 
-        this.hearbeat = undefined
-        this.hearbeatTimeout = undefined
-        this.on('pong', ()=>{
-            this.hearbeatTimeout = clearTimeout(this.hearbeatTimeout)
-        })
-        this.on('ping', ()=>{
-            this.socket.send('["pong"]')
-        })
+        this.dieTimeout = undefined;
 
-        this.dieTimeout = undefined
-
-        this.open(ws)
-
+        this.open(ws);
     }
 
     open(ws) {
+        this.socket = ws;
 
-        this.socket = ws
+        this.socket.onmessage = (e) => {
+            this.receive(e.data);
+        };
 
-        this.socket.onmessage = (e)=>{
-            this.receive(e.data)
-        }
+        this.socket.onclose = this.socket.onerror = () => {
+            if (!this.connected()) this.close();
+        };
 
-        this.socket.onclose = this.socket.onerror = ()=>{
-            if (!this.connected()) this.close()
-        }
+        this.dieTimeout = clearTimeout(this.dieTimeout);
 
-        this.dieTimeout = clearTimeout(this.dieTimeout)
+        this.hearbeat = setInterval(() => {
+            if (!this.connected()) return;
+            this.socket.send("[\"ping\"]");
+            this.hearbeatTimeout = setTimeout(() => {
+                if (this.connected()) this.socket.close();
+            }, hearbeatTimeout);
+        }, hearbeatInterval);
 
-        this.hearbeat = setInterval(()=>{
-            if (!this.connected()) return
-            this.socket.send('["ping"]')
-            this.hearbeatTimeout = setTimeout(()=>{
-                if (this.connected()) this.socket.close()
-            }, hearbeatTimeout)
-        }, hearbeatInterval)
-
-        this.emit('created')
-
+        this.emit("created");
     }
 
     close() {
+        this.hearbeat = clearInterval(this.hearbeat);
+        this.hearbeatTimeout = clearTimeout(this.hearbeatTimeout);
+        this.dieTimeout = clearTimeout(this.dieTimeout);
 
-        this.hearbeat = clearInterval(this.hearbeat)
-        this.hearbeatTimeout = clearTimeout(this.hearbeatTimeout)
-        this.dieTimeout = clearTimeout(this.dieTimeout)
-
-        this.dieTimeout = setTimeout(()=>{
-
-            this.emit('destroyed')
-
-        }, dieTimeout)
-
+        this.dieTimeout = setTimeout(() => {
+            this.emit("destroyed");
+        }, dieTimeout);
     }
 
     connected() {
-
-        return this.socket.readyState == this.socket.OPEN
-
+        return this.socket.readyState == this.socket.OPEN;
     }
 
     receive(message) {
+        if (typeof message == "string") {
+            var packet = JSON.parse(message);
 
-        if (typeof message == 'string') {
-
-            var packet = JSON.parse(message)
-
-            if (Array.isArray(packet) && typeof packet[0] == 'string') {
-
-                this.emit(packet[0], packet[1])
-
+            if (Array.isArray(packet) && typeof packet[0] == "string") {
+                this.emit(packet[0], packet[1]);
             }
-
         }
-
     }
 
     send(event, data) {
-
-        var packet = JSON.stringify([event, data])
+        var packet = JSON.stringify([event, data]);
 
         if (this.connected()) {
-            this.socket.send(packet)
+            this.socket.send(packet);
         } else {
-            this.queue.push(packet)
+            this.queue.push(packet);
         }
-
     }
 
-    flush(){
-
+    flush() {
         for (var i in this.queue) {
-
-            if (this.connected()) this.socket.send(this.queue[i])
-
+            if (this.connected()) this.socket.send(this.queue[i]);
         }
 
-        this.queue = []
-
+        this.queue = [];
     }
-
 }
 
-module.exports = Socket
+module.exports = Socket;

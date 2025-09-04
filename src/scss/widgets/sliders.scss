@@ -2,7 +2,6 @@
 .knob-container,
 .encoder-container,
 .range-container {
-
     --color-knob: var(--color-fill);
 
     canvas {
@@ -10,19 +9,17 @@
         width: 100%;
         height: auto;
     }
-
 }
 
 .fader-container,
 .range-container {
-
     width: 50rem;
     height: 200rem;
 
     --widget-padding: 1rem;
     --knob-size: 1rem;
     --line-width: 1rem;
-    
+
     canvas {
         text-align: left;
     }
@@ -38,7 +35,7 @@
         --alpha-stroke: 0.5;
         --alpha-fill-off: 0.25;
         --alpha-fill-on: 1;
-        --line-width: 2rem
+        --line-width: 2rem;
     }
 
     &.design-round {
@@ -47,24 +44,22 @@
         --alpha-stroke: 0.25;
         --alpha-fill-off: 0.25;
         --alpha-fill-on: 1;
-        --line-width: 2rem
+        --line-width: 2rem;
     }
-
 }
 
 .knob-container,
 .encoder-container {
-
     width: 100rem;
     height: 100rem;
 
     --widget-padding: 1rem;
     --alpha-stroke: 0.75;
 
-    &.design-solid, &.design-line {
+    &.design-solid,
+    &.design-line {
         --alpha-fill-off: 0.25;
         --alpha-fill-on: 1;
         --line-width: 2rem;
     }
-
 }

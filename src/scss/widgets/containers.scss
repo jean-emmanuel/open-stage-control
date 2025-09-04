@@ -15,26 +15,20 @@
     height: 160rem;
 }
 
-
 .widget-panel-base {
-
     --widget-padding: 4rem;
 
     background-color: var(--color-background);
 
-
     > inner {
         overflow: auto;
     }
-
-
 
     &.no-scroll > inner {
         overflow: hidden;
     }
 
     &.contains-widgets {
-
         > inner {
             --widget-spacing: calc(var(--widget-padding) / 2);
             margin: var(--widget-spacing);
@@ -56,20 +50,20 @@
             flex-direction: row;
             align-items: stretch;
             > .widget {
-                top:auto!important;
-                left:auto!important;
-                position: relative!important;
-                height: auto!important;
-                min-height: auto!important;
+                top: auto !important;
+                left: auto !important;
+                position: relative !important;
+                height: auto !important;
+                min-height: auto !important;
                 max-height: 100%;
             }
             > .flex-expand {
-                flex: 1
+                flex: 1;
             }
         }
 
         &.layout-horizontal.layout-contain > inner > .widget {
-            min-width: auto!important;
+            min-width: auto !important;
             max-width: 100%;
         }
 
@@ -79,19 +73,19 @@
             flex-direction: column;
             align-items: stretch;
             > .widget {
-                top:auto!important;
-                left:auto!important;
-                position: relative!important;
-                width: auto!important;
-                min-width: auto!important;
+                top: auto !important;
+                left: auto !important;
+                position: relative !important;
+                width: auto !important;
+                min-width: auto !important;
                 max-width: 100%;
             }
             > .flex-expand {
-                flex: 1
+                flex: 1;
             }
         }
         &.layout-vertical.layout-contain > inner > .widget {
-            min-height: auto!important;
+            min-height: auto !important;
             max-height: 100%;
         }
 
@@ -99,25 +93,21 @@
         &.layout-grid .folder-container > inner {
             display: grid;
             > .widget {
-                top:auto!important;
-                left:auto!important;
-                position: relative!important;
-                height: auto!important;
-                width: auto!important;
-                min-height: auto!important;
-                max-height: auto!important;
-                min-width: auto!important;
-                max-width: auto!important;
+                top: auto !important;
+                left: auto !important;
+                position: relative !important;
+                height: auto !important;
+                width: auto !important;
+                min-height: auto !important;
+                max-height: auto !important;
+                min-width: auto !important;
+                max-width: auto !important;
             }
         }
-
     }
 
-
     &.contains-tabs {
-
         > inner {
-
             --widget-spacing: 0;
 
             display: flex;
@@ -147,9 +137,7 @@
         &.tabs-hidden > inner > .navigation {
             display: none;
         }
-
     }
-
 }
 
 .tab-container {
@@ -163,14 +151,13 @@
     background-color: var(--color-background);
 
     &:not(.show) {
-        display:none
+        display: none;
     }
-
 }
 .tab-container.editing {
-    z-index: initial!important;
+    z-index: initial !important;
     &:after {
-        display:none;
+        display: none;
     }
 }
 .tablink.editing:after {
@@ -181,9 +168,7 @@
     margin: 2rem 4rem 2rem 2rem;
 }
 
-
 .panel-container {
-
     @extend .widget-panel-base;
 
     --alpha-fill-on: 0.75;
@@ -200,7 +185,6 @@
     }
 
     &.contains-widgets {
-
         > inner {
             margin: calc(var(--widget-spacing) + var(--line-width));
         }
@@ -209,8 +193,6 @@
             margin: calc(var(--widget-spacing) * -1);
         }
     }
-
-
 }
 
 .folder-container {
@@ -224,13 +206,12 @@
     padding: 0;
     margin: 0;
     > inner {
-        display: contents!important;
+        display: contents !important;
         padding: 0;
     }
 }
 
 .root-container {
-
     @extend .widget-panel-base;
 
     --alpha-fill-on: 0.75;
@@ -241,10 +222,10 @@
     // optimize layout recalc
     &.auto-height {
         position: absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 
     > inner {
@@ -259,30 +240,26 @@
     }
 
     margin: auto;
-
 }
 
 .root-container.editing {
     &:after {
-        display:none;
+        display: none;
     }
 }
 
-
-
 .navigation {
-
     background-color: var(--color-ui-foreground);
 
-    height:var(--nav-height);
-    flex-shrink:0;
+    height: var(--nav-height);
+    flex-shrink: 0;
     display: flex;
     // padding-bottom: 1rem;
     position: relative;
     border-bottom: 1rem solid var(--color-background);
 
     &:before {
-        content:"";
+        content: "";
         position: absolute;
         // border-bottom: 1rem solid var(--color-stroke);
         opacity: var(--alpha-stroke);
@@ -292,27 +269,26 @@
     }
 
     div {
-
         // --color-stroke:var(--color-widget);
-        --color-fill:var(--color-widget);
+        --color-fill: var(--color-widget);
 
         color: var(--color-text);
 
-        line-height:calc(var(--nav-height) - 1rem);
-        display:flex;
-        min-width:0;
+        line-height: calc(var(--nav-height) - 1rem);
+        display: flex;
+        min-width: 0;
         flex: 1 1 100%;
-        cursor:pointer;
-        height:100%;
+        cursor: pointer;
+        height: 100%;
         align-items: center;
         align-items: center;
         justify-content: center;
-        position:relative;
+        position: relative;
         letter-spacing: 1rem;
         font-size: 109%;
         text-overflow: ellipsis;
         padding: 0 8rem;
-        overflow: hidden!important;
+        overflow: hidden !important;
         white-space: pre-wrap;
         text-align: center;
 
@@ -324,7 +300,8 @@
         }
 
         &.on {
-            z-index: 1;overflow: visible;
+            z-index: 1;
+            overflow: visible;
             background: var(--color-ui-background);
             &:before {
                 content: "";
@@ -337,11 +314,10 @@
                 background: var(--color-fill);
                 z-index: 101;
             }
-
-
         }
     }
-    &.tabs-top, &.bottom {
+    &.tabs-top,
+    &.bottom {
         div {
             &:last-child {
                 border-right: 0;
@@ -355,8 +331,8 @@
         }
     }
 
-
-    &.tabs-left, &.tabs-right {
+    &.tabs-left,
+    &.tabs-right {
         flex-direction: column;
         height: 100%;
         padding-bottom: 0;
@@ -389,7 +365,7 @@
             }
 
             &:last-child {
-                border-bottom:0
+                border-bottom: 0;
             }
             &:first-child:before {
                 margin-top: 1rem;
@@ -401,9 +377,8 @@
     }
 }
 
-
-.clone-container, .fragment-container {
-
+.clone-container,
+.fragment-container {
     &.empty {
         @include pseudo-stroke();
         &:before {
@@ -412,33 +387,32 @@
     }
 
     &:before {
-        content: none
+        content: none;
     }
 
     > .clone,
     > .fragment {
-
         --widget-spacing: 0;
         flex: 1;
         position: relative;
 
         > .widget {
-            border:0!important;
-            box-shadow: none!important;
+            border: 0 !important;
+            box-shadow: none !important;
             // on ios, relative position + 100% size and auto position
             // does not work well in flex panels
-            position: absolute!important;
-            left:0!important;
-            bottom:0!important;
-            right:0!important;
-            top: 0!important;
-            width: auto!important;
-            height: auto!important;
-            min-height: initial!important;
-            max-height: initial!important;
-            min-width: initial!important;
-            max-width: initial!important;
-            padding: 0!important;
+            position: absolute !important;
+            left: 0 !important;
+            bottom: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            width: auto !important;
+            height: auto !important;
+            min-height: initial !important;
+            max-height: initial !important;
+            min-width: initial !important;
+            max-width: initial !important;
+            padding: 0 !important;
         }
     }
 
@@ -447,26 +421,22 @@
     }
 }
 
-
-
 .modal-container {
-
     --widget-padding: -1rem;
     --popup-padding: 4rem;
 
     --color-text-on: var(--color-background);
     --alpha-fill-off: 0.15;
-    --alpha-fill-on: .75;
+    --alpha-fill-on: 0.75;
 
     > .toggle {
-
         // --widget-padding: -1rem;
 
         position: absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         margin: var(--widget-spacing);
         flex: 1;
         display: flex;
@@ -475,7 +445,6 @@
 
         @include pseudo-stroke();
         @include pseudo-fill($z: -1);
-
     }
 
     > label {
@@ -492,9 +461,8 @@
     }
 
     &.on {
-
         > .toggle {
-            --alpha-fill:var(--alpha-fill-on);
+            --alpha-fill: var(--alpha-fill-on);
             z-index: 1;
         }
         > label {
@@ -508,13 +476,7 @@
         @supports not (contain: strict) {
             transform: none; // cancel new stacking context
         }
-
     }
-
-
-
-
-
 
     > inner {
         display: none;
@@ -527,10 +489,9 @@
         @extend .modal-breakout;
     }
 
-
     > .popup {
-        padding:0;
-        z-index: 9999999999999!important;
+        padding: 0;
+        z-index: 9999999999999 !important;
 
         > .popup-wrapper {
             width: var(--width, 100%);
@@ -562,16 +523,15 @@
             }
         }
         &.y-positionned {
-            align-items:flex-start;
+            align-items: flex-start;
             > .popup-wrapper {
                 top: var(--top);
             }
         }
-
     }
 
-    --parent-scroll-x:0;
-    --parent-scroll-y:0;
+    --parent-scroll-x: 0;
+    --parent-scroll-y: 0;
     &.relative {
         > .popup {
             left: auto;
@@ -580,50 +540,45 @@
             bottom: auto;
             width: var(--width, 100%);
             height: var(--height, 100%);
-            margin-top: calc(-1 * var(--widget-spacing) - var(--parent-scroll-y));
-            margin-left: calc(-1 * var(--widget-spacing) - var(--parent-scroll-x));
+            margin-top: calc(
+                -1 * var(--widget-spacing) - var(--parent-scroll-y)
+            );
+            margin-left: calc(
+                -1 * var(--widget-spacing) - var(--parent-scroll-x)
+            );
             padding: var(--widget-spacing);
-            align-items:flex-start;
+            align-items: flex-start;
             justify-content: flex-start;
         }
     }
-
 }
 
 .modal-breakout {
-    z-index: initial!important;
-    contain: size!important;
+    z-index: initial !important;
+    contain: size !important;
     @supports not (contain: strict) {
-        transform: none!important; // cancel new stacking context
+        transform: none !important; // cancel new stacking context
     }
 }
 
-
-
 .matrix-container {
-
     @extend .panel-container;
 
-
-    &.layout-vertical, &.layout-horizontal {
+    &.layout-vertical,
+    &.layout-horizontal {
         > inner > .widget {
             flex: 1;
         }
     }
-
 }
 
-
 .patchbaynode-container {
-
     justify-content: center;
     flex: 1;
     background: transparent;
-
 }
 .patchbay-container {
-
-    --alpha-fill-on: .75;
+    --alpha-fill-on: 0.75;
     --alpha-fill-off: 0.25;
 
     inner {
@@ -640,12 +595,13 @@
         .nodes {
             display: flex;
             flex-direction: column;
-            align-items:stretch;
+            align-items: stretch;
             margin-bottom: var(--line-width);
             width: 25%;
         }
 
-        .inputs, .outputs {
+        .inputs,
+        .outputs {
             position: relative;
             @include pseudo-stroke();
             top: var(--line-width);
@@ -675,26 +631,22 @@
         border: 2rem solid transparent;
         pointer-events: none;
     }
-
 }
 
-
 .keyboard-container {
-
     --widget-padding: 0rem;
     --alpha-fill-off: 0;
-    --alpha-fill-on: .75;
+    --alpha-fill-on: 0.75;
 
     --color-key-on: var(--color-fill);
     --alpha-key-off: var(--alpha-fill-off);
     --alpha-key-on: var(--alpha-fill-on);
     --color-white-key: #ccc;
-    --color-black-key: #1A1A1A;
+    --color-black-key: #1a1a1a;
 
-    --widget-keypad:  calc(var(--widget-padding) + var(--line-width));
+    --widget-keypad: calc(var(--widget-padding) + var(--line-width));
 
     > inner {
-
         padding: calc(var(--widget-padding) + var(--line-width));
         flex: 1;
         @include pseudo-stroke($z: 2);
@@ -705,12 +657,11 @@
     }
 
     .key {
-
         --alpha-fill-off: var(--alpha-key-off);
         --alpha-fill-on: var(--alpha-key-on);
-        --line-width: 0!important;
+        --line-width: 0 !important;
         inner {
-            margin: 1rem 0.5rem!important;
+            margin: 1rem 0.5rem !important;
             --widget-padding: -1rem;
             &:before {
                 content: none;
@@ -736,22 +687,21 @@
         position: absolute;
         z-index: 1;
 
-        left: calc((100% - var(--widget-keypad) * 2) / var(--nkeys) * var(--rank));
+        left: calc(
+            (100% - var(--widget-keypad) * 2) / var(--nkeys) * var(--rank)
+        );
         width: calc(100% / var(--nkeys) * 0.6);
         margin-left: calc(100% / var(--nkeys) * -0.3 + var(--widget-keypad));
         height: calc((100% - var(--widget-keypad) * 2) * 0.65);
 
         inner {
-            margin-left: 0!important;
-            margin-right: 0!important;
-            margin-bottom: 0!important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            margin-bottom: 0 !important;
             background: var(--color-black-key);
         }
     }
-
 }
-
-
 
 // iOS13+ scrollbar shim
 .iOS13 {
@@ -762,7 +712,7 @@
         --knob-size: 40rem;
         margin: 3rem;
         z-index: 99;
-        --alpha-fill-on: 0!important;
+        --alpha-fill-on: 0 !important;
         opacity: var(--alpha-scrollbar);
         &:active {
             opacity: var(--alpha-scrollbar-on);
@@ -774,7 +724,7 @@
             width: var(--scrollbar-size);
             height: auto;
             &.double-scrollbar {
-                margin-bottom: var(--scrollbar-size)!important;
+                margin-bottom: var(--scrollbar-size) !important;
             }
         }
         &.horizontal {
@@ -786,27 +736,41 @@
         }
     }
     .has-ios-scrollbar-h > .ios-scrollbar.horizontal,
-    .has-ios-scrollbar-h.modal-container > .popup > .popup-wrapper > .popup-content > .ios-scrollbar.horizontal {
+    .has-ios-scrollbar-h.modal-container
+        > .popup
+        > .popup-wrapper
+        > .popup-content
+        > .ios-scrollbar.horizontal {
         display: inline-flex;
     }
     .has-ios-scrollbar-v > .ios-scrollbar.vertical,
-    .has-ios-scrollbar-v.modal-container > .popup > .popup-wrapper > .popup-content > .ios-scrollbar.vertical {
+    .has-ios-scrollbar-v.modal-container
+        > .popup
+        > .popup-wrapper
+        > .popup-content
+        > .ios-scrollbar.vertical {
         display: inline-flex;
     }
 
     .has-ios-scrollbar-h:not(.modal-container) {
-        padding-right: var(--scrollbar-size)!important;
+        padding-right: var(--scrollbar-size) !important;
     }
 
     .has-ios-scrollbar-v:not(.modal-container) {
-        padding-bottom: var(--scrollbar-size)!important;
+        padding-bottom: var(--scrollbar-size) !important;
     }
 
-    .has-ios-scrollbar-h.modal-container > .popup > .popup-wrapper > .popup-content {
-        padding-right: var(--scrollbar-size)!important;
+    .has-ios-scrollbar-h.modal-container
+        > .popup
+        > .popup-wrapper
+        > .popup-content {
+        padding-right: var(--scrollbar-size) !important;
     }
 
-    .has-ios-scrollbar-v.modal-container > .popup > .popup-wrapper > .popup-content {
-        padding-bottom: var(--scrollbar-size)!important;
+    .has-ios-scrollbar-v.modal-container
+        > .popup
+        > .popup-wrapper
+        > .popup-content {
+        padding-bottom: var(--scrollbar-size) !important;
     }
 }

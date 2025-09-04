@@ -51,7 +51,7 @@ if (process.argv.includes("--reload")) {
 
     ipc.on("error", () => {});
     ipc.on("open", () => {
-        ipc.send('["reloadCss"]');
+        ipc.send("[\"reloadCss\"]");
         process.exit();
     });
 }

@@ -1,64 +1,91 @@
 .select-area {
-
-    position:fixed;
-    z-index:999999;
+    position: fixed;
+    z-index: 999999;
     border: 1rem solid var(--color-accent);
     pointer-events: none;
     &:after {
-        content:"";
+        content: "";
         position: absolute;
-        top:0;left:0;
-        right:0;bottom:0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background: var(--color-accent);
         opacity: 0.2;
     }
     &.hidden {
         display: none;
     }
-
 }
 
 .widget.editing:after,
 .tablink.editing:after,
 .modal-container.editing > .popup > .popup-wrapper:after {
-    content:"";
-    z-index: 999!important;
+    content: "";
+    z-index: 999 !important;
     position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
     border-style: solid;
 
-    -webkit-border-image: linear-gradient(to right, var(--color-accent) 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), var(--color-accent) calc(100% - 10rem)) 1 / 1rem;
-    -webkit-mask-image: linear-gradient(to bottom, white 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), white calc(100% - 10rem));
+    -webkit-border-image: linear-gradient(
+            to right,
+            var(--color-accent) 10rem,
+            rgba(0, 0, 0, 0) 10rem,
+            rgba(0, 0, 0, 0) calc(100% - 10rem),
+            var(--color-accent) calc(100% - 10rem)
+        )
+        1 / 1rem;
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        white 10rem,
+        rgba(0, 0, 0, 0) 10rem,
+        rgba(0, 0, 0, 0) calc(100% - 10rem),
+        white calc(100% - 10rem)
+    );
 
-    border-image: linear-gradient(to right, var(--color-accent) 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), var(--color-accent) calc(100% - 10rem)) 1 / 1rem;
-    mask-image: linear-gradient(to bottom, white 10rem, rgba(0, 0, 0, 0) 10rem, rgba(0, 0, 0, 0) calc(100% - 10rem), white calc(100% - 10rem));
+    border-image: linear-gradient(
+            to right,
+            var(--color-accent) 10rem,
+            rgba(0, 0, 0, 0) 10rem,
+            rgba(0, 0, 0, 0) calc(100% - 10rem),
+            var(--color-accent) calc(100% - 10rem)
+        )
+        1 / 1rem;
+    mask-image: linear-gradient(
+        to bottom,
+        white 10rem,
+        rgba(0, 0, 0, 0) 10rem,
+        rgba(0, 0, 0, 0) calc(100% - 10rem),
+        white calc(100% - 10rem)
+    );
 
     pointer-events: none;
-    box-shadow: none!important;
-    opacity: 1!important;
+    box-shadow: none !important;
+    opacity: 1 !important;
 }
-
-
 
 .widget.editing.editor-blink:after,
 .modal-container.editing.editor-blink > .popup > .popup-wrapper:after {
-    display: block!important;
+    display: block !important;
     -webkit-mask-image: none;
     mask-image: none;
     background-color: var(--color-accent);
-    opacity: 0.5!important;
+    opacity: 0.5 !important;
     animation: editor-blink 0.51s steps(3) infinite;
 }
 
 @keyframes editor-blink {
-    from {--color-accent: var(--color-warning)}
-    to {--color-accent: transparent}
+    from {
+        --color-accent: var(--color-warning);
+    }
+    to {
+        --color-accent: transparent;
+    }
 }
-
 
 .editor-hide-selection {
     #drag-resize {

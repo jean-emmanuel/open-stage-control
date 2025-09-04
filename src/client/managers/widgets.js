@@ -1,62 +1,71 @@
-var EventEmitter = require('../events/event-emitter'),
-    ipc = require('../ipc/')
+var EventEmitter = require("../events/event-emitter"),
+    ipc = require("../ipc/");
 
 class WidgetManager extends EventEmitter {
-
     constructor() {
+        super();
 
-        super()
+        this.widgets = {};
+        this.children = [];
 
-        this.widgets = {}
-        this.children = []
+        this.addressRoute = {};
+        this.idRoute = {};
+        this.linkIdRoute = {};
 
-        this.addressRoute = {}
-        this.idRoute = {}
-        this.linkIdRoute = {}
+        this.linkIdLock = [];
+        this.linkIdLockDepth = 0;
 
-        this.linkIdLock = []
-        this.linkIdLockDepth = 0
+        this.preArgsSeparator = "||||";
 
-        this.preArgsSeparator = '||||'
+        this.on("value-changed", this.onChange.bind(this));
 
-        this.on('value-changed', this.onChange.bind(this))
-
-        ipc.on('connect', ()=>{
+        ipc.on("connect", () => {
             for (var hash in this.widgets) {
-                this.registerWidget(this.widgets[hash])
+                this.registerWidget(this.widgets[hash]);
             }
-        })
-
+        });
     }
 
     onChange(e) {
+        if (!e) return;
 
-        if (!e) return
-
-        var {id, widget, linkId, options} = e
+        var { id, widget, linkId, options } = e;
 
         if (linkId) {
-            if (!Array.isArray(linkId)) linkId = [linkId]
-            linkId = linkId.map(x=>String(x).replace(/^>>\s*/, '')).filter(x=>x.indexOf('<<') < 0)
-            linkId = linkId.filter(x=>this.linkIdLock.indexOf(x)<0)
-            this.linkIdLock = this.linkIdLock.concat(linkId)
-            this.linkIdLockDepth++
+            if (!Array.isArray(linkId)) linkId = [linkId];
+            linkId = linkId
+                .map((x) => String(x).replace(/^>>\s*/, ""))
+                .filter((x) => x.indexOf("<<") < 0);
+            linkId = linkId.filter((x) => this.linkIdLock.indexOf(x) < 0);
+            this.linkIdLock = this.linkIdLock.concat(linkId);
+            this.linkIdLockDepth++;
         }
 
         var widgetsById = this.getWidgetById(id),
-            widgetsByLinkId = linkId ? this.getWidgetByLinkId(linkId) : []
+            widgetsByLinkId = linkId ? this.getWidgetByLinkId(linkId) : [];
 
         // Widget that share the same id will update each other
         // without sending any extra osc message or running scripts
         if (widgetsById.length > 1) {
-            let v = widget.getValue()
+            let v = widget.getValue();
             for (let i in widgetsById) {
                 if (widgetsById[i] !== widget) {
-                    widgetsById[i].setValue(v,{send:false,sync:false, id})
+                    widgetsById[i].setValue(v, {
+                        send: false,
+                        sync: false,
+                        id
+                    });
                     // Because of sync:false, updated widgets that use @{this}
                     // in their properties wont update them, we trigger it manually
-                    if (widgetsById[i].linkedPropsValue['this']) {
-                        widgetsById[i].onLinkedPropsChanged({id, widget: widgetsById[i], options: {send: false, sync: false, id}}, 'value-changed')
+                    if (widgetsById[i].linkedPropsValue["this"]) {
+                        widgetsById[i].onLinkedPropsChanged(
+                            {
+                                id,
+                                widget: widgetsById[i],
+                                options: { send: false, sync: false, id }
+                            },
+                            "value-changed"
+                        );
                     }
                 }
             }
@@ -65,265 +74,273 @@ class WidgetManager extends EventEmitter {
         // widgets that share the same linkId will update each other.
         // Updated widgets will send osc messages normally
         if (widgetsByLinkId.length > 0) {
-            let v = widget.getValue()
+            let v = widget.getValue();
             for (let i in widgetsByLinkId) {
                 if (widgetsByLinkId[i] !== widget) {
-                    widgetsByLinkId[i].setValue(v,{send: options.send, sync: true, script:options.script, widget, id})
+                    widgetsByLinkId[i].setValue(v, {
+                        send: options.send,
+                        sync: true,
+                        script: options.script,
+                        widget,
+                        id
+                    });
                 }
             }
         }
 
         if (linkId && this.linkIdLockDepth) {
-            this.linkIdLockDepth--
+            this.linkIdLockDepth--;
             if (!this.linkIdLockDepth) {
-                this.linkIdLock = []
+                this.linkIdLock = [];
             }
         }
     }
 
     createAddressRef(widget, preArgs, address) {
+        preArgs = widget ? widget.getProp("preArgs") : preArgs;
+        address = widget
+            ? widget.getProp("address") === "auto"
+                ? "/" + widget.getProp("id")
+                : widget.getProp("address")
+            : address;
 
-        preArgs = widget ? widget.getProp('preArgs') : preArgs
-        address = widget ? widget.getProp('address') === 'auto' ? '/' + widget.getProp('id') : widget.getProp('address') : address
+        if (!Array.isArray(preArgs) && preArgs !== "") preArgs = [preArgs];
+        if (preArgs === "") preArgs = [];
 
-        if (!Array.isArray(preArgs) && preArgs !== '') preArgs = [preArgs]
-        if (preArgs === '') preArgs = []
+        preArgs = preArgs.map((x) =>
+            typeof x === "object" && x !== null && x.value !== undefined
+                ? x.value
+                : x
+        );
 
-        preArgs = preArgs.map(x=>typeof x === 'object' && x !== null && x.value !== undefined ? x.value : x)
-
-        return preArgs && preArgs.length ?
-            address + this.preArgsSeparator + preArgs.join(this.preArgsSeparator)
-            : address
-
+        return preArgs && preArgs.length
+            ? address +
+                  this.preArgsSeparator +
+                  preArgs.join(this.preArgsSeparator)
+            : address;
     }
 
     addWidget(widget) {
-
         var hash = widget.hash,
             address = this.createAddressRef(widget),
-            id = widget.getProp('id'),
-            linkId = widget.getProp('linkId')
+            id = widget.getProp("id"),
+            linkId = widget.getProp("linkId");
 
-        this.widgets[hash] = widget
+        this.widgets[hash] = widget;
 
-        if (!this.idRoute[id]) this.idRoute[id] = []
-        this.idRoute[id].push(hash)
+        if (!this.idRoute[id]) this.idRoute[id] = [];
+        this.idRoute[id].push(hash);
 
         if (address) {
-            if (!this.addressRoute[address]) this.addressRoute[address] = []
-            this.addressRoute[address].push(hash)
+            if (!this.addressRoute[address]) this.addressRoute[address] = [];
+            this.addressRoute[address].push(hash);
         }
 
         if (linkId) {
-            if (!Array.isArray(linkId)) linkId = [linkId]
-            linkId = linkId.map(x=>String(x).replace(/^<<\s*/, '')).filter(x=>x.indexOf('>>') < 0)
+            if (!Array.isArray(linkId)) linkId = [linkId];
+            linkId = linkId
+                .map((x) => String(x).replace(/^<<\s*/, ""))
+                .filter((x) => x.indexOf(">>") < 0);
             for (var i in linkId) {
                 if (linkId[i]) {
-                    if (!this.linkIdRoute[linkId[i]]) this.linkIdRoute[linkId[i]] = []
-                    this.linkIdRoute[linkId[i]].push(hash)
+                    if (!this.linkIdRoute[linkId[i]])
+                        this.linkIdRoute[linkId[i]] = [];
+                    this.linkIdRoute[linkId[i]].push(hash);
                 }
             }
         }
 
-        this.registerWidget(widget)
-
+        this.registerWidget(widget);
     }
 
     registerWidget(widget, updatedData, oldData) {
-
-        ipc.send('addWidget', {
+        ipc.send("addWidget", {
             hash: widget.hash,
             data: updatedData || {
-                preArgs: widget.getProp('preArgs'),
-                target: widget.getProp('target'),
-                typeTags: widget.getProp('typeTags'),
-                address: widget.getProp('address') === 'auto' ? '/' + widget.getProp('id') : widget.getProp('address'),
+                preArgs: widget.getProp("preArgs"),
+                target: widget.getProp("target"),
+                typeTags: widget.getProp("typeTags"),
+                address:
+                    widget.getProp("address") === "auto"
+                        ? "/" + widget.getProp("id")
+                        : widget.getProp("address")
             }
-        })
+        });
 
         if (updatedData && oldData) {
-            var address = this.createAddressRef(null, oldData.preArgs, oldData.address),
+            var address = this.createAddressRef(
+                    null,
+                    oldData.preArgs,
+                    oldData.address
+                ),
                 newAddress = this.createAddressRef(widget),
-                hash = widget.hash
+                hash = widget.hash;
 
-            if (address && this.addressRoute[address].indexOf(hash) != -1) this.addressRoute[address].splice(this.addressRoute[address].indexOf(hash), 1)
+            if (address && this.addressRoute[address].indexOf(hash) != -1)
+                this.addressRoute[address].splice(
+                    this.addressRoute[address].indexOf(hash),
+                    1
+                );
 
-            if (!this.addressRoute[newAddress]) this.addressRoute[newAddress] = []
-            this.addressRoute[newAddress].push(hash)
+            if (!this.addressRoute[newAddress])
+                this.addressRoute[newAddress] = [];
+            this.addressRoute[newAddress].push(hash);
         }
-
     }
 
     removeWidget(widget) {
-
         var hash = widget.hash,
             address = this.createAddressRef(widget),
-            linkId =  widget.getProp('linkId'),
-            id = widget.getProp('id')
+            linkId = widget.getProp("linkId"),
+            id = widget.getProp("id");
 
         if (this.widgets[hash]) {
             if (this.widgets[hash].onRemove) {
-                this.widgets[hash].onRemove()
+                this.widgets[hash].onRemove();
             }
 
-            delete this.widgets[hash]
+            delete this.widgets[hash];
 
-            ipc.send('removeWidget', {
-                hash:hash
-            })
+            ipc.send("removeWidget", {
+                hash: hash
+            });
 
-            widget.trigger('widget-removed', {widget: widget})
-            widget.off('widget-removed')
-
+            widget.trigger("widget-removed", { widget: widget });
+            widget.off("widget-removed");
         }
-        if (id && this.idRoute[id].indexOf(hash) != -1) this.idRoute[id].splice(this.idRoute[id].indexOf(hash), 1)
-        if (address && this.addressRoute[address].indexOf(hash) != -1) this.addressRoute[address].splice(this.addressRoute[address].indexOf(hash), 1)
+        if (id && this.idRoute[id].indexOf(hash) != -1)
+            this.idRoute[id].splice(this.idRoute[id].indexOf(hash), 1);
+        if (address && this.addressRoute[address].indexOf(hash) != -1)
+            this.addressRoute[address].splice(
+                this.addressRoute[address].indexOf(hash),
+                1
+            );
 
-        if (!Array.isArray(linkId)) linkId = [linkId]
-        linkId = linkId.map(x=>String(x))
+        if (!Array.isArray(linkId)) linkId = [linkId];
+        linkId = linkId.map((x) => String(x));
         for (var i in linkId) {
-            if (linkId[i] && this.linkIdRoute[linkId[i]] && this.linkIdRoute[linkId[i]].indexOf(hash) != -1) this.linkIdRoute[linkId[i]].splice(this.linkIdRoute[linkId[i]].indexOf(hash), 1)
+            if (
+                linkId[i] &&
+                this.linkIdRoute[linkId[i]] &&
+                this.linkIdRoute[linkId[i]].indexOf(hash) != -1
+            )
+                this.linkIdRoute[linkId[i]].splice(
+                    this.linkIdRoute[linkId[i]].indexOf(hash),
+                    1
+                );
         }
-
     }
 
     removeWidgets(widgets, nested) {
-
         for (let i in widgets) {
-
             if (Array.isArray(widgets[i])) {
-
-                this.removeWidgets(widgets[i], true)
-
+                this.removeWidgets(widgets[i], true);
             } else if (this.widgets[widgets[i].hash]) {
-
-                this.removeWidget(widgets[i])
-
+                this.removeWidget(widgets[i]);
             }
-
         }
 
-        if (!nested) this.purge()
-
+        if (!nested) this.purge();
     }
 
     purge() {
-
         for (let route of [this.addressRoute, this.idRoute, this.linkIdRoute]) {
             for (let key in route) {
-                for (let i=route[key].length-1; i>=0; i--) {
-                    let hash = route[key][i]
+                for (let i = route[key].length - 1; i >= 0; i--) {
+                    let hash = route[key][i];
                     if (!this.widgets[hash]) {
-                        route[key].splice(i, 1)
+                        route[key].splice(i, 1);
                     }
                 }
             }
         }
-
     }
 
     reset() {
+        this.removeWidgets(Object.values(this.widgets));
 
-        this.removeWidgets(Object.values(this.widgets))
+        this.off();
 
-        this.off()
-
-        this.on('value-changed', this.onChange.bind(this))
-
+        this.on("value-changed", this.onChange.bind(this));
     }
 
-
     getWidgetBy(key, dict, widgets = []) {
-
-        var hash, w
+        var hash, w;
 
         if (Array.isArray(key)) {
             for (let i in key) {
-                this.getWidgetBy(key[i], dict, widgets)
+                this.getWidgetBy(key[i], dict, widgets);
             }
-            return widgets
+            return widgets;
         }
 
         if (dict[key]) {
-            for (let i = dict[key].length-1; i>=0; i--) {
-                hash = dict[key][i]
-                w = this.widgets[hash]
+            for (let i = dict[key].length - 1; i >= 0; i--) {
+                hash = dict[key][i];
+                w = this.widgets[hash];
                 if (!w) {
-                    dict[key].splice(i,1)
+                    dict[key].splice(i, 1);
                 } else if (widgets.indexOf(w) == -1) {
-                    widgets.push(w)
+                    widgets.push(w);
                 }
             }
         }
 
-        return widgets
-
+        return widgets;
     }
 
     getWidgetById(id) {
-
-        return this.getWidgetBy(id, this.idRoute)
-
+        return this.getWidgetBy(id, this.idRoute);
     }
 
     getWidgetByLinkId(linkId) {
-
-        return this.getWidgetBy(linkId, this.linkIdRoute)
-
+        return this.getWidgetBy(linkId, this.linkIdRoute);
     }
 
     getWidgetByAddress(address) {
-
-        return this.getWidgetBy(address, this.addressRoute)
-
+        return this.getWidgetBy(address, this.addressRoute);
     }
 
     getWidgetByAddressAndArgs(address, args) {
-
         var addressref = address,
-            restArgs = args
+            restArgs = args;
 
-        if (typeof args == 'object' && args != null) {
+        if (typeof args == "object" && args != null) {
             for (var i = args.length; i >= 0; i--) {
-
-                var ref = this.createAddressRef(null, args.slice(0,i), address)
+                var ref = this.createAddressRef(
+                    null,
+                    args.slice(0, i),
+                    address
+                );
 
                 if (this.getWidgetByAddress(ref).length) {
-                    addressref = ref
-                    restArgs = args.slice(i, args.length)
-                    break
+                    addressref = ref;
+                    restArgs = args.slice(i, args.length);
+                    break;
                 }
-
             }
         } else {
-            restArgs = args
+            restArgs = args;
         }
 
+        if (restArgs == null || restArgs.length == 0) restArgs = null;
+        else if (restArgs.length == 1) restArgs = restArgs[0];
 
-        if (restArgs == null || restArgs.length == 0) restArgs = null
-        else if (restArgs.length == 1) restArgs = restArgs[0]
+        var widgets = this.getWidgetByAddress(addressref);
 
-
-        var widgets = this.getWidgetByAddress(addressref)
-
-        return [
-            widgets,
-            restArgs
-        ]
-
+        return [widgets, restArgs];
     }
 
-    getWidgetByElement(e, filter = '') {
-        var element = e ? e.closest('[data-widget]' + filter) : undefined
+    getWidgetByElement(e, filter = "") {
+        var element = e ? e.closest("[data-widget]" + filter) : undefined;
         if (element) {
-            return element._widget_instance ?
-                element._widget_instance :
-                this.widgets[element.getAttribute('data-widget')]
+            return element._widget_instance
+                ? element._widget_instance
+                : this.widgets[element.getAttribute("data-widget")];
         }
     }
-
 }
 
-var widgetManager = new WidgetManager()
+var widgetManager = new WidgetManager();
 
-module.exports = widgetManager
+module.exports = widgetManager;

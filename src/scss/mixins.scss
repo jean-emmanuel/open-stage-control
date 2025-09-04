@@ -1,6 +1,6 @@
 @mixin pseudo-stroke($z: 0) {
     &:before {
-        content:"";
+        content: "";
         position: absolute;
         border: var(--line-width) solid var(--color-stroke);
         opacity: var(--alpha-stroke);
@@ -16,7 +16,7 @@
 
 @mixin pseudo-fill($z: 0) {
     &:after {
-        content:"";
+        content: "";
         position: absolute;
         background: var(--color-fill);
         opacity: var(--alpha-fill);

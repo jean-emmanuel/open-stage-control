@@ -14,7 +14,6 @@ osc-panel-container.right.editor-breakout {
 }
 
 #osc-inspector {
-
     --widget-padding: -1rem;
 
     .lock {
@@ -23,10 +22,10 @@ osc-panel-container.right.editor-breakout {
             pointer-events: none;
             opacity: 0.65;
         }
-        osc-inspector-field[name=lock] {
+        osc-inspector-field[name="lock"] {
             filter: none;
             pointer-events: auto;
-            opacity: 1.0;
+            opacity: 1;
         }
     }
 
@@ -36,17 +35,17 @@ osc-panel-container.right.editor-breakout {
         padding: $padding / 2;
         height: 46rem;
         position: relative;
-        top:0;
+        top: 0;
         z-index: 21;
         background: var(--color-ui-background);
-        border-bottom:1rem solid var(--color-background);
+        border-bottom: 1rem solid var(--color-background);
         .btn {
             margin: $padding / 2;
             padding: 0 8rem 1rem;
             align-items: center;
             justify-content: center;
             display: flex;
-            span{
+            span {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
@@ -54,7 +53,7 @@ osc-panel-container.right.editor-breakout {
                 pointer-events: none;
             }
             &[data-action="toggle-grid"] {
-                color: var(--color-accent)
+                color: var(--color-accent);
             }
             &[data-action="reset-selection"] i:after {
                 content: "";
@@ -77,27 +76,23 @@ osc-panel-container.right.editor-breakout {
     overflow: hidden;
     > .content {
         overflow: auto;
-        flex:1;
+        flex: 1;
         height: calc(100% - 46rem);
         box-shadow: 0 1rem 0 0 inset rgba(white, 0.025);
 
-
-        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
-            border-color: var(--color-background)!important;
-            border-top:0;
+        &::-webkit-scrollbar-thumb,
+        &::-webkit-scrollbar-track-piece {
+            border-color: var(--color-background) !important;
+            border-top: 0;
         }
     }
-
 }
 
 body.no-grid #osc-inspector .toolbar .btn[data-action="toggle-grid"] {
     color: inherit;
 }
 
-
-
 osc-inspector-field {
-
     display: flex;
     flex-direction: row;
     line-height: $field-height;
@@ -105,12 +100,12 @@ osc-inspector-field {
     position: relative;
 
     &:after {
-        content:"";
+        content: "";
         position: absolute;
-        left:$label-width;
-        top:0;
+        left: $label-width;
+        top: 0;
         right: 1rem;
-        border-top:1rem solid var(--color-ui-background);
+        border-top: 1rem solid var(--color-ui-background);
         z-index: 1;
         // opacity: 0.5;
     }
@@ -126,20 +121,19 @@ osc-inspector-field {
         height: $field-height;
         cursor: pointer;
         background: var(--color-ui-foreground);
-        border:1rem solid var(--color-background);
+        border: 1rem solid var(--color-background);
         border-right: none;
         border-top-left-radius: inherit;
         border-bottom-left-radius: inherit;
     }
 
     &.has-editor {
-
         flex-direction: column;
         height: auto;
         border-radius: $radius;
 
         > label {
-            border:1rem solid var(--color-background);
+            border: 1rem solid var(--color-background);
             border-bottom: none;
             width: 100%;
             position: relative;
@@ -150,34 +144,34 @@ osc-inspector-field {
         }
         .btn {
             position: absolute;
-            top:3rem;
+            top: 3rem;
             background: var(--color-ui-button);
             line-height: $field-height - 6;
             box-shadow: 0 0 1rem 0 var(--color-background);
             border: 0;
         }
         .fullscreen {
-            right:3rem;
+            right: 3rem;
             width: 24rem;
             padding-left: 0;
             padding-right: 0;
             border-top-right-radius: inherit;
         }
         .help {
-            right:30rem;
+            right: 30rem;
         }
         &:after {
-            content:none;
+            content: none;
         }
 
         &.fullscreen {
             position: fixed;
-            width:auto;
+            width: auto;
             height: auto;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             padding: 50rem;
             margin: 0;
             z-index: 99;
@@ -193,7 +187,7 @@ osc-inspector-field {
                 }
             }
             .ace_editor {
-                height: 100%!important;
+                height: 100% !important;
             }
         }
     }
@@ -202,7 +196,8 @@ osc-inspector-field {
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
     }
-    > textarea, > input {
+    > textarea,
+    > input {
         font-family: $font-mono;
 
         line-height: $field-height - 8rem;
@@ -216,7 +211,7 @@ osc-inspector-field {
         background: var(--color-background);
         cursor: text;
 
-        &:last-child{
+        &:last-child {
             border-top-right-radius: inherit;
             border-bottom-right-radius: inherit;
         }
@@ -235,10 +230,7 @@ osc-inspector-field {
         &[rows="1"] {
             scrollbar-width: none;
         }
-
-
     }
-
 
     .computed-value {
         position: absolute;
@@ -249,19 +241,18 @@ osc-inspector-field {
         font-style: italic;
         margin-top: 1rem;
     }
-
 }
 
 osc-inspector-field .ace_editor {
-
     color: var(--color-text);
     font-size: inherit;
     background: var(--color-background);
     line-height: 1.3;
     border: 1rem solid var(--color-background);
 
-    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
-        border-color: var(--color-background)!important;
+    ::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-track-piece {
+        border-color: var(--color-background) !important;
     }
     --scrollbar-size: 8rem;
 
@@ -269,7 +260,7 @@ osc-inspector-field .ace_editor {
         background: var(--color-background);
         color: #6a6f7a;
         border-right: 1rem solid var(--color-ui-background);
-        line-height: 1.5
+        line-height: 1.5;
     }
     .ace_print-margin {
         display: none;
@@ -286,27 +277,27 @@ osc-inspector-field .ace_editor {
         opacity: 0;
     }
     .ace_marker-layer .ace_selection {
-        background: #3d4350
+        background: #3d4350;
     }
     .ace_multiselect .ace_selection.ace_start {
         box-shadow: 0 0 3rem 0 #282c34;
-        border-radius: 2rem
+        border-radius: 2rem;
     }
     .ace_marker-layer .ace_step {
-        background: #c6dbae
+        background: #c6dbae;
     }
     .ace_marker-layer .ace_bracket {
         border: none;
         border-radius: 0;
         margin-top: 1rem;
-        border-bottom: 1rem solid var(--color-accent)
+        border-bottom: 1rem solid var(--color-accent);
     }
     .ace_marker-layer .ace_active-line {
         background: rgba(white, 0.05);
     }
     .ace_gutter-active-line {
         background-color: rgba(white, 0.05);
-        z-index: 99
+        z-index: 99;
     }
     .ace_marker-layer .ace_selected-word {
         border: none;
@@ -315,85 +306,85 @@ osc-inspector-field .ace_editor {
     }
     .ace_fold {
         background-color: #61afef;
-        border-color: #abb2bf
+        border-color: #abb2bf;
     }
     .ace_keyword {
-        color: #c678dd
+        color: #c678dd;
     }
     .ace_keyword.ace_operator {
-        color: #c678dd
+        color: #c678dd;
     }
     .ace_keyword.ace_other.ace_unit {
-        color: #d19a66
+        color: #d19a66;
     }
     .ace_constant.ace_language {
-        color: #d19a66
+        color: #d19a66;
     }
     .ace_constant.ace_numeric {
-        color: #d19a66
+        color: #d19a66;
     }
     .ace_constant.ace_character {
-        color: #56b6c2
+        color: #56b6c2;
     }
     .ace_constant.ace_other {
-        color: #56b6c2
+        color: #56b6c2;
     }
     .ace_support.ace_function {
-        color: #61afef
+        color: #61afef;
     }
     .ace_support.ace_constant {
-        color: #d19a66
+        color: #d19a66;
     }
     .ace_support.ace_class {
-        color: #e5c07b
+        color: #e5c07b;
     }
     .ace_support.ace_type {
-        color: #e5c07b
+        color: #e5c07b;
     }
     .ace_storage {
-        color: #c678dd
+        color: #c678dd;
     }
     .ace_storage.ace_type {
-        color: #c678dd
+        color: #c678dd;
     }
     .ace_invalid {
         color: #fff;
-        background-color: #f2777a
+        background-color: #f2777a;
     }
     .ace_invalid.ace_deprecated {
         color: #272b33;
-        background-color: #d27b53
+        background-color: #d27b53;
     }
     .ace_string {
-        color: #98c379
+        color: #98c379;
     }
     .ace_string.ace_regexp {
-        color: #e06c75
+        color: #e06c75;
     }
     .ace_comment {
         font-style: italic;
-        color: #5c6370
+        color: #5c6370;
     }
     .ace_variable {
-        color: #e06c75
+        color: #e06c75;
     }
     .ace_variable.ace_parameter {
-        color: #d19a66
+        color: #d19a66;
     }
     .ace_meta.ace_tag {
-        color: #e06c75
+        color: #e06c75;
     }
     .ace_entity.ace_other.ace_attribute-name {
-        color: #e06c75
+        color: #e06c75;
     }
     .ace_entity.ace_name.ace_function {
-        color: #61afef
+        color: #61afef;
     }
     .ace_entity.ace_name.ace_tag {
-        color: #e06c75
+        color: #e06c75;
     }
     .ace_markup.ace_heading {
-        color: #98c379
+        color: #98c379;
     }
     .ace_indent-guide {
         background: none;
@@ -401,7 +392,7 @@ osc-inspector-field .ace_editor {
         margin-left: -1rem;
     }
     .ace_tooltip {
-        left:$padding + 1!important;
+        left: $padding + 1 !important;
         max-width: 80%;
         white-space: pre-wrap;
         background: var(--color-context-menu);
@@ -413,29 +404,33 @@ osc-inspector-field .ace_editor {
     }
     .ace_gutter {
         .ace_info {
-            background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-text)!important;
+            background:
+                linear-gradient(rgba(black, 0.5), rgba(black, 0.5)),
+                var(--color-text) !important;
             color: var(--color-background);
         }
         .ace_warning {
-            background: linear-gradient(rgba(black, 0.5), rgba(black, 0.5)), var(--color-warning);
+            background:
+                linear-gradient(rgba(black, 0.5), rgba(black, 0.5)),
+                var(--color-warning);
             color: var(--color-background);
         }
         .ace_error {
-            background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), var(--color-error);
+            background:
+                linear-gradient(rgba(black, 0.4), rgba(black, 0.4)),
+                var(--color-error);
             color: var(--color-background);
         }
     }
 }
 
-
 osc-inspector-category {
-
     margin-top: 1rem;
     display: block;
     padding: 0 8rem;
 
     &:first-child {
-        margin-top: 0
+        margin-top: 0;
     }
 
     .category-header {
@@ -450,8 +445,8 @@ osc-inspector-category {
         font-weight: 500;
         @include pseudo-fill($z: -1);
         &:after {
-            left:-($padding - 1);
-            right:-($padding - 1);
+            left: -($padding - 1);
+            right: -($padding - 1);
         }
 
         &:before {
@@ -464,13 +459,13 @@ osc-inspector-category {
             transform-origin: 2rem 3rem;
             width: 8rem;
             margin-right: 8rem;
-            top:1rem;
+            top: 1rem;
         }
 
-        &:focus, &:active {
-            text-decoration: underline
+        &:focus,
+        &:active {
+            text-decoration: underline;
         }
-
     }
 
     .separator {
@@ -497,16 +492,17 @@ osc-inspector-category {
             content: "";
             position: absolute;
             height: 100%;
-            left:-($padding);
-            right:-($padding);
+            left: -($padding);
+            right: -($padding);
             background: var(--color-ui-foreground);
-            border-top:1rem solid var(--color-background);
-            border-bottom:1rem solid var(--color-background);
+            border-top: 1rem solid var(--color-background);
+            border-bottom: 1rem solid var(--color-background);
             z-index: -1;
         }
     }
 
-    osc-inspector-field, .separator {
+    osc-inspector-field,
+    .separator {
         display: none;
     }
     --alpha-fill: 1;
@@ -524,7 +520,7 @@ osc-inspector-category {
             display: flex;
         }
         .separator {
-            display: block
+            display: block;
         }
     }
 
@@ -538,7 +534,7 @@ osc-inspector-category {
             border-top: 0;
         }
         osc-inspector-color:after {
-            top:0;
+            top: 0;
         }
         border-top-left-radius: $radius;
         border-top-right-radius: $radius;
@@ -560,7 +556,6 @@ osc-inspector-category {
 }
 
 osc-inspector-checkbox {
-
     --widget-padding: 1rem;
     --color-fill: var(--color-ui-button);
     --alpha-fill: 1;
@@ -600,7 +595,6 @@ osc-inspector-checkbox {
             color: var(--color-text-solid);
         }
     }
-
 }
 
 osc-inspector-select {
@@ -621,7 +615,7 @@ osc-inspector-select {
         padding: 4rem 6rem;
 
         position: absolute;
-        right:2rem;
+        right: 2rem;
         width: 127rem;
         opacity: 0;
         optgroup {
@@ -637,21 +631,20 @@ osc-inspector-select {
             }
         }
     }
-    &:after{
-        content:"\f107";
+    &:after {
+        content: "\f107";
         font-family: FontAwesome;
         position: absolute;
         line-height: $field-height;
         height: $field-height;
         width: $field-height;
         text-align: center;
-        right:0;
-        top:1rem;
+        right: 0;
+        top: 1rem;
         font-size: 16rem;
         pointer-events: none;
     }
 }
-
 
 osc-inspector-color {
     padding: 0;
@@ -670,8 +663,6 @@ osc-inspector-color {
 
     cursor: pointer;
 
-
-
     --color-fill: var(--color-picker-value);
     --alpha-fill: 1;
     --widget-padding: 2rem;
@@ -686,7 +677,9 @@ osc-inspector-color {
 .color-picker {
     position: absolute;
     z-index: 99;
-    height: calc(var(--sidepanel-size) - #{$label-width} - #{$field-height * 2});
+    height: calc(
+        var(--sidepanel-size) - #{$label-width} - #{$field-height * 2}
+    );
     min-height: 111rem;
     max-height: 227rem;
     top: 0;
@@ -702,7 +695,7 @@ osc-inspector-color {
     .widget {
         background: var(--color-ui-background);
         flex: 1;
-        width:  auto;
+        width: auto;
         --widget-padding: 0rem;
         inner {
             padding: 1rem;
@@ -714,20 +707,18 @@ osc-inspector-color {
         }
         .alpha {
             margin-top: 0.5rem;
-            left:0;
+            left: 0;
             margin-left: 0;
-            border:0;
+            border: 0;
         }
         .hue:after {
-            left:0;
-            right:0;
+            left: 0;
+            right: 0;
         }
     }
-
 }
 
 .inspector-help {
-
     width: 100%;
     padding: 8rem;
     background: var(--color-background);
@@ -749,7 +740,9 @@ osc-inspector-color {
         display: inline-block;
         user-select: auto;
         cursor: auto;
-        ::selection{/* reset */}
+        ::selection {
+            /* reset */
+        }
     }
     a {
         text-decoration: underline;
@@ -782,7 +775,6 @@ osc-inspector-color {
         border-top: 2rem solid var(--color-ui-foreground);
         margin-top: 10rem;
         padding-top: 10rem;
-
     }
 
     .kbd {
@@ -799,7 +791,6 @@ osc-inspector-color {
     }
 }
 
-
 .editor-enabled.local-zoom-in .root-container,
 .editor-enabled.local-zoom-out .root-container {
     transform-origin: top left;
@@ -808,7 +799,6 @@ osc-inspector-color {
     min-height: calc(100% / var(--local-zoom));
 }
 
-.editor-enabled.local-zoom-out .root-container.auto-height{
+.editor-enabled.local-zoom-out .root-container.auto-height {
     transform-origin: center left;
-
 }

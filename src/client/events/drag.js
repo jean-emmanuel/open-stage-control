@@ -1,203 +1,187 @@
-const {normalizeDragEvent, resetEventOffset, TRAVERSING_SAMEWIDGET} = require('./utils')
-const iOS = require('../ui/ios')
+const {
+    normalizeDragEvent,
+    resetEventOffset,
+    TRAVERSING_SAMEWIDGET
+} = require("./utils");
+const iOS = require("../ui/ios");
 
 var targets = {},
-    previousPointers = {}
+    previousPointers = {};
 
 function pointerDownHandler(event) {
-
-    if (event.capturedByEditor || event.touchPunch) return event
+    if (event.capturedByEditor || event.touchPunch) return event;
 
     if (!event.target._drag_multitouch) {
         for (var i in targets) {
-            if (targets[i] == event.target) return event
+            if (targets[i] == event.target) return event;
         }
     }
 
-    event = normalizeDragEvent(event)
-    event.stopPropagation = true
+    event = normalizeDragEvent(event);
+    event.stopPropagation = true;
 
-    var target = closestDragContainer(event.target)
+    var target = closestDragContainer(event.target);
 
-    if (!target) return event
+    if (!target) return event;
 
     if (event.traversingStack) {
-
         var widget = target._drag_widget,
-            local = event.traversingStack.stack[event.traversingStack.stack.length - 1]
+            local =
+                event.traversingStack.stack[
+                    event.traversingStack.stack.length - 1
+                ];
 
         if (widget.getProp) {
             // if first touched widget is a container, wait until another widget is touched while moving
-            event.traversingStack.firstType = widget.isContainer ? '?' : widget.getProp('type')
+            event.traversingStack.firstType = widget.isContainer
+                ? "?"
+                : widget.getProp("type");
         }
 
         if (local.mode === TRAVERSING_SAMEWIDGET) {
-            if (local.type === '') {
-                local.type = event.traversingStack.firstType
+            if (local.type === "") {
+                local.type = event.traversingStack.firstType;
             }
-            event.traversing = local.type === event.traversingStack.firstType || event.traversingStack.firstType === '?'
+            event.traversing =
+                local.type === event.traversingStack.firstType ||
+                event.traversingStack.firstType === "?";
         } else {
-            event.traversing = true
+            event.traversing = true;
         }
-
     }
 
-    targets[event.pointerId] = target
-    previousPointers[event.pointerId] = event
+    targets[event.pointerId] = target;
+    previousPointers[event.pointerId] = event;
 
+    if (event.pointerType !== "mouse") domObserver.activate();
 
-    if (event.pointerType !== 'mouse') domObserver.activate()
+    triggerWidgetEvent(targets[event.pointerId], "draginit", event);
 
-    triggerWidgetEvent(targets[event.pointerId], 'draginit', event)
+    if (event.cancelDragEvent) clearPointer(event);
 
-    if (event.cancelDragEvent) clearPointer(event)
-
-    return event
-
+    return event;
 }
 
 function pointerMoveHandler(event) {
+    event = normalizeDragEvent(event, previousPointers[event.pointerId]);
 
-    event = normalizeDragEvent(event, previousPointers[event.pointerId])
-
-    event.stopPropagation = true
+    event.stopPropagation = true;
 
     if (event.traversing) {
-
         var previousTarget = targets[event.pointerId],
-            target = event.isTouch ?
-                document.elementFromPoint(event.clientX, event.clientY)
-                : event.target
+            target = event.isTouch
+                ? document.elementFromPoint(event.clientX, event.clientY)
+                : event.target;
 
-        if (target) target = closestDragContainer(target)
+        if (target) target = closestDragContainer(target);
 
         var local = null,
             containersOnly = false,
-            backupTarget = target
+            backupTarget = target;
 
         if (target && event.traversingStack) {
             for (var i = event.traversingStack.stack.length - 1; i > -1; i--) {
                 if (event.traversingStack.stack[i].container.contains(target)) {
-                    local = event.traversingStack.stack[i]
-                    break
+                    local = event.traversingStack.stack[i];
+                    break;
                 }
             }
             if (!local) {
-                target = null
+                target = null;
             } else if (local.mode === TRAVERSING_SAMEWIDGET) {
-                var widget = target._drag_widget
-                if (local.type === '?' && widget.getProp && !widget.isContainer) local.type = widget.getProp('type')
-                if (widget.getProp && local.type !== widget.getProp('type')) target = null
+                var widget = target._drag_widget;
+                if (local.type === "?" && widget.getProp && !widget.isContainer)
+                    local.type = widget.getProp("type");
+                if (widget.getProp && local.type !== widget.getProp("type"))
+                    target = null;
             }
         }
 
-
-
-
         if (target && event.isTouch) {
-            resetEventOffset(event, target)
+            resetEventOffset(event, target);
         }
 
         if (previousTarget !== target && !containersOnly) {
-            triggerWidgetEvent(previousTarget, 'dragend', event)
+            triggerWidgetEvent(previousTarget, "dragend", event);
         }
-
 
         if (target) {
-
             if (previousTarget === target) {
-
-                triggerWidgetEvent(target, 'drag', event)
-
-            } else  {
-                triggerWidgetEvent(target, 'draginit', event)
-
+                triggerWidgetEvent(target, "drag", event);
+            } else {
+                triggerWidgetEvent(target, "draginit", event);
             }
-
         } else {
-
             // notify container of move events if no draggable widget is under the pointer
-            triggerWidgetEvent(backupTarget, 'drag', event, true)
-
+            triggerWidgetEvent(backupTarget, "drag", event, true);
         }
 
-        targets[event.pointerId] = target
-
-
+        targets[event.pointerId] = target;
     } else {
-        triggerWidgetEvent(targets[event.pointerId], 'drag', event)
+        triggerWidgetEvent(targets[event.pointerId], "drag", event);
     }
 
-    previousPointers[event.pointerId] = event
-
+    previousPointers[event.pointerId] = event;
 }
 
 function pointerUpHandler(event) {
+    event = normalizeDragEvent(event, previousPointers[event.pointerId]);
+    event.stopPropagation = true;
 
-    event = normalizeDragEvent(event, previousPointers[event.pointerId])
-    event.stopPropagation = true
+    triggerWidgetEvent(targets[event.pointerId], "dragend", event);
 
-    triggerWidgetEvent(targets[event.pointerId], 'dragend', event)
-
-    clearPointer(event)
-
+    clearPointer(event);
 }
 
 function clearPointer(event) {
-
-    delete targets[event.pointerId]
-    delete previousPointers[event.pointerId]
+    delete targets[event.pointerId];
+    delete previousPointers[event.pointerId];
 
     if (domObserver.active) {
-        var t
-        for (var k in targets) {t=targets[k]}
-        if (t === undefined) domObserver.deactivate()
+        var t;
+        for (var k in targets) {
+            t = targets[k];
+        }
+        if (t === undefined) domObserver.deactivate();
     }
-
 }
-
 
 // Move / Up Filter
 
 function pointerMoveFilter(event) {
-
     if (targets[event.pointerId] !== undefined) {
-        pointerMoveHandler.call(targets[event.pointerId], event)
+        pointerMoveHandler.call(targets[event.pointerId], event);
     }
-
 }
 
 function pointerUpFilter(event) {
-
     if (targets[event.pointerId] !== undefined) {
-        pointerUpHandler.call(targets[event.pointerId], event)
-        delete targets[event.pointerId]
+        pointerUpHandler.call(targets[event.pointerId], event);
+        delete targets[event.pointerId];
     }
-
 }
 
 // Mouse events wrappers
 
 function mouseDownCapture(event) {
-    if (event.pointerType === 'touch') return
-    event.stopPropagation()
+    if (event.pointerType === "touch") return;
+    event.stopPropagation();
     // event.pointerId = 'mouse'
-    pointerDownHandler(event)
+    pointerDownHandler(event);
 }
 
 function mouseMoveCapture(event) {
-    if (event.pointerType === 'touch') return
+    if (event.pointerType === "touch") return;
     // event.pointerId = 'mouse'
-    event.inertia = event.ctrlKey ? 10 : 1
-    pointerMoveFilter(event)
+    event.inertia = event.ctrlKey ? 10 : 1;
+    pointerMoveFilter(event);
 }
 
-function mouseUpCapture(event){
-    if (event.pointerType === 'touch') return
+function mouseUpCapture(event) {
+    if (event.pointerType === "touch") return;
     // event.pointerId = 'mouse'
-    pointerUpFilter(event)
+    pointerUpFilter(event);
 }
-
 
 // Touch events wrappers
 
@@ -207,228 +191,244 @@ function mouseUpCapture(event){
 const domObserver = new MutationObserver(function(mutations) {
     for (var id in targets) {
         var event = previousPointers[id],
-            target = targets[id]
+            target = targets[id];
 
-        if (!event || event.pointerType === 'mouse') continue
+        if (!event || event.pointerType === "mouse") continue;
 
         for (var mutation of mutations) {
             for (var node of mutation.removedNodes) {
-                if (node == target || node.contains(target)){
-                    pointerUpHandler(event)
+                if (node == target || node.contains(target)) {
+                    pointerUpHandler(event);
                 }
             }
         }
     }
-})
-domObserver.active = false
-domObserver.activate = ()=>{
+});
+domObserver.active = false;
+domObserver.activate = () => {
     if (!domObserver.active) {
-        domObserver.observe(DOM.get('#osc-container')[0], {subtree: true, childList: true})
-        domObserver.active = true
+        domObserver.observe(DOM.get("#osc-container")[0], {
+            subtree: true,
+            childList: true
+        });
+        domObserver.active = true;
     }
-}
-domObserver.deactivate = ()=>{
+};
+domObserver.deactivate = () => {
     if (domObserver.active) {
-        domObserver.disconnect()
-        domObserver.active = false
+        domObserver.disconnect();
+        domObserver.active = false;
     }
-}
+};
 
 function touchDownCapture(event) {
+    var preventDefault = true;
 
-    var preventDefault = true
-
-    event.stopPropagation()
+    event.stopPropagation();
 
     for (var i in event.changedTouches) {
-        if (isNaN(i) || !event.changedTouches[i]) continue
-        var touchEvent = event.changedTouches[i]
+        if (isNaN(i) || !event.changedTouches[i]) continue;
+        var touchEvent = event.changedTouches[i];
 
         if (event.traversingStack) {
-            touchEvent.traversingStack = event.traversingStack
+            touchEvent.traversingStack = event.traversingStack;
         }
 
-        touchEvent.pointerId = touchEvent.identifier
+        touchEvent.pointerId = touchEvent.identifier;
 
-        touchEvent = pointerDownHandler(touchEvent)
+        touchEvent = pointerDownHandler(touchEvent);
 
         // allow scroll if drag is cancelled or widget is a container
-        if (touchEvent.cancelDragEvent || touchEvent.allowScroll) preventDefault = false
+        if (touchEvent.cancelDragEvent || touchEvent.allowScroll)
+            preventDefault = false;
     }
-    if (preventDefault) event.preventDefault()
+    if (preventDefault) event.preventDefault();
 }
 
 function touchMoveCapture(event) {
     for (var i in event.changedTouches) {
-        if (isNaN(i) || !event.changedTouches[i]) continue
-        var touchEvent = event.changedTouches[i]
-        touchEvent.fingers = 0
+        if (isNaN(i) || !event.changedTouches[i]) continue;
+        var touchEvent = event.changedTouches[i];
+        touchEvent.fingers = 0;
         for (var j in event.touches) {
-            if (event.touches[j].target && event.touches[j].target.isSameNode(touchEvent.target)) {
-                touchEvent.fingers += 1
+            if (
+                event.touches[j].target &&
+                event.touches[j].target.isSameNode(touchEvent.target)
+            ) {
+                touchEvent.fingers += 1;
             }
         }
 
-        touchEvent.pointerId = touchEvent.identifier
-        pointerMoveFilter(touchEvent)
+        touchEvent.pointerId = touchEvent.identifier;
+        pointerMoveFilter(touchEvent);
     }
 }
 
 function touchUpCapture(event) {
     for (var i in event.changedTouches) {
-        if (isNaN(i) || !event.changedTouches[i]) continue
-        var touchEvent = event.changedTouches[i]
-        touchEvent.pointerId = touchEvent.identifier
-        pointerUpFilter(touchEvent)
+        if (isNaN(i) || !event.changedTouches[i]) continue;
+        var touchEvent = event.changedTouches[i];
+        touchEvent.pointerId = touchEvent.identifier;
+        pointerUpFilter(touchEvent);
     }
 }
-
-
 
 function ancestorDragContainers(target) {
     var containers = [],
-        container = target
+        container = target;
     while (container !== null) {
         if (container._drag_widget) {
-            containers.splice(0, 0, container._drag_widget)
-            if (container._drag_widget.root) break
+            containers.splice(0, 0, container._drag_widget);
+            if (container._drag_widget.root) break;
         }
-        container = container.parentNode
+        container = container.parentNode;
     }
-    return containers
+    return containers;
 }
 
 function closestDragContainer(target) {
-    var container = target
+    var container = target;
     while (container !== null) {
         if (container._drag_widget) {
-            return container
+            return container;
         } else {
-            container = container.parentNode
+            container = container.parentNode;
         }
     }
-    return null
+    return null;
 }
 
 // Callback trigger
 
 function triggerWidgetEvent(target, name, event, containersOnly) {
-
     // trigger drag events from parent to child
     var widgets = ancestorDragContainers(target),
-        widget
+        widget;
 
     for (widget of widgets) {
-        if (containersOnly && !widget.isContainer) continue
-        widget.trigger(name, event)
-        if (event.preventDefault) break
+        if (containersOnly && !widget.isContainer) continue;
+        widget.trigger(name, event);
+        if (event.preventDefault) break;
     }
 
     // if child is a container, let it scroll
-    if (widget && widget.scroll) event.allowScroll = true
+    if (widget && widget.scroll) event.allowScroll = true;
 }
 
 // init
 
-DOM.ready(()=>{
-
+DOM.ready(() => {
     if (!iOS) {
-        document.addEventListener('pointermove', mouseMoveCapture, true)
-        if ('onwebkitmouseforcechanged' in document) document.addEventListener('webkitmouseforcechanged', mouseMoveCapture, true)
+        document.addEventListener("pointermove", mouseMoveCapture, true);
+        if ("onwebkitmouseforcechanged" in document)
+            document.addEventListener(
+                "webkitmouseforcechanged",
+                mouseMoveCapture,
+                true
+            );
     }
-    if (!iOS) document.addEventListener('pointerup', mouseUpCapture, true)
+    if (!iOS) document.addEventListener("pointerup", mouseUpCapture, true);
 
-    document.addEventListener('touchmove', touchMoveCapture, true)
+    document.addEventListener("touchmove", touchMoveCapture, true);
 
-    if ('ontouchforcechange' in document) document.addEventListener('touchforcechange', touchMoveCapture, true)
+    if ("ontouchforcechange" in document)
+        document.addEventListener("touchforcechange", touchMoveCapture, true);
 
-    DOM.addEventListener(document, 'touchend touchcancel', touchUpCapture, true)
+    DOM.addEventListener(
+        document,
+        "touchend touchcancel",
+        touchUpCapture,
+        true
+    );
 
-    if (!iOS) document.addEventListener('pointerdown', mouseDownCapture)
-
-})
+    if (!iOS) document.addEventListener("pointerdown", mouseDownCapture);
+});
 
 module.exports = {
-
     setup: function(options) {
-
         if (
-            this._customBindings['drag'] !== 0 ||
-            this._customBindings['draginit'] !== 0 ||
-            this._customBindings['dragend'] !== 0 ||
-            !options || options.ignoreCustomBindings
+            this._customBindings["drag"] !== 0 ||
+            this._customBindings["draginit"] !== 0 ||
+            this._customBindings["dragend"] !== 0 ||
+            !options ||
+            options.ignoreCustomBindings
         ) {
-            return
+            return;
         }
 
-        var {element, multitouch} = options
+        var { element, multitouch } = options;
 
-        element.addEventListener('touchstart', touchDownCapture, false)
-        element._drag_widget = this
-        element._drag_multitouch = multitouch
-
+        element.addEventListener("touchstart", touchDownCapture, false);
+        element._drag_widget = this;
+        element._drag_multitouch = multitouch;
     },
 
     teardown: function(options) {
-
         if (
-            this._customBindings['drag'] !== 0 ||
-            this._customBindings['draginit'] !== 0 ||
-            this._customBindings['dragend'] !== 0 ||
-            !options || options.ignoreCustomBindings
+            this._customBindings["drag"] !== 0 ||
+            this._customBindings["draginit"] !== 0 ||
+            this._customBindings["dragend"] !== 0 ||
+            !options ||
+            options.ignoreCustomBindings
         ) {
-            return
+            return;
         }
 
-        var {element} = options
+        var { element } = options;
 
-        element.style.touchAction = ''
-        element.removeEventListener('touchstart', touchDownCapture, false)
-        delete element._drag_widget
-        delete element._drag_multitouch
-
+        element.style.touchAction = "";
+        element.removeEventListener("touchstart", touchDownCapture, false);
+        delete element._drag_widget;
+        delete element._drag_multitouch;
     },
 
-    enableTraversingGestures: function(element, options={}) {
-
-        if (element._traversing) return
+    enableTraversingGestures: function(element, options = {}) {
+        if (element._traversing) return;
 
         var traversing = options.type ? TRAVERSING_SAMEWIDGET : true,
-            traversingType = options.type === 'smart' || options.type === 'auto' ? '' : options.type
+            traversingType =
+                options.type === "smart" || options.type === "auto"
+                    ? ""
+                    : options.type;
 
-        element._traversing = traversing
+        element._traversing = traversing;
 
         function makeEventTraversing(event) {
-            if (event.ctrlKey) return
-            if (!event.traversingStack) event.traversingStack = {firstType: '', stack: []}
+            if (event.ctrlKey) return;
+            if (!event.traversingStack)
+                event.traversingStack = { firstType: "", stack: [] };
             event.traversingStack.stack.push({
                 container: element.parentNode,
                 mode: traversing,
                 type: traversingType
-            })
-
+            });
         }
 
-        if (!iOS) element.addEventListener('pointerdown', makeEventTraversing, true)
-        element.addEventListener('touchstart', makeEventTraversing, true)
+        if (!iOS)
+            element.addEventListener("pointerdown", makeEventTraversing, true);
+        element.addEventListener("touchstart", makeEventTraversing, true);
 
-        element.addEventListener('disableTraversingGestures', (e)=>{
-            e.stopPropagation()
-            if (!iOS) element.removeEventListener('pointerdown', makeEventTraversing, true)
-            element.removeEventListener('touchstart', makeEventTraversing, true)
-
-        })
-
+        element.addEventListener("disableTraversingGestures", (e) => {
+            e.stopPropagation();
+            if (!iOS)
+                element.removeEventListener(
+                    "pointerdown",
+                    makeEventTraversing,
+                    true
+                );
+            element.removeEventListener(
+                "touchstart",
+                makeEventTraversing,
+                true
+            );
+        });
     },
 
     disableTraversingGestures: function(element) {
+        if (!element._traversing) return;
 
-        if (!element._traversing) return
+        delete element._traversing;
 
-        delete element._traversing
-
-        DOM.dispatchEvent(element, 'disableTraversingGestures')
-
+        DOM.dispatchEvent(element, "disableTraversingGestures");
     }
-
-}
+};

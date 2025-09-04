@@ -1,191 +1,206 @@
-var UiSidePanel = require('./ui-sidepanel'),
-    html = require('nanohtml'),
-    raw = require('nanohtml/raw'),
-    locales = require('../locales'),
-    {icon} = require('./utils'),
-    Script = require('../widgets/scripts/script'),
-    Widget = require('../widgets/common/widget'),
-    widgetManager = require('../managers/widgets')
+var UiSidePanel = require("./ui-sidepanel"),
+    html = require("nanohtml"),
+    raw = require("nanohtml/raw"),
+    locales = require("../locales"),
+    { icon } = require("./utils"),
+    Script = require("../widgets/scripts/script"),
+    Widget = require("../widgets/common/widget"),
+    widgetManager = require("../managers/widgets");
 
 class UiConsole extends UiSidePanel {
-
     constructor(options) {
+        super(options);
 
-        super(options)
+        this.header = DOM.get(this.container, "osc-panel-header")[0];
 
-        this.header = DOM.get(this.container, 'osc-panel-header')[0]
+        this.header.appendChild(html`<label>${locales("console")}</label>`);
+        this.messages = this.content.appendChild(
+            html`<osc-console></osc-console>`
+        );
 
-        this.header.appendChild(html`<label>${locales('console')}</label>`)
-        this.messages = this.content.appendChild(html`<osc-console></osc-console>`)
+        this.inputWrapper = this.content.appendChild(
+            html`<osc-console-input></osc-console-inpu>`
+        );
+        this.input = this.inputWrapper.appendChild(
+            html`<textarea rows="1"></textarea>`
+        );
 
-        this.inputWrapper = this.content.appendChild(html`<osc-console-input></osc-console-inpu>`)
-        this.input = this.inputWrapper.appendChild(html`<textarea rows="1"></textarea>`)
+        this.actions = this.header.appendChild(
+            html`<div class="actions"></div>`
+        );
+        this.clearBtn = this.actions.appendChild(
+            html`<div class="clear" title="${locales("console_clear")}">
+                ${raw(icon("trash"))}
+            </div>`
+        );
+        this.clearBtn.addEventListener("click", () => {
+            this.clear();
+        });
 
-        this.actions = this.header.appendChild(html`<div class="actions"></div>`)
-        this.clearBtn = this.actions.appendChild(html`<div class="clear" title="${locales('console_clear')}">${raw(icon('trash'))}</div>`)
-        this.clearBtn.addEventListener('click', ()=>{
-            this.clear()
-        })
+        this.length = 0;
+        this.maxLength = ENV.consolelength || 300;
 
-        this.length = 0
-        this.maxLength = ENV.consolelength || 300
+        this.history = [""];
+        this.cursor = 0;
 
-        this.history = ['']
-        this.cursor = 0
+        var _this = this;
 
-
-        var _this = this
-
-        console._log = console.log
-        console.log = function(message){
+        console._log = console.log;
+        console.log = function(message) {
             for (let arg of arguments) {
-                _this.log('log', arg)
+                _this.log("log", arg);
             }
-            console._log(...arguments)
-        }
+            console._log(...arguments);
+        };
 
-        console._error = console.error
-        console.error = function(message){
+        console._error = console.error;
+        console.error = function(message) {
             for (let arg of arguments) {
-                _this.log('error', arg)
+                _this.log("error", arg);
             }
-            console._error(...arguments)
-        }
+            console._error(...arguments);
+        };
 
-        console._clear = console.clear
-        console.clear = function(){
-            _this.clear()
-            console._clear()
-        }
+        console._clear = console.clear;
+        console.clear = function() {
+            _this.clear();
+            console._clear();
+        };
 
-        this.widget = new Widget({props: {id: 'CONSOLE'}, parent: widgetManager})
+        this.widget = new Widget({
+            props: { id: "CONSOLE" },
+            parent: widgetManager
+        });
         this.script = new Script({
             widget: this.widget,
-            property: '',
-            code: 'var navigator; return eval(input_code)',
-            context: {input_code: ''}
-        })
-        this.widget._not_editable = true
-        this.widget.hash = 'CONSOLE'
+            property: "",
+            code: "var navigator; return eval(input_code)",
+            context: { input_code: "" }
+        });
+        this.widget._not_editable = true;
+        this.widget.hash = "CONSOLE";
 
-        this.input.addEventListener('keydown', (event)=>{
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault()
-                this.inputValidate()
-            } else if (event.key == 'ArrowUp') {
+        this.input.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                this.inputValidate();
+            } else if (event.key == "ArrowUp") {
                 if (this.cursor < this.history.length - 1) {
+                    if (
+                        this.input.value
+                            .substr(0, this.input.selectionStart)
+                            .split("\n").length !== 1
+                    )
+                        return;
 
-                    if (this.input.value.substr(0, this.input.selectionStart).split('\n').length !== 1) return
-
-                    this.cursor += 1
-                    this.input.value = this.history[this.cursor]
-                    event.preventDefault()
+                    this.cursor += 1;
+                    this.input.value = this.history[this.cursor];
+                    event.preventDefault();
                 }
-            } else if (event.key == 'ArrowDown') {
+            } else if (event.key == "ArrowDown") {
                 if (this.cursor > 0) {
-                    var nLines = this.input.value.split('\n').length
-                    if (this.input.value.substr(0, this.input.selectionStart).split('\n').length !== nLines) return
+                    var nLines = this.input.value.split("\n").length;
+                    if (
+                        this.input.value
+                            .substr(0, this.input.selectionStart)
+                            .split("\n").length !== nLines
+                    )
+                        return;
 
-                    this.cursor -= 1
-                    this.input.value = this.history[this.cursor]
-                    event.preventDefault()
+                    this.cursor -= 1;
+                    this.input.value = this.history[this.cursor];
+                    event.preventDefault();
                 }
-            } else if (event.key == 'DOM_VK_TAB' && this.input.value !== '') {
+            } else if (event.key == "DOM_VK_TAB" && this.input.value !== "") {
                 var cur = this.input.selectionStart,
-                    val = this.input.value
-                this.input.value = val.slice(0, cur) + '  ' + val.slice(cur)
-                event.preventDefault()
+                    val = this.input.value;
+                this.input.value = val.slice(0, cur) + "  " + val.slice(cur);
+                event.preventDefault();
             }
 
-            this.inputSize()
+            this.inputSize();
+        });
 
-        })
+        this.input.addEventListener("input", (event) => {
+            this.inputSize();
+        });
 
-        this.input.addEventListener('input', (event)=>{
-            this.inputSize()
-        })
-
-        if (!READ_ONLY) this.enable()
-
+        if (!READ_ONLY) this.enable();
     }
 
     inputSize() {
-        this.input.setAttribute('rows',0)
-        this.input.setAttribute('rows', this.input.value.split('\n').length)
+        this.input.setAttribute("rows", 0);
+        this.input.setAttribute("rows", this.input.value.split("\n").length);
     }
 
     inputValidate() {
+        if (this.input.value == "") return;
 
-        if (this.input.value == '') return
+        this.log("input", `${this.input.value}`);
 
-        this.log('input', `${this.input.value}`)
-
-        var returnValue = this.script.run({input_code: this.input.value}, {sync: true, send: true})
+        var returnValue = this.script.run(
+            { input_code: this.input.value },
+            { sync: true, send: true }
+        );
         if (returnValue === undefined) {
-            this.log('output undefined', 'undefined')
+            this.log("output undefined", "undefined");
         } else {
-            this.log('output value', returnValue)
+            this.log("output value", returnValue);
         }
 
         if (this.input.value !== this.history[1]) {
-            this.history.splice(1, 0, this.input.value)
-            if (this.history.length > 50) this.history.pop()
+            this.history.splice(1, 0, this.input.value);
+            if (this.history.length > 50) this.history.pop();
         }
 
-        this.input.value = ''
-        this.cursor = 0
-
+        this.input.value = "";
+        this.cursor = 0;
     }
 
     log(type, message, html) {
-
         var node = this.messages.appendChild(html`
-            <osc-console-message class="${type}">
+            <osc-console-message class="${type}"> </osc-console-message>
+        `);
 
-            </osc-console-message>
-        `)
-
-        if (typeof message === 'object') {
+        if (typeof message === "object") {
             if (!(message instanceof Error)) {
                 try {
-                    message = JSON.stringify(message)
+                    message = JSON.stringify(message);
                 } catch (_) {}
             } else {
-                message = String(message) + message.stack
+                message = String(message) + message.stack;
             }
         }
 
         if (html) {
-            node.innerHTML = message
+            node.innerHTML = message;
         } else {
-            node.textContent = message
+            node.textContent = message;
         }
 
-        node.scrollIntoView()
+        node.scrollIntoView();
 
-        if (++this.length > this.maxLength) this.purge()
-
-
+        if (++this.length > this.maxLength) this.purge();
     }
 
     purge() {
-
-        var children = [...this.messages.children]
+        var children = [...this.messages.children];
         for (var i = 0; i < this.maxLength / 2; i++) {
-            this.messages.removeChild(children[i])
+            this.messages.removeChild(children[i]);
         }
-        this.length = this.maxLength / 2 + 1
-
+        this.length = this.maxLength / 2 + 1;
     }
 
     clear() {
-
-        this.messages.innerHTML = ''
-        this.length = 0
-        this.script.onRemove()
-
+        this.messages.innerHTML = "";
+        this.length = 0;
+        this.script.onRemove();
     }
-
 }
 
-module.exports = new UiConsole({selector: '#osc-console', minSize: 40, size: 200, minimized: true})
+module.exports = new UiConsole({
+    selector: "#osc-console",
+    minSize: 40,
+    size: 200,
+    minimized: true
+});

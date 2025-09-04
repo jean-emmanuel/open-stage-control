@@ -1,63 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, user-scalable=no"/>
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="theme-color" content="black">
-    <link rel="apple-touch-icon" href="/assets/logo.png?__OSC_ASSET__=1&version=${version}" />
-    <link rel="stylesheet" type="text/css" href="/assets/open-stage-control.css?__OSC_ASSET__=1&version=${version}" hot-reload/>
-    <link rel="stylesheet" type="text/css" href="/theme.css?__OSC_ASSET__=1&version=${version}" hot-reload/>
-    <link rel="stylesheet" type="text/css" href="/assets/fonts/fontawesome.min.css?__OSC_ASSET__=1&version=${version}"/>
-    <link rel="stylesheet" type="text/css" href="/assets/fonts/fa-solid.css?__OSC_ASSET__=1&version=${version}"/>
-    <link rel="stylesheet" type="text/css" href="/assets/fonts/roboto.css?__OSC_ASSET__=1&version=${version}"/>
-    <link rel="shortcut icon" href="/assets/favicon.png?__OSC_ASSET__=1&version=${version}"/>
-    <script src="/client/open-stage-control-client.js?__OSC_ASSET__=1&version=${version}"></script>
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="theme-color" content="black" />
+        <link
+            rel="apple-touch-icon"
+            href="/assets/logo.png?__OSC_ASSET__=1&version=${version}"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="/assets/open-stage-control.css?__OSC_ASSET__=1&version=${version}"
+            hot-reload
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="/theme.css?__OSC_ASSET__=1&version=${version}"
+            hot-reload
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="/assets/fonts/fontawesome.min.css?__OSC_ASSET__=1&version=${version}"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="/assets/fonts/fa-solid.css?__OSC_ASSET__=1&version=${version}"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="/assets/fonts/roboto.css?__OSC_ASSET__=1&version=${version}"
+        />
+        <link
+            rel="shortcut icon"
+            href="/assets/favicon.png?__OSC_ASSET__=1&version=${version}"
+        />
+        <script src="/client/open-stage-control-client.js?__OSC_ASSET__=1&version=${version}"></script>
+    </head>
 
-<body class="editor-disabled" spellcheck="false">
-    <osc-workspace class="vertical">
-        <osc-panel-container class="horizontal" id="main">
-            <osc-toolbar id="main-menu"></osc-toolbar>
-            <osc-panel-container class="left">
-                <div class="resize-handle left"></div>
-                <div class="toggle-button left"></div>
-                <osc-panel-inner class="left">
+    <body class="editor-disabled" spellcheck="false">
+        <osc-workspace class="vertical">
+            <osc-panel-container class="horizontal" id="main">
+                <osc-toolbar id="main-menu"></osc-toolbar>
+                <osc-panel-container class="left">
+                    <div class="resize-handle left"></div>
+                    <div class="toggle-button left"></div>
+                    <osc-panel-inner class="left">
+                        <osc-panel-header></osc-panel-header>
+                        <osc-panel-content
+                            class="left"
+                            id="osc-tree"
+                        ></osc-panel-content>
+                    </osc-panel-inner>
+                </osc-panel-container>
+                <osc-panel-container class="center">
+                    <osc-panel-header id="osc-greeting-header">
+                        ${productName} <span class="version">v${version}</span>
+                    </osc-panel-header>
+                    <osc-panel-inner id="osc-container"></osc-panel-inner>
+                </osc-panel-container>
+                <osc-panel-container class="right">
+                    <div class="resize-handle right"></div>
+                    <div class="toggle-button right"></div>
+                    <osc-panel-inner class="right">
+                        <osc-panel-header></osc-panel-header>
+                        <osc-panel-content
+                            class="right"
+                            id="osc-inspector"
+                        ></osc-panel-content>
+                    </osc-panel-inner>
+                </osc-panel-container>
+                <osc-modal-container></osc-modal-container>
+            </osc-panel-container>
+
+            <osc-panel-container class="bottom minimized" id="osc-console">
+                <div class="resize-handle bottom"></div>
+                <div class="toggle-button bottom"></div>
+                <osc-panel-inner class="bottom">
                     <osc-panel-header></osc-panel-header>
-                    <osc-panel-content class="left" id="osc-tree"></osc-panel-content>
+                    <osc-panel-content></osc-panel-content>
                 </osc-panel-inner>
             </osc-panel-container>
-            <osc-panel-container class="center">
-                <osc-panel-header id="osc-greeting-header">
-                    ${productName} <span class="version">v${version}</span>
-                </osc-panel-header>
-                <osc-panel-inner id="osc-container"></osc-panel-inner>
-            </osc-panel-container>
-            <osc-panel-container class="right">
-                <div class="resize-handle right"></div>
-                <div class="toggle-button right"></div>
-                <osc-panel-inner class="right">
-                    <osc-panel-header></osc-panel-header>
-                    <osc-panel-content  class="right" id="osc-inspector"></osc-panel-content>
-                </osc-panel-inner>
-            </osc-panel-container>
-            <osc-modal-container></osc-modal-container>
-        </osc-panel-container>
-
-        <osc-panel-container class="bottom minimized"  id="osc-console">
-            <div class="resize-handle bottom"></div>
-            <div class="toggle-button bottom"></div>
-            <osc-panel-inner  class="bottom">
-                <osc-panel-header></osc-panel-header>
-                <osc-panel-content></osc-panel-content>
-            </osc-panel-inner>
-        </osc-panel-container>
-        <osc-keyboard class="simple-keyboard">
-        </osc-keyboard>
-    </osc-workspace>
-    <div id="notifications"></div>
-</body>
-
+            <osc-keyboard class="simple-keyboard"> </osc-keyboard>
+        </osc-workspace>
+        <div id="notifications"></div>
+    </body>
 </html>

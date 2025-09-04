@@ -1,8 +1,7 @@
 #osc-launcher {
-
     osc-panel-header {
-        background-color:  var(--color-ui-foreground);
-        --alpha-fill: .75;
+        background-color: var(--color-ui-foreground);
+        --alpha-fill: 0.75;
         text-align: left;
         justify-content: center;
         .spacer {
@@ -19,12 +18,12 @@
     flex-direction: column;
 
     osc-panel-container.main {
-        background-color:  var(--color-ui-foreground);
+        background-color: var(--color-ui-foreground);
         min-height: 0;
         min-height: 40rem;
         osc-panel-content {
             padding: 8rem;
-            background-color:  var(--color-ui-foreground);
+            background-color: var(--color-ui-foreground);
         }
     }
     osc-panel-content {
@@ -43,9 +42,9 @@
 
         border-top: 2rem solid var(--color-ui-foreground);
         max-height: calc(100% - var(--nav-height));
-        background-color:  var(--color-background);
+        background-color: var(--color-background);
         osc-panel-inner {
-            background-color:  var(--color-background);
+            background-color: var(--color-background);
         }
 
         // --color-background: --color-ui-foreground; // scrollbar
@@ -54,45 +53,48 @@
     osc-panel-inner {
         contain: layout style;
     }
-
 }
 
 osc-settings {
-
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-
 }
 osc-settings-field {
     display: flex;
     flex-direction: row;
     // margin: 1rem;
-    margin-top:-1rem;
+    margin-top: -1rem;
     line-height: 22rem;
     position: relative;
     &:after {
-        content:"";
+        content: "";
         position: absolute;
-        left:100rem;
-        top:0;
+        left: 100rem;
+        top: 0;
         right: 0;
-        border-top:1rem solid var(--color-ui-foreground);
+        border-top: 1rem solid var(--color-ui-foreground);
         z-index: 11;
     }
     &:nth-child(2n) {
         margin-left: 8rem;
     }
-    &:nth-child(2), &:nth-child(1) {
-        margin-top:0;
-        osc-settings-checkbox, osc-settings-reset, osc-settings-file {
+    &:nth-child(2),
+    &:nth-child(1) {
+        margin-top: 0;
+        osc-settings-checkbox,
+        osc-settings-reset,
+        osc-settings-file {
             border-top: 0;
         }
         &:after {
             content: none;
         }
     }
-    &:nth-last-child(2), &:nth-last-child(1) {
-        osc-settings-checkbox, osc-settings-reset, osc-settings-file {
+    &:nth-last-child(2),
+    &:nth-last-child(1) {
+        osc-settings-checkbox,
+        osc-settings-reset,
+        osc-settings-file {
             border-bottom: 0;
         }
     }
@@ -100,7 +102,7 @@ osc-settings-field {
         width: 100rem;
         // text-align: right;
         background: var(--color-ui-background);
-        border:1rem solid var(--color-background);
+        border: 1rem solid var(--color-background);
         border-right: none;
         // margin-right: 8rem;
         padding: 0 4rem;
@@ -119,10 +121,10 @@ osc-settings-field {
         padding: 0 4rem;
         width: 100rem;
     }
-    [disabled], [disabled] ~ * {
+    [disabled],
+    [disabled] ~ * {
         pointer-events: none;
-        opacity: 0.75!important;
-
+        opacity: 0.75 !important;
     }
 
     &.error label {
@@ -131,17 +133,19 @@ osc-settings-field {
     &.restart label:after {
         content: "";
         position: absolute;
-        top:1rem;
-        left:4rem;
-        right:-4rem;
-        bottom:0;
+        top: 1rem;
+        left: 4rem;
+        right: -4rem;
+        bottom: 0;
         background: var(--color-warning);
         opacity: 0.25;
         border-radius: 4rem;
     }
 }
 
-osc-settings-checkbox, osc-settings-reset, osc-settings-file {
+osc-settings-checkbox,
+osc-settings-reset,
+osc-settings-file {
     @extend osc-inspector-checkbox;
 
     i {
@@ -167,21 +171,20 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
 #osc-terminal {
     flex: 1;
     line-height: 18rem;
-    user-select:text;
+    user-select: text;
     cursor: auto;
 
     > div {
         margin: 0 12rem;
     }
 
-
     * {
-        user-select:text;
+        user-select: text;
         cursor: auto;
         white-space: pre-wrap;
     }
     .log span {
-        background: transparent!important
+        background: transparent !important;
     }
     .help {
         font-style: italic;
@@ -225,10 +228,10 @@ osc-settings-checkbox, osc-settings-reset, osc-settings-file {
         margin-top: 5rem;
         margin-left: 15rem;
         path[fill="#ffffff"] {
-            fill: var(--color-text)!important;
+            fill: var(--color-text) !important;
         }
         path[stroke="#000000"] {
-            stroke: var(--color-background)!important;
+            stroke: var(--color-background) !important;
         }
     }
 

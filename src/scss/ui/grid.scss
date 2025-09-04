@@ -5,8 +5,17 @@
         .modal-container,
         .panel-container {
             > inner {
-                background-image: linear-gradient(to bottom, var(--color-grid)  1rem,  transparent 1rem),
-                linear-gradient(to right, var(--color-grid)  1rem,  transparent 1rem);
+                background-image:
+                    linear-gradient(
+                        to bottom,
+                        var(--color-grid) 1rem,
+                        transparent 1rem
+                    ),
+                    linear-gradient(
+                        to right,
+                        var(--color-grid) 1rem,
+                        transparent 1rem
+                    );
                 --size: calc(var(--grid-width) * 1rem);
                 background-size: var(--size) var(--size);
                 background-attachment: local;
@@ -16,7 +25,6 @@
     }
 
     .widget:not(.not-editable) {
-        pointer-events: initial!important;
+        pointer-events: initial !important;
     }
-
 }

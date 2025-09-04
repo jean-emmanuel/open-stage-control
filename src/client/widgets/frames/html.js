@@ -1,20 +1,15 @@
-var Widget = require('../common/widget'),
-    morph = require('nanomorph'),
-    html = require('nanohtml'),
-    sanitizeHtml = require('sanitize-html'),
-    StaticProperties = require('../mixins/static_properties')
+var Widget = require("../common/widget"),
+    morph = require("nanomorph"),
+    html = require("nanohtml"),
+    sanitizeHtml = require("sanitize-html"),
+    StaticProperties = require("../mixins/static_properties");
 
-class Html extends StaticProperties(Widget, {bypass: true}) {
-
+class Html extends StaticProperties(Widget, { bypass: true }) {
     static description() {
-
-        return 'Simple HTML parser.'
-
+        return "Simple HTML parser.";
     }
 
-
     static defaults() {
-
         return super.defaults().extend({
             osc: {
                 decimals: null,
@@ -22,54 +17,49 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
                 bypass: null,
                 ignoreDefaults: null
             }
-        })
-
+        });
     }
 
     constructor(options) {
+        super({
+            ...options,
+            html: html`
+                <inner>
+                    <div class="frame html"></div>
+                </inner>
+            `
+        });
 
-        super({...options, html: html`
-            <inner>
-                <div class="frame html"></div>
-            </inner>
-        `})
+        this.noValueState = true;
 
-        this.noValueState = true
+        if (!this.getProp("border")) this.container.classList.add("noborder");
+        this.frame = DOM.get(this.widget, ".frame")[0];
 
-        if (!this.getProp('border')) this.container.classList.add('noborder')
-        this.frame = DOM.get(this.widget, '.frame')[0]
-
-        if (this.getProp('html') !== '') this.updateHtmlLegacy()
-
+        if (this.getProp("html") !== "") this.updateHtmlLegacy();
     }
 
-    updateHtml(){}
+    updateHtml() {}
 
-    updateHtmlLegacy(){
+    updateHtmlLegacy() {
+        var newHtml = this.frame.cloneNode(false);
 
-        var newHtml = this.frame.cloneNode(false)
+        newHtml.innerHTML = sanitizeHtml(
+            this.getProp("html"),
+            Widget.sanitizeHtmlOptions
+        );
 
-        newHtml.innerHTML = sanitizeHtml(this.getProp('html'), Widget.sanitizeHtmlOptions)
-
-        morph(this.frame, newHtml)
-
+        morph(this.frame, newHtml);
     }
 
     onPropChanged(propName, options, oldPropValue) {
-
-        if (super.onPropChanged(...arguments)) return true
+        if (super.onPropChanged(...arguments)) return true;
 
         switch (propName) {
-
-            case 'html':
-                this.updateHtmlLegacy()
-                return
-
+            case "html":
+                this.updateHtmlLegacy();
+                return;
         }
-
     }
-
-
 }
 
-module.exports = Html
+module.exports = Html;

@@ -1,39 +1,41 @@
-
 #loading {
     position: fixed;
-    top:50%;
-    left:50%;
-    margin-left:-15rem;
-    margin-top:-15rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -15rem;
+    margin-top: -15rem;
     text-align: center;
 }
 
 .spinner {
     display: block;
     margin: 0 auto;
-    height:36rem;
-    width:36rem;
+    height: 36rem;
+    width: 36rem;
     border-radius: 50%;
     position: relative;
     margin: 20rem auto;
 
-
     &:after {
-        content:"";
+        content: "";
         position: absolute;
-        left:-3rem;
-        top:-3rem;
-        right:-3rem;
-        bottom:-3rem;
-        border:4rem solid var(--color-ui-foreground);
+        left: -3rem;
+        top: -3rem;
+        right: -3rem;
+        bottom: -3rem;
+        border: 4rem solid var(--color-ui-foreground);
         border-top: 2rem solid var(--color-widget);
         transform: rotateZ(0deg);
-        animation: spin .5s linear infinite;
+        animation: spin 0.5s linear infinite;
         border-radius: 50%;
     }
 }
 
 @keyframes spin {
-    0% {transform: rotateZ(0deg);}
-    100% {transform: rotateZ(360deg);}
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
 }
