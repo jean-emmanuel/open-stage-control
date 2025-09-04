@@ -111,5 +111,8 @@
   },
   "devDependencies": {
     "watchify": "4.0.0"
+  },
+  "volta": {
+    "node": "20.19.4"
   }
 }
