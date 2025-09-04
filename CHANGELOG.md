@@ -2,6 +2,11 @@
 
 ## 1.29.9-dev
 
+### branch `develop`
+
+- Commits from branch `package-updates`: Updated Node to >= 20, as 16 and 18 are both EOL. Updates packages as necessary without breaking CJS compatability.
+- Commits from branch `contributing`: Began a `CONTRIBUTING.md` file outlining dependencies required for local development (very incomplete, only contains a couple things at the moment).
+
 ### branch `build-improvements`
 
 - Changed build scripts so that all assets in `app` are either generated or copied to it. `app` can now be deleted and re-created via `npm run build`.
