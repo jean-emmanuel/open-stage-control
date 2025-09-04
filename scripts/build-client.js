@@ -5,7 +5,7 @@ var build = require("./build"),
     nanohtml = require("nanohtml"),
     watch = process.argv.includes("--watch"),
     through = require("through"),
-    minimatch = require("minimatch");
+    minimatch = require("minimatch").minimatch;
 
 var ignores = ["**/*.min.js", "**/jquery.ui.js", "gyronorm.complete.min.js"],
     transformWrapper = function (transform) {
@@ -18,7 +18,21 @@ var ignores = ["**/*.min.js", "**/jquery.ui.js", "gyronorm.complete.min.js"],
         };
     };
 
-var transforms = [[transformWrapper(nanohtml)], [transformWrapper(babelify)]];
+var transforms = [[transformWrapper(nanohtml)], [transformWrapper(babelify), {
+    global: true,
+    presets: [
+        ["@babel/preset-env", {
+            targets: {
+                ios: "10.3",
+                chrome: "60"
+            },
+            modules: "commonjs",
+            useBuiltIns: "usage",
+            corejs: 3
+        }]
+    ],
+    plugins: ["@babel/plugin-transform-object-rest-spread"]
+}]];
 
 console.warn("\x1b[36m=> Building compressed client scripts...\x1b[0m");
 transforms.push([

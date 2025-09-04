@@ -9,5 +9,5 @@
       "corejs": 3
     }]
   ],
-  "plugins": ["@babel/plugin-proposal-object-rest-spread"]
+  "plugins": ["@babel/plugin-transform-object-rest-spread"]
 }
