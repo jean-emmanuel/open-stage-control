@@ -34,7 +34,12 @@ fs.writeFileSync(sessionPath, JSON.stringify(session))
 
 var {spawn} = require('child_process')
 
-var proc = spawn('xvfb-run', `npm start -- -l ${sessionPath}`.split(' '), {detached: true})
+// OS-specific spawn command
+var isLinux = process.platform === 'linux'
+var command = isLinux ? 'xvfb-run' : 'npm'
+var args = isLinux ? `npm start -- -l ${sessionPath}`.split(' ') : `start -- -l ${sessionPath}`.split(' ')
+
+var proc = spawn(command, args, {detached: true})
 
 proc.stdout.on('data', std)
 proc.stderr.on('data', std)
