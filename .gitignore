@@ -8,7 +8,6 @@ app/client/*.js*
 app/launcher/*.js*
 app/server/*
 app/docs/*
-!app/docs/.htaccess
 !app/server/.keep
 app/package.json
 *.pyc
