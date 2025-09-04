@@ -10,7 +10,7 @@ module.exports = {
 
         return {
 
-            target: e.target,
+            target: e.target === document ? null : e.target, // firefox passes document when outside the page
             firstTarget: null,
             offsetX: e.offsetX,
             offsetY: e.offsetY,

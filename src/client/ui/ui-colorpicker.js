@@ -37,10 +37,13 @@ class ColorPicker extends UiWidget {
             this.trigger('change', {preventHistory: true})
         })
 
-        this.rgb.on('dragend', (e)=>{
+        var dragEndCb = (e)=>{
             this.value = chroma(this.rgb.value).hex()
             this.trigger('change')
-        })
+        }
+        this.rgb.pad.on('dragend', dragEndCb)
+        this.rgb.hue.on('dragend', dragEndCb)
+        this.rgb.alpha.on('dragend', dragEndCb)
 
 
         this.opened = 0

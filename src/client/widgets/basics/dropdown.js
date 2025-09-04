@@ -83,6 +83,8 @@ class Dropdown extends MenuBase {
             `)
         }
 
+        this.setValue(this.value)
+
     }
 
     setValue(v,options={}) {
@@ -120,7 +122,9 @@ class Dropdown extends MenuBase {
                 this.parseValues()
                 this.setValue(this.value)
                 return
-
+            case 'label':
+                this.setLabel()
+                return
         }
 
         return ret
@@ -130,7 +134,8 @@ class Dropdown extends MenuBase {
 }
 
 Dropdown.dynamicProps = Dropdown.prototype.constructor.dynamicProps.concat(
-    'values'
+    'values',
+    'label'
 )
 
 

@@ -43,9 +43,11 @@ if (settings.read('client-options')) {
     }
 }
 
-var resolveDirs = theme.files.map(x=>path.dirname(x))
+var resolveDirs = theme.files.map(x=>path.dirname(x)),
+    remoteRoot = settings.read('remote-root')
+
 resolveDirs = resolveDirs.filter((x, index)=>{return resolveDirs.indexOf(x) === index})
-resolveDirs.push(settings.read('remote-root') || '') // remote-root / absolute
+resolveDirs.push(remoteRoot || '') // remote-root / absolute
 
 function resolvePath(url, clientId) {
 
@@ -60,6 +62,12 @@ function resolvePath(url, clientId) {
 
     for (var i = sessionPath ? -1 : 0; i < resolveDirs.length; i++) {
         var p = i === -1 ? sessionPath : resolveDirs[i]
+
+        if (i == resolveDirs.length - 1 && remoteRoot) {
+            // strip out remote-root path from request url when resolving against it
+            url = url.replace(settings.read('remote-root'), '')
+        }
+
         p = path.resolve(path.join(p, url))
 
         if (fs.existsSync(p)) return p

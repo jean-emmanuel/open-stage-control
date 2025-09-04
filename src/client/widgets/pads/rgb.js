@@ -110,9 +110,6 @@ module.exports = class Rgb extends Widget {
             initValue[3] = this.getProp('rangeAlpha').min
         }
 
-
-        touchstate(this, {element: this.widget, multitouch: true, ignoreCustomBindings: true})
-
         if (this.getProp('spring')) {
 
             this.on('dragend', (e)=>{
@@ -124,6 +121,7 @@ module.exports = class Rgb extends Widget {
 
         }
 
+        touchstate(this, {element: this.widget, multitouch: true, ignoreCustomBindings: false})
 
         this.hsb = {h:0,s:0,b:0}
 

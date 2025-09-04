@@ -6,7 +6,19 @@
 
 - Changed build scripts so that all assets in `app` are either generated or copied to it. `app` can now be deleted and re-created via `npm run build`.
 
+## 1.29.9
+
+- bug fixes
+    - server: fix resolving absolute file urls containing the remote-root path
+
 ## 1.29.8
+
+- bug fixes
+    - firefox: `onTouch` error when the cursor goes outside the page
+    - dropdown: label not initialized until a value is set
+    - editor: regression (1.29.0) preventing color changes made with the color to be undoable unless validaed with the enter key
+    - editor: color picker interaction issue in near #000000
+    - rgb: incoming values were not queued when during user interaction
 
 - client
     - add `title` client option
