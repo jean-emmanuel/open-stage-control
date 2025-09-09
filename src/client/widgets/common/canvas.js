@@ -1,7 +1,7 @@
 var Widget = require('./widget'),
     resize = require('../../events/resize'),
     canvasQueue = require('./queue'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     fastdom = require('fastdom')
 
 

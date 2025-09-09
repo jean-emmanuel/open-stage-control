@@ -2,7 +2,7 @@ var Widget = require('../common/widget'),
     Xy = require('./xy'),
     Fader = require('../sliders/fader'),
     {clip, mapToScale, hsbToRgb, rgbToHsb} = require('../utils'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     touchstate = require('../mixins/touch_state')
 
 var faderDefaults = Fader.defaults()._props(),

@@ -1,6 +1,6 @@
 var UiWidget = require('./ui-widget'),
     {categories} = require('../widgets/'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     {icon} = require('../ui/utils'),
     chroma = require('chroma-js')

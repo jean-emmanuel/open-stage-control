@@ -1,5 +1,5 @@
 var Canvas = require('../common/canvas'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 class Pad extends Canvas {
 

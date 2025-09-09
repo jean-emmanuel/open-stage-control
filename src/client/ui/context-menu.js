@@ -1,4 +1,4 @@
-var html = require('nanohtml'),
+var html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     UiWidget = require('./ui-widget'),

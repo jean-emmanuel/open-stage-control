@@ -1,7 +1,7 @@
 var Container = require('../common/container'),
     widgetManager = require('../../managers/widgets'),
     parser = require('../../parser'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     {enableTraversingGestures, disableTraversingGestures} = require('../../events/drag'),
     {setScrollbarColor} = require('../../ui/utils'),
     iOS13 = require('../../ui/ios') === 13,

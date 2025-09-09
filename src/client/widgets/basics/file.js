@@ -1,5 +1,5 @@
 var Widget = require('../common/widget'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     uiFilebrowser = require('../../ui/ui-filebrowser')
 
 module.exports = class File extends Widget {

@@ -1,6 +1,6 @@
 var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw')
 
 class Switch extends MenuBase {

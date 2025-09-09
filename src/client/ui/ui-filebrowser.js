@@ -1,5 +1,5 @@
 var locales = require('../locales'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     ipc = require('../ipc'),
     doubleClick = require('../events/double-click'),

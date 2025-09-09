@@ -1,6 +1,6 @@
 var terminal = require('./terminal'),
     settings = require('./settings'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     semver = require('semver'),
     {ipcRenderer} = require('electron')    
 

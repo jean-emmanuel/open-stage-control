@@ -1,6 +1,6 @@
 var Widget = require('../common/widget'),
     morph = require('nanomorph'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     sanitizeHtml = require('sanitize-html'),
     StaticProperties = require('../mixins/static_properties')
 

@@ -1,14 +1,4 @@
-node_modules
-dist
-app/LICENSE
-app/assets/fonts/*
-app/assets/*.css*
-app/assets/*.png
-app/client/*.js*
-app/launcher/*.js*
-app/server/*
-app/docs/*
-!app/docs/.htaccess
-!app/server/.keep
-app/package.json
+node_modules/
+dist/
+/app/
 *.pyc

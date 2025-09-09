@@ -1,6 +1,6 @@
 var UiWidget = require('./ui-widget'),
     keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     fastdom = require('fastdom'),
     Tab, Root, Folder
 

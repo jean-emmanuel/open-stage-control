@@ -1,4 +1,4 @@
-var html = require('nanohtml'),
+var html = require('nanohtml/lib/browser'),
     morph = require('nanomorph'),
     UiWidget = require('./ui-widget')
 

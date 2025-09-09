@@ -1,6 +1,6 @@
 var Widget = require('../common/widget'),
     doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     {deepEqual, isJSON} = require('../../utils'),
     {iconify} = require('../../ui/utils'),
     parser = require('../../parser')
