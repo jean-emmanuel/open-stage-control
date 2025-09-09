@@ -15,6 +15,7 @@ class CanvasWidget extends Canvas {
 
         var defaults = super.defaults().extend({
             class_specific: {
+                contextType: {type: 'string', value: '2d', choices: ['2d', 'webgl2'], help: 'Context type for the canvas'},
                 valueLength: {type: 'number', value: 1, help:[
                     'Defines the number of values accepted by the widget (minimum 1). Incoming messages that don\'t comply will be ignored',
                     'When calling `set()` from a script, submitted value should be an array only if `valueLength` is greater than 1.'

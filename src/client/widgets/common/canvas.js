@@ -30,7 +30,7 @@ class Canvas extends Widget {
 
         this.canvas = DOM.get(this.container, 'canvas')[0]
 
-        this.ctx = this.canvas.getContext('2d',{
+        this.ctx = this.canvas.getContext(this.getProp('contextType') || '2d',{
             desynchronized: !ELECTRON_NOGPU && ENV.desynccanvas ? true : false,
             alpha: true
         })
