@@ -7,7 +7,7 @@
 
 - widgets
     - the html property is no longer restricted / sanitized
-
+    - input/textarea/select no longer have their appearance property reset in custom html
 
 
 ## 1.29.8

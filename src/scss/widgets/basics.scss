@@ -642,18 +642,18 @@
         padding:0;
         background: transparent;
         border-radius: inherit;
-        -webkit-appearance:none;
-        appearance: none;
         text-align:inherit;
         vertical-align: top;
         letter-spacing: 1rem;
-        -webkit-user-select: text;
-        user-select: text;
-
         color:var(--color-fill);
         caret-color: var(--color-fill);
-
         height: 100%;
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        appearance:none;
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        user-select: auto;
 
         &:focus::selection {
             background: var(--color-fill);
@@ -694,8 +694,6 @@
         &.left {
             text-align: left;
         }
-        padding: var(--widget-padding);
-
 
     }
     textarea {
@@ -704,6 +702,12 @@
         height: 100%;
         resize: none;
         padding: var(--widget-padding);
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        appearance:none;
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        user-select: auto;
     }
 }
 

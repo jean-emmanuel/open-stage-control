@@ -15,6 +15,16 @@ osc-panel-container.right.editor-breakout {
 
 #osc-inspector {
 
+    select, input, textarea {
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        appearance:none;
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        user-select: auto;
+    }
+
+
     --widget-padding: -1rem;
 
     .lock {
