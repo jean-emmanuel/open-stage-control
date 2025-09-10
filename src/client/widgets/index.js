@@ -42,6 +42,7 @@ module.exports.widgets = {
     rgb: require('./pads/rgb'),
     multixy: require('./pads/multixy'),
     canvas: require('./pads/canvas'),
+    canvasgl: require('./pads/canvasgl'),
 
     // sliders
     fader: require('./sliders/fader'),
@@ -61,7 +62,7 @@ module.exports.categories = {
     'Frames':['frame', 'svg', 'html', 'image'],
     'Graphs':['plot','eq','visualizer'],
     'Indicators':['led', 'text'],
-    'Pads':['xy','rgb','multixy', 'canvas'],
+    'Pads':['xy','rgb','multixy', 'canvas', 'canvasgl'],
     'Sliders':['fader','knob', 'encoder', 'range'],
     'Scripts':['script', 'variable'],
 }

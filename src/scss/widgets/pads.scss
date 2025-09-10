@@ -1,7 +1,8 @@
 .xy-container,
 .multixy-container,
 .rgb-container,
-.canvas-container {
+.canvas-container,
+.canvasgl-container {
     width: 200rem;
     height: 200rem;
 }
@@ -130,7 +131,8 @@
 }
 
 
-.canvas-container {
+.canvas-container,
+.canvasgl-container {
 
    --alpha-fill-off: 0.05;
    --alpha-fill-on: 0.75;
