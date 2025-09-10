@@ -19,7 +19,7 @@ module.exports = {
             name: '_',
 		},
 	],
-    external: ['electron'],
+    external: ['electron', '@serialport'],
     watch: {
         clearScreen: false
     },
