@@ -5,6 +5,10 @@
 - bug fixes
     - server: fix resolving absolute file urls containing the remote-root path
 
+- widgets
+    - the html property is no longer restricted / sanitized
+
+
 
 ## 1.29.8
 

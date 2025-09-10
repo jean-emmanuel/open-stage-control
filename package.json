@@ -68,7 +68,6 @@
     "rollup-plugin-copy": "3.5.0",
     "rollup-plugin-license": "^3.6.0",
     "rollup-plugin-node-externals": "^8.1.1",
-    "sanitize-html": "1.27.5",
     "sass": "1.89.2",
     "scope-css": "1.2.1",
     "screenfull": "5.2.0",

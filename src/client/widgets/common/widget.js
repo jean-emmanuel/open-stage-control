@@ -11,7 +11,6 @@ var EventEmitter = require('../../events/event-emitter'),
     {deepCopy, deepEqual, isJSON} = require('../../utils'),
     html = require('nanohtml/lib/browser'),
     morph = require('nanomorph'),
-    sanitizeHtml = require('sanitize-html'),
     updateWidget = ()=>{},
     Script = require('../scripts/script'),
     uiConsole, uiTree, uiDragResize, sessionManager
@@ -82,13 +81,7 @@ class Widget extends EventEmitter {
                 html: {type: 'string', value: '', editor: 'html', syntaxChecker: false, help: [
                     'Custom html content to be inserted in the widget (before the widget\'s content). Elements are all unstyled by default, `css` should be used to customize their appearance.',
                     'The code is automatically wrapped in &lt;div class="html">&lt;/div>',
-                    'Allowed HTML tags:',
-                    '&nbsp;&nbsp;h1-6, blockquote, p, a, ul, ol, nl, li,',
-                    '&nbsp;&nbsp;b, i, strong, em, strike, code, hr, br, div,',
-                    '&nbsp;&nbsp;table, thead, img, caption, tbody, tr, th, td, pre',
-                    'Allowed attributes:',
-                    '&nbsp;&nbsp;&lt;*>: class, style, title, name',
-                    '&nbsp;&nbsp;&lt;img>: src, width, height',
+                    'Note: inserting scripts may break the application.',
                 ]},
                 css: {type: 'string', value: '', editor: 'css', syntaxChecker: false, help: [
                     'CSS rules. See <a href="https://openstagecontrol.ammd.net/docs/customization/css-tips/">documentation</a>.',
@@ -1278,7 +1271,7 @@ class Widget extends EventEmitter {
 
     updateHtml(){
 
-        var extraHtml = this.getProp('html') !== '' ? sanitizeHtml(this.getProp('html'), Widget.sanitizeHtmlOptions) : null
+        var extraHtml = this.getProp('html') || null
 
         if (this.extraHtml) {
             if (!extraHtml) {
@@ -1344,18 +1337,6 @@ class Widget extends EventEmitter {
 
     }
 
-}
-
-Widget.sanitizeHtmlOptions = {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2']).filter(x=>x!=='iframe'),
-    allowedAttributes: {
-        '*': [ 'title', 'class', 'style', 'name'],
-        'img': [ 'src' ,  'title', 'class', 'style', 'width', 'height'],
-        'a': ['href', 'target']
-    },
-    transformTags: {
-        'a': sanitizeHtml.simpleTransform('a', {target: '_blank'})
-    }
 }
 
 Widget.parsersContexts = {}

@@ -1,7 +1,6 @@
 var Widget = require('../common/widget'),
     morph = require('nanomorph'),
     html = require('nanohtml/lib/browser'),
-    sanitizeHtml = require('sanitize-html'),
     StaticProperties = require('../mixins/static_properties')
 
 class Html extends StaticProperties(Widget, {bypass: true}) {
@@ -49,7 +48,7 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
         var newHtml = this.frame.cloneNode(false)
 
-        newHtml.innerHTML = sanitizeHtml(this.getProp('html'), Widget.sanitizeHtmlOptions)
+        newHtml.innerHTML = this.getProp('html')
 
         morph(this.frame, newHtml)
 
