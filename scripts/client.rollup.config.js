@@ -55,6 +55,8 @@ module.exports = {
         terser({
             safari10: true,
             sourceMap: true,
+            keep_classnames: true,
+            keep_fnames: true,
             output: {
                 comments: false,
             },

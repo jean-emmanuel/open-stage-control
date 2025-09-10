@@ -33,12 +33,6 @@ module.exports = {
         nodeResolve({
             preferBuiltins: true
         }),
-        terser({
-            sourceMap: true,
-            output: {
-                comments: false,
-            },
-        }),
         license({
             banner: {
                 content: {
