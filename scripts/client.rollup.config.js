@@ -83,11 +83,6 @@ module.exports = {
                 {src: 'node_modules/ace-builds/src-min/worker-css.js', dest: 'app/client/workers/'},
                 {src: 'node_modules/ace-builds/src-min/worker-html.js', dest: 'app/client/workers/'},
                 {src: 'node_modules/ace-builds/src-min/worker-javascript.js', dest: 'app/client/workers/'},
-                {src: 'LICENSE', dest: 'app/'},
-                {src: 'src/python/*', dest: 'app/server/python/'},
-                {src: 'src/html/launcher.html', dest: 'app/launcher/', rename: 'index.html'},
-                {src: 'node_modules/fsevents/fsevents.node', dest: 'app/server/'},
-                {src: 'src/app/index.js', dest: 'app/'},
                 {src: 'src/html/client.html', dest: 'app/client/', rename: 'index.html', transform: (contents)=>{
                     return contents.toString().replace(/\$\{([^\}]+)\}/g, (m, p1)=>{return package[p1]})
                 }},
