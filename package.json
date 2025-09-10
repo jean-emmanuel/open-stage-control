@@ -21,6 +21,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@babel/core": "7.18.0",
+    "@babel/eslint-parser": "7.28.4",
     "@babel/preset-env": "7.18.0",
     "@electron/remote": "2.0.8",
     "@rollup/plugin-babel": "^6.0.4",
