@@ -32,6 +32,7 @@ module.exports = {
         }),
         babel({
             babelHelpers: 'bundled',
+            babelrc: false,
             exclude: [
                 /node_modules\/core-js/,
                 /node_modules\/ace-builds/
