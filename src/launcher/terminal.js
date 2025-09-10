@@ -1,6 +1,6 @@
 var {ipcRenderer} = require('electron'),
     ansiHTML = require('ansi-html'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 ansiHTML.setColors({
     magenta: 'B48EAD',

@@ -1,6 +1,6 @@
 var UiWidget = require('./ui-widget'),
     Rgb = require('../widgets/pads/rgb'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     chroma = require('chroma-js'),
     resize = require('../events/resize')
 

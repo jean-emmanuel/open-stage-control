@@ -1,5 +1,5 @@
 var UiSidePanel = require('./ui-sidepanel'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     locales = require('../locales'),
     {icon} = require('./utils'),
@@ -137,14 +137,14 @@ class UiConsole extends UiSidePanel {
 
     }
 
-    log(type, message, html) {
-
-        var node = this.messages.appendChild(html`
+    log(type, message, as_html) {
+        var msg =html`
             <osc-console-message class="${type}">
 
             </osc-console-message>
-        `)
+        `
 
+        var node = this.messages.appendChild(msg)
         if (typeof message === 'object') {
             if (!(message instanceof Error)) {
                 try {
@@ -155,7 +155,7 @@ class UiConsole extends UiSidePanel {
             }
         }
 
-        if (html) {
+        if (as_html) {
             node.innerHTML = message
         } else {
             node.textContent = message

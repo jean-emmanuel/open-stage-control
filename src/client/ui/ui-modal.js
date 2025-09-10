@@ -1,6 +1,6 @@
 var UiWidget = require('./ui-widget'),
     {icon} = require('./utils'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     MODAL_SINGLETON = null,
     MODAL_CONTAINER = null

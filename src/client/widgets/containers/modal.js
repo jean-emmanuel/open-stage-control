@@ -2,7 +2,7 @@ var Panel = require('./panel'),
     {icon, iconify} = require('../../ui/utils'),
     resize = require('../../events/resize'),
     doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     iOS13 = require('../../ui/ios') === 13
 

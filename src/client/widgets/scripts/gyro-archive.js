@@ -2,7 +2,7 @@ var Widget = require('../common/widget'),
     GyroNorm = require('gyronorm/dist/gyronorm.complete.min.js'),
     {icon} = require('../../ui/utils'),
     {clip} = require('../utils'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw')
 
 

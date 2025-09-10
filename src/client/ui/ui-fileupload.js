@@ -1,6 +1,6 @@
 var locales = require('../locales'),
     uiLoading = require('./ui-loading'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     SINGLETON = null,
     CONTAINER = null
 

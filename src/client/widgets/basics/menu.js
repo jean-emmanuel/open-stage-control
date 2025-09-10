@@ -1,7 +1,7 @@
 var MenuBase = require('./menu-base'),
     {iconify} = require('../../ui/utils'),
     doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     iOS = require('../../ui/ios')
 

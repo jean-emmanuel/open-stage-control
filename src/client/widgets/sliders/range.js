@@ -1,6 +1,6 @@
 var {clip} = require('../utils'),
     Fader = require('./fader'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 var faderDefaults = Fader.defaults()._props()
 

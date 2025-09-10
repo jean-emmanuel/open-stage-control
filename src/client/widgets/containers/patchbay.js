@@ -3,7 +3,7 @@ var Widget = require('../common/widget'),
     Container = require('../common/container'),
     {iconify} = require('../../ui/utils'),
     parser = require('../../parser'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 class PatchBayNode extends Widget {
 

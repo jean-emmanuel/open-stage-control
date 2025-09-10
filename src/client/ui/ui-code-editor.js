@@ -1,14 +1,14 @@
 var UiModal = require('./ui-modal'),
     locales = require('../locales'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     {icon} = require('../ui/utils'),
-    ace = require('ace-builds/src/ace.js'),
+    ace = require('ace-builds/src-noconflict/ace.js'),
     scriptGlobals = require('../widgets/scripts/script-vm').globals,
     editors = {}, editorModes = {
-        javascript: require('ace-builds/src/mode-javascript.js'),
-        css: require('ace-builds/src/mode-css.js'),
-        html: require('ace-builds/src/mode-html.js'),
+        javascript: require('ace-builds/src-noconflict/mode-javascript.js'),
+        css: require('ace-builds/src-noconflict/mode-css.js'),
+        html: require('ace-builds/src-noconflict/mode-html.js'),
     },
     codeEditorModKey = (navigator.platform || '').match('Mac') ? 'Cmd' : 'Ctrl'
 

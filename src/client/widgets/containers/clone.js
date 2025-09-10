@@ -4,7 +4,7 @@ var Container = require('../common/container'),
     parser = require('../../parser'),
     {deepCopy, deepEqual} = require('../../utils'),
     {diff, diffToWidget} = require('../../editor/diff'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     Session = require('../../managers/session/session')
 
 var excludedCloneClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand', 'no-interaction']

@@ -1,5 +1,5 @@
 var Widget = require('../common/widget'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     {urlParser} = require('../utils'),
     StaticProperties = require('../mixins/static_properties')
 

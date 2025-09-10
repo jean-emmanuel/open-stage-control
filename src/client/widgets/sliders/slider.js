@@ -2,7 +2,7 @@ var {clip, mapToScale} = require('../utils'),
     Canvas = require('../common/canvas'),
     touchstate = require('../mixins/touch_state'),
     doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 class Slider extends Canvas {
 

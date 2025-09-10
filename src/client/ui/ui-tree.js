@@ -1,5 +1,5 @@
 var UiWidget = require('./ui-widget'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     doubleClick = require('../events/double-click'),
     Sortable = require('sortablejs'),
     morph = require('nanomorph'),

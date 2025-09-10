@@ -1,6 +1,6 @@
 var Canvas = require('../common/canvas'),
     {deepCopy} = require('../../utils'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 class Input extends Canvas {
 

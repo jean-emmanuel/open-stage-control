@@ -1,5 +1,5 @@
 var MenuBase = require('./menu-base'),
-    html = require('nanohtml'),
+    html = require('nanohtml/lib/browser'),
     iOS = require('../../ui/ios')
 
 class Dropdown extends MenuBase {

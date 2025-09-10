@@ -1,6 +1,6 @@
 var {iconify} = require('../../ui/utils'),
     Widget = require('../common/widget'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 module.exports = class Text extends Widget {
 

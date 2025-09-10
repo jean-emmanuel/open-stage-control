@@ -1,7 +1,7 @@
 var Canvas = require('../common/canvas'),
     Script = require('../scripts/script'),
     widgetManager = require('../../managers/widgets'),
-    html = require('nanohtml')
+    html = require('nanohtml/lib/browser')
 
 class CanvasWidget extends Canvas {
 
