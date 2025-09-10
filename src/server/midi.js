@@ -23,11 +23,8 @@ var midiBinaries = {
     }
 }
 
-var expectMidiBinaries = false,
+var expectMidiBinaries = fs.existsSync(path.join(__dirname, '/osc-midi.json')),
     expectMidiBinariesError = false
-try {
-    expectMidiBinaries = eval('require("./osc-midi.json")')
-} catch(e) {}
 
 var pythonPathOverride
 if (midiBinaries[process.arch] && midiBinaries[process.arch][process.platform]) {
