@@ -110,8 +110,5 @@
   },
   "engines": {
     "node": ">=16 <=20"
-  },
-  "devDependencies": {
-    "watchify": "4.0.0"
   }
 }
