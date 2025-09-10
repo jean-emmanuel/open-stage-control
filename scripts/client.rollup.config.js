@@ -18,9 +18,11 @@ module.exports = {
             format: 'iife',
             sourcemap: true,
             strict: false,
+            indent: false,
             name: '_'
 		},
 	],
+    treeshake: false,
     watch: {
         clearScreen: false
     },
