@@ -83,9 +83,10 @@ module.exports = {
                 {src: 'resources/images/logo_tray@x2.png', dest: 'app/assets/'},
                 {src: 'resources/images/logo_16x16.png', dest: 'app/assets/'},
                 {src: 'resources/fonts/*', dest: 'app/assets/fonts/'},
-                {src: 'node_modules/ace-builds/src-min/worker-css.js', dest: 'app/client/workers/'},
-                {src: 'node_modules/ace-builds/src-min/worker-html.js', dest: 'app/client/workers/'},
-                {src: 'node_modules/ace-builds/src-min/worker-javascript.js', dest: 'app/client/workers/'},
+                {src: 'node_modules/ace-builds/src-min/worker-css.js', dest: 'app/client/ace/'},
+                {src: 'node_modules/ace-builds/src-min/worker-html.js', dest: 'app/client/ace/'},
+                {src: 'node_modules/ace-builds/src-min/worker-javascript.js', dest: 'app/client/ace/'},
+                {src: 'node_modules/ace-builds/src-min/ace.js', dest: 'app/client/ace/'},
                 {src: 'src/html/client.html', dest: 'app/client/', rename: 'index.html', transform: (contents)=>{
                     return contents.toString().replace(/\$\{([^\}]+)\}/g, (m, p1)=>{return package[p1]})
                 }},

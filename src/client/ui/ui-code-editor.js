@@ -3,7 +3,6 @@ var UiModal = require('./ui-modal'),
     html = require('nanohtml/lib/browser'),
     raw = require('nanohtml/raw'),
     {icon} = require('../ui/utils'),
-    ace = require('ace-builds/src-noconflict/ace.js'),
     scriptGlobals = require('../widgets/scripts/script-vm').globals,
     editors = {}, editorModes = {
         javascript: require('ace-builds/src-noconflict/mode-javascript.js'),
@@ -12,7 +11,7 @@ var UiModal = require('./ui-modal'),
     },
     codeEditorModKey = (navigator.platform || '').match('Mac') ? 'Cmd' : 'Ctrl'
 
-ace.config.set('basePath', '/client/workers/')
+ace.config.set('basePath', '/client/ace/')
 
 function setCommandEnabled(editor, name, enabled) {
     var command = editor.commands.byName[name]

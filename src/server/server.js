@@ -124,7 +124,7 @@ function httpRoute(req, res) {
         if (
             url.indexOf('__OSC_ASSET__=1') != -1 ||
             url.indexOf('open-stage-control-client.js.map') != -1 ||
-            url.indexOf('/client/workers') != -1
+            url.indexOf('/client/ace/') != -1
         ) {
 
             // osc asset files
