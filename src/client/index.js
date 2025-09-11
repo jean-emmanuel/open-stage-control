@@ -1,46 +1,37 @@
-document.addEventListener('DOMContentLoaded', function(event) {
+import './globals'
+import './stacktrace'
+import './ui/init'
 
-    require('./globals')
-    require('./stacktrace')
+import locales from './locales'
+import uiLoading from './ui/ui-loading'
+import ipc from './ipc/index'
+import * as backup from './backup'
 
-    var locales = require('./locales')
+uiLoading(locales('loading_server'))
 
-    DOM.init()
+function init() {
 
-    var uiLoading = require('./ui/ui-loading')
-    uiLoading(locales('loading_server'))
+    setTimeout(()=>{
 
-    function init() {
+        ipc.init()
 
-        setTimeout(()=>{
+        document.title = TITLE
 
-            var ipc = require('./ipc/'),
-                backup = require('./backup')
+        ipc.send('open', {hotReload: backup.exists})
 
-            ipc.init()
+        window.onunload = ()=>{
+            ipc.send('close')
+        }
 
-
-            require('./ui/init')
-
-            document.title = TITLE
-
-            ipc.send('open', {hotReload: backup.exists})
-
-            window.onunload = ()=>{
-                ipc.send('close')
-            }
-
-            backup.load()
+        backup.load()
 
 
-        }, 100)
+    }, 100)
 
-    }
+}
 
-    if (document.requestStorageAccess) {
-        document.requestStorageAccess().then(init, init)
-    } else {
-        init()
-    }
-
-})
+if (document.requestStorageAccess) {
+    document.requestStorageAccess().then(init, init)
+} else {
+    init()
+}

@@ -1,8 +1,8 @@
-var Widget = require('../common/widget'),
-    html = require('nanohtml/lib/browser'),
-    uiFilebrowser = require('../../ui/ui-filebrowser')
+import Widget from '../common/widget'
+import html from 'nanohtml/lib/browser'
+import uiFilebrowser from '../../ui/ui-filebrowser'
 
-module.exports = class File extends Widget {
+export default class File extends Widget {
 
     static description() {
 

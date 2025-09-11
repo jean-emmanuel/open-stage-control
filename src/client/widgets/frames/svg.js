@@ -1,7 +1,7 @@
-var Widget = require('../common/widget'),
-    morph = require('nanomorph'),
-    html = require('nanohtml/lib/browser'),
-    StaticProperties = require('../mixins/static_properties')
+import Widget from '../common/widget'
+import morph from 'nanomorph'
+import html from 'nanohtml/lib/browser'
+import StaticProperties from '../mixins/static_properties'
 
 
 class Svg extends StaticProperties(Widget, {bypass: true}) {
@@ -111,4 +111,4 @@ Svg.dynamicProps = Svg.prototype.constructor.dynamicProps.concat(
     'svg'
 )
 
-module.exports = Svg
+export default Svg

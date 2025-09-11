@@ -1,25 +1,26 @@
-var {updateWidget, incrementWidget} = require('./data-workers'),
-    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
-    {diff, diffToWidget} = require('./diff'),
-    widgetManager = require('../managers/widgets'),
-    {deepCopy} = require('../utils'),
-    {defaults} = require('../widgets/'),
-    macOs = (navigator.platform || '').match('Mac'),
-    UiSelectArea = require('../ui/ui-selectarea'),
-    UiInspector = require('../ui/ui-inspector'),
-    UiTree = require('../ui/ui-tree'),
-    UiDragResize = require('../ui/ui-dragresize'),
-    uiConsole = require('../ui/ui-console'),
-    notifications = require('../ui/notifications'),
-    locales = require('../locales'),
-    {leftUiSidePanel, rightUiSidePanel} = require('../ui/'),
-    ipc = require('../ipc'),
-    sessionManager
+import {updateWidget, incrementWidget} from './data-workers'
+import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+import {diff, diffToWidget} from './diff'
+import widgetManager from '../managers/widgets'
+import {deepCopy} from '../utils'
+import {defaults} from '../widgets/'
+import UiSelectArea from '../ui/ui-selectarea'
+import UiInspector from '../ui/ui-inspector'
+import UiTree from '../ui/ui-tree'
+import UiDragResize from '../ui/ui-dragresize'
+import uiConsole from '../ui/ui-console'
+import notifications from '../ui/notifications'
+import locales from '../locales'
+import {leftUiSidePanel, rightUiSidePanel} from '../ui/'
+import ipc from '../ipc'
 
-setTimeout(()=>{
-    sessionManager = require('../managers/session/')
-})
+var sessionManager
+;(async()=>{
+    sessionManager = (await import('../managers/session/')).default
+    await import('./context-menu')
+})()
 
+const macOs = (navigator.platform || '').match('Mac')
 const HISTORY_SIZE = 50
 
 class Editor {
@@ -1112,6 +1113,4 @@ class Editor {
 
 var editor = new Editor()
 
-module.exports = editor
-
-require('./context-menu')
+export default editor

@@ -1,16 +1,18 @@
-var UiWidget = require('./ui-widget'),
-    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
-    html = require('nanohtml/lib/browser'),
-    fastdom = require('fastdom'),
-    Tab, Root, Folder
+import UiWidget from './ui-widget'
+import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+import html from 'nanohtml/lib/browser'
+import fastdom from 'fastdom'
+
+var Tab, Root, Folder
+;(async ()=>{
+    Tab = (await import('../widgets/containers/tab')).default
+    Root = (await import('../widgets/containers/root')).default
+    Folder = (await import('../widgets/containers/folder')).default
+})()
 
 class UiDragResize extends UiWidget {
 
     constructor(options) {
-
-        Tab = require('../widgets/containers/tab')
-        Root = require('../widgets/containers/root')
-        Folder = require('../widgets/containers/folder')
 
         super(options)
 
@@ -235,4 +237,4 @@ class UiDragResize extends UiWidget {
 
 }
 
-module.exports = UiDragResize
+export default UiDragResize

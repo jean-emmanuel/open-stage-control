@@ -1,5 +1,5 @@
-var UiWidget = require('./ui-widget'),
-    {setScrollbarColor} = require('./utils')
+import UiWidget from './ui-widget'
+import {setScrollbarColor} from './utils'
 
 class UiWorkspace extends UiWidget {
 
@@ -13,4 +13,4 @@ class UiWorkspace extends UiWidget {
 
 }
 
-module.exports = new UiWorkspace({selector: 'osc-workspace'})
+export default new UiWorkspace({selector: 'osc-workspace'})

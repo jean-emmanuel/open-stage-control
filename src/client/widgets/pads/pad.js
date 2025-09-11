@@ -1,5 +1,5 @@
-var Canvas = require('../common/canvas'),
-    html = require('nanohtml/lib/browser')
+import Canvas from '../common/canvas'
+import html from 'nanohtml/lib/browser'
 
 class Pad extends Canvas {
 
@@ -107,4 +107,4 @@ Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'dec
     'label'
 ])
 
-module.exports = Pad
+export default Pad

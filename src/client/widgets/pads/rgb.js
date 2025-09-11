@@ -1,15 +1,15 @@
-var Widget = require('../common/widget'),
-    Xy = require('./xy'),
-    Fader = require('../sliders/fader'),
-    {clip, mapToScale, hsbToRgb, rgbToHsb} = require('../utils'),
-    html = require('nanohtml/lib/browser'),
-    touchstate = require('../mixins/touch_state')
+import Widget from '../common/widget'
+import Xy from './xy'
+import Fader from '../sliders/fader'
+import {clip, mapToScale, hsbToRgb, rgbToHsb} from '../utils'
+import html from 'nanohtml/lib/browser'
+import touchstate from '../mixins/touch_state'
 
 var faderDefaults = Fader.defaults()._props(),
     xyDefaults = Xy.defaults()._props()
 
 
-module.exports = class Rgb extends Widget {
+export default class Rgb extends Widget {
 
     static description() {
 

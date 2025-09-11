@@ -1,7 +1,7 @@
-var widgetManager = require('./managers/widgets'),
-    EventEmitter = require('./events/event-emitter'),
-    ipc = require('./ipc/'),
-    {deepEqual} = require('./utils')
+import widgetManager from './managers/widgets'
+import EventEmitter from './events/event-emitter'
+import ipc from './ipc/'
+import {deepEqual} from './utils'
 
 var Osc = class Osc extends EventEmitter {
 
@@ -13,9 +13,9 @@ var Osc = class Osc extends EventEmitter {
         this.remoteControl = {}
         this.serverTargets = []
 
-        setTimeout(()=>{
-            osc.remoteControl = require('./remote-control')
-        })
+        ;(async ()=>{
+            this.remoteControl = (await import('./remote-control')).default
+        })()
 
     }
 
@@ -90,4 +90,4 @@ var Osc = class Osc extends EventEmitter {
 
 var osc = new Osc()
 
-module.exports = osc
+export default osc

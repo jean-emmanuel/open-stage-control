@@ -13,4 +13,4 @@ let StaticProperties = (superclass, props) => class extends superclass {
 
 }
 
-module.exports = StaticProperties
+export default StaticProperties

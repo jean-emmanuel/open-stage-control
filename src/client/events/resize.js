@@ -1,7 +1,8 @@
-var fastdom = require('fastdom')
+import fastdom from 'fastdom'
+
 var elements = []
 
-function checkResizes(context, force){
+export function check(context, force){
     fastdom.measure(()=>{
         // Iterate over all elements to which the 'resize' event is bound.
         let resizedElems = [],
@@ -38,30 +39,25 @@ function checkResizes(context, force){
 
 }
 
-window.addEventListener('resize', ()=>{checkResizes(document)})
+window.addEventListener('resize', ()=>{check(document)})
 
-module.exports = {
+export function setup(options) {
 
-    setup: function(options) {
+    if (!options) return
+    if (elements.indexOf(options.element) == -1) {
+        elements.push(options.element)
+        options.element._resize_widget = this
+    }
 
-        if (!options) return
-        if (elements.indexOf(options.element) == -1) {
-            elements.push(options.element)
-            options.element._resize_widget = this
-        }
+}
 
-    },
-    teardown: function(options) {
+export function teardown(options) {
 
-        if (!options) return
+    if (!options) return
 
-        if (elements.indexOf(options.element) != -1) {
-            elements.splice(elements.indexOf(options.element), 1)
-            delete options.element._resize_widget
-        }
-
-    },
-
-    check: checkResizes
+    if (elements.indexOf(options.element) != -1) {
+        elements.splice(elements.indexOf(options.element), 1)
+        delete options.element._resize_widget
+    }
 
 }

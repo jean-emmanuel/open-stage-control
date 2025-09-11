@@ -1,16 +1,16 @@
-var widgetManager = require('../managers/widgets'),
-    resize = require('../events/resize'),
-    stateManager = require('../managers/state'),
-    parser = require('../parser'),
-    Panel, Matrix,
-    editor,
-    scrollState = {}
+import widgetManager from '../managers/widgets'
+import stateManager from '../managers/state'
+import parser from '../parser'
+import * as resize from '../events/resize'
 
-setTimeout(()=>{
-    editor = require('./')
-    Panel = require('../widgets/containers/panel')
-    Matrix = require('../widgets/containers/matrix')
-})
+var Panel, Matrix, editor
+;(async ()=>{
+    Panel = (await import('../widgets/containers/panel')).default
+    Matrix = (await import('../widgets/containers/matrix')).default
+    editor = (await import('./')).default
+})()
+
+var scrollState = {}
 
 function updateWidget(widget, options={}) {
 
@@ -235,7 +235,7 @@ var incrementWidget = function(data, root){
 
 }
 
-module.exports = {
-    updateWidget:updateWidget,
-    incrementWidget:incrementWidget
+export {
+    updateWidget,
+    incrementWidget
 }

@@ -1,8 +1,8 @@
-var Panel = require('./panel'),
-    parser = require('../../parser'),
-    {deepCopy} = require('../../utils'),
-    Session = require('../../managers/session/session'),
-    widgetManager = require('../../managers/widgets')
+import Panel from './panel'
+import parser from '../../parser'
+import {deepCopy} from '../../utils'
+import Session from '../../managers/session/session'
+import widgetManager from '../../managers/widgets'
 
 
 class Matrix extends Panel {
@@ -280,4 +280,4 @@ Matrix.dynamicProps = Matrix.prototype.constructor.dynamicProps.concat(
     'props'
 )
 
-module.exports = Matrix
+export default Matrix

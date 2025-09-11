@@ -1,11 +1,11 @@
-var UiSidePanel = require('./ui-sidepanel'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    locales = require('../locales'),
-    {icon} = require('./utils'),
-    Script = require('../widgets/scripts/script'),
-    Widget = require('../widgets/common/widget'),
-    widgetManager = require('../managers/widgets')
+import UiSidePanel from './ui-sidepanel'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import locales from '../locales'
+import {icon} from './utils'
+import Script from '../widgets/scripts/script'
+import Widget from '../widgets/common/widget'
+import widgetManager from '../managers/widgets'
 
 class UiConsole extends UiSidePanel {
 
@@ -188,4 +188,4 @@ class UiConsole extends UiSidePanel {
 
 }
 
-module.exports = new UiConsole({selector: '#osc-console', minSize: 40, size: 200, minimized: true})
+export default new UiConsole({selector: '#osc-console', minSize: 40, size: 200, minimized: true})

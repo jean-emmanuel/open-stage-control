@@ -1,8 +1,8 @@
-var {mapToScale} = require('../utils'),
-    Widget = require('../common/widget'),
-    html = require('nanohtml/lib/browser')
+import {mapToScale} from '../utils'
+import Widget from '../common/widget'
+import html from 'nanohtml/lib/browser'
 
-module.exports = class Led extends Widget {
+export default class Led extends Widget {
 
     static description() {
 

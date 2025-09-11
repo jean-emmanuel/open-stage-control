@@ -1,6 +1,6 @@
-var {mapToScale} = require('../utils'),
-    Plot = require('./plot'),
-    StaticProperties = require('../mixins/static_properties')
+import {mapToScale} from '../utils'
+import Plot from './plot'
+import StaticProperties from '../mixins/static_properties'
 
 class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smooth:true}) {
 
@@ -132,7 +132,7 @@ Eq.dynamicProps = Eq.prototype.constructor.dynamicProps.concat(
     'filters'
 )
 
-module.exports = Eq
+export default Eq
 
 
 // biquadResponse

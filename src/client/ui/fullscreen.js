@@ -1,7 +1,7 @@
-var screenfull = require('screenfull'),
-    UiModal = require('./ui-modal'),
-    locales = require('../locales'),
-    iOS = require('./ios')
+import screenfull from 'screenfull'
+import UiModal from './ui-modal'
+import locales from '../locales'
+import iOS from './ios'
 
 var fullscreen
 
@@ -40,4 +40,4 @@ if (screenfull.isEnabled && !iOS) {
 
 window.ELECTRON_FULLSCREEN = ()=>{fullscreen.toggle()}
 
-module.exports = fullscreen
+export default fullscreen

@@ -1,7 +1,8 @@
-var notifications = require('./notifications'),
-    loading = null, timeout = null
+import notifications from './notifications'
 
-module.exports = function uiLoading(title) {
+var loading = null, timeout = null
+
+export default function(title) {
 
     if (title === false && loading) {
         clearTimeout(timeout)

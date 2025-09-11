@@ -1,7 +1,7 @@
-var Panel = require('./panel'),
-    Widget = require('../common/widget'),
-    parser = require('../../parser'),
-    {mapToScale} = require('../utils')
+import Panel from './panel'
+import Widget from '../common/widget'
+import parser from '../../parser'
+import {mapToScale} from '../utils'
 
 
 class Keyboard extends Panel {
@@ -193,4 +193,4 @@ Keyboard.cssVariables = Keyboard.prototype.constructor.cssVariables.concat(
     {js: 'colorBlack', css: '--color-black-key'}
 )
 
-module.exports = Keyboard
+export default Keyboard

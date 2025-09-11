@@ -1,7 +1,7 @@
-var osc = require('../../osc'),
-    {isJSON, isJSONObject} = require('../../utils')
+import osc from '../../osc'
+import {isJSON, isJSONObject} from '../../utils'
 
-module.exports = class OscReceiver {
+export default class OscReceiver {
 
     constructor(options) {
 

@@ -1,10 +1,10 @@
-var html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
-    UiWidget = require('./ui-widget'),
-    mod = (navigator.platform || '').match('Mac') ? 'cmd' : 'ctrl',
-    MENU_CONTAINER
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+import UiWidget from './ui-widget'
 
+var mod = (navigator.platform || '').match('Mac') ? 'cmd' : 'ctrl',
+    MENU_CONTAINER
 
 class ContextMenu extends UiWidget {
 
@@ -217,4 +217,4 @@ class ContextMenu extends UiWidget {
 
 }
 
-module.exports = ContextMenu
+export default ContextMenu

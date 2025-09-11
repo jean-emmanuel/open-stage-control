@@ -1,11 +1,11 @@
-var Pad = require('./pad'),
-    Fader = require('../sliders/fader'),
-    doubleTap = require('../mixins/double_tap'),
-    touchstate = require('../mixins/touch_state')
+import Pad from './pad'
+import Fader from '../sliders/fader'
+import doubleTap from '../mixins/double_tap'
+import touchstate from '../mixins/touch_state'
 
 var faderDefaults = Fader.defaults()._props()
 
-module.exports = class Xy extends Pad {
+export default class Xy extends Pad {
 
     static description() {
 

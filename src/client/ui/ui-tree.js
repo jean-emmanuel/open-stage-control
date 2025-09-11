@@ -1,13 +1,22 @@
-var UiWidget = require('./ui-widget'),
-    html = require('nanohtml/lib/browser'),
-    doubleClick = require('../events/double-click'),
-    Sortable = require('sortablejs'),
-    morph = require('nanomorph'),
-    locales = require('../locales'),
-    raw = require('nanohtml/raw'),
-    {icon} = require('./utils'),
-    Root, Panel, Matrix, Keyboard, widgetManager,
-    {widgets, categories} = require('../widgets')
+import UiWidget from './ui-widget'
+import html from 'nanohtml/lib/browser'
+import doubleClick from '../events/double-click'
+import Sortable from 'sortablejs'
+import morph from 'nanomorph'
+import locales from '../locales'
+import raw from 'nanohtml/raw'
+import {icon} from './utils'
+import {widgets, categories} from '../widgets'
+
+var Root, Panel, Matrix, Keyboard, widgetManager
+;(async ()=>{
+    Root = (await import('../widgets/containers/root')).default
+    Panel = (await import('../widgets/containers/panel')).default
+    Matrix = (await import('../widgets/containers/matrix')).default
+    Keyboard = (await import('../widgets/containers/keyboard')).default
+    widgetManager = (await import('../managers/widgets')).default
+})()
+
 
 var widgetIcons = {
     root: 'bookmark',
@@ -50,12 +59,6 @@ for (var type in widgets) {
 class UiTree extends UiWidget {
 
     constructor(options) {
-
-        Root = require('../widgets/containers/root')
-        Panel = require('../widgets/containers/panel')
-        Matrix = require('../widgets/containers/matrix')
-        Keyboard = require('../widgets/containers/keyboard')
-        widgetManager = require('../managers/widgets')
 
         super(options)
 
@@ -241,7 +244,7 @@ class UiTree extends UiWidget {
     }
 
     showWidgetInSession(widget) {
-        
+
         var parent = widget
         while (parent !== widgetManager) {
             if (parent.getProp('type') === 'tab') parent.parent.setValue(parent.parent.children.indexOf(parent), {sync: true, send: true})
@@ -355,4 +358,4 @@ class UiTree extends UiWidget {
 
 }
 
-module.exports = UiTree
+export default UiTree

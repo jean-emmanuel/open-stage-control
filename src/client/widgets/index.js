@@ -1,61 +1,113 @@
-module.exports.widgets = {
+// basics
+import button from './basics/button'
+import _switch from './basics/switch'
+import dropdown from './basics/dropdown'
+import menu from './basics/menu'
+import input from './basics/input'
+import textarea from './basics/textarea'
+import file from './basics/file'
+
+// containers
+import panel from './containers/panel'
+import folder from './containers/folder'
+import root from './containers/root'
+import tab from './containers/tab'
+import modal from './containers/modal'
+import clone from './containers/clone'
+import fragment from './containers/fragment'
+import matrix from './containers/matrix'
+import keyboard from './containers/keyboard'
+import {PatchBay as patchbay, PatchBayNode as patchbaynode} from './containers/patchbay'
+
+// frames
+import image from './frames/image'
+import svg from './frames/svg'
+import html from './frames/html'
+import frame from './frames/frame'
+
+// graphs
+import plot from './graphs/plot'
+import eq from './graphs/eq'
+import visualizer from './graphs/visualizer'
+
+// indicators
+import led from './indicators/led'
+import text from './indicators/text'
+
+// pads
+import xy from './pads/xy'
+import rgb from './pads/rgb'
+import multixy from './pads/multixy'
+import canvas from './pads/canvas'
+
+// sliders
+import fader from './sliders/fader'
+import knob from './sliders/knob'
+import encoder from './sliders/encoder'
+import range from './sliders/range'
+
+// scripts
+import script from './scripts/script-widget'
+import variable from './scripts/variable'
+
+export const widgets = {
 
     // basics
-    button: require('./basics/button'),
-    switch: require('./basics/switch'),
-    dropdown: require('./basics/dropdown'),
-    menu: require('./basics/menu'),
-    input: require('./basics/input'),
-    textarea: require('./basics/textarea'),
-    file: require('./basics/file'),
+    button,
+    switch: _switch,
+    dropdown,
+    menu,
+    input,
+    textarea,
+    file,
 
     // containers
-    panel: require('./containers/panel'),
-    folder: require('./containers/folder'),
-    root: require('./containers/root'),
-    tab: require('./containers/tab'),
-    modal: require('./containers/modal'),
-    clone: require('./containers/clone'),
-    fragment: require('./containers/fragment'),
-    matrix: require('./containers/matrix'),
-    keyboard: require('./containers/keyboard'),
-    patchbay: require('./containers/patchbay').PatchBay,
-    patchbaynode: require('./containers/patchbay').PatchBayNode,
+    panel,
+    folder,
+    root,
+    tab,
+    modal,
+    clone,
+    fragment,
+    matrix,
+    keyboard,
+    patchbay,
+    patchbaynode,
 
     // frames
-    image: require('./frames/image'),
-    svg: require('./frames/svg'),
-    html: require('./frames/html'),
-    frame: require('./frames/frame'),
+    image,
+    svg,
+    html,
+    frame,
 
     // graphs
-    plot: require('./graphs/plot'),
-    eq: require('./graphs/eq'),
-    visualizer: require('./graphs/visualizer'),
+    plot,
+    eq,
+    visualizer,
 
     // indicators
-    led: require('./indicators/led'),
-    text: require('./indicators/text'),
+    led,
+    text,
 
     // pads
-    xy: require('./pads/xy'),
-    rgb: require('./pads/rgb'),
-    multixy: require('./pads/multixy'),
-    canvas: require('./pads/canvas'),
+    xy,
+    rgb,
+    multixy,
+    canvas,
 
     // sliders
-    fader: require('./sliders/fader'),
-    knob: require('./sliders/knob'),
-    encoder: require('./sliders/encoder'),
-    range: require('./sliders/range'),
+    fader,
+    knob,
+    encoder,
+    range,
 
     // scripts
-    script: require('./scripts/script-widget'),
-    variable: require('./scripts/variable'),
+    script,
+    variable,
 
 }
 
-module.exports.categories = {
+export const categories = {
     'Basics':['button', 'switch', 'dropdown', 'menu', 'input', 'textarea', 'file'],
     'Containers':['panel', 'modal', 'clone', 'fragment', 'matrix', 'keyboard', 'patchbay', 'folder'],
     'Frames':['frame', 'svg', 'html', 'image'],
@@ -67,8 +119,8 @@ module.exports.categories = {
 }
 
 var defaults = {}
-for (var k in module.exports.widgets) {
-    defaults[k] = module.exports.widgets[k].defaults()
-    module.exports.widgets[k]._defaults = defaults[k]._props()
+for (var k in widgets) {
+    defaults[k] = widgets[k].defaults()
+    widgets[k]._defaults = defaults[k]._props()
 }
-module.exports.defaults = defaults
+export {defaults}

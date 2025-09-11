@@ -1,4 +1,4 @@
-var Widget = require('./widget')
+import Widget from './widget'
 
 var Container = (Class=Widget)=> class extends Class {
 
@@ -74,4 +74,4 @@ var Container = (Class=Widget)=> class extends Class {
 }
 
 
-module.exports = Container
+export default Container

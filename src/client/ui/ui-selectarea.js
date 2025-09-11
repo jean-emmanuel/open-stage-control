@@ -1,4 +1,4 @@
-var html = require('nanohtml/lib/browser')
+import html from 'nanohtml/lib/browser'
 
 class UiSelectArea {
 
@@ -125,4 +125,4 @@ class UiSelectArea {
 
 }
 
-module.exports = UiSelectArea
+export default UiSelectArea

@@ -1,9 +1,9 @@
-var {mapToScale} = require('../utils'),
-    Canvas = require('../common/canvas'),
-    html = require('nanohtml/lib/browser'),
-    StaticProperties = require('../mixins/static_properties')
+import {mapToScale} from '../utils'
+import Canvas from '../common/canvas'
+import html from 'nanohtml/lib/browser'
+import StaticProperties from '../mixins/static_properties'
 
-module.exports = class Plot extends StaticProperties(Canvas, {bypass: true}) {
+export default class Plot extends StaticProperties(Canvas, {bypass: true}) {
 
     static description() {
 

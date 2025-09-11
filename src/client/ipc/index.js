@@ -1,21 +1,21 @@
-var EventEmitter = require('../events/event-emitter'),
-    cache = require('../managers/cache'),
-    {nanoid} = require('nanoid'), uuid,
-    notifications,
-    locales
+import EventEmitter from '../events/event-emitter'
+import cache from '../managers/cache'
+import {nanoid} from 'nanoid'
 
-var localUuid = ENV.id || cache.get('osc.uuid', false)
+var notifications, locales, callbacks
+;(async ()=>{
+    notifications = (await import('../ui/notifications')).default
+    locales = (await import('../locales')).default
+    callbacks = (await import('./callbacks')).default
+})()
+
+var uuid, localUuid = ENV.id || cache.get('osc.uuid', false)
 if (localUuid) {
     uuid = localUuid
 } else {
     uuid = nanoid(10)
     cache.set('uuid', uuid, false)
 }
-
-setTimeout(()=>{
-    notifications = require('../ui/notifications')
-    locales = require('../locales')
-})
 
 var reconnectTimeout = 500,
     hearbeatInterval = 5000,
@@ -59,8 +59,6 @@ class Ipc extends EventEmitter {
     }
 
     init() {
-
-        var callbacks = require('./callbacks')
 
         for (let i in callbacks) {
             let callback = callbacks[i]
@@ -192,4 +190,4 @@ class Ipc extends EventEmitter {
 
 var ipc = new Ipc()
 
-module.exports = ipc
+export default ipc

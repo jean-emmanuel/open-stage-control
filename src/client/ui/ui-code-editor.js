@@ -1,13 +1,18 @@
-var UiModal = require('./ui-modal'),
-    locales = require('../locales'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    {icon} = require('../ui/utils'),
-    scriptGlobals = require('../widgets/scripts/script-vm').globals,
+import UiModal from './ui-modal'
+import locales from '../locales'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import {icon} from '../ui/utils'
+import scriptVm from '../widgets/scripts/script-vm'
+import modeJavascript from 'ace-builds/src-noconflict/mode-javascript.js'
+import modeCss from 'ace-builds/src-noconflict/mode-css.js'
+import modeHtml from 'ace-builds/src-noconflict/mode-html.js'
+
+var scriptGlobals = scriptVm.globals,
     editors = {}, editorModes = {
-        javascript: require('ace-builds/src-noconflict/mode-javascript.js'),
-        css: require('ace-builds/src-noconflict/mode-css.js'),
-        html: require('ace-builds/src-noconflict/mode-html.js'),
+        javascript: modeJavascript,
+        css: modeCss,
+        html: modeHtml
     },
     codeEditorModKey = (navigator.platform || '').match('Mac') ? 'Cmd' : 'Ctrl'
 
@@ -307,7 +312,7 @@ class CodeEditor {
 
 }
 
-module.exports = function(parent, name, language, syntaxChecker) {
+export default function(parent, name, language, syntaxChecker) {
     if (!editors[name]) editors[name] = new CodeEditor(parent, name, language, syntaxChecker)
     return editors[name]
 }

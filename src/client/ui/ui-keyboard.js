@@ -1,11 +1,12 @@
-var UiWidget = require('./ui-widget'),
-    {icon} = require('./utils'),
-    locales = require('../locales'),
-    layout = locales('keyboard_layout'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    morph = require('nanomorph'),
-    doubleClick = require('../events/double-click')
+import UiWidget from './ui-widget'
+import {icon} from './utils'
+import locales from '../locales'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import morph from 'nanomorph'
+import doubleClick from '../events/double-click'
+
+var layout = locales('keyboard_layout')
 
 const numericLayout = [
     '{sep} + 7 8 9',
@@ -476,4 +477,4 @@ class OscKeybard extends UiWidget {
     }
 }
 
-module.exports = new OscKeybard({element: DOM.get('osc-keyboard')[0]})
+export default new OscKeybard({element: DOM.get('osc-keyboard')[0]})

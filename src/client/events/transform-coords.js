@@ -45,7 +45,7 @@ function getTransformationMatrix(w) {
 
 }
 
-module.exports = function cssTransformCoords(node, x, y) {
+export default function cssTransformCoords(node, x, y) {
 
     return new Point(x, y, 0).transformBy(getTransformationMatrix(node).inverse())
 

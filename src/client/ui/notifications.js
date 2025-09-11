@@ -1,6 +1,6 @@
-var html = require('nanohtml/lib/browser'),
-    morph = require('nanomorph'),
-    UiWidget = require('./ui-widget')
+import html from 'nanohtml/lib/browser'
+import morph from 'nanomorph'
+import UiWidget from './ui-widget'
 
 
 var DEFAULT_DURATION = 3500
@@ -136,4 +136,4 @@ class Notifications extends UiWidget {
 
 }
 
-module.exports = new Notifications({selector: '#notifications'})
+export default new Notifications({selector: '#notifications'})

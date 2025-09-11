@@ -1,14 +1,16 @@
+import en from './en'
+import fr from './fr'
+import de from './de'
+import pl from './pl'
+
 var locales = {
-    en: require('./en'),
-    fr: require('./fr'),
-    de: require('./de'),
-    ok: require('./pl'),
+    en, fr, de, pl,
     debug: {
         /* empty */
-        keyboard_layout: require('./en').keyboard_layout
+        keyboard_layout: en.keyboard_layout
     }
 }
 
 var lang = locales[LANG] ? LANG : 'en'
 
-module.exports = key=>locales[lang][key] || `!${key}!`
+export default key=>locales[lang][key] || `!${key}!`

@@ -1,8 +1,8 @@
-var {clip, mapToScale} = require('../utils'),
-    Canvas = require('../common/canvas'),
-    touchstate = require('../mixins/touch_state'),
-    doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml/lib/browser')
+import {clip, mapToScale} from '../utils'
+import Canvas from '../common/canvas'
+import touchstate from '../mixins/touch_state'
+import doubleTap from '../mixins/double_tap'
+import html from 'nanohtml/lib/browser'
 
 class Slider extends Canvas {
 
@@ -317,4 +317,4 @@ Slider.dynamicProps = Slider.prototype.constructor.dynamicProps
         'knobSize'
     ])
 
-module.exports = Slider
+export default Slider

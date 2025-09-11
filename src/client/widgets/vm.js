@@ -1,6 +1,13 @@
-var loopProtect = require('loop-protect'),
-    {deepCopy} = require('../utils'),
-    globals
+import loopProtect from 'loop-protect'
+import {deepCopy} from '../utils'
+
+var sessionManager
+;(async ()=>{
+    sessionManager = (await import('../managers/session')).default
+})()
+
+
+var globals
 
 class Vm {
 
@@ -24,7 +31,6 @@ class Vm {
                 platform: navigator.platform,
                 clipboard: navigator.clipboard,
                 get session() {
-                    sessionManager = sessionManager || require('../managers/session')
                     return sessionManager.sessionPath
                 }
             }
@@ -172,4 +178,4 @@ class Vm {
 
 }
 
-module.exports = Vm
+export default Vm

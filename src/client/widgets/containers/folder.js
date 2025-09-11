@@ -1,4 +1,4 @@
-var Panel = require('./panel')
+import Panel from './panel'
 
 class Folder extends Panel {
 
@@ -57,4 +57,4 @@ class Folder extends Panel {
 
 
 
-module.exports = Folder
+export default Folder

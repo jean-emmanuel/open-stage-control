@@ -1,9 +1,9 @@
-var MenuBase = require('./menu-base'),
-    {iconify} = require('../../ui/utils'),
-    doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    iOS = require('../../ui/ios')
+import MenuBase from './menu-base'
+import {iconify} from '../../ui/utils'
+import doubleTap from '../mixins/double_tap'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import iOS from '../../ui/ios'
 
 class Menu extends MenuBase {
 
@@ -386,4 +386,4 @@ Menu.dynamicProps = Menu.prototype.constructor.dynamicProps.concat(
 )
 
 
-module.exports = Menu
+export default Menu

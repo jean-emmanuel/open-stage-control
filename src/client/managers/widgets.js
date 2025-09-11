@@ -1,5 +1,5 @@
-var EventEmitter = require('../events/event-emitter'),
-    ipc = require('../ipc/')
+import EventEmitter from '../events/event-emitter'
+import ipc from '../ipc/'
 
 class WidgetManager extends EventEmitter {
 
@@ -326,4 +326,4 @@ class WidgetManager extends EventEmitter {
 
 var widgetManager = new WidgetManager()
 
-module.exports = widgetManager
+export default widgetManager

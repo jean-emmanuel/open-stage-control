@@ -1,6 +1,6 @@
-var widgetManager = require('./managers/widgets'),
-    stateManager = require('./managers/state'),
-    {deepCopy} = require('./utils')
+import widgetManager from './managers/widgets'
+import stateManager from './managers/state'
+import {deepCopy} from './utils'
 
 var Parser = class Parser {
 
@@ -9,6 +9,13 @@ var Parser = class Parser {
         this.iterators = {}
         this.widgets = {}
         this.defaults = {}
+
+        ;(async ()=>{
+            this.widgets = (await import('./widgets/')).widgets
+            for (var k in this.widgets) {
+                this.defaults[k] = this.widgets[k].defaults()._props()
+            }
+        })()
 
     }
 
@@ -116,9 +123,4 @@ var Parser = class Parser {
 
 var parser = new Parser()
 
-module.exports = parser
-
-parser.widgets = require('./widgets/').widgets
-for (var k in parser.widgets) {
-    parser.defaults[k] = parser.widgets[k].defaults()._props()
-}
+export default parser

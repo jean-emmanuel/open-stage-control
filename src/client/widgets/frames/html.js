@@ -1,7 +1,7 @@
-var Widget = require('../common/widget'),
-    morph = require('nanomorph'),
-    html = require('nanohtml/lib/browser'),
-    StaticProperties = require('../mixins/static_properties')
+import Widget from '../common/widget'
+import morph from 'nanomorph'
+import html from 'nanohtml/lib/browser'
+import StaticProperties from '../mixins/static_properties'
 
 class Html extends StaticProperties(Widget, {bypass: true}) {
 
@@ -71,4 +71,4 @@ class Html extends StaticProperties(Widget, {bypass: true}) {
 
 }
 
-module.exports = Html
+export default Html

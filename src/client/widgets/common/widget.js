@@ -1,20 +1,29 @@
-var EventEmitter = require('../../events/event-emitter'),
-    osc = require('../../osc'),
-    {nanoid} = require('nanoid'),
-    widgetManager = require('../../managers/widgets'),
-    {urlParser, balancedReplace} = require('../utils'),
-    Vm = require('../vm'),
-    vm = new Vm(),
-    scopeCss = require('scope-css'),
-    resize = require('../../events/resize'),
-    OscReceiver = require('./osc-receiver'),
-    {deepCopy, deepEqual, isJSON} = require('../../utils'),
-    html = require('nanohtml/lib/browser'),
-    morph = require('nanomorph'),
-    updateWidget = ()=>{},
-    Script = require('../scripts/script'),
-    uiConsole, uiTree, uiDragResize, sessionManager
+import EventEmitter from '../../events/event-emitter'
+import osc from '../../osc'
+import {nanoid} from 'nanoid'
+import widgetManager from '../../managers/widgets'
+import {urlParser, balancedReplace} from '../utils'
+import Vm from '../vm'
+import scopeCss from 'scope-css'
+import * as resize from '../../events/resize'
+import OscReceiver from './osc-receiver'
+import {deepCopy, deepEqual, isJSON} from '../../utils'
+import html from 'nanohtml/lib/browser'
+import morph from 'nanomorph'
+import Script from '../scripts/script'
 
+var updateWidget = ()=>{},
+    uiConsole, widgetTree, widgetDragResize, sessionManager
+
+;(async ()=>{
+    updateWidget = (await import('../../editor/data-workers')).updateWidget
+    uiConsole = (await import('../../ui/ui-console')).default
+    widgetTree = (await import('../../editor')).default.widgetTree
+    widgetDragResize = (await import('../../editor')).default.widgetDragResize
+    sessionManager = (await import('../../managers/session')).default
+})()
+
+var vm = new Vm()
 
 var oscReceiverState = {}
 
@@ -28,11 +37,7 @@ var OSCProps = [
 ]
 
 setTimeout(()=>{
-    updateWidget = require('../../editor/data-workers').updateWidget
-    uiConsole = require('../../ui/ui-console')
-    uiTree = require('../../editor').widgetTree
-    uiDragResize = require('../../editor').widgetDragResize
-    sessionManager = require('../../managers/session')
+
 })
 
 class Widget extends EventEmitter {
@@ -1026,7 +1031,7 @@ class Widget extends EventEmitter {
                 this.setContainerStyles(['geometry'])
                 let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                 resize.check(container)
-                if (uiDragResize.mounted && uiDragResize.widgets.includes(this)) uiDragResize.updateRectangle()
+                if (widgetDragResize.mounted && widgetDragResize.widgets.includes(this)) widgetDragResize.updateRectangle()
                 return
             }
 
@@ -1034,7 +1039,7 @@ class Widget extends EventEmitter {
                 this.setVisibility()
                 let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                 resize.check(container)
-                uiTree.updateVisibility(this)
+                widgetTree.updateVisibility(this)
                 return
             }
 
@@ -1053,7 +1058,7 @@ class Widget extends EventEmitter {
                 if (re.test(oldPropValue) || re.test(this.getProp('css'))) {
                     let container = this.parent !== widgetManager && this.parent.getProp('layout') !== 'default' ? this.parent.container : this.container
                     resize.check(container)
-                    if (uiDragResize.mounted && uiDragResize.widgets.includes(this)) uiDragResize.updateRectangle()
+                    if (widgetDragResize.mounted && widgetDragResize.widgets.includes(this)) widgetDragResize.updateRectangle()
                 }
                 return
             }
@@ -1389,4 +1394,4 @@ Widget.dynamicProps = [
     'bypass'
 ]
 
-module.exports = Widget
+export default Widget

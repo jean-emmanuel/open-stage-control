@@ -1,6 +1,10 @@
+import json5 from 'json5'
+import pkg from '../../package.json'
+import * as dom from './dom'
+
 window.IP = window.IP || ''
 window.ENV = window.ENV || {}
-location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, (s,k,v)=>{
+location.search.replace(/[?&]+([^=&j]+)=([^&]*)/gi, (s,k,v)=>{
     ENV[k]=v
 })
 for (var k in ENV) {
@@ -9,7 +13,7 @@ for (var k in ENV) {
 
 window.LANG = ENV.lang === 'debug' ? 'debug' : (ENV.lang || navigator.language || '').substr(0, 2).toLowerCase()
 
-window.PACKAGE = require('../../package.json')
+window.PACKAGE = pkg
 
 window.LOADING = null
 
@@ -39,8 +43,8 @@ window.FOCUSABLE = !ENV.noFocus
 if (!FOCUSABLE) console.debug('ELECTRON.SETFOCUSABLE(0)')
 else console.debug('ELECTRON.SETFOCUSABLE(1)')
 
-window.JSON.parseFlex = require('json5').parse
+window.JSON.parseFlex = json5.parse
 
-window.DOM = require('./dom')
+window.DOM = dom
 
 window.TITLE = ENV.title || (PACKAGE.productName + ' v' + PACKAGE.version)

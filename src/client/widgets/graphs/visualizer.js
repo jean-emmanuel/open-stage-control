@@ -1,7 +1,7 @@
-var {clip} = require('../utils'),
-    Plot = require('./plot'),
-    StaticProperties = require('../mixins/static_properties'),
-    canvasQueue = require('../common/queue')
+import {clip} from '../utils'
+import Plot from './plot'
+import StaticProperties from '../mixins/static_properties'
+import canvasQueue from '../common/queue'
 
 
 class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false}) {
@@ -168,4 +168,4 @@ Visualizer.dynamicProps = Visualizer.prototype.constructor.dynamicProps.concat(
     'freeze'
 )
 
-module.exports = Visualizer
+export default Visualizer

@@ -1,7 +1,7 @@
-var Widget = require('../common/widget'),
-    StaticProperties = require('../mixins/static_properties')
+import Widget from '../common/widget'
+import StaticProperties from '../mixins/static_properties'
 
-module.exports = class Variable extends StaticProperties(Widget, {interaction: false, visible: false}) {
+export default class Variable extends StaticProperties(Widget, {interaction: false, visible: false}) {
 
     static description() {
 

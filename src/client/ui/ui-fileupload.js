@@ -1,10 +1,11 @@
-var locales = require('../locales'),
-    uiLoading = require('./ui-loading'),
-    html = require('nanohtml/lib/browser'),
-    SINGLETON = null,
+import locales from '../locales'
+import uiLoading from './ui-loading'
+import html from 'nanohtml/lib/browser'
+
+var SINGLETON = null,
     CONTAINER = null
 
-module.exports = function uiFileUpload(types, ok, error) {
+export default function uiFileUpload(types, ok, error) {
 
     if (!CONTAINER) CONTAINER = DOM.get('osc-modal-container')[0]
 

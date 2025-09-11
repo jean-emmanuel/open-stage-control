@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 
     // console
     console: 'Console',
@@ -96,7 +96,7 @@ module.exports = {
 
     // notifications
     notifications: 'Notifications',
-    
+
     // remote save
     remotesave_open: 'Open (on the server)',
     remotesave_save: 'Save (on the server)',

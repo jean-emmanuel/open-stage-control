@@ -1,13 +1,16 @@
-var Container = require('../common/container'),
-    widgetManager = require('../../managers/widgets'),
-    resize = require('../../events/resize'),
-    parser = require('../../parser'),
-    {deepCopy, deepEqual} = require('../../utils'),
-    {diff, diffToWidget} = require('../../editor/diff'),
-    html = require('nanohtml/lib/browser'),
-    sessionManager,
-    Session = require('../../managers/session/session')
+import Container from '../common/container'
+import widgetManager from '../../managers/widgets'
+import * as resize from '../../events/resize'
+import parser from '../../parser'
+import {deepCopy, deepEqual} from '../../utils'
+import {diff, diffToWidget} from '../../editor/diff'
+import html from 'nanohtml/lib/browser'
+import Session from '../../managers/session/session'
 
+var sessionManager
+;(async ()=>{
+    sessionManager = (await import('../../managers/session')).default
+})()
 
 var excludedfragmentClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand', 'no-interaction']
 
@@ -61,8 +64,6 @@ class Fragment extends Container() {
             }
 
         })
-
-        sessionManager = sessionManager || require('../../managers/session')
 
         sessionManager.on('fragment-updated', (e)=>{
             var {path} = e
@@ -220,4 +221,4 @@ Fragment.dynamicProps = Fragment.prototype.constructor.dynamicProps.concat(
     'props'
 )
 
-module.exports = Fragment
+export default Fragment

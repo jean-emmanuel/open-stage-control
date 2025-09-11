@@ -1,6 +1,6 @@
-var {clip} = require('../utils'),
-    Fader = require('./fader'),
-    html = require('nanohtml/lib/browser')
+import {clip} from '../utils'
+import Fader from './fader'
+import html from 'nanohtml/lib/browser'
 
 var faderDefaults = Fader.defaults()._props()
 
@@ -420,4 +420,4 @@ class Range extends Fader {
 
 }
 
-module.exports = Range
+export default Range

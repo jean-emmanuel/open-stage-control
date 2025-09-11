@@ -59,4 +59,4 @@ if (iOS) {
 
 if (iOS13) document.body.classList.add('iOS13')
 
-module.exports = iOS
+export default iOS

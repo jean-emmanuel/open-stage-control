@@ -1,20 +1,22 @@
+import domEvent from './dom-event'
+
 var customEvents = {}
-setTimeout(()=>{
-    customEvents['draginit'] = customEvents['drag'] = customEvents['dragend']  = require('./drag')
-    customEvents['resize']  = require('./resize')
-    customEvents['wheel']  = require('./dom-event')('wheel')
-    customEvents['scroll']  = require('./dom-event')('scroll', {capture: true})
-    customEvents['click']  = require('./dom-event')('click')
-    customEvents['fast-click']  = require('./dom-event')('fast-click')
-    customEvents['focus']  = require('./dom-event')('focus', {capture: true})
-    customEvents['blur']  = require('./dom-event')('blur', {capture: true})
-    customEvents['change']  = require('./dom-event')('change')
-})
+;(async ()=>{
+    customEvents['draginit'] = customEvents['drag'] = customEvents['dragend'] = await import('./drag')
+    customEvents['resize']  = await import('./resize')
+    customEvents['wheel']  = domEvent('wheel')
+    customEvents['scroll']  = domEvent('scroll', {capture: true})
+    customEvents['click']  = domEvent('click')
+    customEvents['fast-click']  = domEvent('fast-click')
+    customEvents['focus']  = domEvent('focus', {capture: true})
+    customEvents['blur']  = domEvent('blur', {capture: true})
+    customEvents['change']  = domEvent('change')
+})()
 
 // micro optimisation from eventemitter3
 var has = Object.prototype.hasOwnProperty
 
-module.exports = class EventEmitter {
+export default class EventEmitter {
 
     constructor() {
 

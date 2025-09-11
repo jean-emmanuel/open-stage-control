@@ -1,9 +1,9 @@
-var Widget = require('../common/widget'),
-    doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml/lib/browser'),
-    {deepEqual, isJSON} = require('../../utils'),
-    {iconify} = require('../../ui/utils'),
-    parser = require('../../parser')
+import Widget from '../common/widget'
+import doubleTap from '../mixins/double_tap'
+import html from 'nanohtml/lib/browser'
+import {deepEqual, isJSON} from '../../utils'
+import {iconify} from '../../ui/utils'
+import parser from '../../parser'
 
 class Button extends Widget {
 
@@ -407,4 +407,4 @@ Button.dynamicProps = Button.prototype.constructor.dynamicProps.concat(
     'label'
 )
 
-module.exports = Button
+export default Button

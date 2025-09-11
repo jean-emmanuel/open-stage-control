@@ -1,6 +1,6 @@
-var {normalizeDragEvent} = require('../../events/utils')
+import {normalizeDragEvent} from '../../events/utils'
 
-module.exports = (self, callback, options={})=>{
+export default (self, callback, options={})=>{
 
     var lastTapTime = 0,
         lastTapX,

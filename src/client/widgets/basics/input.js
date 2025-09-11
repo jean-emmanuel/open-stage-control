@@ -1,6 +1,6 @@
-var Canvas = require('../common/canvas'),
-    {deepCopy} = require('../../utils'),
-    html = require('nanohtml/lib/browser')
+import Canvas from '../common/canvas'
+import {deepCopy} from '../../utils'
+import html from 'nanohtml/lib/browser'
 
 class Input extends Canvas {
 
@@ -229,4 +229,4 @@ Input.dynamicProps = Input.prototype.constructor.dynamicProps
     .filter(x=>x !== 'interaction')
 
 
-module.exports = Input
+export default Input

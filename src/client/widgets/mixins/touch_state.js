@@ -1,4 +1,4 @@
-module.exports = (self, options)=>{
+export default (self, options)=>{
 
     if (self.parent.preventChildrenTouchState) return
 

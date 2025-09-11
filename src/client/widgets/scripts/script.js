@@ -1,5 +1,6 @@
-var scriptVm = require('./script-vm'),
-    noop = ()=>{}
+import scriptVm from './script-vm'
+
+var noop = ()=>{}
 
 class Script {
 
@@ -65,4 +66,4 @@ class Script {
 
 }
 
-module.exports = Script
+export default Script

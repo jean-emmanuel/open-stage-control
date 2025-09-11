@@ -1,4 +1,4 @@
-module.exports = function(eventName, options={}){
+export default function(eventName, options={}){
 
     var widget_storage_key = '_' + eventName + '_widget'
 
@@ -19,13 +19,9 @@ module.exports = function(eventName, options={}){
         if (container) container[widget_storage_key].trigger(eventName, event)
     }
 
-    DOM.ready(()=>{
-
-        document.addEventListener(eventName, (event)=>{
-            triggerWidgetEvent(event.target, event)
-        }, {passive: !!options.passive, capture: !!options.capture})
-
-    })
+    document.addEventListener(eventName, (event)=>{
+        triggerWidgetEvent(event.target, event)
+    }, {passive: !!options.passive, capture: !!options.capture})
 
     return {
 

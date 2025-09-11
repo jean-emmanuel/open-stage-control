@@ -1,8 +1,9 @@
-var UiWidget = require('./ui-widget'),
-    {icon} = require('./utils'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    MODAL_SINGLETON = null,
+import UiWidget from './ui-widget'
+import {icon} from './utils'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+
+var MODAL_SINGLETON = null,
     MODAL_CONTAINER = null
 
 class UiModal extends UiWidget {
@@ -102,4 +103,4 @@ class UiModal extends UiWidget {
 
 }
 
-module.exports = UiModal
+export default UiModal

@@ -1,7 +1,7 @@
-var Canvas = require('../common/canvas'),
-    Script = require('../scripts/script'),
-    widgetManager = require('../../managers/widgets'),
-    html = require('nanohtml/lib/browser')
+import Canvas from '../common/canvas'
+import Script from '../scripts/script'
+import widgetManager from '../../managers/widgets'
+import html from 'nanohtml/lib/browser'
 
 class CanvasWidget extends Canvas {
 
@@ -197,4 +197,4 @@ class CanvasWidget extends Canvas {
 CanvasWidget.dynamicProps = CanvasWidget.prototype.constructor.dynamicProps.concat([
 ])
 
-module.exports = CanvasWidget
+export default CanvasWidget

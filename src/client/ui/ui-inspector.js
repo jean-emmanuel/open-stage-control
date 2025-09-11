@@ -1,18 +1,24 @@
-var UiWidget = require('./ui-widget'),
-    UiInspectorField = require('./ui-inspector-field'),
-    UiColorPicker = require('./ui-colorpicker'),
-    UiModal = require('./ui-modal'),
-    morph = require('nanomorph'),
-    {defaults} = require('../widgets/'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    fastdom = require('fastdom'),
-    {icon} = require('./utils'),
-    zoom = require('./zoom'),
-    locales = require('../locales'),
-    getCodeEditor = require('./ui-code-editor'),
-    codeEditorModKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey',
-    editor
+import UiWidget from './ui-widget'
+import UiInspectorField from './ui-inspector-field'
+import UiColorPicker from './ui-colorpicker'
+import UiModal from './ui-modal'
+import morph from 'nanomorph'
+import {defaults} from '../widgets/'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import fastdom from 'fastdom'
+import {icon} from './utils'
+import zoom from './zoom'
+import locales from '../locales'
+import getCodeEditor from './ui-code-editor'
+
+var editor
+;(async ()=>{
+    mainMenu = (await import('../editor')).default
+})()
+
+
+var codeEditorModKey = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 
 class UiInspector extends UiWidget {
 
@@ -88,11 +94,9 @@ class UiInspector extends UiWidget {
                         zoom.setLocalZoom(zoom.localZoom + 0.1)
                         break
                     case 'reset-selection':
-                        editor = editor || require('../editor')
                         editor.unselect()
                         break
                     case 'toggle-grid':
-                        editor = editor || require('../editor')
                         editor.toggleGrid()
                         break
                 }
@@ -426,4 +430,4 @@ class UiInspector extends UiWidget {
 
 }
 
-module.exports = UiInspector
+export default UiInspector

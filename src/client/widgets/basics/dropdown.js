@@ -1,6 +1,6 @@
-var MenuBase = require('./menu-base'),
-    html = require('nanohtml/lib/browser'),
-    iOS = require('../../ui/ios')
+import MenuBase from './menu-base'
+import html from 'nanohtml/lib/browser'
+import iOS from '../../ui/ios'
 
 class Dropdown extends MenuBase {
 
@@ -139,4 +139,4 @@ Dropdown.dynamicProps = Dropdown.prototype.constructor.dynamicProps.concat(
 )
 
 
-module.exports = Dropdown
+export default Dropdown

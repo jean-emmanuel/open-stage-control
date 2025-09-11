@@ -1,4 +1,4 @@
-var EventEmitter = require('../events/event-emitter')
+import EventEmitter from '../events/event-emitter'
 
 class UiWidget extends EventEmitter {
 
@@ -13,4 +13,4 @@ class UiWidget extends EventEmitter {
 
 }
 
-module.exports = UiWidget
+export default UiWidget

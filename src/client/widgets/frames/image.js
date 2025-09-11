@@ -1,9 +1,9 @@
-var Widget = require('../common/widget'),
-    html = require('nanohtml/lib/browser'),
-    {urlParser} = require('../utils'),
-    StaticProperties = require('../mixins/static_properties')
+import Widget from '../common/widget'
+import html from 'nanohtml/lib/browser'
+import {urlParser} from '../utils'
+import StaticProperties from '../mixins/static_properties'
 
-module.exports = class Image extends StaticProperties(Widget, {bypass: true}) {
+export default class Image extends StaticProperties(Widget, {bypass: true}) {
 
     static description() {
 

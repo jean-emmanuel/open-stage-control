@@ -1,9 +1,9 @@
-var Widget = require('../common/widget'),
-    Canvas = require('../common/canvas'),
-    Container = require('../common/container'),
-    {iconify} = require('../../ui/utils'),
-    parser = require('../../parser'),
-    html = require('nanohtml/lib/browser')
+import Widget from '../common/widget'
+import Canvas from '../common/canvas'
+import Container from '../common/container'
+import {iconify} from '../../ui/utils'
+import parser from '../../parser'
+import html from 'nanohtml/lib/browser'
 
 class PatchBayNode extends Widget {
 
@@ -363,7 +363,7 @@ class PatchBay extends Container(Canvas) {
 
 }
 
-module.exports = {
+export {
     PatchBay,
     PatchBayNode
 }

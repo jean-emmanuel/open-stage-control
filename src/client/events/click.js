@@ -1,5 +1,6 @@
-const iOS = require('../ui/ios')
-const editor = require('../editor')
+import iOS from '../ui/ios'
+import editor from '../editor'
+
 const macOs = (navigator.platform || '').match('Mac')
 
 var longTouchTimer = false,

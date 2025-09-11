@@ -1,14 +1,14 @@
-var UiToolbar = require('./ui-toolbar'),
-    ipc = require('../ipc'),
-    locales = require('../locales'),
-    notifications = require('./notifications'),
-    fullscreen = require('./fullscreen'),
-    editor = require('../editor'),
-    sessionManager = require('../managers/session/'),
-    stateManager = require('../managers/state'),
-    {leftUiSidePanel, rightUiSidePanel} = require('../ui/'),
-    uiConsole = require('../ui/ui-console')
-
+import UiToolbar from './ui-toolbar'
+import ipc from '../ipc'
+import locales from '../locales'
+import notifications from './notifications'
+import fullscreen from './fullscreen'
+import editor from '../editor'
+import sessionManager from '../managers/session/'
+import stateManager from '../managers/state'
+import {leftUiSidePanel, rightUiSidePanel} from '../ui/'
+import uiConsole from '../ui/ui-console'
+import NoSleep from 'nosleep.js'
 
 var recentSessions = [{label: locales('file_open_recent_wait'), class: 'disabled'}]
 var menuEntries = [
@@ -229,10 +229,10 @@ var menuEntries = [
 
 if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
 
-    var NoSleep = require('nosleep.js'),
-        noSleep = new NoSleep(),
-        noSleepState = false,
-        wakeLock = null
+
+var noSleep = new NoSleep(),
+    noSleepState = false,
+    wakeLock = null
 
     menuEntries.push({
         label: locales('nosleep'),
@@ -300,4 +300,4 @@ class MainMenu extends UiToolbar {
 }
 
 
-module.exports = new MainMenu({selector: '#main-menu', position: [40, 1], entries: menuEntries})
+export default new MainMenu({selector: '#main-menu', position: [40, 1], entries: menuEntries})

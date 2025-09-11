@@ -1,14 +1,14 @@
-var locales = require('../locales'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    ipc = require('../ipc'),
-    doubleClick = require('../events/double-click'),
-    {icon} = require('./utils'),
-    UiModal = require('./ui-modal'),
-    keyboardJS = require('keyboardjs/dist/keyboard.min.js')
+import locales from '../locales'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import ipc from '../ipc'
+import doubleClick from '../events/double-click'
+import {icon} from './utils'
+import UiModal from './ui-modal'
+import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
 
 
-module.exports = function UiFilebrowser(options, callback) {
+export default function UiFilebrowser(options, callback) {
 
     var save = options.save,
         saveInputFocus = undefined,

@@ -1,14 +1,17 @@
-var Container = require('../common/container'),
-    widgetManager = require('../../managers/widgets'),
-    parser = require('../../parser'),
-    html = require('nanohtml/lib/browser'),
-    {enableTraversingGestures, disableTraversingGestures} = require('../../events/drag'),
-    {setScrollbarColor} = require('../../ui/utils'),
-    iOS13 = require('../../ui/ios') === 13,
-    Fader = require('../sliders/fader'), faderDefaults,
-    Script = require('../scripts/script'),
-    resize = require('../../events/resize'),
-    fastdom = require('fastdom')
+import Container from '../common/container'
+import widgetManager from '../../managers/widgets'
+import parser from '../../parser'
+import html from 'nanohtml/lib/browser'
+import {enableTraversingGestures, disableTraversingGestures} from '../../events/drag'
+import {setScrollbarColor} from '../../ui/utils'
+import iOS from '../../ui/ios'
+import Fader from '../sliders/fader'
+import Script from '../scripts/script'
+import * as resize from '../../events/resize'
+import fastdom from 'fastdom'
+
+var iOS13 = iOS === 13,
+    faderDefaults
 
 class Panel extends Container() {
 
@@ -450,4 +453,4 @@ Panel.dynamicProps = Panel.prototype.constructor.dynamicProps.concat(
     'traversing'
 )
 
-module.exports = Panel
+export default Panel

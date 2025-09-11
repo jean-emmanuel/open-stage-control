@@ -1,12 +1,14 @@
-require('./zoom')
-require('../events/click')
-require('./ios')
-require('./notifications')
-require('./ui-workspace')
-require('./main-menu')
-require('./ui-console')
-require('./utils').updateMobileThemeColor()
+import './zoom'
+import '../events/click'
+import './ios'
+import './notifications'
+import './ui-workspace'
+import './main-menu'
+import './ui-console'
+import {updateMobileThemeColor} from './utils'
+
+updateMobileThemeColor()
 
 if (!navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
-    require('./ui-keyboard')
+    import('./ui-keyboard')
 }

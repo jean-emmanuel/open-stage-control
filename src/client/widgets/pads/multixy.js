@@ -1,8 +1,8 @@
-var Pad = require('./pad'),
-    Xy = require('./xy'),
-    {clip} = require('../utils'),
-    doubleTap = require('../mixins/double_tap'),
-    touchstate = require('../mixins/touch_state')
+import Pad from './pad'
+import Xy from './xy'
+import {clip} from '../utils'
+import doubleTap from '../mixins/double_tap'
+import touchstate from '../mixins/touch_state'
 
 
 var xyDefaults = Xy.defaults()._props()
@@ -426,4 +426,4 @@ MultiXy.dynamicProps = MultiXy.prototype.constructor.dynamicProps.filter(n => n 
     'pointsAttr',
 ])
 
-module.exports = MultiXy
+export default MultiXy

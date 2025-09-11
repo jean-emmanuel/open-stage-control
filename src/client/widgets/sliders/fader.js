@@ -1,5 +1,5 @@
-var {clip} = require('../utils'),
-    Slider = require('./slider')
+import {clip} from '../utils'
+import Slider from './slider'
 
 class Fader extends Slider {
 
@@ -543,4 +543,4 @@ Fader.cssVariables = Fader.prototype.constructor.cssVariables.concat(
     {js: 'colorKnob', css: '--color-knob'},
 )
 
-module.exports = Fader
+export default Fader

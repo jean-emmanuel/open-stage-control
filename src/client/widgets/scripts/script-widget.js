@@ -1,6 +1,6 @@
-var Widget = require('../common/widget'),
-    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
-    Script = require('./script')
+import Widget from '../common/widget'
+import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+import Script from './script'
 
 class ScriptWidget extends Widget {
 
@@ -124,4 +124,4 @@ class ScriptWidget extends Widget {
 
 }
 
-module.exports = ScriptWidget
+export default ScriptWidget

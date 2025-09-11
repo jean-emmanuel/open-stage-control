@@ -1,8 +1,8 @@
-var UiWidget = require('./ui-widget'),
-    Rgb = require('../widgets/pads/rgb'),
-    html = require('nanohtml/lib/browser'),
-    chroma = require('chroma-js'),
-    resize = require('../events/resize')
+import UiWidget from './ui-widget'
+import Rgb from '../widgets/pads/rgb'
+import html from 'nanohtml/lib/browser'
+import chroma from 'chroma-js'
+import * as resize from '../events/resize'
 
 
 class ColorPicker extends UiWidget {
@@ -117,4 +117,4 @@ class ColorPicker extends UiWidget {
 
 }
 
-module.exports = ColorPicker
+export default ColorPicker

@@ -1,4 +1,4 @@
-module.exports = (element, callback, options={})=>{
+export default (element, callback, options={})=>{
 
     var lastTapTime = 0,
         lastTapX,

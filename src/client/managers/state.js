@@ -1,12 +1,12 @@
-var ipc = require('../ipc'),
-    widgetManager = require('./widgets'),
-    cache = require('./cache'),
-    uiFilebrowser = require('../ui/ui-filebrowser'),
-    uiFileupload = require('../ui/ui-fileupload'),
-    notifications = require('../ui/notifications'),
-    {saveAs} = require('file-saver'),
-    locales = require('../locales'),
-    {deepCopy} = require('../utils')
+import ipc from '../ipc'
+import widgetManager from './widgets'
+import cache from './cache'
+import uiFilebrowser from '../ui/ui-filebrowser'
+import uiFileupload from '../ui/ui-fileupload'
+import notifications from '../ui/notifications'
+import {saveAs} from 'file-saver'
+import locales from '../locales'
+import {deepCopy} from '../utils'
 
 
 var StateManager = class StateManager {
@@ -260,4 +260,4 @@ var StateManager = class StateManager {
 
 var stateManager = new StateManager()
 
-module.exports = stateManager
+export default stateManager

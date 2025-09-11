@@ -1,7 +1,11 @@
-var Panel = require('./panel'),
-    StaticProperties = require('../mixins/static_properties'),
-    {updateMobileThemeColor} = require('../../ui/utils'),
-    mainMenu
+import Panel from './panel'
+import StaticProperties from '../mixins/static_properties'
+import {updateMobileThemeColor} from '../../ui/utils'
+
+var mainMenu
+;(async ()=>{
+    mainMenu = (await import('../../ui/main-menu')).default
+})()
 
 class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {
 
@@ -59,8 +63,6 @@ class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'ro
 
     checkMenuVisibility() {
 
-        mainMenu = mainMenu || require('../../ui/main-menu')
-
         if (this.getProp('hideMenu')) {
             mainMenu.container.style.display = 'none'
         } else {
@@ -114,4 +116,4 @@ Root.dynamicProps = Root.prototype.constructor.dynamicProps.concat(
 )
 
 
-module.exports = Root
+export default Root

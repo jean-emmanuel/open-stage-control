@@ -1,5 +1,5 @@
-var UiWidget = require('./ui-widget'),
-    cache = require('../managers/cache')
+import UiWidget from './ui-widget'
+import cache from '../managers/cache'
 
 class UiSidePanel extends UiWidget {
 
@@ -135,4 +135,4 @@ class UiSidePanel extends UiWidget {
 
 
 
-module.exports = UiSidePanel
+export default UiSidePanel

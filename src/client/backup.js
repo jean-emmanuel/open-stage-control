@@ -1,65 +1,62 @@
-var cache = require('./managers/cache'),
-    localBackup = cache.get('backup', false)
+import cache from './managers/cache'
+
+var session, state, editor, ipc
+;(async ()=>{
+    session = (await import('./managers/session/')).default
+    state = (await import('./managers/state')).default
+    editor = (await import('./editor/')).default
+    ipc = (await import('./ipc/')).default
+})()
+
+var localBackup = cache.get('backup', false)
 
 
-module.exports = {
+export const exists = localBackup !== null
 
-    exists: localBackup !== null,
+export function save() {
 
-    save: ()=>{
+    if (session.session) {
+        cache.set('backup', {
+            session: session.session.data,
+            saveMode: session.saveMode,
+            sessionPath: session.sessionPath,
+            fragments: session.fragments,
+            state: state.get(),
+            history: editor.history,
+            historyState: editor.historyState,
+            editorEnabled: editor.enabled,
+        }, false)
+    }
 
-        var session = require('./managers/session/'),
-            state = require('./managers/state'),
-            editor = require('./editor/')
+}
 
-        if (session.session) {
-            cache.set('backup', {
-                session: session.session.data,
-                saveMode: session.saveMode,
-                sessionPath: session.sessionPath,
-                fragments: session.fragments,
-                state: state.get(),
-                history: editor.history,
-                historyState: editor.historyState,
-                editorEnabled: editor.enabled,
-            }, false)
+export function load() {
+
+    if (localBackup) {
+
+        var data = localBackup
+
+        cache.remove('backup', false)
+        for (let k in data.fragments) {
+            session.setFragment({path: k, fileContent: data.fragments[k]})
         }
+        session.load(data.session, ()=>{
 
-    },
+            session.setSaveMode(data.saveMode)
+            state.set(data.state, false)
 
-    load: ()=>{
+            editor.clearHistory()
+            editor.history = data.history
+            editor.historyState = data.historyState
 
-        var session = require('./managers/session/'),
-            state = require('./managers/state'),
-            editor = require('./editor/'),
-            ipc = require('./ipc/')
-
-        if (localBackup) {
-
-            var data = localBackup
-
-            cache.remove('backup', false)
-            for (let k in data.fragments) {
-                session.setFragment({path: k, fileContent: JSON.parse(data.fragments[k])})
-            }
-            session.load(data.session, ()=>{
-
-                session.setSaveMode(data.saveMode)
-                state.set(data.state, false)
-
-                editor.clearHistory()
-                editor.history = data.history
-                editor.historyState = data.historyState
-
-                if (data.editorEnabled) editor.enable()
+            if (data.editorEnabled) editor.enable()
 
 
-                ipc.send('sessionSetPath', {path: data.sessionPath})
-                session.setSessionPath(data.sessionPath)
+            ipc.send('sessionSetPath', {path: data.sessionPath})
+            session.setSessionPath(data.sessionPath)
 
-            })
-
-        }
+        })
 
     }
+
 }

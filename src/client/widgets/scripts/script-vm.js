@@ -1,13 +1,16 @@
-var widgetManager = require('../../managers/widgets'),
-    stateManager = require('../../managers/state'),
-    cache = require('../../managers/cache'),
-    {deepCopy} = require('../../utils'),
-    {urlParser} = require('../utils'),
-    Vm = require('../vm'),
-    ipc = require('../../ipc'),
-    uiFilebrowser = require('../../ui/ui-filebrowser'),
-    toolbar
+import widgetManager from '../../managers/widgets'
+import stateManager from '../../managers/state'
+import cache from '../../managers/cache'
+import {deepCopy} from '../../utils'
+import {urlParser} from '../utils'
+import Vm from '../vm'
+import ipc from '../../ipc'
+import uiFilebrowser from '../../ui/ui-filebrowser'
 
+var toolbar
+;(async ()=>{
+    toolbar = (await import('../../ui/main-menu')).default
+})()
 
 class ScriptVm extends Vm {
 
@@ -480,8 +483,6 @@ class ScriptVm extends Vm {
 
             if (!options.send) return
 
-            toolbar = toolbar || require('../../ui/main-menu')
-
             var action = toolbar.entries.filter(x=>!x.separator)
 
             for (var i of args) {
@@ -602,4 +603,4 @@ class ScriptVm extends Vm {
 
 }
 
-module.exports = new ScriptVm()
+export default new ScriptVm()

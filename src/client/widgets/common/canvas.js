@@ -1,8 +1,8 @@
-var Widget = require('./widget'),
-    resize = require('../../events/resize'),
-    canvasQueue = require('./queue'),
-    html = require('nanohtml/lib/browser'),
-    fastdom = require('fastdom')
+import Widget from './widget'
+import * as resize from '../../events/resize'
+import canvasQueue from './queue'
+import html from 'nanohtml/lib/browser'
+import fastdom from 'fastdom'
 
 
 class Canvas extends Widget {
@@ -248,4 +248,4 @@ Canvas.cssVariables = Canvas.prototype.constructor.cssVariables.concat(
     {js: 'alphaPipsText', css: '--alpha-pips-text', toCss: x=>parseFloat(x), toJs: x=>parseFloat(x)}
 )
 
-module.exports = Canvas
+export default Canvas

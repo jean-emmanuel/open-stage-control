@@ -1,6 +1,6 @@
-var semver = require('semver'),
-    UiModal = require('../../ui/ui-modal'),
-    locales = require('../../locales')
+import semver from 'semver'
+import UiModal from '../../ui/ui-modal'
+import locales from '../../locales'
 
 class Session {
 
@@ -347,4 +347,4 @@ for (var i in converters) {
     Session.converters[converters[i].version] = converters[i]
 }
 
-module.exports = Session
+export default Session

@@ -1,9 +1,9 @@
-var UiWidget = require('./ui-widget'),
-    {categories} = require('../widgets/'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    {icon} = require('../ui/utils'),
-    chroma = require('chroma-js')
+import UiWidget from './ui-widget'
+import {categories} from '../widgets/'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import {icon} from '../ui/utils'
+import chroma from 'chroma-js'
 
 class UiInspectorField extends UiWidget {
 
@@ -134,4 +134,4 @@ class UiInspectorField extends UiWidget {
 
 }
 
-module.exports = UiInspectorField
+export default UiInspectorField

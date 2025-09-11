@@ -1,11 +1,11 @@
-var {updateWidget} = require('./editor/data-workers'),
-    editor = require('./editor'),
-    widgetManager = require('./managers/widgets'),
-    stateManager = require('./managers/state'),
-    sessionManager = require('./managers/session'),
-    deepExtend = require('deep-extend'),
-    notifications = require('./ui/notifications'),
-    uiConsole = require('./ui/ui-console')
+import {updateWidget} from './editor/data-workers'
+import editor from './editor'
+import widgetManager from './managers/widgets'
+import stateManager from './managers/state'
+import sessionManager from './managers/session'
+import deepExtend from 'deep-extend'
+import notifications from './ui/notifications'
+import uiConsole from './ui/ui-console'
 
 var callbacks = {
     '/EDIT': function(args, custom_module) {
@@ -313,7 +313,7 @@ var callbacks = {
     }
 }
 
-module.exports = {
+export default {
     exec: function(name, args, custom_module){
         if (callbacks[name]) {
             callbacks[name](args, custom_module)

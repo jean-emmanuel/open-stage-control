@@ -1,11 +1,11 @@
-var Container = require('../common/container'),
-    widgetManager = require('../../managers/widgets'),
-    resize = require('../../events/resize'),
-    parser = require('../../parser'),
-    {deepCopy, deepEqual} = require('../../utils'),
-    {diff, diffToWidget} = require('../../editor/diff'),
-    html = require('nanohtml/lib/browser'),
-    Session = require('../../managers/session/session')
+import Container from '../common/container'
+import widgetManager from '../../managers/widgets'
+import * as resize from '../../events/resize'
+import parser from '../../parser'
+import {deepCopy, deepEqual} from '../../utils'
+import {diff, diffToWidget} from '../../editor/diff'
+import html from 'nanohtml/lib/browser'
+import Session from '../../managers/session/session'
 
 var excludedCloneClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand', 'no-interaction']
 
@@ -339,4 +339,4 @@ Clone.dynamicProps = Clone.prototype.constructor.dynamicProps.concat(
     'props'
 )
 
-module.exports = Clone
+export default Clone

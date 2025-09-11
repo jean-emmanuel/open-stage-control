@@ -1,4 +1,4 @@
-var EventEmitter = require('../../events/event-emitter')
+import EventEmitter from '../../events/event-emitter'
 
 class CanvasQueue extends EventEmitter{
 
@@ -65,4 +65,4 @@ class CanvasQueue extends EventEmitter{
 
 }
 
-module.exports = new CanvasQueue()
+export default new CanvasQueue()

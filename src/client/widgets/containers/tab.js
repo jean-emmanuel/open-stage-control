@@ -1,6 +1,6 @@
-var Panel = require('./panel'),
-    resize = require('../../events/resize'),
-    {iconify} = require('../../ui/utils')
+import Panel from './panel'
+import * as resize from '../../events/resize'
+import {iconify} from '../../ui/utils'
 
 class Tab extends Panel {
 
@@ -109,4 +109,4 @@ Tab.dynamicProps = Tab.prototype.constructor.dynamicProps.concat(
     'label'
 )
 
-module.exports = Tab
+export default Tab

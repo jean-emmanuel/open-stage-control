@@ -1,7 +1,7 @@
-var MenuBase = require('./menu-base'),
-    {iconify} = require('../../ui/utils'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw')
+import MenuBase from './menu-base'
+import {iconify} from '../../ui/utils'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
 
 class Switch extends MenuBase {
 
@@ -82,7 +82,7 @@ class Switch extends MenuBase {
             var value = this.values[index]
 
             if (slide && value === this.value) return
-            
+
             this.setValue(value, {sync: true, send: true})
 
         }
@@ -147,4 +147,4 @@ Switch.cssVariables = Switch.prototype.constructor.cssVariables.concat(
     {js: 'colorTextOn', css: '--color-text-on'}
 )
 
-module.exports = Switch
+export default Switch

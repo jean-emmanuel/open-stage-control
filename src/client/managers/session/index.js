@@ -1,17 +1,17 @@
-var ipc = require('../../ipc/'),
-    parser = require('../../parser'),
-    editor = require('../../editor/'),
-    uiFilebrowser = require('../../ui/ui-filebrowser'),
-    uiFileupload = require('../../ui/ui-fileupload'),
-    UiModal = require('../../ui/ui-modal'),
-    uiLoading = require('../../ui/ui-loading'),
-    uiConsole = require('../../ui/ui-console'),
-    {saveAs} = require('file-saver'),
-    widgetManager = require('../widgets'),
-    locales = require('../../locales'),
-    Session = require('./session'),
-    EventEmitter = require('../../events/event-emitter'),
-    {deepEqual} = require('../../utils')
+import ipc from '../../ipc/'
+import parser from '../../parser'
+import editor from '../../editor/'
+import uiFilebrowser from '../../ui/ui-filebrowser'
+import uiFileupload from '../../ui/ui-fileupload'
+import UiModal from '../../ui/ui-modal'
+import uiLoading from '../../ui/ui-loading'
+import uiConsole from '../../ui/ui-console'
+import {saveAs} from 'file-saver'
+import widgetManager from '../widgets'
+import locales from '../../locales'
+import Session from './session'
+import EventEmitter from '../../events/event-emitter'
+import {deepEqual} from '../../utils'
 
 
 var SessionManager = class SessionManager extends EventEmitter {
@@ -173,7 +173,7 @@ var SessionManager = class SessionManager extends EventEmitter {
     }
 
     requestOpen(path) {
-
+        console.log(path)
         ipc.send('sessionOpen', {path: path})
 
     }
@@ -295,4 +295,4 @@ var SessionManager = class SessionManager extends EventEmitter {
 
 var sessionManager = new SessionManager()
 
-module.exports = sessionManager
+export default sessionManager

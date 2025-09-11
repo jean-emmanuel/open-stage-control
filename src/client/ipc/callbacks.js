@@ -1,18 +1,17 @@
-var utils = require('../ui/utils'),
-    osc = require('../osc'),
-    session = require('../managers/session/'),
-    widgetManager = require('../managers/widgets'),
-    state = require('../managers/state'),
-    editor = require('../editor/'),
-    locales = require('../locales'),
-    UiModal = require('../ui/ui-modal'),
-    uiLoading = require('../ui/ui-loading'),
-    notifications = require('../ui/notifications'),
-    raw = require('nanohtml/raw'),
-    backup = require('../backup'),
-    {updateMobileThemeColor} = require('../ui/utils')
+import osc from '../osc'
+import session from '../managers/session/'
+import widgetManager from '../managers/widgets'
+import state from '../managers/state'
+import editor from '../editor/'
+import locales from '../locales'
+import UiModal from '../ui/ui-modal'
+import uiLoading from '../ui/ui-loading'
+import notifications from '../ui/notifications'
+import raw from 'nanohtml/raw'
+import * as backup from '../backup'
+import {updateMobileThemeColor, icon} from '../ui/utils'
 
-module.exports = {
+export default callbacks = {
 
     bundle: function(data) {
         for (let i in data) {
@@ -85,7 +84,7 @@ module.exports = {
     },
 
     error: function(data){
-        new UiModal({title: raw(utils.icon('exclamation-triangle') + '&nbsp; ' + locales('error')), content: raw(data), closable:true})
+        new UiModal({title: raw(icon('exclamation-triangle') + '&nbsp; ' + locales('error')), content: raw(data), closable:true})
     },
 
     errorLog: function(data) {

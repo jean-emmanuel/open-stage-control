@@ -1,8 +1,8 @@
-var {iconify} = require('../../ui/utils'),
-    Widget = require('../common/widget'),
-    html = require('nanohtml/lib/browser')
+import {iconify} from '../../ui/utils'
+import Widget from '../common/widget'
+import html from 'nanohtml/lib/browser'
 
-module.exports = class Text extends Widget {
+export default class Text extends Widget {
 
     static description() {
 

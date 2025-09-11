@@ -1,7 +1,7 @@
-var Widget = require('../common/widget'),
-    html = require('nanohtml/lib/browser'),
-    locales = require('../../locales'),
-    StaticProperties = require('../mixins/static_properties')
+import Widget from '../common/widget'
+import html from 'nanohtml/lib/browser'
+import locales from '../../locales'
+import StaticProperties from '../mixins/static_properties'
 
 class Frame extends StaticProperties(Widget, {bypass: true}) {
 
@@ -79,4 +79,4 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
 }
 
-module.exports = Frame
+export default Frame

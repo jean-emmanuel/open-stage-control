@@ -1,5 +1,5 @@
-const {normalizeDragEvent, resetEventOffset, TRAVERSING_SAMEWIDGET} = require('./utils')
-const iOS = require('../ui/ios')
+import {normalizeDragEvent, resetEventOffset, TRAVERSING_SAMEWIDGET} from './utils'
+import iOS from '../ui/ios'
 
 var targets = {},
     previousPointers = {}
@@ -329,106 +329,97 @@ function triggerWidgetEvent(target, name, event, containersOnly) {
 }
 
 // init
+if (!iOS) {
+    document.addEventListener('pointermove', mouseMoveCapture, true)
+    if ('onwebkitmouseforcechanged' in document) document.addEventListener('webkitmouseforcechanged', mouseMoveCapture, true)
+}
+if (!iOS) document.addEventListener('pointerup', mouseUpCapture, true)
 
-DOM.ready(()=>{
+document.addEventListener('touchmove', touchMoveCapture, true)
 
-    if (!iOS) {
-        document.addEventListener('pointermove', mouseMoveCapture, true)
-        if ('onwebkitmouseforcechanged' in document) document.addEventListener('webkitmouseforcechanged', mouseMoveCapture, true)
+if ('ontouchforcechange' in document) document.addEventListener('touchforcechange', touchMoveCapture, true)
+
+DOM.addEventListener(document, 'touchend touchcancel', touchUpCapture, true)
+
+if (!iOS) document.addEventListener('pointerdown', mouseDownCapture)
+
+export function setup(options) {
+
+    if (
+        this._customBindings['drag'] !== 0 ||
+        this._customBindings['draginit'] !== 0 ||
+        this._customBindings['dragend'] !== 0 ||
+        !options || options.ignoreCustomBindings
+    ) {
+        return
     }
-    if (!iOS) document.addEventListener('pointerup', mouseUpCapture, true)
 
-    document.addEventListener('touchmove', touchMoveCapture, true)
+    var {element, multitouch} = options
 
-    if ('ontouchforcechange' in document) document.addEventListener('touchforcechange', touchMoveCapture, true)
+    element.addEventListener('touchstart', touchDownCapture, false)
+    element._drag_widget = this
+    element._drag_multitouch = multitouch
 
-    DOM.addEventListener(document, 'touchend touchcancel', touchUpCapture, true)
+}
 
-    if (!iOS) document.addEventListener('pointerdown', mouseDownCapture)
+export function teardown(options) {
 
-})
+    if (
+        this._customBindings['drag'] !== 0 ||
+        this._customBindings['draginit'] !== 0 ||
+        this._customBindings['dragend'] !== 0 ||
+        !options || options.ignoreCustomBindings
+    ) {
+        return
+    }
 
-module.exports = {
+    var {element} = options
 
-    setup: function(options) {
+    element.style.touchAction = ''
+    element.removeEventListener('touchstart', touchDownCapture, false)
+    delete element._drag_widget
+    delete element._drag_multitouch
 
-        if (
-            this._customBindings['drag'] !== 0 ||
-            this._customBindings['draginit'] !== 0 ||
-            this._customBindings['dragend'] !== 0 ||
-            !options || options.ignoreCustomBindings
-        ) {
-            return
-        }
+}
 
-        var {element, multitouch} = options
+export function enableTraversingGestures(element, options={}) {
 
-        element.addEventListener('touchstart', touchDownCapture, false)
-        element._drag_widget = this
-        element._drag_multitouch = multitouch
+    if (element._traversing) return
 
-    },
+    var traversing = options.type ? TRAVERSING_SAMEWIDGET : true,
+        traversingType = options.type === 'smart' || options.type === 'auto' ? '' : options.type
 
-    teardown: function(options) {
+    element._traversing = traversing
 
-        if (
-            this._customBindings['drag'] !== 0 ||
-            this._customBindings['draginit'] !== 0 ||
-            this._customBindings['dragend'] !== 0 ||
-            !options || options.ignoreCustomBindings
-        ) {
-            return
-        }
-
-        var {element} = options
-
-        element.style.touchAction = ''
-        element.removeEventListener('touchstart', touchDownCapture, false)
-        delete element._drag_widget
-        delete element._drag_multitouch
-
-    },
-
-    enableTraversingGestures: function(element, options={}) {
-
-        if (element._traversing) return
-
-        var traversing = options.type ? TRAVERSING_SAMEWIDGET : true,
-            traversingType = options.type === 'smart' || options.type === 'auto' ? '' : options.type
-
-        element._traversing = traversing
-
-        function makeEventTraversing(event) {
-            if (event.ctrlKey) return
-            if (!event.traversingStack) event.traversingStack = {firstType: '', stack: []}
-            event.traversingStack.stack.push({
-                container: element.parentNode,
-                mode: traversing,
-                type: traversingType
-            })
-
-        }
-
-        if (!iOS) element.addEventListener('pointerdown', makeEventTraversing, true)
-        element.addEventListener('touchstart', makeEventTraversing, true)
-
-        element.addEventListener('disableTraversingGestures', (e)=>{
-            e.stopPropagation()
-            if (!iOS) element.removeEventListener('pointerdown', makeEventTraversing, true)
-            element.removeEventListener('touchstart', makeEventTraversing, true)
-
+    function makeEventTraversing(event) {
+        if (event.ctrlKey) return
+        if (!event.traversingStack) event.traversingStack = {firstType: '', stack: []}
+        event.traversingStack.stack.push({
+            container: element.parentNode,
+            mode: traversing,
+            type: traversingType
         })
 
-    },
-
-    disableTraversingGestures: function(element) {
-
-        if (!element._traversing) return
-
-        delete element._traversing
-
-        DOM.dispatchEvent(element, 'disableTraversingGestures')
-
     }
+
+    if (!iOS) element.addEventListener('pointerdown', makeEventTraversing, true)
+    element.addEventListener('touchstart', makeEventTraversing, true)
+
+    element.addEventListener('disableTraversingGestures', (e)=>{
+        e.stopPropagation()
+        if (!iOS) element.removeEventListener('pointerdown', makeEventTraversing, true)
+        element.removeEventListener('touchstart', makeEventTraversing, true)
+
+    })
+
+}
+
+export function disableTraversingGestures(element) {
+
+    if (!element._traversing) return
+
+    delete element._traversing
+
+    DOM.dispatchEvent(element, 'disableTraversingGestures')
 
 }

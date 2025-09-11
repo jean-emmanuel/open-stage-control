@@ -1,5 +1,5 @@
-var {clip} = require('../utils'),
-    Slider = require('./slider')
+import {clip} from '../utils'
+import Slider from './slider'
 
 class Knob extends Slider {
 
@@ -380,4 +380,4 @@ Knob.cssVariables = Knob.prototype.constructor.cssVariables.concat(
     {js: 'colorKnob', css: '--color-knob'}
 )
 
-module.exports = Knob
+export default Knob

@@ -1,5 +1,5 @@
-var UiWidget = require('./ui-widget'),
-    ContextMenu = require('./context-menu')
+import UiWidget from './ui-widget'
+import ContextMenu from './context-menu'
 
 class UiToolbar extends UiWidget {
 
@@ -60,4 +60,4 @@ class UiToolbar extends UiWidget {
 }
 
 
-module.exports = UiToolbar
+export default UiToolbar

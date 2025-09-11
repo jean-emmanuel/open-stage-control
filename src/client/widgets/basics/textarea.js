@@ -1,5 +1,5 @@
-var Widget = require('../common/widget'),
-    html = require('nanohtml/lib/browser')
+import Widget from '../common/widget'
+import html from 'nanohtml/lib/browser'
 
 class TextArea extends Widget {
 
@@ -115,4 +115,4 @@ TextArea.dynamicProps = TextArea.prototype.constructor.dynamicProps
     .filter(x=>x !== 'interaction')
 
 
-module.exports = TextArea
+export default TextArea

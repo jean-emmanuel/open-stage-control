@@ -1,6 +1,6 @@
-var Widget = require('../common/widget'),
-    {iconify} = require('../../ui/utils'),
-    {deepEqual} = require('../../utils')
+import Widget from '../common/widget'
+import {iconify} from '../../ui/utils'
+import {deepEqual} from '../../utils'
 
 class MenuBase extends Widget {
 
@@ -73,4 +73,4 @@ class MenuBase extends Widget {
 
 }
 
-module.exports = MenuBase
+export default MenuBase

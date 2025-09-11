@@ -1,10 +1,12 @@
-var Panel = require('./panel'),
-    {icon, iconify} = require('../../ui/utils'),
-    resize = require('../../events/resize'),
-    doubleTap = require('../mixins/double_tap'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    iOS13 = require('../../ui/ios') === 13
+import Panel from './panel'
+import {icon, iconify} from '../../ui/utils'
+import * as resize from '../../events/resize'
+import doubleTap from '../mixins/double_tap'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import iOS from '../../ui/ios'
+
+var iOS13 = iOS === 13
 
 class Modal extends Panel {
 
@@ -303,4 +305,4 @@ Modal.dynamicProps = Modal.prototype.constructor.dynamicProps.concat(
     'popupPadding'
 )
 
-module.exports = Modal
+export default Modal
