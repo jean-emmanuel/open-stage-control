@@ -9,7 +9,7 @@ import {icon} from './utils'
 import {widgets, categories} from '../widgets'
 
 var Root, Panel, Matrix, Keyboard, widgetManager
-;(async ()=>{
+;(async()=>{
     Root = (await import('../widgets/containers/root')).default
     Panel = (await import('../widgets/containers/panel')).default
     Matrix = (await import('../widgets/containers/matrix')).default

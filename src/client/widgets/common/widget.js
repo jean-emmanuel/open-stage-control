@@ -15,7 +15,7 @@ import Script from '../scripts/script'
 var updateWidget = ()=>{},
     uiConsole, widgetTree, widgetDragResize, sessionManager
 
-;(async ()=>{
+;(async()=>{
     updateWidget = (await import('../../editor/data-workers')).updateWidget
     uiConsole = (await import('../../ui/ui-console')).default
     widgetTree = (await import('../../editor')).default.widgetTree

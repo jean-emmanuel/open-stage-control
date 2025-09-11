@@ -3,7 +3,7 @@ import StaticProperties from '../mixins/static_properties'
 import {updateMobileThemeColor} from '../../ui/utils'
 
 var mainMenu
-;(async ()=>{
+;(async()=>{
     mainMenu = (await import('../../ui/main-menu')).default
 })()
 

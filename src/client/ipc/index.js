@@ -3,7 +3,7 @@ import cache from '../managers/cache'
 import {nanoid} from 'nanoid'
 
 var notifications, locales, callbacks
-;(async ()=>{
+;(async()=>{
     notifications = (await import('../ui/notifications')).default
     locales = (await import('../locales')).default
     callbacks = (await import('./callbacks')).default

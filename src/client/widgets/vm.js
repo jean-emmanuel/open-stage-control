@@ -2,7 +2,7 @@ import loopProtect from 'loop-protect'
 import {deepCopy} from '../utils'
 
 var sessionManager
-;(async ()=>{
+;(async()=>{
     sessionManager = (await import('../managers/session')).default
 })()
 
@@ -16,7 +16,6 @@ class Vm {
         this.widget = []
 
         if (!globals) {
-            var sessionManager
             globals = {
                 screen: {
                     get width() {return screen.width},

@@ -8,7 +8,7 @@ import ipc from '../../ipc'
 import uiFilebrowser from '../../ui/ui-filebrowser'
 
 var toolbar
-;(async ()=>{
+;(async()=>{
     toolbar = (await import('../../ui/main-menu')).default
 })()
 

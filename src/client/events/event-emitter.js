@@ -1,7 +1,7 @@
 import domEvent from './dom-event'
 
 var customEvents = {}
-;(async ()=>{
+;(async()=>{
     customEvents['draginit'] = customEvents['drag'] = customEvents['dragend'] = await import('./drag')
     customEvents['resize']  = await import('./resize')
     customEvents['wheel']  = domEvent('wheel')

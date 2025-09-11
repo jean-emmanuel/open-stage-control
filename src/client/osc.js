@@ -13,7 +13,7 @@ var Osc = class Osc extends EventEmitter {
         this.remoteControl = {}
         this.serverTargets = []
 
-        ;(async ()=>{
+        ;(async()=>{
             this.remoteControl = (await import('./remote-control')).default
         })()
 

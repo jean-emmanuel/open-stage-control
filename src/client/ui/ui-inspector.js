@@ -13,7 +13,7 @@ import locales from '../locales'
 import getCodeEditor from './ui-code-editor'
 
 var editor
-;(async ()=>{
+;(async()=>{
     mainMenu = (await import('../editor')).default
 })()
 

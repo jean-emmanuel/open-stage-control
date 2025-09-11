@@ -7,7 +7,7 @@ import locales from '../locales'
 import ContextMenu from '../ui/context-menu'
 
 var sessionManager
-;(async ()=>{
+;(async()=>{
     sessionManager = (await import('../managers/session')).default
 })()
 

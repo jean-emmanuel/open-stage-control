@@ -10,7 +10,7 @@ var Parser = class Parser {
         this.widgets = {}
         this.defaults = {}
 
-        ;(async ()=>{
+        ;(async()=>{
             this.widgets = (await import('./widgets/')).widgets
             for (var k in this.widgets) {
                 this.defaults[k] = this.widgets[k].defaults()._props()

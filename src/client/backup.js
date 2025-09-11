@@ -1,7 +1,7 @@
 import cache from './managers/cache'
 
 var session, state, editor, ipc
-;(async ()=>{
+;(async()=>{
     session = (await import('./managers/session/')).default
     state = (await import('./managers/state')).default
     editor = (await import('./editor/')).default

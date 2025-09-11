@@ -230,9 +230,9 @@ var menuEntries = [
 if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
 
 
-var noSleep = new NoSleep(),
-    noSleepState = false,
-    wakeLock = null
+    var noSleep = new NoSleep(),
+        noSleepState = false,
+        wakeLock = null
 
     menuEntries.push({
         label: locales('nosleep'),

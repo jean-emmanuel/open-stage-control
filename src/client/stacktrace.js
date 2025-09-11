@@ -2,7 +2,7 @@ import StackTrace from 'stacktrace-js'
 import ipc from './ipc'
 
 var uiConsole
-;(async ()=>{
+;(async()=>{
     uiConsole = (await import('./ui/ui-console')).default
 })()
 

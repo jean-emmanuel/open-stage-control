@@ -4,7 +4,7 @@ import parser from '../parser'
 import * as resize from '../events/resize'
 
 var Panel, Matrix, editor
-;(async ()=>{
+;(async()=>{
     Panel = (await import('../widgets/containers/panel')).default
     Matrix = (await import('../widgets/containers/matrix')).default
     editor = (await import('./')).default

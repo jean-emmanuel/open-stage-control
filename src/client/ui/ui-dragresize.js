@@ -4,7 +4,7 @@ import html from 'nanohtml/lib/browser'
 import fastdom from 'fastdom'
 
 var Tab, Root, Folder
-;(async ()=>{
+;(async()=>{
     Tab = (await import('../widgets/containers/tab')).default
     Root = (await import('../widgets/containers/root')).default
     Folder = (await import('../widgets/containers/folder')).default

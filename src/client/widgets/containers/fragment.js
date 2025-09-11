@@ -8,7 +8,7 @@ import html from 'nanohtml/lib/browser'
 import Session from '../../managers/session/session'
 
 var sessionManager
-;(async ()=>{
+;(async()=>{
     sessionManager = (await import('../../managers/session')).default
 })()
 
