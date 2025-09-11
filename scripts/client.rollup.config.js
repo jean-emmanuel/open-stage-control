@@ -32,35 +32,35 @@ module.exports = {
             browser: true
         }),
         commonjs(),
-        // babel({
-        //     babelHelpers: 'bundled',
-        //     babelrc: false,
-        //     exclude: [
-        //         /node_modules\/core-js/,
-        //         /node_modules\/ace-builds/
-        //     ],
-        //     presets: [[
-        //         '@babel/preset-env',
-        //         {
-        //             targets: {
-        //                 ios: '10.3',
-        //                 chrome: '60'
-        //             },
-        //             useBuiltIns: 'usage',
-        //             corejs: 3,
-        //             modules:false
-        //         }
-        //     ]]
-        // }),
-        // terser({
-        //     safari10: true,
-        //     sourceMap: true,
-        //     keep_classnames: true,
-        //     keep_fnames: true,
-        //     output: {
-        //         comments: false,
-        //     },
-        // }),
+        babel({
+            babelHelpers: 'bundled',
+            babelrc: false,
+            exclude: [
+                /node_modules\/core-js/,
+                /node_modules\/ace-builds/
+            ],
+            presets: [[
+                '@babel/preset-env',
+                {
+                    targets: {
+                        ios: '10.3',
+                        chrome: '60'
+                    },
+                    useBuiltIns: 'usage',
+                    corejs: 3,
+                    modules:false
+                }
+            ]]
+        }),
+        terser({
+            safari10: true,
+            sourceMap: true,
+            keep_classnames: true,
+            keep_fnames: true,
+            output: {
+                comments: false,
+            },
+        }),
         {
             name: 'remove-node-modules-from-source-map',
             enforce: 'post',
