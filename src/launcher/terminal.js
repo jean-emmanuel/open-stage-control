@@ -1,6 +1,6 @@
-var {ipcRenderer} = require('electron'),
-    ansiHTML = require('ansi-html'),
-    html = require('nanohtml/lib/browser')
+import {ipcRenderer} from 'electron'
+import ansiHTML from 'ansi-html'
+import html from 'nanohtml/lib/browser'
 
 ansiHTML.setColors({
     magenta: 'B48EAD',
@@ -69,4 +69,4 @@ class Terminal {
 
 }
 
-module.exports = new Terminal({selector: '#osc-terminal'})
+export default new Terminal({selector: '#osc-terminal'})

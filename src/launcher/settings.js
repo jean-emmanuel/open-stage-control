@@ -1,12 +1,13 @@
-var {ipcRenderer} = require('electron'),
-    remote = require('@electron/remote'),
-    {dialog} = remote.require('electron'),
+import {ipcRenderer} from 'electron'
+import remote from '@electron/remote'
+import {icon} from '../client/ui/utils'
+import html from 'nanohtml/lib/browser'
+import raw from 'nanohtml/raw'
+import terminal from './terminal'
+
+var {dialog} = remote.require('electron'),
     fs = remote.require('fs'),
     {settings} = remote.getGlobal('launcherSharedGlobals'),
-    {icon} = require('../client/ui/utils'),
-    html = require('nanohtml/lib/browser'),
-    raw = require('nanohtml/raw'),
-    terminal = require('./terminal'),
     options_remote = settings.read('options')
 
 class Settings {
@@ -259,4 +260,4 @@ class Settings {
 
 }
 
-module.exports = new Settings()
+export default new Settings()

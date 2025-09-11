@@ -1,10 +1,12 @@
-var {ipcRenderer} = require('electron'),
-    remote = require('@electron/remote'),
-    {Menu, MenuItem} = remote.require('electron'),
+import {ipcRenderer} from 'electron'
+import remote from '@electron/remote'
+import terminal from './terminal'
+import settings from './settings'
+import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+
+
+var {Menu, MenuItem} = remote.require('electron'),
     menu = new Menu(),
-    terminal = require('./terminal'),
-    settings = require('./settings'),
-    keyboardJS = require('keyboardjs/dist/keyboard.min.js'),
     {midilist, openDocs} = remote.getGlobal('launcherSharedGlobals'),
     serverStarting = false,
     serverStart = ()=>{
@@ -232,4 +234,4 @@ class Toolbar {
 
 }
 
-module.exports = new Toolbar()
+export default new Toolbar()

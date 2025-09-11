@@ -1,10 +1,9 @@
-var terminal = require('./terminal'),
-    settings = require('./settings'),
-    html = require('nanohtml/lib/browser'),
-    semver = require('semver'),
-    {ipcRenderer} = require('electron')    
-
-require('./toolbar')
+import terminal from './terminal'
+import settings from './settings'
+import html from 'nanohtml/lib/browser'
+import semver from 'semver'
+import {ipcRenderer} from 'electron'
+import './toolbar'
 
 DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${window.PACKAGE.productName} <span class="version">v${window.PACKAGE.version}</span>`)
 
