@@ -173,7 +173,7 @@ var SessionManager = class SessionManager extends EventEmitter {
     }
 
     requestOpen(path) {
-        console.log(path)
+
         ipc.send('sessionOpen', {path: path})
 
     }
