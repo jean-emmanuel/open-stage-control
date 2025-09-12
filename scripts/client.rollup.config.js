@@ -10,7 +10,7 @@ var commonjs = require('@rollup/plugin-commonjs'),
     path = require('path')
 
 module.exports = {
-    input: 'src/client/index.js',
+    input: 'src/client/index.mjs',
 	output: [
 		{
             file: 'app/client/open-stage-control-client.js',

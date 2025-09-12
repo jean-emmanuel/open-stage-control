@@ -78,9 +78,6 @@ Object.assign(global, window)
 
 // Required globals
 
-DOM = require('../src/client/dom')
-DOM.get = x=>[{addEventListener:()=>{}, style:{}}]
-DOM.init()
 ELECTRON_NOGPU = false
 CANVAS_FRAMERATE = 1
 LANG = 'en'

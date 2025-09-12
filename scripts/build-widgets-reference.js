@@ -1,9 +1,9 @@
-require('./client-shim')
+// import './client-shim'
+import widgets from '../src/client/widgets/index.js'
+import baseClass from '../src/client/widgets/common/widget.js'
 
 // Here we go
-var widgets = require('../src/client/widgets'),
-    baseClass = require('../src/client/widgets/common/widget'),
-    base = baseClass.defaults(),
+var base = baseClass.defaults(),
     doc = ['<!-- This file is generated automatically from the widget class declarations. See scripts/build-widget-reference.js -->']
 
 

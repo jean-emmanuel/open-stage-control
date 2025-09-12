@@ -10,8 +10,8 @@ var commonjs = require('@rollup/plugin-commonjs'),
 
 module.exports = {
     input:  {
-        'node/index': 'src/server/node/index.js',
-        'electron/index': 'src/server/electron/index.js'
+        'node/index': 'src/server/node/index.mjs',
+        'electron/index': 'src/server/electron/index.mjs'
     },
 	output: [
 		{
