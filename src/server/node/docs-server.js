@@ -1,10 +1,10 @@
-var EventEmitter = require('events').EventEmitter,
-    http = require('http'),
-    send = require('send'),
-    path = require('path'),
-    fs = require('fs'),
-    open = require('open'),
-    address = require('./address')
+import {EventEmitter} from 'events'
+import http from 'http'
+import send from 'send'
+import path from 'path'
+import fs from 'fs'
+import open from 'open'
+import address from './address'
 
 class DocsServer extends EventEmitter {
 
@@ -87,4 +87,4 @@ class DocsServer extends EventEmitter {
 
 }
 
-module.exports = DocsServer
+export default DocsServer

@@ -1,18 +1,17 @@
-var path = require('path'),
-    {BrowserWindow, dialog, shell, screen, Menu, MenuItem} = require('electron'),
-    shortcut = require('electron-localshortcut'),
-    app = require('./electron-app'),
-    settings = require('./settings'),
-    theme = require('./theme')
+import path from 'path'
+import {BrowserWindow, dialog, shell, screen, Menu, MenuItem} from 'electron'
+import shortcut from 'electron-localshortcut'
+import app from './electron-app'
+import * as settings from '../node/settings'
 
-module.exports = function(options={}) {
+export default function(options={}) {
 
     var window
 
     window = new BrowserWindow({
         title: options.title || settings.infos.productName,
         icon: path.resolve(__dirname + '/../assets/logo.png'),
-        backgroundColor: options.color || theme.backgroundColor,
+        backgroundColor: options.color,
         type: options.type,
         useContentSize: true,
         autoHideMenuBar: true,

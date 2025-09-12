@@ -1,10 +1,8 @@
-var osc = require('./osc'),
-    EventEmitter = require('events').EventEmitter,
-    settings = require('../settings'),
-    zeroconf = require('../zeroconf'),
-    tcpInPort = settings.read('tcp-port'),
-    tcpTargets = settings.read('tcp-targets'),
-    net = require('net')
+import osc from './osc'
+import {EventEmitter} from 'events'
+import * as settings from '../settings'
+import zeroconf from '../zeroconf'
+import net from 'net'
 
 class OscTCPClient extends EventEmitter {
 
@@ -76,14 +74,19 @@ class OscTCPClient extends EventEmitter {
 
 }
 
-class OscTCPServer extends EventEmitter {
+export default class OscTCPServer extends EventEmitter {
 
     constructor() {
 
         super()
 
+        this.port = settings.read('tcp-port')
+        this.targets = settings.read('tcp-targets')
+
         this.clients = {}
 
+        this.server = net.createServer(this.bindSocket.bind(this))
+        this.on = this.server.on.bind(this.server)
     }
 
     bindSocket(socket) {
@@ -113,17 +116,17 @@ class OscTCPServer extends EventEmitter {
     }
 
 
-    open() {
+    start() {
 
-        this.server = net.createServer(this.bindSocket.bind(this))
-        this.server.listen({port: tcpInPort})
 
-        for (var i in tcpTargets) {
+        this.server.listen({port: this.port})
+
+        for (var i in this.targets) {
 
             this.addClient(new OscTCPClient({
                 metadata: true,
-                address: tcpTargets[i].split(':')[0],
-                port: tcpTargets[i].split(':')[1]
+                address: this.targets[i].split(':')[0],
+                port: this.targets[i].split(':')[1]
             }))
 
         }
@@ -132,15 +135,17 @@ class OscTCPServer extends EventEmitter {
             name: settings.infos.productName + (settings.read('instance-name') ? ' (' + settings.read('instance-name') + ')' : ''),
             protocol: 'tcp',
             type: 'osc',
-            port: tcpInPort
+            port: this.port
         }).on('error', (e)=>{
             console.error(`Error: Zeroconf: ${e.message}`)
         })
 
+    }
+
+    stop() {
+
+        this.server.close()
 
     }
+
 }
-
-var oscTCPServer = new OscTCPServer()
-
-module.exports = oscTCPServer

@@ -1,10 +1,11 @@
-var {Menu, Tray, ipcMain} = require('electron'),
-    settings = require('./settings'),
-    tray = null,
+import {Menu, Tray, ipcMain} from 'electron'
+import * as settings from '../node/settings'
+
+var tray = null,
     contextMenu = null,
     isServerRunning = false
 
-module.exports = function(options = {}) {
+export default function(options = {}) {
 
     var icon = __dirname + '/../assets/logo.png'
     if (process.platform === 'darwin') {

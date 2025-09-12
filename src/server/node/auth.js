@@ -1,10 +1,11 @@
-var settings = require('./settings'),
-    auth = null
+import httpAuth from 'http-auth'
+import * as settings from './settings'
+
+var auth = null
 
 if (settings.read('authentication')) {
 
-    var [name, pwd] = settings.read('authentication').split(':'),
-        httpAuth = require('http-auth')
+    var [name, pwd] = settings.read('authentication').split(':')
 
     auth = httpAuth.basic(
         {
@@ -19,4 +20,4 @@ if (settings.read('authentication')) {
 }
 
 
-module.exports = auth
+export default auth

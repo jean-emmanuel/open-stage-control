@@ -1,10 +1,10 @@
-var EventEmitter = require('events').EventEmitter
+import {EventEmitter} from 'events'
 
 var hearbeatInterval = 25000,
     hearbeatTimeout = 5000,
     dieTimeout = 60000
 
-class Socket extends EventEmitter {
+class Client extends EventEmitter {
 
     constructor(ws, id, address) {
 
@@ -123,4 +123,4 @@ class Socket extends EventEmitter {
 
 }
 
-module.exports = Socket
+export default Client

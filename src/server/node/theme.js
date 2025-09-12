@@ -1,25 +1,20 @@
-var fs = require('fs'),
-    path = require('path'),
-    settings = require('./settings'),
-    chokidar = require('chokidar'),
-    ipc
+import fs from 'fs'
+import path from 'path'
+import * as settings from './settings'
+import chokidar from 'chokidar'
+import {EventEmitter} from 'events'
 
-class Theme {
+class Theme extends EventEmitter {
 
     constructor() {
 
-        this.themes = []
-        this.files = []
-        this.css = []
-        this.watcher = null
+        super()
 
         this.defaultColor = '#151a24'
         this.backgroundColor = this.defaultColor
 
-    }
-
-    init() {
-
+        this.css = []
+        this.watcher = null
         this.themes = settings.read('theme') || []
         this.files = []
 
@@ -47,16 +42,13 @@ class Theme {
         if (this.files.length) {
 
             this.watcher = chokidar.watch(this.files, {awaitWriteFinish: {stabilityThreshold: 200}}).on('change', ()=>{
-                if (!ipc) ipc = require('./server').ipc
                 this.load()
-                ipc.send('reloadCss')
+                this.emit('update')
             })
 
         }
 
         this.load()
-
-        return this
 
     }
 
@@ -74,16 +66,6 @@ class Theme {
 
         }
 
-        var css = this.get()
-
-        if (css.includes('--color-background:')) {
-            this.backgroundColor = css.match(/--color-background:([^;\n]*)/)[1].trim()
-        } else {
-            this.backgroundColor = this.defaultColor
-        }
-
-        return this
-
     }
 
     get() {
@@ -96,4 +78,4 @@ class Theme {
 
 var theme = new Theme()
 
-module.exports = theme
+export default theme

@@ -1,6 +1,6 @@
-var networkInterfaces = require('os').networkInterfaces
+import {networkInterfaces} from 'os'
 
-module.exports = (proto, port)=>{
+export default (proto, port)=>{
     var address = Object.values(networkInterfaces())
         .reduce((a,b)=>a.concat(b), [])
         .filter(i=>i.family === 'IPv4')

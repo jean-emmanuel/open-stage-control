@@ -1,24 +1,25 @@
-var ipc = require('../server').ipc,
-    settings = require('../settings'),
-    tcpInPort = settings.read('tcp-port'),
-    debug = settings.read('debug'),
-    midi = settings.read('midi') ? require('../midi') : false,
-    oscUDPServer = require('./udp'),
-    oscTCPServer = require('./tcp'),
-    EventEmitter = require('events').EventEmitter,
-    CustomModule = require('../custom-module')
+import * as settings from '../settings'
+import OscUDPServer from './udp'
+import OscTCPServer from './tcp'
+import {EventEmitter} from 'events'
+import CustomModule from '../custom-module'
+import MidiServer from '../midi'
 
-
-if (midi) midi = new midi()
-
-class OscServer {
+export default class OscServer {
 
     constructor(){
+
+        this.oscUDPServer = new OscUDPServer()
+        this.oscTCPServer = new OscTCPServer()
+        this.tcpInPort = settings.read('tcp-port')
+        this.midiServer = settings.read('midi') ? new MidiServer() : null
+
+        this.debug = settings.read('debug')
 
         this.customModuleEventEmitter = new EventEmitter()
         this.customModule = settings.read('custom-module') ? new CustomModule(settings.read('custom-module'), {
             app: this.customModuleEventEmitter,
-            tcpServer: oscTCPServer,
+            tcpServer: this.oscTCPServer,
             sendOsc: this.sendOsc.bind(this),
             receiveOsc: this.receiveOsc.bind(this),
             send: (host, port, address, ...args)=>{
@@ -103,7 +104,7 @@ class OscServer {
 
         if (data.host == 'midi') {
 
-            if (midi) midi.send(data)
+            if (this.midiServer) this.midiServer.send(data)
 
         } else {
 
@@ -117,23 +118,23 @@ class OscServer {
                 return
             }
 
-            if (tcpInPort && oscTCPServer.clients[data.host] && oscTCPServer.clients[data.host][data.port]) {
+            if (this.tcpInPort && this.oscTCPServer.clients[data.host] && this.oscTCPServer.clients[data.host][data.port]) {
 
-                oscTCPServer.clients[data.host][data.port].send({
+                this.oscTCPServer.clients[data.host][data.port].send({
                     address: data.address,
                     args: data.args
                 })
 
             } else {
 
-                oscUDPServer.send({
+                this.oscUDPServer.send({
                     address: data.address,
                     args: data.args
                 }, data.host, data.port)
 
             }
 
-            if (debug) {
+            if (this.debug) {
                 console.log('\x1b[35m(DEBUG, OSC) Out: ', `{ address: '${data.address}', args: `, data.args, '} To: ' + data.host + ':' + data.port, '\x1b[0m')
             }
 
@@ -152,9 +153,9 @@ class OscServer {
 
         if (data.args.length==1) data.args = data.args[0]
 
-        ipc.send('receiveOsc', data, clientId)
+        this.ipcServer.send('receiveOsc', data, clientId)
 
-        if (debug) console.log('\x1b[36m(DEBUG, OSC) In: ', {address:data.address, args: data.args}, 'From: ' + data.host + ':' + data.port, '\x1b[0m')
+        if (this.debug) console.log('\x1b[36m(DEBUG, OSC) In: ', {address:data.address, args: data.args}, 'From: ' + data.host + ':' + data.port, '\x1b[0m')
 
     }
 
@@ -201,11 +202,11 @@ class OscServer {
         }
     }
 
+    start(ipcServer){
 
+        this.ipcServer = ipcServer
 
-    init(){
-
-        if (midi) midi.init((data)=>{
+        if (this.midiServer) midi.init((data)=>{
 
             data = this.oscInFilter({address: data.address, args: data.args, host: data.host, port: data.port})
 
@@ -215,12 +216,12 @@ class OscServer {
 
         })
 
-        oscUDPServer.on('message', this.oscInHandlerWrapper.bind(this))
-        oscUDPServer.open()
+        this.oscUDPServer.on('message', this.oscInHandlerWrapper.bind(this))
+        this.oscUDPServer.start()
 
         if (settings.read('tcp-port')) {
-            oscTCPServer.on('message', this.oscInHandlerWrapper.bind(this))
-            oscTCPServer.open()
+            this.oscTCPServer.on('message', this.oscInHandlerWrapper.bind(this))
+            this.oscTCPServer.start()
         }
 
         if (this.customModule.init) {
@@ -236,20 +237,12 @@ class OscServer {
     stop() {
 
         if (this.customModule.stop) this.customModule.stop()
-        if (midi) midi.stop()
+        if (this.midiServer) this.midiServer.stop()
 
     }
 
-
-}
-
-
-var oscServer = new OscServer()
-oscServer.init()
-
-module.exports = {
-    server: oscServer,
-    send: function(host, port, address, args, typeTags, clientId) {
+    send(host, port, address, args, typeTags, clientId) {
+        // public send function
 
         var message = []
 
@@ -263,17 +256,17 @@ module.exports = {
             for (var i = 0; i < args.length; i++) {
 
                 if (typeTags && typeTags[i]) typeTag = typeTags[i]
-                arg = oscServer.parseArg(args[i], typeTag)
+                arg = this.parseArg(args[i], typeTag)
 
                 if (arg !== null) message.push(arg)
 
             }
         }
 
-        var data = oscServer.oscOutFilter({address:address, args: message, host: host, port: port, clientId: clientId})
+        var data = this.oscOutFilter({address:address, args: message, host: host, port: port, clientId: clientId})
 
-        oscServer.sendOsc(data)
+        this.sendOsc(data)
 
-    },
-    midi:midi
+    }
+
 }

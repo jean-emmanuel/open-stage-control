@@ -1,6 +1,7 @@
-var settings = require('./settings'),
-    forge = require('node-forge'),
-    pki = forge.pki,
+import * as settings from './settings'
+import forge from 'node-forge'
+
+var pki = forge.pki,
     certificate = settings.read('ssl-certificate')
 
 forge.options.usePureJavaScript = true
@@ -47,24 +48,27 @@ function createCertificate() {
 
 }
 
-if (!certificate) {
+if (settings.read('use-ssl')){
 
-    createCertificate()
+    if (!certificate) {
 
-} else {
-
-    var cert = pki.certificateFromPem(certificate.cert)
-
-    if (
-        cert.serialNumber === '00' ||
-        new Date() > new Date(cert.validity.notAfter) ||
-        cert.subject.attributes[1].value !== settings.infos.productName
-    ) {
-        console.log('(INFO) Self-signed ssl certificate in cache has expired or is invalid')
         createCertificate()
-    } else {
-        console.log('(INFO) Using self-signed ssl certificate in cache')
-    }
 
+    } else {
+
+        var cert = pki.certificateFromPem(certificate.cert)
+
+        if (
+            cert.serialNumber === '00' ||
+            new Date() > new Date(cert.validity.notAfter) ||
+            cert.subject.attributes[1].value !== settings.infos.productName
+        ) {
+            console.log('(INFO) Self-signed ssl certificate in cache has expired or is invalid')
+            createCertificate()
+        } else {
+            console.log('(INFO) Using self-signed ssl certificate in cache')
+        }
+
+    }
 
 }

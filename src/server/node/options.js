@@ -1,6 +1,6 @@
-var fs = require('fs')
+import fs from 'fs'
 
-module.exports = {
+export default {
     's': {alias: 'send', type: 'array', describe: 'default targets for all widgets (ip: port / domain: port / midi: port_name pairs)',
         check: (s)=>{
             return s.some(item=>!item.match(/^[^:]*:[0-9]{4,5}$/) && !item.match(/^midi:.*$/)) ?

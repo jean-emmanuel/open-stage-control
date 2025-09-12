@@ -1,9 +1,11 @@
-var settings = require('./settings'),
-    fs = require('fs'),
-    vm = require('vm'),
-    chokidar = require('chokidar'),
-    path = require('path'),
-    modulePathExtended = false,
+import * as settings from './settings'
+import fs from 'fs'
+import vm from 'vm'
+import chokidar from 'chokidar'
+import path from 'path'
+import {globalPaths} from 'module'
+
+var modulePathExtended = false,
     loadedModules = {},
     globalObject = {}
 
@@ -77,7 +79,7 @@ class CustomModule {
         }
 
         if (!this.submodule && !modulePathExtended) {
-            require('module').globalPaths.push(
+            globalPaths.push(
                 path.resolve(path.dirname(this.filename)),
                 path.resolve(path.dirname(this.filename), 'node_modules')
             )
@@ -263,4 +265,4 @@ class CustomModule {
 }
 
 
-module.exports = CustomModule
+export default CustomModule

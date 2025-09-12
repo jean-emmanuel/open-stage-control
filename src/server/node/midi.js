@@ -1,7 +1,7 @@
-var {PythonShell} = require('python-shell'),
-    fs = require('fs'),
-    path = require('path'),
-    settings = require('./settings')
+import {PythonShell} from 'python-shell'
+import fs from 'fs'
+import path from 'path'
+import * as settings from './settings'
 
 // last o-s-c version that changed midi sources
 // must match version in midi.py / bundled midi executable
@@ -168,4 +168,4 @@ class MidiConverter {
 
 }
 
-module.exports = MidiConverter
+export default MidiConverter

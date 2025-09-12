@@ -1,21 +1,20 @@
-var EventEmitter = require('events').EventEmitter,
-    WebSocketServer = require('ws').Server,
-    Client = require('./client'),
-    settings = require('../settings')
+import {WebSocketServer} from 'ws'
+import Client from './client'
+import * as settings from '../settings'
+import Callbacks from './callbacks'
 
-class Ipc extends EventEmitter {
+class IpcServer {
 
-    constructor(server) {
-
-        super()
+    constructor(webServer, oscServer) {
 
         this.clients = {}
-        this.server = null
+        this.webServer = webServer
+        this.oscServer = oscServer
+        this.server = new WebSocketServer({server: webServer.server})
+        this.callbacks = new Callbacks(this, webServer, oscServer)
 
-        this.server = new WebSocketServer({server: server})
 
         this.server.on('connection', (socket, req)=>{
-
             var url  = req.url.split('/'),
                 auth = url.pop().replace('_', '/'),
                 id = url.pop()
@@ -38,7 +37,15 @@ class Ipc extends EventEmitter {
                 var client = new Client(socket, id, req.connection.remoteAddress)
                 this.clients[id] = client
 
-                this.emit('connection', client)
+                var customModule = settings.read('custom-module')
+                for (let name of this.callbacks.getEvents()) {
+                    client.on(name, (data)=>{
+                        if (customModule) {
+                            oscServer.customModuleEventEmitter.emit(name, data, {address: client.address, id: client.id})
+                        }
+                        this.callbacks[name](data, client.id)
+                    })
+                }
 
                 client.on('destroyed', ()=>{
                     delete this.clients[id]
@@ -72,4 +79,4 @@ class Ipc extends EventEmitter {
 
 }
 
-module.exports = Ipc
+export default IpcServer

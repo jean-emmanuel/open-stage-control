@@ -1,6 +1,6 @@
-var {app, Menu, shell, BrowserWindow} = require('electron'),
-    settings = require('./settings'),
-    infos = require('../package.json')
+import {app, Menu, shell, BrowserWindow} from 'electron'
+import * as settings from '../node/settings'
+import infos from '../../../package.json'
 
 app.setPath('userData', settings.configPath)
 
@@ -127,4 +127,4 @@ app.on('window-all-closed', function() {
     }
 })
 
-module.exports = app
+export default app

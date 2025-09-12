@@ -1,10 +1,12 @@
-var path = require('path'),
-    fs = require('fs'),
-    yargs = require('yargs'),
-    infos = require('../../package.json'),
-    options = require('./options'),
-    address = require('./address'),
-    argv = process.argv.slice()
+import path from 'path'
+import fs from 'fs'
+import yargs from 'yargs'
+import infos from '../../../package.json'
+import options from './options'
+import address from './address'
+import envPaths from 'env-paths'
+
+var argv = process.argv.slice()
 
 // Note : on windows, electron stops parsing after the first argument containing a colon
 // https://github.com/electron/electron/pull/13039
@@ -95,7 +97,6 @@ var baseDir, configPath, configPathExists = true, config = {}
 if (argv['cache-dir']) {
     baseDir = path.isAbsolute(argv['cache-dir']) ? argv['cache-dir'] : path.resolve(process.cwd(), argv['cache-dir'])
 } else {
-    envPaths = require('env-paths')
     baseDir = envPaths(infos.name, {
         suffix: ''
     }).config
@@ -154,54 +155,57 @@ if (!configPath) {
 /////////////////
 
 
+export {
+    options,
+    cli,
+    infos,
+    baseDir as configPath
+}
 
-module.exports = {
-    options: options,
-    read: function(key){
-        return settings.options[key] !== undefined ? settings.options[key] : settings[key]
-    },
-    write:function(key, value, tmp, sync) {
+export function read(key){
+    return settings.options[key] !== undefined ? settings.options[key] : settings[key]
+}
+export function write(key, value, tmp, sync) {
 
-        settings[key] = value
+    settings[key] = value
 
-        if (!tmp && configPathExists) {
+    if (!tmp && configPathExists) {
 
-            if (process.send) {
-                // server running as child process of launcher
-                // -> just pass the modification to the launcher process
-                process.send(['settings.write', [key, value]])
-            } else {
-                config[key] = value
-                if (config.options) {
-                    // don't save cli-only options
-                    for (var k in config.options) {
-                        if (options[k] && options[k].launcher === false) {
-                            delete config.options[k]
-                        }
+        if (process.send) {
+            // server running as child process of launcher
+            // -> just pass the modification to the launcher process
+            process.send(['settings.write', [key, value]])
+        } else {
+            config[key] = value
+            if (config.options) {
+                // don't save cli-only options
+                for (var k in config.options) {
+                    if (options[k] && options[k].launcher === false) {
+                        delete config.options[k]
                     }
                 }
-                if (sync) {
-                    fs.writeFileSync(configPath, JSON.stringify(config, null, 4))
-                } else {
-                    fs.writeFile(configPath, JSON.stringify(config, null, 4), function(err, data) {
-                        if (err) throw err
-                    })
-                }
-
+            }
+            if (sync) {
+                fs.writeFileSync(configPath, JSON.stringify(config, null, 4))
+            } else {
+                fs.writeFile(configPath, JSON.stringify(config, null, 4), function(err, data) {
+                    if (err) throw err
+                })
             }
 
         }
 
-        // we are in launcher process -> update server process' config
-        if (global.serverProcess) {
-            global.serverProcess.send(['settings.write', [key, value]])
-        }
+    }
 
-    },
-    cli: cli,
-    configPath: baseDir,
-    infos: infos,
-    appAddresses: ()=>address(module.exports.read('use-ssl') ? 'https://' : 'http://', settings.options.port || 8080)
+    // we are in launcher process -> update server process' config
+    if (global.serverProcess) {
+        global.serverProcess.send(['settings.write', [key, value]])
+    }
+
+}
+
+export function appAddresses() {
+    return address(read('use-ssl') ? 'https://' : 'http://', settings.options.port || 8080)
 }
 
 if (process.send) {
@@ -210,7 +214,7 @@ if (process.send) {
     process.on('message', function(data) {
         var [command, args] = data
         if (command === 'settings.write') {
-            module.exports.write(args[0], args[1], true)
+            write(args[0], args[1], true)
         }
     })
 }
