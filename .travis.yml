@@ -30,14 +30,14 @@ before_deploy:
   - npm run package -- --all
   - PLATFORM=darwin;ARCH=arm64; npm run package
   - npm run package-node
-  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-linux-x64/resources/app/server/
-  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-linux && chmod +x osc-midi-linux && echo "true" > osc-midi.json
-  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-win32-x64/resources/app/server/
-  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-windows.exe && chmod +x osc-midi-windows.exe && echo "true" > osc-midi.json
-  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-darwin-x64/open-stage-control.app/Contents/Resources/app/server
-  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx && chmod +x osc-midi-osx && echo "true" > osc-midi.json
-  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-darwin-arm64/open-stage-control.app/Contents/Resources/app/server
-  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx && chmod +x osc-midi-osx && echo "true" > osc-midi.json
+  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-linux-x64/resources/app/server/python
+  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-linux && chmod +x osc-midi-linux && echo "true" > .expect-midi-bin
+  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-win32-x64/resources/app/server/python
+  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-windows.exe && chmod +x osc-midi-windows.exe && echo "true" > .expect-midi-bin
+  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-darwin-x64/open-stage-control.app/Contents/Resources/app/server/python
+  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx && chmod +x osc-midi-osx && echo "true" > .expect-midi-bin
+  - cd $TRAVIS_BUILD_DIR/dist/open-stage-control-darwin-arm64/open-stage-control.app/Contents/Resources/app/server/python
+  - wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx && chmod +x osc-midi-osx && echo "true" > .expect-midi-bin
   - cd $TRAVIS_BUILD_DIR
   - mkdir dist/packages
   - npm run deb64

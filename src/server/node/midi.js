@@ -3,10 +3,8 @@ import fs from 'fs'
 import path from 'path'
 import * as settings from './settings'
 
-var pythonOptions = {
-    scriptPath:__dirname,
-    mode:'text',
-}
+
+var scriptPath = path.resolve(__dirname, '../python')
 
 var midiBinaries = {
     x64: {
@@ -19,12 +17,12 @@ var midiBinaries = {
     }
 }
 
-var expectMidiBinaries = fs.existsSync(path.join(__dirname, '/osc-midi.json')),
+var expectMidiBinaries = fs.existsSync(path.resoluve(scriptPath, '/.expect-midi-bin')),
     expectMidiBinariesError = false
 
 var pythonPathOverride
 if (midiBinaries[process.arch] && midiBinaries[process.arch][process.platform]) {
-    var p = path.resolve(__dirname,midiBinaries[process.arch][process.platform])
+    var p = path.resolve(scriptPath, midiBinaries[process.arch][process.platform])
     if (fs.existsSync(p)) {
         pythonPathOverride = p
     } else if (expectMidiBinaries) {
@@ -45,7 +43,7 @@ class MidiConverter {
                 ...settings.read('midi')
             ],
             pythonPath: MidiConverter.getPythonPath()
-        }, pythonOptions))
+        }, {scriptPath, mode:'text'}))
 
         this.py.childProcess.on('error', (e)=>{
             if (e.code === 'ENOENT') {
@@ -126,7 +124,7 @@ class MidiConverter {
 
         if (expectMidiBinariesError) MidiConverter.midiBinariesError()
 
-        PythonShell.run('python/midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['--params', 'list-only']}, pythonOptions), function(e, results) {
+        PythonShell.run('python/midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['--params', 'list-only']}, {scriptPath, mode:'text'}), function(e, results) {
             if (e) {
                 if (e.code === 'ENOENT') {
                     console.error(`(ERROR, MIDI) Could not find python binary: ${e.message.replace(/spawn (.*) ENOENT/, '$1')}`)
