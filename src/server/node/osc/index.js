@@ -206,7 +206,7 @@ export default class OscServer {
 
         this.ipcServer = ipcServer
 
-        if (this.midiServer) midi.init((data)=>{
+        if (this.midiServer) this.midiServer.init((data)=>{
 
             data = this.oscInFilter({address: data.address, args: data.args, host: data.host, port: data.port})
 
