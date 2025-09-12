@@ -1,17 +1,20 @@
 import domEvent from './dom-event.mjs'
+import * as drag from './drag.mjs'
+import * as resize from './resize.mjs'
 
-var customEvents = {}
-;(async()=>{
-    customEvents['draginit'] = customEvents['drag'] = customEvents['dragend'] = await import('./drag.mjs')
-    customEvents['resize']  = await import('./resize')
-    customEvents['wheel']  = domEvent('wheel')
-    customEvents['scroll']  = domEvent('scroll', {capture: true})
-    customEvents['click']  = domEvent('click')
-    customEvents['fast-click']  = domEvent('fast-click')
-    customEvents['focus']  = domEvent('focus', {capture: true})
-    customEvents['blur']  = domEvent('blur', {capture: true})
-    customEvents['change']  = domEvent('change.mjs')
-})()
+var customEvents = {
+    'draginit': drag,
+    'drag': drag,
+    'dragend': drag,
+    'resize': resize,
+    'wheel': domEvent('wheel'),
+    'scroll': domEvent('scroll', {capture: true}),
+    'click': domEvent('click'),
+    'fast-click': domEvent('fast-click'),
+    'focus': domEvent('focus', {capture: true}),
+    'blur': domEvent('blur', {capture: true}),
+    'change': domEvent('change.mjs')
+}
 
 // micro optimisation from eventemitter3
 var has = Object.prototype.hasOwnProperty

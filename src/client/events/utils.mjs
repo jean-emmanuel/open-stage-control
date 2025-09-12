@@ -1,4 +1,8 @@
-import zoom from '../ui/zoom.mjs'
+var zoom
+;(async()=>{
+    zoom = (await import('../ui/zoom')).default
+})()
+
 // impot cssTransformCoords from './transform-coords.mjs'
 
 const Touch = window.Touch || class Touch {}
