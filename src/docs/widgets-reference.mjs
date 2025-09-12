@@ -17,7 +17,7 @@ doc.push(`
     `
 )
 
-for (var categoryName in base) {
+for (let categoryName in base) {
     doc.push(`\n
 
 === "${categoryName}"
@@ -25,16 +25,16 @@ for (var categoryName in base) {
     | property | type |default | description |
     | --- | --- | --- | --- |`
     )
-    var notEmpty = false
+    let notEmpty = false
 
-    for (var propName in base[categoryName]) {
+    for (let propName in base[categoryName]) {
 
-        var prop = base[categoryName][propName],
+        let prop = base[categoryName][propName],
             permalink = propName
 
-        if (propName === '_props' || propName[0] === '_') continue
+        if (propName === '_props' || propName[0] === '_') continue
 
-        var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
+        let help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
             dynamic = baseClass.dynamicProps.includes(propName) ? '<sup><i class="fas fa-bolt" title="dynamic"></i></sup>' : ''
 
         if (prop.choices) {
@@ -75,24 +75,24 @@ for (var k in widgets.categories) {
 
         )
 
-        for (var categoryName in defaults) {
+        for (let categoryName in defaults) {
             doc.push(`\n
     === "${categoryName == 'class_specific' ? type : categoryName}"
 
         | property | type |default | description |
         | --- | --- | --- | --- |`
             )
-            var notEmpty = false
+            let notEmpty = false
 
-            for (var propName in defaults[categoryName]) {
+            for (let propName in defaults[categoryName]) {
 
-                var prop = defaults[categoryName][propName],
+                let prop = defaults[categoryName][propName],
                     permalink = type + '_' + propName
 
 
-                if (propName === '_props' || propName[0] === '_' || JSON.stringify(prop) == JSON.stringify((base[categoryName]||{})[propName])) continue
+                if (propName === '_props' || propName[0] === '_' || JSON.stringify(prop) == JSON.stringify((base[categoryName]||{})[propName])) continue
 
-                var help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
+                let help = Array.isArray(prop.help) ? prop.help.join('<br/><br/>').replace(/<br\/>-/g, '-') : prop.help || '',
                     dynamic = widgets.widgets[type].dynamicProps.includes(propName) ? '<sup><i class="fas fa-bolt" title="dynamic"></i></sup>' : ''
 
                 if (prop.choices) {

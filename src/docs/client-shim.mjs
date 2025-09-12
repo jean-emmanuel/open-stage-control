@@ -1,12 +1,12 @@
 // Dirty browser window shim
 import * as DOM from '../client/dom'
 
+// eslint-disable-next-line no-global-assign
 document = {
     createElement: x=>({
         ownerDocument: document,
         addEventListener: ()=>{},
         style: {},
-        contentWindow: {},
         nodeName: '',
         childNodes: [],
         setAttribute: ()=>{},
@@ -55,10 +55,11 @@ document = {
     }
 }
 
+// eslint-disable-next-line no-global-assign
 window = {
     screen: {width: 800, height: 600},
     addEventListener: ()=>{},
-    location: {},
+    location: {},
     Image: Function,
     document: document,
     navigator: {
@@ -72,7 +73,7 @@ window = {
     },
     sessionStorage: {
         getItem(){return null},
-            setItem(){},
+        setItem(){},
     },
     MutationObserver: class MutationObserver{},
     ELECTRON_NOGPU: false,
