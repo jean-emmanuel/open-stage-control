@@ -7,7 +7,8 @@ var commonjs = require('@rollup/plugin-commonjs'),
     license = require('rollup-plugin-license'),
     watchChange = require('./client.plugin-watch'),
     package = require('../package.json'),
-    path = require('path')
+    path = require('path'),
+    watch = process.argv.includes('--watch')
 
 module.exports = {
     input: 'src/client/index.mjs',
@@ -32,7 +33,7 @@ module.exports = {
             browser: true
         }),
         commonjs(),
-        babel({
+        watch ? {} : babel({
             babelHelpers: 'bundled',
             babelrc: false,
             exclude: [
@@ -52,7 +53,7 @@ module.exports = {
                 }
             ]]
         }),
-        terser({
+        watch ? {} : terser({
             safari10: true,
             sourceMap: true,
             keep_classnames: true,
@@ -70,14 +71,14 @@ module.exports = {
                 }
             }
         },
-        license({
+        watch ? {} :license({
             banner: {
                 content: {
                     file: path.join(__dirname, 'license-header.txt'),
                 },
             }
         }),
-        copy({
+        watch ? {} : copy({
             targets: [
                 {src: 'resources/images/logo_nobadge.png', dest: 'app/assets/', rename: 'favicon.png'},
                 {src: 'resources/images/logo.png', dest: 'app/assets/'},
