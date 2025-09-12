@@ -4,7 +4,9 @@ import path from 'path'
 import * as settings from './settings'
 
 
-var scriptPath = path.resolve(__dirname, '../python')
+var scriptPath = __dirname.includes('server/node') ? 
+    path.resolve(__dirname, '../python') :  // src folder structure
+    path.resolve(__dirname, './python')     // app folder structure with rollup chunking
 
 var midiBinaries = {
     x64: {
@@ -17,7 +19,7 @@ var midiBinaries = {
     }
 }
 
-var expectMidiBinaries = fs.existsSync(path.resoluve(scriptPath, '/.expect-midi-bin')),
+var expectMidiBinaries = fs.existsSync(path.resolve(scriptPath, './.expect-midi-bin')),
     expectMidiBinariesError = false
 
 var pythonPathOverride
@@ -36,7 +38,7 @@ class MidiConverter {
 
         if (expectMidiBinariesError) MidiConverter.midiBinariesError()
 
-        this.py = new PythonShell('python/midi.py', Object.assign({
+        this.py = new PythonShell('midi.py', Object.assign({
             args: [
                 '--params',
                 settings.read('debug') ? 'debug' : '',
@@ -124,7 +126,7 @@ class MidiConverter {
 
         if (expectMidiBinariesError) MidiConverter.midiBinariesError()
 
-        PythonShell.run('python/midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['--params', 'list-only']}, {scriptPath, mode:'text'}), function(e, results) {
+        PythonShell.run('midi.py', Object.assign({pythonPath: MidiConverter.getPythonPath(), args: ['--params', 'list-only']}, {scriptPath, mode:'text'}), function(e, results) {
             if (e) {
                 if (e.code === 'ENOENT') {
                     console.error(`(ERROR, MIDI) Could not find python binary: ${e.message.replace(/spawn (.*) ENOENT/, '$1')}`)

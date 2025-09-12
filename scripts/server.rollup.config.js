@@ -55,7 +55,7 @@ module.exports = {
             targets: [
                 {src: 'src/app/index.js', dest: 'app/'},
                 {src: 'src/server/index.js', dest: 'app/server/'},
-                {src: 'src/python/*', dest: 'app/server/python/'},
+                {src: 'src/server/python/*', dest: 'app/server/python/'},
                 {src: 'node_modules/fsevents/fsevents.node', dest: 'app/server/'},
                 {src: 'LICENSE', dest: 'app/'},
                 {src: 'package.json', dest: 'app/'},
