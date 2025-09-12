@@ -1,6 +1,6 @@
-import {mapToScale} from '../utils'
-import Widget from '../common/widget'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
+import {mapToScale} from '../utils.mjs'
+import Widget from '../common/widget.mjs'
 
 export default class Led extends Widget {
 

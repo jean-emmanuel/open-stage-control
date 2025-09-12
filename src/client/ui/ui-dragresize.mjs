@@ -1,13 +1,13 @@
-import UiWidget from './ui-widget'
-import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import fastdom from 'fastdom'
+import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+import UiWidget from './ui-widget.mjs'
 
 var Tab, Root, Folder
 ;(async()=>{
-    Tab = (await import('../widgets/containers/tab')).default
-    Root = (await import('../widgets/containers/root')).default
-    Folder = (await import('../widgets/containers/folder')).default
+    Tab = (await import('../widgets/containers/tab.mjs')).default
+    Root = (await import('../widgets/containers/root.mjs')).default
+    Folder = (await import('../widgets/containers/folder.mjs')).default
 })()
 
 class UiDragResize extends UiWidget {

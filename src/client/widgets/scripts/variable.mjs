@@ -1,5 +1,5 @@
-import Widget from '../common/widget'
-import StaticProperties from '../mixins/static_properties'
+import Widget from '../common/widget.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
 
 export default class Variable extends StaticProperties(Widget, {interaction: false, visible: false}) {
 

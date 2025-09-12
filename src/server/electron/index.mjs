@@ -1,15 +1,15 @@
 import sourceMap from 'source-map-support'
-import * as settings from '../node/settings'
+import * as settings from '../node/settings.mjs'
 import DocsServer from '../node/docs-server'
 import {fork} from 'child_process'
 import path from 'path'
-import app from './electron-app'
+import app from './electron-app.mjs'
 import window from './electron-window'
 import {ipcMain} from 'electron'
 import electronRemote from '@electron/remote/main'
-import createTray from './tray'
-import midi from '../node/midi'
-import qrcode from '../node/qrcode'
+import createTray from './tray.mjs'
+import midi from '../node/midi.mjs'
+import qrcode from '../node/qrcode.mjs'
 
 var dev = process.argv[0].includes('node_modules'),
     docsServer,

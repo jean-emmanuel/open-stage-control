@@ -1,6 +1,6 @@
-import {clip} from '../utils'
+import html from 'nanohtml'
+import {clip} from '../utils.mjs'
 import Fader from './fader'
-import html from 'nanohtml/lib/browser'
 
 var faderDefaults = Fader.defaults()._props()
 

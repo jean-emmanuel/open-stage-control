@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs'
 import yargs from 'yargs'
-import infos from '../../../package.json'
-import options from './options'
-import address from './address'
 import envPaths from 'env-paths'
+import infos from '../../../package.json'
+import options from './options.mjs'
+import address from './address.mjs'
 
 var argv = process.argv.slice()
 

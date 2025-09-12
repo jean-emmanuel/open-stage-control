@@ -1,15 +1,15 @@
-import widgetManager from '../../managers/widgets'
-import stateManager from '../../managers/state'
-import cache from '../../managers/cache'
-import {deepCopy} from '../../utils'
-import {urlParser} from '../utils'
-import Vm from '../vm'
-import ipc from '../../ipc'
-import uiFilebrowser from '../../ui/ui-filebrowser'
+import widgetManager from '../../managers/widgets.mjs'
+import stateManager from '../../managers/state.mjs'
+import cache from '../../managers/cache.mjs'
+import {deepCopy} from '../../utils.mjs'
+import {urlParser} from '../utils.mjs'
+import Vm from '../vm.mjs'
+import ipc from '../../ipc/index.mjs'
+import uiFilebrowser from '../../ui/ui-filebrowser.mjs'
 
 var toolbar
 ;(async()=>{
-    toolbar = (await import('../../ui/main-menu')).default
+    toolbar = (await import('../../ui/main-menu.mjs')).default
 })()
 
 class ScriptVm extends Vm {

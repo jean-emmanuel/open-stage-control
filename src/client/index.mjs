@@ -1,11 +1,11 @@
-import './globals'
-import './stacktrace'
-import './ui/init'
+import './globals.mjs'
+import './stacktrace.mjs'
+import './ui/init.mjs'
 
-import locales from './locales'
-import uiLoading from './ui/ui-loading'
-import ipc from './ipc/index'
-import * as backup from './backup'
+import locales from './locales/index.mjs'
+import uiLoading from './ui/ui-loading.mjs'
+import ipc from './ipc/index.mjs'
+import * as backup from './backup.mjs'
 
 uiLoading(locales('loading_server'))
 

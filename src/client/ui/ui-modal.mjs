@@ -1,7 +1,7 @@
-import UiWidget from './ui-widget'
-import {icon} from './utils'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
+import UiWidget from './ui-widget.mjs'
+import {icon} from './utils.mjs'
 
 var MODAL_SINGLETON = null,
     MODAL_CONTAINER = null

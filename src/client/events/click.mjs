@@ -1,5 +1,5 @@
-import iOS from '../ui/ios'
-import editor from '../editor'
+import iOS from '../ui/ios.mjs'
+import editor from '../editor/index.mjs'
 
 const macOs = (navigator.platform || '').match('Mac')
 

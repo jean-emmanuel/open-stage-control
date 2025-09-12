@@ -1,20 +1,20 @@
 import UiWidget from './ui-widget'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import doubleClick from '../events/double-click'
 import Sortable from 'sortablejs'
 import morph from 'nanomorph'
 import locales from '../locales'
 import raw from 'nanohtml/raw'
-import {icon} from './utils'
-import {widgets, categories} from '../widgets'
+import {icon} from './utils.mjs'
+import {widgets, categories} from '../widgets/index.mjs'
 
 var Root, Panel, Matrix, Keyboard, widgetManager
 ;(async()=>{
-    Root = (await import('../widgets/containers/root')).default
-    Panel = (await import('../widgets/containers/panel')).default
-    Matrix = (await import('../widgets/containers/matrix')).default
-    Keyboard = (await import('../widgets/containers/keyboard')).default
-    widgetManager = (await import('../managers/widgets')).default
+    Root = (await import('../widgets/containers/root.mjs')).default
+    Panel = (await import('../widgets/containers/panel.mjs')).default
+    Matrix = (await import('../widgets/containers/matrix.mjs')).default
+    Keyboard = (await import('../widgets/containers/keyboard.mjs')).default
+    widgetManager = (await import('../managers/widgets.mjs')).default
 })()
 
 

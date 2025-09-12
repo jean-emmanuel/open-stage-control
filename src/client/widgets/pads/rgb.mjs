@@ -1,9 +1,9 @@
-import Widget from '../common/widget'
-import Xy from './xy'
-import Fader from '../sliders/fader'
-import {clip, mapToScale, hsbToRgb, rgbToHsb} from '../utils'
-import html from 'nanohtml/lib/browser'
-import touchstate from '../mixins/touch_state'
+import html from 'nanohtml'
+import Widget from '../common/widget.mjs'
+import Xy from './xy.mjs'
+import Fader from '../sliders/fader.mjs'
+import {clip, mapToScale, hsbToRgb, rgbToHsb} from '../utils.mjs'
+import touchstate from '../mixins/touch_state.mjs'
 
 var faderDefaults = Fader.defaults()._props(),
     xyDefaults = Xy.defaults()._props()

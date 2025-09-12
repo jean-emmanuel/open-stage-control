@@ -1,5 +1,5 @@
-import UiWidget from './ui-widget'
-import {setScrollbarColor} from './utils'
+import UiWidget from './ui-widget.mjs'
+import {setScrollbarColor} from './utils.mjs'
 
 class UiWorkspace extends UiWidget {
 

@@ -1,6 +1,6 @@
-import {iconify} from '../../ui/utils'
-import Widget from '../common/widget'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
+import {iconify} from '../../ui/utils.mjs'
+import Widget from '../common/widget.mjs'
 
 export default class Text extends Widget {
 

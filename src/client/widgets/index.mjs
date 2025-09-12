@@ -1,54 +1,54 @@
 // basics
-import button from './basics/button'
-import _switch from './basics/switch'
-import dropdown from './basics/dropdown'
-import menu from './basics/menu'
-import input from './basics/input'
-import textarea from './basics/textarea'
-import file from './basics/file'
+import button from './basics/button.mjs'
+import _switch from './basics/switch.mjs'
+import dropdown from './basics/dropdown.mjs'
+import menu from './basics/menu.mjs'
+import input from './basics/input.mjs'
+import textarea from './basics/textarea.mjs'
+import file from './basics/file.mjs'
 
 // containers
-import panel from './containers/panel'
-import folder from './containers/folder'
-import root from './containers/root'
-import tab from './containers/tab'
-import modal from './containers/modal'
-import clone from './containers/clone'
-import fragment from './containers/fragment'
-import matrix from './containers/matrix'
-import keyboard from './containers/keyboard'
-import {PatchBay as patchbay, PatchBayNode as patchbaynode} from './containers/patchbay'
+import panel from './containers/panel.mjs'
+import folder from './containers/folder.mjs'
+import root from './containers/root.mjs'
+import tab from './containers/tab.mjs'
+import modal from './containers/modal.mjs'
+import clone from './containers/clone.mjs'
+import fragment from './containers/fragment.mjs'
+import matrix from './containers/matrix.mjs'
+import keyboard from './containers/keyboard.mjs'
+import {PatchBay as patchbay, PatchBayNode as patchbaynode} from './containers/patchbay.mjs'
 
 // frames
-import image from './frames/image'
-import svg from './frames/svg'
-import html from './frames/html'
-import frame from './frames/frame'
+import image from './frames/image.mjs'
+import svg from './frames/svg.mjs'
+import html from './frames/html.mjs'
+import frame from './frames/frame.mjs'
 
 // graphs
-import plot from './graphs/plot'
-import eq from './graphs/eq'
-import visualizer from './graphs/visualizer'
+import plot from './graphs/plot.mjs'
+import eq from './graphs/eq.mjs'
+import visualizer from './graphs/visualizer.mjs'
 
 // indicators
-import led from './indicators/led'
-import text from './indicators/text'
+import led from './indicators/led.mjs'
+import text from './indicators/text.mjs'
 
 // pads
-import xy from './pads/xy'
-import rgb from './pads/rgb'
-import multixy from './pads/multixy'
-import canvas from './pads/canvas'
+import xy from './pads/xy.mjs'
+import rgb from './pads/rgb.mjs'
+import multixy from './pads/multixy.mjs'
+import canvas from './pads/canvas.mjs'
 
 // sliders
-import fader from './sliders/fader'
-import knob from './sliders/knob'
-import encoder from './sliders/encoder'
-import range from './sliders/range'
+import fader from './sliders/fader.mjs'
+import knob from './sliders/knob.mjs'
+import encoder from './sliders/encoder.mjs'
+import range from './sliders/range.mjs'
 
 // scripts
-import script from './scripts/script-widget'
-import variable from './scripts/variable'
+import script from './scripts/script-widget.mjs'
+import variable from './scripts/variable.mjs'
 
 export const widgets = {
 

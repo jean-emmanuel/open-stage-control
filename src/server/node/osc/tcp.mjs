@@ -1,6 +1,6 @@
-import osc from './osc'
+import osc from './osc.mjs'
 import {EventEmitter} from 'events'
-import * as settings from '../settings'
+import * as settings from '../settings.mjs'
 import zeroconf from '../zeroconf'
 import net from 'net'
 

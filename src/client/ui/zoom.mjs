@@ -1,4 +1,4 @@
-import EventEmitter from '../events/event-emitter'
+import EventEmitter from '../events/event-emitter.mjs'
 
 var mod = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 

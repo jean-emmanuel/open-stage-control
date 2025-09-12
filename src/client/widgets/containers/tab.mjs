@@ -1,12 +1,12 @@
-import Panel from './panel'
-import * as resize from '../../events/resize'
-import {iconify} from '../../ui/utils'
+import Panel from './panel.mjs'
+import * as resize from '../../events/resize.mjs'
+import {iconify} from '../../ui/utils.mjs'
 
 class Tab extends Panel {
 
     static description() {
 
-        return 'Tabbed panel widget'
+        return 'Tabbed panel widget.mjs'
 
     }
 

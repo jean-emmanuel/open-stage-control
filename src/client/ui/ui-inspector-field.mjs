@@ -1,9 +1,9 @@
-import UiWidget from './ui-widget'
-import {categories} from '../widgets/'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
-import {icon} from '../ui/utils'
 import chroma from 'chroma-js'
+import UiWidget from './ui-widget.mjs'
+import {categories} from '../widgets/index.mjs'
+import {icon} from '../ui/utils.mjs'
 
 class UiInspectorField extends UiWidget {
 

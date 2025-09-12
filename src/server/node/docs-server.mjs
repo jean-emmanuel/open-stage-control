@@ -4,7 +4,7 @@ import send from 'send'
 import path from 'path'
 import fs from 'fs'
 import open from 'open'
-import address from './address'
+import address from './address.mjs'
 
 class DocsServer extends EventEmitter {
 

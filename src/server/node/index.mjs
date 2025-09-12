@@ -1,11 +1,11 @@
 import sourceMap from 'source-map-support'
-import * as settings from './settings'
-import qrcode from './qrcode'
-import zeroconf from './zeroconf'
-import DocsServer from './docs-server'
-import OscServer from './osc'
-import WebServer from './server'
-import IpcServer from './ipc/server'
+import * as settings from './settings.mjs'
+import qrcode from './qrcode.mjs'
+import zeroconf from './zeroconf.mjs'
+import DocsServer from './docs-server.mjs'
+import OscServer from './osc/index.mjs'
+import WebServer from './server.mjs'
+import IpcServer from './ipc/server.mjs'
 
 
 sourceMap.install({handleUncaughtExceptions: false})

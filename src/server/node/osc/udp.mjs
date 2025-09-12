@@ -1,6 +1,6 @@
-import osc from './osc'
-import * as settings from '../settings'
-import zeroconf from '../zeroconf'
+import osc from './osc.mjs'
+import * as settings from '../settings.mjs'
+import zeroconf from '../zeroconf.mjs'
 
 export default class OscUDPServer {
 

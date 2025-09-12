@@ -1,4 +1,4 @@
-import * as settings from './settings'
+import * as settings from './settings.mjs'
 import fs from 'fs'
 import vm from 'vm'
 import chokidar from 'chokidar'

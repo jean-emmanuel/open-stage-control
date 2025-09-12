@@ -1,6 +1,6 @@
 import json5 from 'json5'
 import pkg from '../../package.json'
-import * as dom from './dom'
+import * as dom from './dom.mjs'
 
 window.IP = window.IP || ''
 window.ENV = window.ENV || {}

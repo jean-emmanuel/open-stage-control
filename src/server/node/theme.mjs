@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import * as settings from './settings'
+import * as settings from './settings.mjs'
 import chokidar from 'chokidar'
 import {EventEmitter} from 'events'
 

@@ -1,23 +1,23 @@
-import {updateWidget, incrementWidget} from './data-workers'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
-import {diff, diffToWidget} from './diff'
-import widgetManager from '../managers/widgets'
-import {deepCopy} from '../utils'
-import {defaults} from '../widgets/'
-import UiSelectArea from '../ui/ui-selectarea'
-import UiInspector from '../ui/ui-inspector'
-import UiTree from '../ui/ui-tree'
-import UiDragResize from '../ui/ui-dragresize'
-import uiConsole from '../ui/ui-console'
-import notifications from '../ui/notifications'
-import locales from '../locales'
-import {leftUiSidePanel, rightUiSidePanel} from '../ui/'
-import ipc from '../ipc'
+import {updateWidget, incrementWidget} from './data-workers.mjs'
+import {diff, diffToWidget} from './diff.mjs'
+import widgetManager from '../managers/widgets.mjs'
+import {deepCopy} from '../utils.mjs'
+import {defaults} from '../widgets/index.mjs'
+import UiSelectArea from '../ui/ui-selectarea.mjs'
+import UiInspector from '../ui/ui-inspector.mjs'
+import UiTree from '../ui/ui-tree.mjs'
+import UiDragResize from '../ui/ui-dragresize.mjs'
+import uiConsole from '../ui/ui-console.mjs'
+import notifications from '../ui/notifications.mjs'
+import locales from '../locales/index.mjs'
+import {leftUiSidePanel, rightUiSidePanel} from '../ui/index.mjs'
+import ipc from '../ipc/index.mjs'
 
 var sessionManager
 ;(async()=>{
-    sessionManager = (await import('../managers/session/')).default
-    await import('./context-menu')
+    sessionManager = (await import('../managers/session/index.mjs')).default
+    await import('./context-menu.mjs')
 })()
 
 const macOs = (navigator.platform || '').match('Mac')

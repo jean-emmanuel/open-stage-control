@@ -1,13 +1,13 @@
-import widgetManager from '../managers/widgets'
-import stateManager from '../managers/state'
-import parser from '../parser'
-import * as resize from '../events/resize'
+import widgetManager from '../managers/widgets.mjs'
+import stateManager from '../managers/state.mjs'
+import parser from '../parser.mjs'
+import * as resize from '../events/resize.mjs'
 
 var Panel, Matrix, editor
 ;(async()=>{
-    Panel = (await import('../widgets/containers/panel')).default
-    Matrix = (await import('../widgets/containers/matrix')).default
-    editor = (await import('./')).default
+    Panel = (await import('../widgets/containers/panel.mjs')).default
+    Matrix = (await import('../widgets/containers/matrix.mjs')).default
+    editor = (await import('./index.mjs')).default
 })()
 
 var scrollState = {}

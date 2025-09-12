@@ -1,6 +1,6 @@
-import Widget from '../common/widget'
-import html from 'nanohtml/lib/browser'
-import uiFilebrowser from '../../ui/ui-filebrowser'
+import html from 'nanohtml'
+import Widget from '../common/widget.mjs'
+import uiFilebrowser from '../../ui/ui-filebrowser.mjs'
 
 export default class File extends Widget {
 

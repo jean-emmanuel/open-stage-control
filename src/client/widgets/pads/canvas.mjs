@@ -1,7 +1,7 @@
-import Canvas from '../common/canvas'
-import Script from '../scripts/script'
-import widgetManager from '../../managers/widgets'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
+import Canvas from '../common/canvas.mjs'
+import Script from '../scripts/script.mjs'
+import widgetManager from '../../managers/widgets.mjs'
 
 class CanvasWidget extends Canvas {
 

@@ -1,4 +1,4 @@
-import Widget from './widget'
+import Widget from './widget.mjs'
 
 var Container = (Class=Widget)=> class extends Class {
 

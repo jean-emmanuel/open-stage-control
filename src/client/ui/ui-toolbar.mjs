@@ -1,5 +1,5 @@
-import UiWidget from './ui-widget'
-import ContextMenu from './context-menu'
+import UiWidget from './ui-widget.mjs'
+import ContextMenu from './context-menu.mjs'
 
 class UiToolbar extends UiWidget {
 

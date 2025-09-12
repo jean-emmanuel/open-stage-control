@@ -1,5 +1,5 @@
 import {Menu, Tray, ipcMain} from 'electron'
-import * as settings from '../node/settings'
+import * as settings from '../node/settings.mjs'
 
 var tray = null,
     contextMenu = null,

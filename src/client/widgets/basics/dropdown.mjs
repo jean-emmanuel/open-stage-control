@@ -1,6 +1,6 @@
-import MenuBase from './menu-base'
-import html from 'nanohtml/lib/browser'
-import iOS from '../../ui/ios'
+import html from 'nanohtml'
+import MenuBase from './menu-base.mjs'
+import iOS from '../../ui/ios.mjs'
 
 class Dropdown extends MenuBase {
 

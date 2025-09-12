@@ -1,7 +1,7 @@
-import widgetManager from './managers/widgets'
-import EventEmitter from './events/event-emitter'
-import ipc from './ipc/'
-import {deepEqual} from './utils'
+import widgetManager from './managers/widgets.mjs'
+import EventEmitter from './events/event-emitter.mjs'
+import ipc from './ipc/index.mjs'
+import {deepEqual} from './utils.mjs'
 
 var Osc = class Osc extends EventEmitter {
 
@@ -14,7 +14,7 @@ var Osc = class Osc extends EventEmitter {
         this.serverTargets = []
 
         ;(async()=>{
-            this.remoteControl = (await import('./remote-control')).default
+            this.remoteControl = (await import('./remote-control.mjs')).default
         })()
 
     }

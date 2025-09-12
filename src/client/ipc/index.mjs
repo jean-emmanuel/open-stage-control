@@ -1,12 +1,12 @@
-import EventEmitter from '../events/event-emitter'
-import cache from '../managers/cache'
 import {nanoid} from 'nanoid'
+import EventEmitter from '../events/event-emitter.mjs'
+import cache from '../managers/cache.mjs'
 
 var notifications, locales, callbacks
 ;(async()=>{
-    notifications = (await import('../ui/notifications')).default
-    locales = (await import('../locales')).default
-    callbacks = (await import('./callbacks')).default
+    notifications = (await import('../ui/notifications.mjs')).default
+    locales = (await import('../locales/index.mjs')).default
+    callbacks = (await import('./callbacks.mjs')).default
 })()
 
 var uuid, localUuid = ENV.id || cache.get('osc.uuid', false)

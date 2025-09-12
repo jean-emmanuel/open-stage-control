@@ -1,4 +1,4 @@
-import {normalizeDragEvent} from '../../events/utils'
+import {normalizeDragEvent} from '../../events/utils.mjs'
 
 export default (self, callback, options={})=>{
 

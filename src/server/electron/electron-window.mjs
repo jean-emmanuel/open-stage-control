@@ -1,8 +1,8 @@
 import path from 'path'
 import {BrowserWindow, dialog, shell, screen, Menu, MenuItem} from 'electron'
 import shortcut from 'electron-localshortcut'
-import app from './electron-app'
-import * as settings from '../node/settings'
+import app from './electron-app.mjs'
+import * as settings from '../node/settings.mjs'
 
 export default function(options={}) {
 

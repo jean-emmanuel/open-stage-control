@@ -1,9 +1,9 @@
-import * as settings from '../settings'
-import OscUDPServer from './udp'
-import OscTCPServer from './tcp'
+import * as settings from '../settings.mjs'
+import OscUDPServer from './udp.mjs'
+import OscTCPServer from './tcp.mjs'
+import CustomModule from '../custom-module.mjs'
+import MidiServer from '../midi.mjs'
 import {EventEmitter} from 'events'
-import CustomModule from '../custom-module'
-import MidiServer from '../midi'
 
 export default class OscServer {
 

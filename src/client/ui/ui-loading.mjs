@@ -1,4 +1,4 @@
-import notifications from './notifications'
+import notifications from './notifications.mjs'
 
 var loading = null, timeout = null
 

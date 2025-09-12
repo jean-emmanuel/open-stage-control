@@ -1,4 +1,4 @@
-import scriptVm from './script-vm'
+import scriptVm from './script-vm.mjs'
 
 var noop = ()=>{}
 

@@ -1,6 +1,6 @@
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import morph from 'nanomorph'
-import UiWidget from './ui-widget'
+import UiWidget from './ui-widget.mjs'
 
 
 var DEFAULT_DURATION = 3500

@@ -1,9 +1,9 @@
-import MenuBase from './menu-base'
-import {iconify} from '../../ui/utils'
-import doubleTap from '../mixins/double_tap'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
-import iOS from '../../ui/ios'
+import MenuBase from './menu-base.mjs'
+import {iconify} from '../../ui/utils.mjs'
+import doubleTap from '../mixins/double_tap'
+import iOS from '../../ui/ios.mjs'
 
 class Menu extends MenuBase {
 

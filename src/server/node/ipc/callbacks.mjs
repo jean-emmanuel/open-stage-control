@@ -1,9 +1,9 @@
 import path from 'path'
 import fs from 'fs'
 import child_process from 'child_process'
-import * as settings from '../settings'
-import {deepCopy, resolveHomeDir} from '../utils'
-import FragmentManager from '../fragment-manager'
+import * as settings from '../settings.mjs'
+import {deepCopy, resolveHomeDir} from '../utils.mjs'
+import FragmentManager from '../fragment-manager.mjs'
 
 export default class Callbacks {
 

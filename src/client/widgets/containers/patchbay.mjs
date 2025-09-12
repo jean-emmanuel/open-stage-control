@@ -1,9 +1,9 @@
-import Widget from '../common/widget'
-import Canvas from '../common/canvas'
-import Container from '../common/container'
-import {iconify} from '../../ui/utils'
-import parser from '../../parser'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
+import Widget from '../common/widget.mjs'
+import Canvas from '../common/canvas.mjs'
+import Container from '../common/container.mjs'
+import {iconify} from '../../ui/utils.mjs'
+import parser from '../../parser.mjs'
 
 class PatchBayNode extends Widget {
 

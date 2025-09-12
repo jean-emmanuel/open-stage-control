@@ -1,26 +1,26 @@
-import EventEmitter from '../../events/event-emitter'
-import osc from '../../osc'
-import {nanoid} from 'nanoid'
-import widgetManager from '../../managers/widgets'
-import {urlParser, balancedReplace} from '../utils'
-import Vm from '../vm'
-import scopeCss from 'scope-css'
-import * as resize from '../../events/resize'
-import OscReceiver from './osc-receiver'
-import {deepCopy, deepEqual, isJSON} from '../../utils'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import morph from 'nanomorph'
-import Script from '../scripts/script'
+import scopeCss from 'scope-css'
+import {nanoid} from 'nanoid'
+import EventEmitter from '../../events/event-emitter.mjs'
+import osc from '../../osc.mjs'
+import widgetManager from '../../managers/widgets.mjs'
+import {urlParser, balancedReplace} from '../utils.mjs'
+import Vm from '../vm.mjs'
+import * as resize from '../../events/resize.mjs'
+import OscReceiver from './osc-receiver.mjs'
+import {deepCopy, deepEqual, isJSON} from '../../utils.mjs'
+import Script from '../scripts/script.mjs'
 
 var updateWidget = ()=>{},
     uiConsole, widgetTree, widgetDragResize, sessionManager
 
 ;(async()=>{
-    updateWidget = (await import('../../editor/data-workers')).updateWidget
-    uiConsole = (await import('../../ui/ui-console')).default
-    widgetTree = (await import('../../editor')).default.widgetTree
-    widgetDragResize = (await import('../../editor')).default.widgetDragResize
-    sessionManager = (await import('../../managers/session')).default
+    updateWidget = (await import('../../editor/data-workers.mjs')).updateWidget
+    uiConsole = (await import('../../ui/ui-console.mjs')).default
+    widgetTree = (await import('../../editor/index.mjs')).default.widgetTree
+    widgetDragResize = (await import('../../editor/index.mjs')).default.widgetDragResize
+    sessionManager = (await import('../../managers/session/index.mjs')).default
 })()
 
 var vm = new Vm()

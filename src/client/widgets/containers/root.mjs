@@ -1,10 +1,10 @@
-import Panel from './panel'
-import StaticProperties from '../mixins/static_properties'
-import {updateMobileThemeColor} from '../../ui/utils'
+import Panel from './panel.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
+import {updateMobileThemeColor} from '../../ui/utils.mjs'
 
 var mainMenu
 ;(async()=>{
-    mainMenu = (await import('../../ui/main-menu')).default
+    mainMenu = (await import('../../ui/main-menu.mjs')).default
 })()
 
 class Root extends StaticProperties(Panel, {visible: true, label: false, id: 'root'}) {

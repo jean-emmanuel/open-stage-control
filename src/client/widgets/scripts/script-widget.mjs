@@ -1,12 +1,12 @@
-import Widget from '../common/widget'
+import Widget from '../common/widget.mjs'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
-import Script from './script'
+import Script from './script.mjs'
 
 class ScriptWidget extends Widget {
 
     static description() {
 
-        return 'Scripting widget utility with keyboard bindings'
+        return 'Scripting widget utility with keyboard bindings.mjs'
 
     }
 

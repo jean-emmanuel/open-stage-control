@@ -1,5 +1,5 @@
-import Knob from './knob'
-import StaticProperties from '../mixins/static_properties'
+import Knob from './knob.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
 
 export default class Encoder extends StaticProperties(Knob, {angle: 360, range: {min: 0, max: 1}}) {
 

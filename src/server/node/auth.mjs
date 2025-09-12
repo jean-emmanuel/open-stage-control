@@ -1,5 +1,5 @@
 import httpAuth from 'http-auth'
-import * as settings from './settings'
+import * as settings from './settings.mjs'
 
 var auth = null
 

@@ -1,5 +1,5 @@
-import UiWidget from './ui-widget'
-import cache from '../managers/cache'
+import UiWidget from './ui-widget.mjs'
+import cache from '../managers/cache.mjs'
 
 class UiSidePanel extends UiWidget {
 

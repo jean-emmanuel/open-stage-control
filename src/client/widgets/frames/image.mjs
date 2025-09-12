@@ -1,7 +1,7 @@
-import Widget from '../common/widget'
-import html from 'nanohtml/lib/browser'
-import {urlParser} from '../utils'
-import StaticProperties from '../mixins/static_properties'
+import html from 'nanohtml'
+import Widget from '../common/widget.mjs'
+import {urlParser} from '../utils.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
 
 export default class Image extends StaticProperties(Widget, {bypass: true}) {
 

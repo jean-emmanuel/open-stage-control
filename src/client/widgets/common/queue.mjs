@@ -1,4 +1,4 @@
-import EventEmitter from '../../events/event-emitter'
+import EventEmitter from '../../events/event-emitter.mjs'
 
 class CanvasQueue extends EventEmitter{
 

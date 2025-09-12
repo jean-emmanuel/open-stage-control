@@ -1,11 +1,11 @@
-import UiSidePanel from './ui-sidepanel'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
-import locales from '../locales'
-import {icon} from './utils'
-import Script from '../widgets/scripts/script'
-import Widget from '../widgets/common/widget'
-import widgetManager from '../managers/widgets'
+import UiSidePanel from './ui-sidepanel.mjs'
+import locales from '../locales/index.mjs'
+import {icon} from './utils.mjs'
+import Script from '../widgets/scripts/script.mjs'
+import Widget from '../widgets/common/widget.mjs'
+import widgetManager from '../managers/widgets.mjs'
 
 class UiConsole extends UiSidePanel {
 

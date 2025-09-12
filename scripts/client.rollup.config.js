@@ -13,7 +13,7 @@ module.exports = {
     input: 'src/client/index.mjs',
 	output: [
 		{
-            file: 'app/client/open-stage-control-client.js',
+            file: 'app/client/index.js',
             inlineDynamicImports: true,
             format: 'iife',
             sourcemap: true,

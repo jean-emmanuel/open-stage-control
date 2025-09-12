@@ -1,7 +1,7 @@
-import Panel from './panel'
-import Widget from '../common/widget'
-import parser from '../../parser'
-import {mapToScale} from '../utils'
+import Panel from './panel.mjs'
+import Widget from '../common/widget.mjs'
+import parser from '../../parser.mjs'
+import {mapToScale} from '../utils.mjs'
 
 
 class Keyboard extends Panel {

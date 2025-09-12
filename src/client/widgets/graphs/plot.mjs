@@ -1,7 +1,7 @@
-import {mapToScale} from '../utils'
-import Canvas from '../common/canvas'
-import html from 'nanohtml/lib/browser'
-import StaticProperties from '../mixins/static_properties'
+import html from 'nanohtml'
+import {mapToScale} from '../utils.mjs'
+import Canvas from '../common/canvas.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
 
 export default class Plot extends StaticProperties(Canvas, {bypass: true}) {
 

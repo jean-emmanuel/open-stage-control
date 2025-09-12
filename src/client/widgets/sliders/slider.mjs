@@ -1,8 +1,8 @@
-import {clip, mapToScale} from '../utils'
-import Canvas from '../common/canvas'
-import touchstate from '../mixins/touch_state'
+import html from 'nanohtml'
+import {clip, mapToScale} from '../utils.mjs'
+import Canvas from '../common/canvas.mjs'
+import touchstate from '../mixins/touch_state.mjs'
 import doubleTap from '../mixins/double_tap'
-import html from 'nanohtml/lib/browser'
 
 class Slider extends Canvas {
 

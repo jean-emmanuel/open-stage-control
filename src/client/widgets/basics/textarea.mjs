@@ -1,5 +1,5 @@
-import Widget from '../common/widget'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
+import Widget from '../common/widget.mjs'
 
 class TextArea extends Widget {
 

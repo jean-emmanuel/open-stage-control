@@ -12,8 +12,7 @@ module.exports = {
     input: 'src/launcher/index.mjs',
 	output: [
 		{
-            file: 'app/launcher/open-stage-control-launcher.js',
-            inlineDynamicImports: true,
+            dir: 'app/launcher/',
             format: 'commonjs',
             strict: false,
             name: '_',

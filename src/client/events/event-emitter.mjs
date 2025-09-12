@@ -1,8 +1,8 @@
-import domEvent from './dom-event'
+import domEvent from './dom-event.mjs'
 
 var customEvents = {}
 ;(async()=>{
-    customEvents['draginit'] = customEvents['drag'] = customEvents['dragend'] = await import('./drag')
+    customEvents['draginit'] = customEvents['drag'] = customEvents['dragend'] = await import('./drag.mjs')
     customEvents['resize']  = await import('./resize')
     customEvents['wheel']  = domEvent('wheel')
     customEvents['scroll']  = domEvent('scroll', {capture: true})
@@ -10,7 +10,7 @@ var customEvents = {}
     customEvents['fast-click']  = domEvent('fast-click')
     customEvents['focus']  = domEvent('focus', {capture: true})
     customEvents['blur']  = domEvent('blur', {capture: true})
-    customEvents['change']  = domEvent('change')
+    customEvents['change']  = domEvent('change.mjs')
 })()
 
 // micro optimisation from eventemitter3

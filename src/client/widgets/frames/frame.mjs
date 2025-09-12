@@ -1,7 +1,7 @@
 import Widget from '../common/widget'
-import html from 'nanohtml/lib/browser'
-import locales from '../../locales'
-import StaticProperties from '../mixins/static_properties'
+import html from 'nanohtml'
+import locales from '../../locales/index.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
 
 class Frame extends StaticProperties(Widget, {bypass: true}) {
 

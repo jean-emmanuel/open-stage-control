@@ -1,8 +1,8 @@
-import Pad from './pad'
-import Xy from './xy'
-import {clip} from '../utils'
-import doubleTap from '../mixins/double_tap'
-import touchstate from '../mixins/touch_state'
+import Pad from './pad.mjs'
+import Xy from './xy.mjs'
+import {clip} from '../utils.mjs'
+import doubleTap from '../mixins/double_tap.mjs'
+import touchstate from '../mixins/touch_state.mjs'
 
 
 var xyDefaults = Xy.defaults()._props()

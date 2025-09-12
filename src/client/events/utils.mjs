@@ -1,5 +1,5 @@
-import zoom from '../ui/zoom'
-// impot cssTransformCoords from './transform-coords'
+import zoom from '../ui/zoom.mjs'
+// impot cssTransformCoords from './transform-coords.mjs'
 
 const Touch = window.Touch || class Touch {}
 

@@ -1,7 +1,7 @@
 import {PythonShell} from 'python-shell'
 import fs from 'fs'
 import path from 'path'
-import * as settings from './settings'
+import * as settings from './settings.mjs'
 
 
 var scriptPath = __dirname.includes('server/node') ? 

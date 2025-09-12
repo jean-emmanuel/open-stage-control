@@ -1,8 +1,8 @@
 import {ipcRenderer} from 'electron'
 import remote from '@electron/remote'
-import terminal from './terminal'
-import settings from './settings'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+import terminal from './terminal.mjs'
+import settings from './settings.mjs'
 
 
 var {Menu, MenuItem} = remote.require('electron'),

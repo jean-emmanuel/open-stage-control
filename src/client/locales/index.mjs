@@ -1,7 +1,7 @@
-import en from './en'
-import fr from './fr'
-import de from './de'
-import pl from './pl'
+import en from './en.mjs'
+import fr from './fr.mjs'
+import de from './de.mjs'
+import pl from './pl.mjs'
 
 var locales = {
     en, fr, de, pl,

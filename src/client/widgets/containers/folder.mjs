@@ -1,4 +1,4 @@
-import Panel from './panel'
+import Panel from './panel.mjs'
 
 class Folder extends Panel {
 

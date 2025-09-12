@@ -1,6 +1,6 @@
-import Widget from '../common/widget'
-import {iconify} from '../../ui/utils'
-import {deepEqual} from '../../utils'
+import Widget from '../common/widget.mjs'
+import {iconify} from '../../ui/utils.mjs'
+import {deepEqual} from '../../utils.mjs'
 
 class MenuBase extends Widget {
 

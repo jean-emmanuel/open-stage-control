@@ -1,6 +1,6 @@
-import widgetManager from './managers/widgets'
-import stateManager from './managers/state'
-import {deepCopy} from './utils'
+import widgetManager from './managers/widgets.mjs'
+import stateManager from './managers/state.mjs'
+import {deepCopy} from './utils.mjs'
 
 var Parser = class Parser {
 
@@ -11,7 +11,7 @@ var Parser = class Parser {
         this.defaults = {}
 
         ;(async()=>{
-            this.widgets = (await import('./widgets/')).widgets
+            this.widgets = (await import('./widgets/index.mjs')).widgets
             for (var k in this.widgets) {
                 this.defaults[k] = this.widgets[k].defaults()._props()
             }

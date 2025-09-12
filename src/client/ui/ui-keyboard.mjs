@@ -1,10 +1,10 @@
-import UiWidget from './ui-widget'
-import {icon} from './utils'
-import locales from '../locales'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
 import morph from 'nanomorph'
-import doubleClick from '../events/double-click'
+import UiWidget from './ui-widget.mjs'
+import {icon} from './utils.mjs'
+import locales from '../locales/index.mjs'
+import doubleClick from '../events/double-click.mjs'
 
 var layout = locales('keyboard_layout')
 

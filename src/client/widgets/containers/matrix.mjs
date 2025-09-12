@@ -1,8 +1,8 @@
-import Panel from './panel'
-import parser from '../../parser'
-import {deepCopy} from '../../utils'
-import Session from '../../managers/session/session'
-import widgetManager from '../../managers/widgets'
+import Panel from './panel.mjs'
+import parser from '../../parser.mjs'
+import {deepCopy} from '../../utils.mjs'
+import Session from '../../managers/session/session.mjs'
+import widgetManager from '../../managers/widgets.mjs'
 
 
 class Matrix extends Panel {

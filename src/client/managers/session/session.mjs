@@ -1,6 +1,6 @@
 import semver from 'semver'
-import UiModal from '../../ui/ui-modal'
-import locales from '../../locales'
+import UiModal from '../../ui/ui-modal.mjs'
+import locales from '../../locales/index.mjs'
 
 class Session {
 

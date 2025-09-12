@@ -1,9 +1,9 @@
 import loopProtect from 'loop-protect'
-import {deepCopy} from '../utils'
+import {deepCopy} from '../utils.mjs'
 
 var sessionManager
 ;(async()=>{
-    sessionManager = (await import('../managers/session')).default
+    sessionManager = (await import('../managers/session/index.mjs')).default
 })()
 
 

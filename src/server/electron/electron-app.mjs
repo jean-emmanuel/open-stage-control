@@ -1,5 +1,5 @@
 import {app, Menu, shell, BrowserWindow} from 'electron'
-import * as settings from '../node/settings'
+import * as settings from '../node/settings.mjs'
 import infos from '../../../package.json'
 
 app.setPath('userData', settings.configPath)

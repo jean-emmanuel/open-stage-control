@@ -1,8 +1,8 @@
-import Widget from './widget'
-import * as resize from '../../events/resize'
-import canvasQueue from './queue'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import fastdom from 'fastdom'
+import Widget from './widget.mjs'
+import * as resize from '../../events/resize.mjs'
+import canvasQueue from './queue.mjs'
 
 
 class Canvas extends Widget {

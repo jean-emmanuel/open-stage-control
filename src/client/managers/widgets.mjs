@@ -1,5 +1,5 @@
-import EventEmitter from '../events/event-emitter'
-import ipc from '../ipc/'
+import EventEmitter from '../events/event-emitter.mjs'
+import ipc from '../ipc/index.mjs'
 
 class WidgetManager extends EventEmitter {
 

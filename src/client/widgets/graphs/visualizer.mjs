@@ -1,7 +1,7 @@
-import {clip} from '../utils'
-import Plot from './plot'
-import StaticProperties from '../mixins/static_properties'
-import canvasQueue from '../common/queue'
+import {clip} from '../utils.mjs'
+import Plot from './plot.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
+import canvasQueue from '../common/queue.mjs'
 
 
 class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false}) {

@@ -1,11 +1,11 @@
-import Container from '../common/container'
-import widgetManager from '../../managers/widgets'
-import * as resize from '../../events/resize'
-import parser from '../../parser'
-import {deepCopy, deepEqual} from '../../utils'
+import html from 'nanohtml'
+import Container from '../common/container.mjs'
+import widgetManager from '../../managers/widgets.mjs'
+import * as resize from '../../events/resize.mjs'
+import parser from '../../parser.mjs'
+import {deepCopy, deepEqual} from '../../utils.mjs'
 import {diff, diffToWidget} from '../../editor/diff'
-import html from 'nanohtml/lib/browser'
-import Session from '../../managers/session/session'
+import Session from '../../managers/session/session.mjs'
 
 var excludedCloneClasses =  ['widget', 'absolute-position', 'not-editable', 'editing', 'flex-expand', 'no-interaction']
 

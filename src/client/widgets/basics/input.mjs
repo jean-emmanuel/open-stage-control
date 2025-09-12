@@ -1,6 +1,6 @@
-import Canvas from '../common/canvas'
-import {deepCopy} from '../../utils'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
+import Canvas from '../common/canvas.mjs'
+import {deepCopy} from '../../utils.mjs'
 
 class Input extends Canvas {
 

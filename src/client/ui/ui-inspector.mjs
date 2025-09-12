@@ -1,20 +1,20 @@
-import UiWidget from './ui-widget'
-import UiInspectorField from './ui-inspector-field'
-import UiColorPicker from './ui-colorpicker'
-import UiModal from './ui-modal'
-import morph from 'nanomorph'
-import {defaults} from '../widgets/'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
 import fastdom from 'fastdom'
-import {icon} from './utils'
-import zoom from './zoom'
-import locales from '../locales'
-import getCodeEditor from './ui-code-editor'
+import morph from 'nanomorph'
+import UiWidget from './ui-widget.mjs'
+import UiInspectorField from './ui-inspector-field.mjs'
+import UiColorPicker from './ui-colorpicker.mjs'
+import UiModal from './ui-modal.mjs'
+import {defaults} from '../widgets/index.mjs'
+import {icon} from './utils.mjs'
+import zoom from './zoom.mjs'
+import locales from '../locales/index.mjs'
+import getCodeEditor from './ui-code-editor.mjs'
 
 var editor
 ;(async()=>{
-    mainMenu = (await import('../editor')).default
+    mainMenu = (await import('../editor/index.mjs')).default
 })()
 
 

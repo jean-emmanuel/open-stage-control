@@ -1,7 +1,7 @@
-import Widget from '../common/widget'
 import morph from 'nanomorph'
-import html from 'nanohtml/lib/browser'
-import StaticProperties from '../mixins/static_properties'
+import html from 'nanohtml'
+import Widget from '../common/widget.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
 
 
 class Svg extends StaticProperties(Widget, {bypass: true}) {

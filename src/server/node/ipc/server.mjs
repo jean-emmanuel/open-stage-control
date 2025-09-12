@@ -1,7 +1,7 @@
 import {WebSocketServer} from 'ws'
-import Client from './client'
-import * as settings from '../settings'
-import Callbacks from './callbacks'
+import Client from './client.mjs'
+import * as settings from '../settings.mjs'
+import Callbacks from './callbacks.mjs'
 
 class IpcServer {
 

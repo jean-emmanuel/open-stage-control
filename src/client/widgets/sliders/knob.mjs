@@ -1,5 +1,5 @@
-import {clip} from '../utils'
-import Slider from './slider'
+import {clip} from '../utils.mjs'
+import Slider from './slider.mjs'
 
 class Knob extends Slider {
 

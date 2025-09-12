@@ -1,9 +1,9 @@
-import terminal from './terminal'
-import settings from './settings'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import semver from 'semver'
 import {ipcRenderer} from 'electron'
-import './toolbar'
+import terminal from './terminal.mjs'
+import settings from './settings.mjs'
+import './toolbar.mjs'
 
 DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${window.PACKAGE.productName} <span class="version">v${window.PACKAGE.version}</span>`)
 

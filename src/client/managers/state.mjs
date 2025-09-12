@@ -1,12 +1,12 @@
-import ipc from '../ipc'
-import widgetManager from './widgets'
-import cache from './cache'
-import uiFilebrowser from '../ui/ui-filebrowser'
-import uiFileupload from '../ui/ui-fileupload'
-import notifications from '../ui/notifications'
 import {saveAs} from 'file-saver'
-import locales from '../locales'
-import {deepCopy} from '../utils'
+import ipc from '../ipc/index.mjs'
+import widgetManager from './widgets.mjs'
+import cache from './cache.mjs'
+import uiFilebrowser from '../ui/ui-filebrowser.mjs'
+import uiFileupload from '../ui/ui-fileupload.mjs'
+import notifications from '../ui/notifications.mjs'
+import locales from '../locales/index.mjs'
+import {deepCopy} from '../utils.mjs'
 
 
 var StateManager = class StateManager {

@@ -1,9 +1,9 @@
+import html from 'nanohtml'
+import raw from 'nanohtml/raw'
 import {ipcRenderer} from 'electron'
 import remote from '@electron/remote'
-import {icon} from '../client/ui/utils'
-import html from 'nanohtml/lib/browser'
-import raw from 'nanohtml/raw'
-import terminal from './terminal'
+import {icon} from '../client/ui/utils.mjs'
+import terminal from './terminal.mjs'
 
 var {dialog} = remote.require('electron'),
     fs = remote.require('fs'),

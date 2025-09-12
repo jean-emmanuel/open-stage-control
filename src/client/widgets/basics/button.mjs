@@ -1,9 +1,9 @@
-import Widget from '../common/widget'
-import doubleTap from '../mixins/double_tap'
-import html from 'nanohtml/lib/browser'
-import {deepEqual, isJSON} from '../../utils'
-import {iconify} from '../../ui/utils'
-import parser from '../../parser'
+import html from 'nanohtml'
+import Widget from '../common/widget.mjs'
+import doubleTap from '../mixins/double_tap.mjs'
+import {deepEqual, isJSON} from '../../utils.mjs'
+import {iconify} from '../../ui/utils.mjs'
+import parser from '../../parser.mjs'
 
 class Button extends Widget {
 

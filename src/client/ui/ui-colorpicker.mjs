@@ -1,8 +1,8 @@
-import UiWidget from './ui-widget'
-import Rgb from '../widgets/pads/rgb'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import chroma from 'chroma-js'
-import * as resize from '../events/resize'
+import UiWidget from './ui-widget.mjs'
+import Rgb from '../widgets/pads/rgb.mjs'
+import * as resize from '../events/resize.mjs'
 
 
 class ColorPicker extends UiWidget {

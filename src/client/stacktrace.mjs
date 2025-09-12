@@ -1,9 +1,9 @@
 import StackTrace from 'stacktrace-js'
-import ipc from './ipc'
+import ipc from './ipc/index.mjs'
 
 var uiConsole
 ;(async()=>{
-    uiConsole = (await import('./ui/ui-console')).default
+    uiConsole = (await import('./ui/ui-console.mjs')).default
 })()
 
 window.onerror = function(msg,url,row,col, error) {

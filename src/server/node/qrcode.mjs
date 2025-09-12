@@ -1,5 +1,5 @@
 import QRCode from 'qrcode'
-import * as settings from './settings'
+import * as settings from './settings.mjs'
 
 export default function qrcode(mode, callback){
 

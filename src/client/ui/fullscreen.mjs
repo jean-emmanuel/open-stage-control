@@ -1,7 +1,7 @@
 import screenfull from 'screenfull'
-import UiModal from './ui-modal'
-import locales from '../locales'
-import iOS from './ios'
+import UiModal from './ui-modal.mjs'
+import locales from '../locales/index.mjs'
+import iOS from './ios.mjs'
 
 var fullscreen
 

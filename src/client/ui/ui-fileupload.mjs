@@ -1,6 +1,6 @@
-import locales from '../locales'
-import uiLoading from './ui-loading'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
+import locales from '../locales/index.mjs'
+import uiLoading from './ui-loading.mjs'
 
 var SINGLETON = null,
     CONTAINER = null

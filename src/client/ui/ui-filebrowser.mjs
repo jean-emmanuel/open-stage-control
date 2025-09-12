@@ -1,11 +1,11 @@
-import locales from '../locales'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
-import ipc from '../ipc'
-import doubleClick from '../events/double-click'
-import {icon} from './utils'
-import UiModal from './ui-modal'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
+import locales from '../locales/index.mjs'
+import ipc from '../ipc/index.mjs'
+import doubleClick from '../events/double-click.mjs'
+import {icon} from './utils.mjs'
+import UiModal from './ui-modal.mjs'
 
 
 export default function UiFilebrowser(options, callback) {

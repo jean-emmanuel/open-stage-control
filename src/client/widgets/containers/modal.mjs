@@ -1,10 +1,10 @@
-import Panel from './panel'
-import {icon, iconify} from '../../ui/utils'
-import * as resize from '../../events/resize'
-import doubleTap from '../mixins/double_tap'
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
-import iOS from '../../ui/ios'
+import Panel from './panel.mjs'
+import {icon, iconify} from '../../ui/utils.mjs'
+import * as resize from '../../events/resize.mjs'
+import doubleTap from '../mixins/double_tap'
+import iOS from '../../ui/ios.mjs'
 
 var iOS13 = iOS === 13
 

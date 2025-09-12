@@ -1,6 +1,6 @@
-import {mapToScale} from '../utils'
-import Plot from './plot'
-import StaticProperties from '../mixins/static_properties'
+import {mapToScale} from '../utils.mjs'
+import Plot from './plot.mjs'
+import StaticProperties from '../mixins/static_properties.mjs'
 
 class Eq extends StaticProperties(Plot, {logScaleX: false, logScaleY:false, smooth:true}) {
 

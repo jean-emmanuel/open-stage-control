@@ -1,7 +1,7 @@
-import html from 'nanohtml/lib/browser'
+import html from 'nanohtml'
 import raw from 'nanohtml/raw'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
-import UiWidget from './ui-widget'
+import UiWidget from './ui-widget.mjs'
 
 var mod = (navigator.platform || '').match('Mac') ? 'cmd' : 'ctrl',
     MENU_CONTAINER

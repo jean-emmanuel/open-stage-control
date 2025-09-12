@@ -1,4 +1,4 @@
-import * as settings from './settings'
+import * as settings from './settings.mjs'
 import forge from 'node-forge'
 
 var pki = forge.pki,

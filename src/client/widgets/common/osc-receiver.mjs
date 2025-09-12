@@ -1,5 +1,5 @@
-import osc from '../../osc'
-import {isJSON, isJSONObject} from '../../utils'
+import osc from '../../osc.mjs'
+import {isJSON, isJSONObject} from '../../utils.mjs'
 
 export default class OscReceiver {
 

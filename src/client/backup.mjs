@@ -1,11 +1,11 @@
-import cache from './managers/cache'
+import cache from './managers/cache.mjs'
 
 var session, state, editor, ipc
 ;(async()=>{
-    session = (await import('./managers/session/')).default
-    state = (await import('./managers/state')).default
-    editor = (await import('./editor/')).default
-    ipc = (await import('./ipc/')).default
+    session = (await import('./managers/session/index.mjs')).default
+    state = (await import('./managers/state.mjs')).default
+    editor = (await import('./editor/index.mjs')).default
+    ipc = (await import('./ipc/index.mjs')).default
 })()
 
 var localBackup = cache.get('backup', false)
