@@ -2,3 +2,5 @@ node_modules/
 dist/
 /app/
 *.pyc
+src/python/build
+src/python/__pycache__

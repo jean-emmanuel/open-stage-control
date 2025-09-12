@@ -48,3 +48,6 @@ ignore_rpn = 'rpn' not in argv and 'nrpn' not in argv
 ignore_active_sensing = 'active_sensing' not in argv
 # option: note off velocity
 note_off_velocity = 'note_off_velocity' in argv
+# option: list midi ports
+list_midi = 'list' in argv
+list_midi_exit = 'list-only' in argv

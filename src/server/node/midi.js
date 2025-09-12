@@ -3,10 +3,6 @@ import fs from 'fs'
 import path from 'path'
 import * as settings from './settings'
 
-// last o-s-c version that changed midi sources
-// must match version in midi.py / bundled midi executable
-var midiVersion = '1.23.0'
-
 var pythonOptions = {
     scriptPath:__dirname,
     mode:'text',
@@ -122,8 +118,6 @@ class MidiConverter {
             instance.receiveOsc(data)
         } else if (name == 'error') {
             console.error('(ERROR, MIDI) ' + data)
-        } else if (name == 'version' && data != midiVersion) {
-            console.error(`(WARNING, MIDI) binary version mismatch (${data} installed, ${midiVersion} expected)`)
         }
 
     }
