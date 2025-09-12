@@ -53,7 +53,7 @@ module.exports = {
         }),
         copy({
             targets: [
-                {src: 'src/app/index.js', dest: 'app/'},
+                {src: 'src/index.js', dest: 'app/'},
                 {src: 'src/server/index.js', dest: 'app/server/'},
                 {src: 'src/server/python/*', dest: 'app/server/python/'},
                 {src: 'node_modules/fsevents/fsevents.node', dest: 'app/server/'},
