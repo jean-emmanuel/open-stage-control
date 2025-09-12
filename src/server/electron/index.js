@@ -16,8 +16,7 @@ var dev = process.argv[0].includes('node_modules'),
     launcher = null,
     tray = null,
     clientWindows = [],
-    serverProcess = null,
-    node = false
+    serverProcess = null
 
 sourceMap.install({handleUncaughtExceptions: false})
 
