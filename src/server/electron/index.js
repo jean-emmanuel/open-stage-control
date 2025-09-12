@@ -73,7 +73,7 @@ function startServerProcess() {
         }
     }
 
-    serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: {...process.env, OSC_SERVER_PROCESS: 1}})
+    serverProcess = fork(app.getAppPath(), args, {stdio: 'pipe', env: {...process.env, OSC_SERVER_PROCESS: 1, ELECTRON_RUN_AS_NODE: 1}})
 
     var cb = (data)=>{
         if (data.indexOf('(INFO) Server started') > -1) {
