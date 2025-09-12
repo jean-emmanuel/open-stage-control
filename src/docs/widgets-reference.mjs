@@ -1,6 +1,6 @@
-// import './client-shim'
-import widgets from '../src/client/widgets/index.js'
-import baseClass from '../src/client/widgets/common/widget.js'
+import './client-shim.mjs'
+import baseClass from '../client/widgets/common/widget.mjs'
+import * as widgets from '../client/widgets/index.mjs'
 
 // Here we go
 var base = baseClass.defaults(),

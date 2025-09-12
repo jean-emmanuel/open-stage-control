@@ -100,7 +100,7 @@
     "watch-server": "npm run build-server-js -- --watch",
     "build-launcher-js": "rollup -c scripts/launcher.rollup.config.js",
     "watch-launcher": "npm run build-launcherr-js -- --watch",
-    "build-docs": "node scripts/build-widgets-reference.js > resources/docs/docs/widgets/properties-reference.md && cd resources && python3 -m mkdocs build",
+    "build-docs": "rollup -c scripts/docs.rollup.config.js && node src/docs/widgets-reference.js > resources/docs/docs/widgets/properties-reference.md && cd resources && python3 -m mkdocs build",
     "lint": "eslint src --ext mjs",
     "test": "npm run lint && npm run build && node tests/test.js"
   },

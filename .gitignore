@@ -1,6 +1,17 @@
+# npmg
 node_modules/
-dist/
+
+# build
 /app/
+
+# python/midi build
 *.pyc
 src/server/python/build
 src/server/python/__pycache__
+
+# docs build
+src/docs/widgets-reference.js
+properties-reference.md
+
+# packaging
+dist/

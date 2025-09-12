@@ -1,8 +1,10 @@
 // Dirty browser window shim
+import * as DOM from '../client/dom'
 
 document = {
     createElement: x=>({
         ownerDocument: document,
+        addEventListener: ()=>{},
         style: {},
         contentWindow: {},
         nodeName: '',
@@ -20,6 +22,7 @@ document = {
             }
         }
     }),
+    getElementById: ()=>document.createElement(),
     createTextNode: x=>({
         nodeValue: '',
         nodeName: '',
@@ -71,15 +74,14 @@ window = {
         getItem(){return null},
             setItem(){},
     },
-    MutationObserver: class MutationObserver{}
+    MutationObserver: class MutationObserver{},
+    ELECTRON_NOGPU: false,
+    CANVAS_FRAMERATE: 1,
+    LANG: 'en',
+    ENV: {id: ''},
+    IP: '',
+    DOM
+
 }
 
 Object.assign(global, window)
-
-// Required globals
-
-ELECTRON_NOGPU = false
-CANVAS_FRAMERATE = 1
-LANG = 'en'
-ENV = {id: ''}
-IP = ''
