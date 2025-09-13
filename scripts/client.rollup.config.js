@@ -53,7 +53,6 @@ module.exports = {
             ]]
         }),
         watch ? {} : terser({
-            safari10: true,
             sourceMap: true,
             keep_classnames: true,
             keep_fnames: true,
