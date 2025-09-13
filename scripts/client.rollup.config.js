@@ -15,7 +15,6 @@ module.exports = {
 	output: [
 		{
             dir: 'app/client/',
-            hoistTransitiveImports:true,
             chunkFileNames: `[name]-${package.version}.js`,
             entryFileNames: `[name]-${package.version}.js`,
             format: 'es',
