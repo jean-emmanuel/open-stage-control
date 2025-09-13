@@ -14,13 +14,12 @@ module.exports = {
     input: 'src/client/index.mjs',
 	output: [
 		{
-            file: 'app/client/index.js',
-            inlineDynamicImports: true,
-            format: 'iife',
+            dir: 'app/client/',
+            hoistTransitiveImports:true,
+            chunkFileNames: `[name]-${package.version}.js`,
+            entryFileNames: `[name]-${package.version}.js`,
+            format: 'es',
             sourcemap: true,
-            strict: false,
-            indent: false,
-            name: '_'
 		},
 	],
     treeshake: false,
@@ -44,8 +43,8 @@ module.exports = {
                 '@babel/preset-env',
                 {
                     targets: {
-                        ios: '10.3',
-                        chrome: '60'
+                        ios: '11',
+                        chrome: '61'
                     },
                     useBuiltIns: 'usage',
                     corejs: 3,

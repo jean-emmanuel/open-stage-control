@@ -591,7 +591,6 @@ class ScriptVm extends Vm {
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
             'setInterval', 'clearInterval', 'setTimeout', 'cthislearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
             'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas', 'getNavigator', 'browseFile']) {
-            this.sanitize(this.sandbox.contentWindow[imports])
             this.globals[imports] = true
         }
 

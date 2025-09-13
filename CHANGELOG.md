@@ -8,7 +8,13 @@
 - widgets
     - the html property is no longer restricted / sanitized
     - input/textarea/select no longer have their appearance property reset in custom html
+    - canvas: added `contextType` property
 
+- scripting
+    - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)
+
+- breaking change
+    - dropped support for iOS 10.3
 
 ## 1.29.8
 

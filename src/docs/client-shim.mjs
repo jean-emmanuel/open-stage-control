@@ -1,5 +1,5 @@
 // Dirty browser window shim
-import * as DOM from '../client/dom'
+import * as DOM from '../client/dom.mjs'
 
 // eslint-disable-next-line no-global-assign
 document = {

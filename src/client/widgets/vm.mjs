@@ -1,4 +1,3 @@
-import loopProtect from 'loop-protect'
 import {deepCopy} from '../utils.mjs'
 
 var sessionManager
@@ -50,13 +49,6 @@ class Vm {
         this.sandbox.contentWindow.document.write('<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'unsafe-eval\';">')
         this.sandbox.contentWindow.document.close()
 
-        // init infinite loop guard
-        loopProtect.alias = '__protect'
-        loopProtect.hit = function(line){
-            throw 'Potential infinite loop found on line ' + line + '(script interrupted).\nAdd "// noprotect" to your code to disable loop protection.'
-        }
-        this.sandbox.contentWindow.__protect = loopProtect
-
         // global context
         this.registerGlobals()
 
@@ -94,32 +86,6 @@ class Vm {
         }
         this.sandbox.contentWindow.globals = globals
 
-        // sanitize globals
-        for (var imports of ['__protect', 'console', 'setTimeout', 'setInterval', 'globals']) {
-            this.sanitize(this.sandbox.contentWindow[imports])
-        }
-
-    }
-
-    sanitize(object) {
-
-        // non-primitives created outside the sandbox context can leak
-        // the host window object... let's nuke that !
-        // (we only nuke functions and objects/arrays because we don't pass anything else)
-        var t = typeof o
-        if (t === 'function' || (t === 'object' && o !== null)) {
-            if (o.__proto__) {
-                if (t === 'function') {
-                    o.__proto__.constructor = this.safeFunctionProto
-                } else {
-                    o.__proto__.constructor.constructor = this.safeFunctionProto
-                }
-            }
-            for (var k in o) {
-                this.sanitize(o[k])
-            }
-        }
-
     }
 
     compile(code, defaultContext) {
@@ -127,7 +93,7 @@ class Vm {
         if (typeof code !== 'string') code = String(code)
 
         // var contextInit = 'var locals = locals;',
-        var contextInit = '',
+        var contextInit = '"use strict";',
             contextKeys = ['__VARS'],
             contextValues = [{}]
 
@@ -144,13 +110,9 @@ class Vm {
             }
         }
 
-        var compiledCode = new this.safeFunctionProto(
-            ...contextKeys, 'locals',
-            loopProtect('"use strict";' + contextInit + code)
-                .replace(/;\n(if \(__protect.*break;)\n/g, ';$1') // prevent loop protect from breaking stack linenumber
-                .replace(/(VAR_[0-9]+)/g, '__VARS.$1')
-        )
+        code = contextInit + code.replace(/(VAR_[0-9]+)/g, '__VARS.$1')
 
+        var compiledCode = new this.safeFunctionProto(...contextKeys, 'locals', code)
 
         return (context, locals)=>{
 
@@ -166,8 +128,6 @@ class Vm {
             }
 
             __contextValues.push(locals)
-
-            this.sanitize(__contextValues)
 
             return compiledCode.apply('this', __contextValues)
 
