@@ -210,7 +210,7 @@ class WebServer extends EventEmitter {
                         id = (req.headers.cookie.match(/client_id=([^;]+)/) || [])[1]
                     }
 
-                    resolvedPath = this.resolvePath(decodeURI(url), id)
+                    var resolvedPath = this.resolvePath(decodeURI(url), id)
 
                     if (resolvedPath) {
                         try {

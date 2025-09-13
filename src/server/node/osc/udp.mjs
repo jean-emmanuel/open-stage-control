@@ -17,7 +17,7 @@ export default class OscUDPServer {
 
         this.server.on('error', function(e) {
             if (e.code === 'EADDRINUSE') {
-                console.error(`(ERROR, UDP) could not open port ${oscInPort} (already in use) `)
+                console.error(`(ERROR, UDP) could not open port ${this.port} (already in use) `)
             } else {
                 console.error('(ERROR, UDP)', e)
             }
