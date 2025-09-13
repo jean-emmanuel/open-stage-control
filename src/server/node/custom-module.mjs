@@ -1,9 +1,9 @@
-import * as settings from './settings.mjs'
 import fs from 'fs'
 import vm from 'vm'
 import chokidar from 'chokidar'
 import path from 'path'
 import {globalPaths} from 'module'
+import * as settings from './settings.mjs'
 
 var modulePathExtended = false,
     loadedModules = {},

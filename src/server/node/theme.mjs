@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import * as settings from './settings.mjs'
 import chokidar from 'chokidar'
 import {EventEmitter} from 'events'
+import * as settings from './settings.mjs'
 
 class Theme extends EventEmitter {
 

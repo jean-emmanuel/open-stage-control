@@ -1,8 +1,8 @@
-import osc from './osc.mjs'
 import {EventEmitter} from 'events'
-import * as settings from '../settings.mjs'
-import zeroconf from '../zeroconf'
 import net from 'net'
+import * as settings from '../settings.mjs'
+import osc from './osc.mjs'
+import zeroconf from '../zeroconf'
 
 class OscTCPClient extends EventEmitter {
 

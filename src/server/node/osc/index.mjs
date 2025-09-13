@@ -1,9 +1,9 @@
+import {EventEmitter} from 'events'
 import * as settings from '../settings.mjs'
 import OscUDPServer from './udp.mjs'
 import OscTCPServer from './tcp.mjs'
 import CustomModule from '../custom-module.mjs'
 import MidiServer from '../midi.mjs'
-import {EventEmitter} from 'events'
 
 export default class OscServer {
 

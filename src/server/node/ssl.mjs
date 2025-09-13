@@ -1,5 +1,5 @@
-import * as settings from './settings.mjs'
 import forge from 'node-forge'
+import * as settings from './settings.mjs'
 
 var pki = forge.pki,
     certificate = settings.read('ssl-certificate')
