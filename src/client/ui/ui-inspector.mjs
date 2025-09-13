@@ -14,7 +14,7 @@ import getCodeEditor from './ui-code-editor.mjs'
 
 var editor
 ;(async()=>{
-    mainMenu = (await import('../editor/index.mjs')).default
+    editor = (await import('../editor/index.mjs')).default
 })()
 
 

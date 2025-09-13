@@ -11,7 +11,7 @@ import notifications from '../ui/notifications'
 import * as backup from '../backup.mjs'
 import {updateMobileThemeColor, icon} from '../ui/utils.mjs'
 
-export default callbacks = {
+export default {
 
     bundle: function(data) {
         for (let i in data) {
