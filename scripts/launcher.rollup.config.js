@@ -32,11 +32,10 @@ module.exports = {
         nodeResolve(),
         terser(),
         license({
-            banner: {
-                content: {
-                    file: path.join(__dirname, 'license-header.txt'),
-                },
-            }
+            thirdParty: {
+                includeSelf: true,
+                output: 'app/launcher/LICENSES',
+            },
         }),
         copy({
             targets: [

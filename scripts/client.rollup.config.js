@@ -72,11 +72,10 @@ module.exports = {
             }
         },
         watch ? {} :license({
-            banner: {
-                content: {
-                    file: path.join(__dirname, 'license-header.txt'),
-                },
-            }
+            thirdParty: {
+                includeSelf: true,
+                output: 'app/client/LICENSES',
+            },
         }),
         watch ? {} : copy({
             targets: [

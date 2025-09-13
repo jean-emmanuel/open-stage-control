@@ -37,11 +37,10 @@ module.exports = {
             preferBuiltins: true
         }),
         license({
-            banner: {
-                content: {
-                    file: path.join(__dirname, 'license-header.txt'),
-                },
-            }
+            thirdParty: {
+                includeSelf: true,
+                output: 'app/server/LICENSES',
+            },
         }),
         terser({
             sourceMap: true,
