@@ -46,8 +46,10 @@ ignore_mtc = 'mtc' not in argv
 ignore_rpn = 'rpn' not in argv and 'nrpn' not in argv
 # option: parse active sensing
 ignore_active_sensing = 'active_sensing' not in argv
-# option: note off velocity
+# option: note off velocity (/note_on and /note_off instead of only /note and velocity 0 for note off)
 note_off_velocity = 'note_off_velocity' in argv
+# option: no auto note off (do not translate received note_on with velocity 0 to note off)
+no_auto_note_off = 'no_auto_note_off' in argv
 # option: list midi ports
 list_midi = 'list' in argv
 list_midi_exit = 'list-only' in argv

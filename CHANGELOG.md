@@ -13,6 +13,9 @@
 - scripting
     - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)
 
+- midi
+    - add `no_auto_note_off` option
+
 - breaking change
     - dropped support for iOS 10.3
 

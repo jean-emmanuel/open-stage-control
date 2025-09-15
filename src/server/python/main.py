@@ -260,7 +260,7 @@ def send_midi(name, event, *args):
         m = [mtype, args[0]]
 
         if mtype == NOTE_ON:
-            if args[2] == 0:
+            if args[2] == 0 and not no_auto_note_off:
                 mtype = NOTE_OFF
 
         elif mtype == PITCH_BEND:

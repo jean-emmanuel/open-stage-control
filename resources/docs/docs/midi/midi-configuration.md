@@ -94,7 +94,11 @@ Send program changes with a `-1` offset to match some software/hardware implemen
 
 **`note_off_velocity`**
 
-Enable receiving noteOff messages with a velocity and on a different address than noteOn messages.
+Use `/note_on` for noteOn messages and `/note_off` for noteOff messages instead of the defaut `/note` and velocity 0 for note off.
+
+**`auto_note_off`**
+
+Prevent converting outgoing noteOn messages with velocity 0 to noteOff messages.
 
 
 **`device_name:virtual`** (*Linux / Mac only*): creates a virtual midi device with one input port and one output port
