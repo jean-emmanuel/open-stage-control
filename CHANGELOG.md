@@ -9,6 +9,8 @@
     - the html property is no longer restricted / sanitized
     - input/textarea/select no longer have their appearance property reset in custom html
     - canvas: added `contextType` property
+    - file: honor server's `remote-root` option (remove root path from displayed path and returned value)
+
 
 - scripting
     - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)

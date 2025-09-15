@@ -567,7 +567,8 @@ export default class Callbacks {
                 list = list.filter(x=>x.folder || x.name.match(extRe))
                 this.ipcServer.send('listDir', {
                     path: p,
-                    files: list
+                    files: list,
+                    root: root
                 }, clientId)
                 settings.write('last-dir', p, false, false)
             }

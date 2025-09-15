@@ -40,6 +40,7 @@ export default function UiFilebrowser(options, callback) {
         `
 
     var files = [],
+        root = '',
         path = ''
 
     var extRe = options.extension ? new RegExp('.*\\.' + options.extension + '$') : /.*/
@@ -75,10 +76,10 @@ export default function UiFilebrowser(options, callback) {
                 if (files.some(x=>x.name===saveInput.value)) {
                     if (!confirm(locales('remotesave_overwrite'))) return
                 }
-                callback([path, saveInput.value])
+                callback([path, saveInput.value], root)
                 popup.close()
             } else {
-                callback([path, choice ? choice.value : ''])
+                callback([path, choice ? choice.value : ''], root)
                 popup.close()
             }
         }
@@ -142,10 +143,12 @@ export default function UiFilebrowser(options, callback) {
 
     ipc.on('listDir', (data)=>{
 
-        ariane.textContent = path = data.path
+        path = data.path
+        root = data.root
+
+        ariane.textContent = path.replace(root, '/')
 
         files = data.files.filter(x=>x.folder || x.name.match(extRe))
-
 
         function alphaSort(a, b){
             // convert to strings and force lowercase

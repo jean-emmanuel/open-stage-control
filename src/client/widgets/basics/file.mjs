@@ -58,9 +58,13 @@ export default class File extends Widget {
                 directory: this.getProp('directory') === 'auto' ? undefined : this.getProp('directory'),
                 loadDir: this.getProp('allowDir'),
                 save: this.getProp('mode') === 'save'
-            }, (path)=>{
+            }, (path, root)=>{
 
-                this.setValue(path.join(path[0][0] === '/' ? '/' : '\\'), {
+                var sep = path[0][0] === '/' ? '/' : '\\',
+                    val = path.join(sep)
+                if (root) val = val.replace(root, sep).replace(sep + sep, sep)
+
+                this.setValue(val, {
                     sync: true,
                     send: true
                 })
