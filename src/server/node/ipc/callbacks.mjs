@@ -252,7 +252,7 @@ export default class Callbacks {
                 return console.error('(ERROR) Could not save: invalid file')
             }
 
-            fs.writeFile(data.path, data.session, function(err, fdata) {
+            fs.writeFile(data.path, data.session, (err, fdata)=>{
 
                 if (err) return this.ipcServer.send('notify', {
                     class: 'error',
