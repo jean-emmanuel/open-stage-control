@@ -11,7 +11,7 @@ import {icon} from './utils.mjs'
 import zoom from './zoom.mjs'
 import locales from '../locales/index.mjs'
 import getCodeEditor from './ui-code-editor.mjs'
-import {DOM} from '../globals.mjs'
+import {DOM, JSON5} from '../globals.mjs'
 
 var editor
 ;(async()=>{
@@ -313,7 +313,7 @@ class UiInspector extends UiWidget {
             v
 
         try {
-            v = JSON.parseFlex(str)
+            v = JSON5.parse(str)
         } catch(err) {
             v = str
         }

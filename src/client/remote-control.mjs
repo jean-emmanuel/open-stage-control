@@ -6,7 +6,7 @@ import stateManager from './managers/state.mjs'
 import sessionManager from './managers/session'
 import notifications from './ui/notifications.mjs'
 import uiConsole from './ui/ui-console.mjs'
-import {READ_ONLY} from './globals.mjs'
+import {READ_ONLY, JSON5} from './globals.mjs'
 
 var callbacks = {
     '/EDIT': function(args, custom_module) {
@@ -14,8 +14,8 @@ var callbacks = {
         if (READ_ONLY && !custom_module) return
 
         var [id, json, opts] = args,
-            newdata = typeof json == 'string' ? JSON.parseFlex(json) : json,
-            options = typeof opts == 'string' ? JSON.parseFlex(opts) : {},
+            newdata = typeof json == 'string' ? JSON5.parse(json) : json,
+            options = typeof opts == 'string' ? JSON5.parse(opts) : {},
             widgets = widgetManager.getWidgetById(id)
 
         if (!widgets.length) return
@@ -46,8 +46,8 @@ var callbacks = {
         if (READ_ONLY && !custom_module) return
 
         var [id, json, opts] = args,
-            newdata = typeof json == 'string' ? JSON.parseFlex(json) : json,
-            options = typeof opts == 'string' ? JSON.parseFlex(opts) : {},
+            newdata = typeof json == 'string' ? JSON5.parse(json) : json,
+            options = typeof opts == 'string' ? JSON5.parse(opts) : {},
             widgets = widgetManager.getWidgetById(id)
 
         if (!widgets.length) return
@@ -210,7 +210,7 @@ var callbacks = {
         if (!Array.isArray(args)) args = [args]
 
         var json = args[0],
-            data = typeof json == 'string' ? JSON.parseFlex(json) : json,
+            data = typeof json == 'string' ? JSON5.parse(json) : json,
             send = !(args[1] === 0 || args[1] === false)
 
         stateManager.set(data, send)

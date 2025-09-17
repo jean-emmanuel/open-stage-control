@@ -1,5 +1,6 @@
 import osc from '../../osc.mjs'
 import {isJSON, isJSONObject} from '../../utils.mjs'
+import {JSON5} from '../../globals.mjs'
 
 export default class OscReceiver {
 
@@ -9,7 +10,7 @@ export default class OscReceiver {
 
         if (typeof value === 'string' && isJSON(value)) {
             try {
-                this.value = JSON.parseFlex(value)
+                this.value = JSON5.parse(value)
             } catch (err) {
                 this.value = value
             }
@@ -72,7 +73,7 @@ export default class OscReceiver {
             if (value.length < 2) value = value[0]
             if (typeof value === 'string' && isJSONObject(value)) {
                 try {
-                    this.value = JSON.parseFlex(value)
+                    this.value = JSON5.parse(value)
                 } catch (err) {
                     this.value = value
                 }

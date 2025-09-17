@@ -2,7 +2,7 @@ import html from 'nanohtml'
 import {mapToScale} from '../utils.mjs'
 import Canvas from '../common/canvas.mjs'
 import StaticProperties from '../mixins/static_properties.mjs'
-import {PXSCALE} from '../../globals.mjs'
+import {PXSCALE, JSON5} from '../../globals.mjs'
 
 export default class Plot extends StaticProperties(Canvas, {bypass: true}) {
 
@@ -227,7 +227,7 @@ export default class Plot extends StaticProperties(Canvas, {bypass: true}) {
 
         if (typeof v == 'string') {
             try {
-                v = JSON.parseFlex(v)
+                v = JSON5.parse(v)
             } catch(err) {}
         }
 
