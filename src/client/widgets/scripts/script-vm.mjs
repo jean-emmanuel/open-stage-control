@@ -470,7 +470,7 @@ class ScriptVm extends Vm {
         this.sandbox.contentWindow.setFocusable = (focusable)=>{
 
             this.checkContext('setFocusable')
-            FOCUSABLE = !!focusable
+            window.FOCUSABLE = !!focusable
             console.debug('ELECTRON.SETFOCUSABLE('+(focusable ? 1 : 0)+')')
 
         }
