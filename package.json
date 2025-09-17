@@ -22,6 +22,7 @@
   "dependencies": {
     "@babel/core": "7.18.0",
     "@babel/preset-env": "7.18.0",
+    "@electron/packager": "18.4.4",
     "@electron/remote": "2.0.8",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.6",
@@ -39,7 +40,6 @@
     "cpr": "3.0.1",
     "deep-extend": "0.6.0",
     "electron-localshortcut": "3.2.1",
-    "@electron/packager": "18.4.4",
     "electron-packager-plugin-non-proprietary-codecs-ffmpeg": "1.0.2",
     "env-paths": "2.2.1",
     "eslint": "8.16.0",
@@ -98,7 +98,7 @@
     "build-server-js": "rollup -c scripts/server.rollup.config.js",
     "watch-server": "npm run build-server-js -- --watch",
     "build-launcher-js": "rollup -c scripts/launcher.rollup.config.js",
-    "watch-launcher": "npm run build-launcherr-js -- --watch",
+    "watch-launcher": "npm run build-launcher-js -- --watch",
     "build-docs": "rollup -c scripts/docs.rollup.config.js && node src/docs/widgets-reference.js > resources/docs/docs/widgets/properties-reference.md && cd resources && python3 -m mkdocs build",
     "lint": "eslint src --ext mjs",
     "test": "npm run lint && npm run build"
