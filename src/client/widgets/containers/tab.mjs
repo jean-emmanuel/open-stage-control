@@ -87,8 +87,10 @@ class Tab extends Panel {
 
             case 'label':
                 this.updateLabel()
+                // falls through
             case 'visible':
                 resize.check(this.widget, true)
+                // falls through
             case 'colorText':
             case 'colorWidget':
             case 'colorFill':

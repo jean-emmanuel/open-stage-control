@@ -11,10 +11,8 @@
   "rules": {
     "no-prototype-builtins": "off",
     "no-console": "off",
-    "no-cond-assign": "off",
     "no-useless-escape": "off",
     "no-self-assign": "off",
-    "no-fallthrough": "off",
     "no-empty": [
       "error",
       {

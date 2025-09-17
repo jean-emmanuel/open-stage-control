@@ -403,8 +403,10 @@ class Panel extends Container() {
 
             case 'colorBg':
                 this.setCssVariables()
+                // falls through
             case 'colorWidget':
                 if (iOS13  && this.getProp('scroll')) this.checkScrollBars()
+                // falls through
             case 'colorText':
             case 'colorFill':
             case 'colorStroke':

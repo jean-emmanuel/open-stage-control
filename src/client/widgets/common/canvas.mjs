@@ -218,6 +218,7 @@ class Canvas extends Widget {
                         this.batchDraw()
                     })
                 })
+                // falls through
             case 'lineWidth':
             case 'padding':
                 resize.check(this.canvas, true)

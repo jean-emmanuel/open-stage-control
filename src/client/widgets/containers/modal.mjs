@@ -272,6 +272,7 @@ class Modal extends Panel {
 
             case 'label':
                 this.updateLabel()
+                // falls through
             case 'popupLabel':
                 if (this.value) {
                     this.updatePopupLabel()
