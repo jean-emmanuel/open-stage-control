@@ -6,15 +6,11 @@
   },
   "extends": "eslint:recommended",
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "sourceType": "module"
   },
   "rules": {
     "no-prototype-builtins": "off",
     "no-console": "off",
-    "no-undef": "off",
     "no-cond-assign": "off",
     "no-useless-escape": "off",
     "no-self-assign": "off",
