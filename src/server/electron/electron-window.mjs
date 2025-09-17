@@ -10,7 +10,7 @@ export default function(options={}) {
 
     window = new BrowserWindow({
         title: options.title || settings.infos.productName,
-        icon: path.resolve(__dirname + '/../assets/logo.png'),
+        icon: path.resolve(__dirname + '/../../assets/logo.png'),
         backgroundColor: options.color,
         type: options.type,
         useContentSize: true,
