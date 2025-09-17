@@ -24,7 +24,7 @@ export default function uiFileUpload(types, ok, error) {
         uiLoading(locales('loading_upload'))
 
         reader.onerror = reader.onabort = function() {
-            loader.close()
+            uiLoading(false)
             error()
         }
 

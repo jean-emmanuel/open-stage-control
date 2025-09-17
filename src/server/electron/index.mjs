@@ -186,7 +186,7 @@ function startLauncher() {
                 stopServer: stopServerProcess
             })
 
-            launcher.on('will-close', ()=>{
+            launcher.on('will-close', (e)=>{
                 if (clientWindows.some(w=>w && !w.isDestroyed())) {
                     launcher.hide()
                     e.preventDefault()

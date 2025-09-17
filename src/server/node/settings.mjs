@@ -28,7 +28,7 @@ argv = yargs(argv)
     .options(options)
     .check((argv)=>{
         var err = []
-        for (key in options) {
+        for (let key in options) {
             if (options[key].check && argv[key] != undefined) {
                 var c = options[key].check(argv[key],argv)
                 if (c!==true) {

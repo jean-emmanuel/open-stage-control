@@ -509,7 +509,8 @@ class ScriptVm extends Vm {
 
             this.checkContext('runAs')
 
-            var widgets = this.resolveId(id)
+            var widgets = this.resolveId(id),
+                widget = this.getWidget()
 
             if (widgets.length) {
 
@@ -529,10 +530,10 @@ class ScriptVm extends Vm {
 
             this.checkContext('reload')
 
-            var options = this.getValueOptions()
+            var options = this.getValueOptions(),
+                widget = this.getWidget()
 
             if (options.onCreate) {
-                var widget = this.getWidget()
                 widget.errorProp('onCreate', '', 'reload() cannot be called from onCreate')
             } else if (options.send){
                 if (keepState) ipc.trigger('reload')

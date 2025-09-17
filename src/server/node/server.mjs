@@ -68,7 +68,7 @@ class WebServer extends EventEmitter {
 
         this.server.on('error', (e)=>{
             if (e.code === 'EADDRINUSE') {
-                console.error(`(ERROR, HTTP) Could not open port ${oscInPort} (already in use) `)
+                console.error(`(ERROR, HTTP) Could not open port ${this.port} (already in use) `)
             } else {
                 console.error(`(ERROR, HTTP) ${e.message}`)
             }
