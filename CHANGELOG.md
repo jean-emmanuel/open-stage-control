@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.29.9
+## 1.30.0
 
 - bug fixes
     - server: fix resolving absolute file urls containing the remote-root path
