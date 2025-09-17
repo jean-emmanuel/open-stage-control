@@ -1,6 +1,5 @@
 import {app, Menu, shell, BrowserWindow} from 'electron'
 import * as settings from '../node/settings.mjs'
-import infos from '../../../package.json'
 
 app.setPath('userData', settings.configPath)
 
@@ -42,7 +41,7 @@ if (process.platform === 'darwin') {
         label: settings.infos.productName,
         submenu: [
             {
-                label: 'Hide ' + infos.productName,
+                label: 'Hide ' + settings.infos.productName,
                 accelerator: 'Command+H',
                 role: 'hide'
             },
@@ -101,14 +100,14 @@ if (process.platform === 'darwin') {
             submenu: [
                 {
                     label: 'Documentation',
-                    click: ()=>shell.openExternal(infos.homepage)
+                    click: ()=>shell.openExternal(settings.infos.homepage)
                 },
                 {
                     type: 'separator'
                 },
                 {
                     label: 'Report an Issue',
-                    click: ()=>shell.openExternal(infos.repository.url + '/issues')
+                    click: ()=>shell.openExternal(settings.infos.repository.url + '/issues')
                 }
             ]
         }
