@@ -6,6 +6,7 @@ import ipc from '../ipc/index.mjs'
 import doubleClick from '../events/double-click.mjs'
 import {icon} from './utils.mjs'
 import UiModal from './ui-modal.mjs'
+import {DOM} from '../globals.mjs'
 
 
 export default function UiFilebrowser(options, callback) {

@@ -2,6 +2,7 @@ import Pad from './pad.mjs'
 import Fader from '../sliders/fader.mjs'
 import doubleTap from '../mixins/double_tap.mjs'
 import touchstate from '../mixins/touch_state.mjs'
+import {PXSCALE} from '../../globals.mjs'
 
 var faderDefaults = Fader.defaults()._props()
 

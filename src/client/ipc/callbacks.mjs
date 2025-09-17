@@ -1,4 +1,5 @@
 import raw from 'nanohtml/raw'
+import fastdom from 'fastdom'
 import osc from '../osc.mjs'
 import session from '../managers/session/index.mjs'
 import widgetManager from '../managers/widgets.mjs'
@@ -10,6 +11,7 @@ import uiLoading from '../ui/ui-loading.mjs'
 import notifications from '../ui/notifications'
 import * as backup from '../backup.mjs'
 import {updateMobileThemeColor, icon} from '../ui/utils.mjs'
+import {CLIENT_SYNC, DOM, ENV, TITLE, setGRIDWIDTH_CSS} from '../globals.mjs'
 
 export default {
 
@@ -113,7 +115,7 @@ export default {
                     var root = widgetManager.getWidgetById('root')[0]
                     if (root) root.onPropChanged('colorWidget')
                     fastdom.measure(()=>{
-                        GRIDWIDTH_CSS = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width'))
+                        setGRIDWIDTH_CSS(parseInt(getComputedStyle(document.documentElement).getPropertyValue('--grid-width')))
                         fastdom.mutate(()=>{
                             editor.toggleGrid()
                             editor.toggleGrid()

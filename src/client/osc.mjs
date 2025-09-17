@@ -2,6 +2,7 @@ import widgetManager from './managers/widgets.mjs'
 import EventEmitter from './events/event-emitter.mjs'
 import ipc from './ipc/index.mjs'
 import {deepEqual} from './utils.mjs'
+import {CLIENT_SYNC} from './globals.mjs'
 
 var Osc = class Osc extends EventEmitter {
 

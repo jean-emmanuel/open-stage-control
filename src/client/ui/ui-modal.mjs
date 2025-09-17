@@ -2,6 +2,7 @@ import html from 'nanohtml'
 import raw from 'nanohtml/raw'
 import UiWidget from './ui-widget.mjs'
 import {icon} from './utils.mjs'
+import {DOM} from '../globals.mjs'
 
 var MODAL_SINGLETON = null,
     MODAL_CONTAINER = null

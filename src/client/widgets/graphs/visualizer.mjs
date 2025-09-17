@@ -2,6 +2,7 @@ import {clip} from '../utils.mjs'
 import Plot from './plot.mjs'
 import StaticProperties from '../mixins/static_properties.mjs'
 import canvasQueue from '../common/queue.mjs'
+import {CANVAS_FRAMERATE} from '../../globals.mjs'
 
 
 class Visualizer extends StaticProperties(Plot, {rangeX: {min: '', max: ''}, dots: false, smooth: false}) {

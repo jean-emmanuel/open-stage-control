@@ -9,6 +9,7 @@ import iOS from '../../ui/ios.mjs'
 import Fader from '../sliders/fader.mjs'
 import Script from '../scripts/script.mjs'
 import * as resize from '../../events/resize'
+import {DOM} from '../../globals.mjs'
 
 var iOS13 = iOS === 13,
     faderDefaults

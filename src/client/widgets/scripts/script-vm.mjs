@@ -6,6 +6,7 @@ import {urlParser} from '../utils.mjs'
 import Vm from '../vm.mjs'
 import ipc from '../../ipc/index.mjs'
 import uiFilebrowser from '../../ui/ui-filebrowser.mjs'
+import {setFOCUSABLE} from '../../globals.mjs'
 
 var toolbar
 ;(async()=>{
@@ -470,7 +471,7 @@ class ScriptVm extends Vm {
         this.sandbox.contentWindow.setFocusable = (focusable)=>{
 
             this.checkContext('setFocusable')
-            window.FOCUSABLE = !!focusable
+            setFOCUSABLE(!!focusable)
             console.debug('ELECTRON.SETFOCUSABLE('+(focusable ? 1 : 0)+')')
 
         }

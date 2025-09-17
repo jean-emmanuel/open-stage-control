@@ -1,4 +1,5 @@
 import {deepCopy} from '../utils.mjs'
+import {ENV, IP} from '../globals.mjs'
 
 var sessionManager
 ;(async()=>{

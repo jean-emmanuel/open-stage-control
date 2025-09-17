@@ -5,6 +5,7 @@ import UiWidget from './ui-widget.mjs'
 import {icon} from './utils.mjs'
 import locales from '../locales/index.mjs'
 import doubleClick from '../events/double-click.mjs'
+import {DOM, VIRTUAL_KEYBOARD} from '../globals.mjs'
 
 var layout = locales('keyboard_layout')
 

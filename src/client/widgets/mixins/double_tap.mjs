@@ -1,4 +1,5 @@
 import {normalizeDragEvent} from '../../events/utils.mjs'
+import {DOUBLE_TAP_TIME} from '../../globals.mjs'
 
 export default (self, callback, options={})=>{
 

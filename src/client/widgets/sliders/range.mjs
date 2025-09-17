@@ -1,6 +1,7 @@
 import html from 'nanohtml'
 import {clip} from '../utils.mjs'
 import Fader from './fader'
+import {PXSCALE} from '../../globals.mjs'
 
 var faderDefaults = Fader.defaults()._props()
 

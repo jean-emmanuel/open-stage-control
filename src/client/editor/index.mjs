@@ -13,6 +13,7 @@ import notifications from '../ui/notifications.mjs'
 import locales from '../locales/index.mjs'
 import {leftUiSidePanel, rightUiSidePanel} from '../ui/index.mjs'
 import ipc from '../ipc/index.mjs'
+import {DOM, GRIDWIDTH, GRIDWIDTH_CSS, ENV, PXSCALE, setGRIDWIDTH, READ_ONLY} from '../globals.mjs'
 
 var sessionManager
 ;(async()=>{
@@ -519,7 +520,7 @@ class Editor {
 
         this.grid = !this.grid
 
-        GRIDWIDTH = this.grid ? GRIDWIDTH_CSS : 1
+        setGRIDWIDTH(this.grid ? GRIDWIDTH_CSS : 1)
 
         document.body.style.setProperty('--grid-width', GRIDWIDTH)
         document.body.classList.toggle('no-grid', GRIDWIDTH == 1)

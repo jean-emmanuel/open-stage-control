@@ -1,4 +1,5 @@
 import EventEmitter from '../events/event-emitter.mjs'
+import {DOM} from '../globals.mjs'
 
 class UiWidget extends EventEmitter {
 

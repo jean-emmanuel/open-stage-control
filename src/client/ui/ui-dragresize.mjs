@@ -2,6 +2,7 @@ import html from 'nanohtml'
 import fastdom from 'fastdom'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
 import UiWidget from './ui-widget.mjs'
+import {DOM, PXSCALE, GRIDWIDTH} from '../globals.mjs'
 
 var Tab, Root, Folder
 ;(async()=>{

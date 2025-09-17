@@ -1,6 +1,7 @@
 import semver from 'semver'
 import UiModal from '../../ui/ui-modal.mjs'
 import locales from '../../locales/index.mjs'
+import {PACKAGE} from '../../globals.mjs'
 
 class Session {
 

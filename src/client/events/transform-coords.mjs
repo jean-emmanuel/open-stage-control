@@ -4,9 +4,12 @@
 
   Disabled for now
 
+
 */
 
 
+
+/* global WebKitCSSMatrix */
 var I = new WebKitCSSMatrix()
 
 function Point(x, y, z) {

@@ -1,6 +1,7 @@
 import html from 'nanohtml'
 import morph from 'nanomorph'
 import UiWidget from './ui-widget.mjs'
+import {DOM, ENV} from '../globals.mjs'
 
 
 var DEFAULT_DURATION = 3500

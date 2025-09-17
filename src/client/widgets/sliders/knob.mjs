@@ -1,5 +1,6 @@
 import {clip} from '../utils.mjs'
 import Slider from './slider.mjs'
+import {PXSCALE} from '../../globals.mjs'
 
 class Knob extends Slider {
 

@@ -7,6 +7,8 @@ import scriptVm from '../widgets/scripts/script-vm.mjs'
 import modeJavascript from 'ace-builds/src-noconflict/mode-javascript.js'
 import modeCss from 'ace-builds/src-noconflict/mode-css.js'
 import modeHtml from 'ace-builds/src-noconflict/mode-html.js'
+import {DOM} from '../globals.mjs'
+
 
 var scriptGlobals = scriptVm.globals,
     editors = {}, editorModes = {
@@ -16,6 +18,8 @@ var scriptGlobals = scriptVm.globals,
     },
     codeEditorModKey = (navigator.platform || '').match('Mac') ? 'Cmd' : 'Ctrl'
 
+
+const ace = window.ace
 ace.config.set('basePath', '/client/ace/')
 
 function setCommandEnabled(editor, name, enabled) {

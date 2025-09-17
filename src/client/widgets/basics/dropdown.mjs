@@ -1,6 +1,7 @@
 import html from 'nanohtml'
 import MenuBase from './menu-base.mjs'
 import iOS from '../../ui/ios.mjs'
+import {DOM} from '../../globals.mjs'
 
 class Dropdown extends MenuBase {
 

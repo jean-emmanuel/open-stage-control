@@ -1,5 +1,6 @@
 import html from 'nanohtml'
 import Canvas from '../common/canvas.mjs'
+import {PXSCALE} from '../../globals.mjs'
 
 class Pad extends Canvas {
 

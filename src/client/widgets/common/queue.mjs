@@ -1,4 +1,5 @@
 import EventEmitter from '../../events/event-emitter.mjs'
+import {CANVAS_FRAMERATE} from '../../globals.mjs'
 
 class CanvasQueue extends EventEmitter{
 

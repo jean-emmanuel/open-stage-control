@@ -1,4 +1,5 @@
 import html from 'nanohtml'
+import {DOM} from '../globals.mjs'
 
 class UiSelectArea {
 

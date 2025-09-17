@@ -4,6 +4,7 @@ import Xy from './xy.mjs'
 import Fader from '../sliders/fader.mjs'
 import {clip, mapToScale, hsbToRgb, rgbToHsb} from '../utils.mjs'
 import touchstate from '../mixins/touch_state.mjs'
+import {PXSCALE} from '../../globals.mjs'
 
 var faderDefaults = Fader.defaults()._props(),
     xyDefaults = Xy.defaults()._props()

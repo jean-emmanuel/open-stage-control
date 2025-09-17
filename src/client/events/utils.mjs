@@ -1,3 +1,5 @@
+import {DOM} from '../globals.mjs'
+
 var zoom
 ;(async()=>{
     zoom = (await import('../ui/zoom')).default

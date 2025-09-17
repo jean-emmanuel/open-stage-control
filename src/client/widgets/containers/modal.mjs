@@ -5,6 +5,7 @@ import {icon, iconify} from '../../ui/utils.mjs'
 import * as resize from '../../events/resize.mjs'
 import doubleTap from '../mixins/double_tap'
 import iOS from '../../ui/ios.mjs'
+import {DOM, PXSCALE} from '../../globals.mjs'
 
 var iOS13 = iOS === 13
 

@@ -2,6 +2,7 @@ import html from 'nanohtml'
 import raw from 'nanohtml/raw'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
 import UiWidget from './ui-widget.mjs'
+import {DOM, PXSCALE} from '../globals.mjs'
 
 var mod = (navigator.platform || '').match('Mac') ? 'cmd' : 'ctrl',
     MENU_CONTAINER

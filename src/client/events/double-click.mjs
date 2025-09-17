@@ -1,3 +1,5 @@
+import {DOUBLE_TAP_TIME} from '../globals.mjs'
+
 export default (element, callback, options={})=>{
 
     var lastTapTime = 0,

@@ -1,3 +1,5 @@
+import {DOM} from '../globals.mjs'
+
 // Prevent iOS Pull-To-Refresh
 
 var iOS13 = (

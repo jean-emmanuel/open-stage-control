@@ -6,6 +6,7 @@ import {icon} from './utils.mjs'
 import Script from '../widgets/scripts/script.mjs'
 import Widget from '../widgets/common/widget.mjs'
 import widgetManager from '../managers/widgets.mjs'
+import {DOM, ENV, READ_ONLY} from '../globals.mjs'
 
 class UiConsole extends UiSidePanel {
 

@@ -3,6 +3,7 @@ import fastdom from 'fastdom'
 import Widget from './widget.mjs'
 import * as resize from '../../events/resize.mjs'
 import canvasQueue from './queue.mjs'
+import {ENV, CANVAS_SCALING, ELECTRON_NOGPU, DOM} from '../../globals.mjs'
 
 
 class Canvas extends Widget {

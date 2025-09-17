@@ -12,7 +12,7 @@ import locales from '../../locales/index.mjs'
 import Session from './session.mjs'
 import EventEmitter from '../../events/event-emitter.mjs'
 import {deepEqual} from '../../utils.mjs'
-
+import {DOM, READ_ONLY, PACKAGE} from '../../globals.mjs'
 
 var SessionManager = class SessionManager extends EventEmitter {
 

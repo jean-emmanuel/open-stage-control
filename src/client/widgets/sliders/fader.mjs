@@ -1,5 +1,6 @@
 import {clip} from '../utils.mjs'
 import Slider from './slider.mjs'
+import {PXSCALE, CANVAS_SCALING} from '../../globals.mjs'
 
 class Fader extends Slider {
 

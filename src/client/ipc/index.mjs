@@ -1,6 +1,7 @@
 import {nanoid} from 'nanoid'
 import EventEmitter from '../events/event-emitter.mjs'
 import cache from '../managers/cache.mjs'
+import {ENV} from '../globals.mjs'
 
 var notifications, locales, callbacks
 ;(async()=>{

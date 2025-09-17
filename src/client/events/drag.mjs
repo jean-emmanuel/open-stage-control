@@ -1,5 +1,6 @@
 import {normalizeDragEvent, resetEventOffset, TRAVERSING_SAMEWIDGET} from './utils.mjs'
 import iOS from '../ui/ios.mjs'
+import {DOM} from '../globals.mjs'
 
 var targets = {},
     previousPointers = {}

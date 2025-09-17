@@ -5,6 +5,7 @@ import {icon} from '../ui/utils.mjs'
 import editor from './index.mjs'
 import locales from '../locales/index.mjs'
 import ContextMenu from '../ui/context-menu.mjs'
+import {GRIDWIDTH, PXSCALE} from '../globals.mjs'
 
 var sessionManager
 ;(async()=>{

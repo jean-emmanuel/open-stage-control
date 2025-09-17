@@ -1,5 +1,6 @@
 import iOS from '../ui/ios.mjs'
 import editor from '../editor/index.mjs'
+import {DOM, FOCUSABLE, ENV} from '../globals.mjs'
 
 const macOs = (navigator.platform || '').match('Mac')
 

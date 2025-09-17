@@ -11,6 +11,7 @@ import {icon} from './utils.mjs'
 import zoom from './zoom.mjs'
 import locales from '../locales/index.mjs'
 import getCodeEditor from './ui-code-editor.mjs'
+import {DOM} from '../globals.mjs'
 
 var editor
 ;(async()=>{

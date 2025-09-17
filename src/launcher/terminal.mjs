@@ -1,6 +1,7 @@
 import {ipcRenderer} from 'electron'
 import ansiHTML from 'ansi-html'
 import html from 'nanohtml'
+import {DOM} from '../client/globals.mjs'
 
 ansiHTML.setColors({
     magenta: 'B48EAD',

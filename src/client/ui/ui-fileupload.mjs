@@ -1,6 +1,7 @@
 import html from 'nanohtml'
 import locales from '../locales/index.mjs'
 import uiLoading from './ui-loading.mjs'
+import {DOM} from '../globals.mjs'
 
 var SINGLETON = null,
     CONTAINER = null

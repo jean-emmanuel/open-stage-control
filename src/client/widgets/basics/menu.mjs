@@ -4,6 +4,7 @@ import MenuBase from './menu-base.mjs'
 import {iconify} from '../../ui/utils.mjs'
 import doubleTap from '../mixins/double_tap'
 import iOS from '../../ui/ios.mjs'
+import {DOM} from '../../globals.mjs'
 
 class Menu extends MenuBase {
 

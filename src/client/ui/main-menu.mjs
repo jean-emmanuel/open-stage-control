@@ -9,6 +9,7 @@ import sessionManager from '../managers/session/index.mjs'
 import stateManager from '../managers/state.mjs'
 import {leftUiSidePanel, rightUiSidePanel} from '../ui/index.mjs'
 import uiConsole from '../ui/ui-console.mjs'
+import {READ_ONLY, KIOSK, VIRTUAL_KEYBOARD, setVIRTUAL_KEYBOARD} from '../globals.mjs'
 
 var recentSessions = [{label: locales('file_open_recent_wait'), class: 'disabled'}]
 var menuEntries = [
@@ -267,7 +268,7 @@ if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
         label: locales('keyboard'),
         class: ()=>{return 'toggle ' + (VIRTUAL_KEYBOARD ? 'on' : 'off')},
         action: ()=>{
-            VIRTUAL_KEYBOARD = !VIRTUAL_KEYBOARD
+            setVIRTUAL_KEYBOARD(!VIRTUAL_KEYBOARD)
         }
     })
 

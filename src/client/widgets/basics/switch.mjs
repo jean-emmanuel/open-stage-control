@@ -2,6 +2,7 @@ import html from 'nanohtml'
 import raw from 'nanohtml/raw'
 import MenuBase from './menu-base.mjs'
 import {iconify} from '../../ui/utils'
+import {DOM} from '../../globals.mjs'
 
 class Switch extends MenuBase {
 

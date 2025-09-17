@@ -1,6 +1,7 @@
 import html from 'nanohtml'
 import Widget from '../common/widget.mjs'
 import uiFilebrowser from '../../ui/ui-filebrowser.mjs'
+import {DOM} from '../../globals.mjs'
 
 export default class File extends Widget {
 

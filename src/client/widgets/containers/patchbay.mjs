@@ -4,6 +4,7 @@ import Canvas from '../common/canvas.mjs'
 import Container from '../common/container.mjs'
 import {iconify} from '../../ui/utils.mjs'
 import parser from '../../parser.mjs'
+import {DOM, PXSCALE} from '../../globals.mjs'
 
 class PatchBayNode extends Widget {
 

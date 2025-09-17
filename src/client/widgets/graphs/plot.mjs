@@ -2,6 +2,7 @@ import html from 'nanohtml'
 import {mapToScale} from '../utils.mjs'
 import Canvas from '../common/canvas.mjs'
 import StaticProperties from '../mixins/static_properties.mjs'
+import {PXSCALE} from '../../globals.mjs'
 
 export default class Plot extends StaticProperties(Canvas, {bypass: true}) {
 

@@ -1,4 +1,4 @@
-import './globals.mjs'
+import {TITLE} from './globals.mjs'
 import './stacktrace.mjs'
 import './ui/init.mjs'
 

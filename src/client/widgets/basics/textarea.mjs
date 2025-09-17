@@ -1,5 +1,6 @@
 import html from 'nanohtml'
 import Widget from '../common/widget.mjs'
+import {DOM} from '../../globals.mjs'
 
 class TextArea extends Widget {
 

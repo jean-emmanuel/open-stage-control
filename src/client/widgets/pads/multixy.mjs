@@ -3,6 +3,7 @@ import Xy from './xy.mjs'
 import {clip} from '../utils.mjs'
 import doubleTap from '../mixins/double_tap.mjs'
 import touchstate from '../mixins/touch_state.mjs'
+import {PXSCALE} from '../../globals.mjs'
 
 
 var xyDefaults = Xy.defaults()._props()

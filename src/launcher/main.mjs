@@ -4,6 +4,7 @@ import {ipcRenderer} from 'electron'
 import terminal from './terminal.mjs'
 import settings from './settings.mjs'
 import './toolbar.mjs'
+import {DOM} from '../client/globals.mjs'
 
 DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${window.PACKAGE.productName} <span class="version">v${window.PACKAGE.version}</span>`)
 

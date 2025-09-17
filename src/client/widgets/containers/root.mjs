@@ -1,6 +1,7 @@
 import Panel from './panel.mjs'
 import StaticProperties from '../mixins/static_properties.mjs'
 import {updateMobileThemeColor} from '../../ui/utils.mjs'
+import {DOM} from '../../globals.mjs'
 
 var mainMenu
 ;(async()=>{

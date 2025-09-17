@@ -3,6 +3,8 @@ import remote from '@electron/remote'
 import keyboardJS from 'keyboardjs/dist/keyboard.min.js'
 import terminal from './terminal.mjs'
 import settings from './settings.mjs'
+import {DOM, PXSCALE} from '../client/globals.mjs'
+
 
 
 var {Menu, MenuItem} = remote.require('electron'),

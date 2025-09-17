@@ -1,4 +1,5 @@
 import EventEmitter from '../events/event-emitter.mjs'
+import {DOM, PXSCALE, INITIALZOOM, setPXSCALE} from '../globals.mjs'
 
 var mod = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 
@@ -77,7 +78,7 @@ class Zoom extends EventEmitter {
     setGlobalZoom(zoom) {
 
         if (zoom !== PXSCALE) {
-            PXSCALE = zoom
+            setPXSCALE(zoom)
             document.documentElement.style.setProperty('font-size', PXSCALE + 'px')
             DOM.dispatchEvent(window, 'resize')
             this.trigger('global-zoom-changed')

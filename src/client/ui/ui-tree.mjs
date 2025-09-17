@@ -7,6 +7,7 @@ import locales from '../locales'
 import raw from 'nanohtml/raw'
 import {icon} from './utils.mjs'
 import {widgets, categories} from '../widgets/index.mjs'
+import {DOM} from '../globals.mjs'
 
 var Root, Panel, Matrix, Keyboard, widgetManager
 ;(async()=>{

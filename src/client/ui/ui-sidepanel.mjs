@@ -1,5 +1,6 @@
 import UiWidget from './ui-widget.mjs'
 import cache from '../managers/cache.mjs'
+import {DOM, PXSCALE} from '../globals.mjs'
 
 class UiSidePanel extends UiWidget {
 

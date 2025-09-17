@@ -1,5 +1,6 @@
 import chroma from 'chroma-js'
 import fastdom from 'fastdom'
+import {DOM} from '../globals.mjs'
 
 export function icon(i) {
     var iclass = i.split('.').join(' fa-')

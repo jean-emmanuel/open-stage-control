@@ -11,6 +11,7 @@ import * as resize from '../../events/resize.mjs'
 import OscReceiver from './osc-receiver.mjs'
 import {deepCopy, deepEqual, isJSON} from '../../utils.mjs'
 import Script from '../scripts/script.mjs'
+import {PXSCALE} from '../../globals.mjs'
 
 var updateWidget = ()=>{},
     uiConsole, widgetTree, widgetDragResize, sessionManager

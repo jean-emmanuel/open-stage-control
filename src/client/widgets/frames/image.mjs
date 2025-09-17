@@ -2,6 +2,7 @@ import html from 'nanohtml'
 import Widget from '../common/widget.mjs'
 import {urlParser} from '../utils.mjs'
 import StaticProperties from '../mixins/static_properties.mjs'
+import {DOM} from '../../globals.mjs'
 
 export default class Image extends StaticProperties(Widget, {bypass: true}) {
 

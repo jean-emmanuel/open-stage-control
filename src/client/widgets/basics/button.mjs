@@ -4,6 +4,7 @@ import doubleTap from '../mixins/double_tap.mjs'
 import {deepEqual, isJSON} from '../../utils.mjs'
 import {iconify} from '../../ui/utils.mjs'
 import parser from '../../parser.mjs'
+import {TOGGLE_ALT_TRAVERSING} from '../../globals.mjs'
 
 class Button extends Widget {
 

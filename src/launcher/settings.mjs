@@ -4,6 +4,7 @@ import {ipcRenderer} from 'electron'
 import remote from '@electron/remote'
 import {icon} from '../client/ui/utils.mjs'
 import terminal from './terminal.mjs'
+import {DOM} from '../client/globals.mjs'
 
 var {dialog} = remote.require('electron'),
     fs = remote.require('fs'),

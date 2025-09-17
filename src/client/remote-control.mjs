@@ -6,6 +6,7 @@ import stateManager from './managers/state.mjs'
 import sessionManager from './managers/session'
 import notifications from './ui/notifications.mjs'
 import uiConsole from './ui/ui-console.mjs'
+import {READ_ONLY} from './globals.mjs'
 
 var callbacks = {
     '/EDIT': function(args, custom_module) {
