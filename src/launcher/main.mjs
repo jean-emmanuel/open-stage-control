@@ -4,9 +4,9 @@ import {ipcRenderer} from 'electron'
 import terminal from './terminal.mjs'
 import settings from './settings.mjs'
 import './toolbar.mjs'
-import {DOM} from '../client/globals.mjs'
+import {DOM, PACKAGE} from '../client/globals.mjs'
 
-DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${window.PACKAGE.productName} <span class="version">v${window.PACKAGE.version}</span>`)
+DOM.get(document, '#osc-greeting-header')[0].appendChild(html`${PACKAGE.productName} <span class="version">v${PACKAGE.version}</span>`)
 
 if (settings.remote.read('checkForUpdates') && navigator.onLine) {
 
@@ -16,7 +16,7 @@ if (settings.remote.read('checkForUpdates') && navigator.onLine) {
     request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
             var data = JSON.parse(request.responseText),
-                current = 'v' + window.PACKAGE.version,
+                current = 'v' + PACKAGE.version,
                 latest = data[0].name
 
             if (semver.gt(latest, current)) {
