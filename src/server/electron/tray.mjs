@@ -7,9 +7,9 @@ var tray = null,
 
 export default function(options = {}) {
 
-    var icon = __dirname + '/../assets/logo.png'
+    var icon = __dirname + '/../../assets/logo.png'
     if (process.platform === 'darwin') {
-        icon = __dirname + '/../assets/logo_tray.png'
+        icon = __dirname + '/../../assets/logo_tray.png'
     }
 
     tray = new Tray(icon)
