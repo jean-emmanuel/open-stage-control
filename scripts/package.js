@@ -1,4 +1,4 @@
-const packager = require('electron-packager'),
+const packager = require('@electron/packager'),
       path = require('path'),
       appData = require('../app/package.json'),
       safeFFMPEG = require('electron-packager-plugin-non-proprietary-codecs-ffmpeg').default,
