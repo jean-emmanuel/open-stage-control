@@ -274,7 +274,7 @@ class Panel extends Container() {
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
 
-        } else if (this.childrenType === 'widget' && Array.isArray(v) && v.length === 2 && this.props.type !== 'modal') {
+        } else if (this.getProp('scroll') && this.childrenType !== 'tab' && Array.isArray(v) && v.length === 2 && this.props.type !== 'modal') {
 
             this.value = v
             clearTimeout(this.scrollTimeout)

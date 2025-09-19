@@ -45,24 +45,24 @@ class Matrix extends Panel {
 
         this.resolveLock = false
 
-        this.on('value-changed',(e)=>{
+        if (!this.getProp('scroll')) {
+            this.on('value-changed',(e)=>{
 
-            if (e.widget === this) return
+                if (e.widget === this) return
 
-            var widget = this.getProp('widgetType') === 'clone' ? e.widget.parent : e.widget
+                var widget = this.getProp('widgetType') === 'clone' ? e.widget.parent : e.widget
 
-            if (widget.parent !== this) return
+                if (widget.parent !== this) return
 
-            this.value[widget._index] = e.widget.getValue()
+                this.value[widget._index] = e.widget.getValue()
 
-            this.changed({
-                ...e.options,
-                id: widget.getProp('id')
+                this.changed({
+                    ...e.options,
+                    id: widget.getProp('id')
+                })
+
             })
-
-        })
-
-
+        }
 
         if (parser.widgets[this.getProp('widgetType')]) {
 
