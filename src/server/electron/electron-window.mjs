@@ -14,6 +14,7 @@ export default function(options={}) {
         backgroundColor: options.color,
         type: options.type,
         useContentSize: true,
+        darkTheme: true,
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: !!options.node,

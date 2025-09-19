@@ -37,6 +37,7 @@ function openClient() {
         var win = window({
             address:address,
             shortcuts:true,
+            color:'#151a24',
             fullscreen: settings.read('fullscreen'),
             noFocus: settings.read('client-options') && settings.read('client-options').some(x=>x.match(/nofocus=1/i)),
             id: 'client'

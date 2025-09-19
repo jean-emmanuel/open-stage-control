@@ -21,6 +21,7 @@
 - breaking change
     - dropped support for iOS 10.3
     - scrollbars are no longer emulated iOS; in general now only the scrollbar color and width are set (using the standard css scrollbar-* properties) to be more in line with system scrollbars in general
+    - macOS Catalina or abov is now required (the node package will work on older system)
 
 ## 1.29.8
 
