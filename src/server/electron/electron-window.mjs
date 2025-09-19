@@ -126,15 +126,15 @@ export default function(options={}) {
     })
 
 
-    window.webContents.on('console-message', (event, level, message)=>{
+    window.webContents.on('console-message', (event)=>{
 
-        if (level === 0 && message === 'ELECTRON.BLUR()') window.blur()
-        if (level === 0 && message === 'ELECTRON.FOCUS()') window.focus()
-        if (level === 0 && message === 'ELECTRON.SETFOCUSABLE(1)') {
+        if (event.level === 0 && event.message === 'ELECTRON.BLUR()') window.blur()
+        if (event.level === 0 && event.message === 'ELECTRON.FOCUS()') window.focus()
+        if (event.level === 0 && event.message === 'ELECTRON.SETFOCUSABLE(1)') {
             window.setFocusable(true)
             window.focus()
         }
-        if (level === 0 && message === 'ELECTRON.SETFOCUSABLE(0)') {
+        if (event.level === 0 && event.message === 'ELECTRON.SETFOCUSABLE(0)') {
             window.setFocusable(false)
             window.blur()
         }
