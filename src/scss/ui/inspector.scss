@@ -91,11 +91,6 @@ osc-panel-container.right.editor-breakout {
         height: calc(100% - 46rem);
         box-shadow: 0 1rem 0 0 inset rgba(white, 0.025);
 
-
-        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
-            border-color: var(--color-background)!important;
-            border-top:0;
-        }
     }
 
 }
@@ -233,14 +228,7 @@ osc-inspector-field {
 
         user-select: initial;
 
-        --scrollbar-size: 6rem;
-
-        // Chromium scrollbar
-        &::-webkit-scrollbar-thumb:horizontal {
-            cursor: normal;
-        }
-
-        // Firefox scrollbar (hidden to preserve height)
+        // hide scrollbar to preserve height
         scrollbar-width: thin;
         &[rows="1"] {
             scrollbar-width: none;
@@ -269,11 +257,6 @@ osc-inspector-field .ace_editor {
     background: var(--color-background);
     line-height: 1.3;
     border: 1rem solid var(--color-background);
-
-    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
-        border-color: var(--color-background)!important;
-    }
-    --scrollbar-size: 8rem;
 
     .ace_gutter {
         background: var(--color-background);

@@ -4,6 +4,7 @@ import Container from '../common/container.mjs'
 import widgetManager from '../../managers/widgets.mjs'
 import parser from '../../parser.mjs'
 import {enableTraversingGestures, disableTraversingGestures} from '../../events/drag.mjs'
+import {setScrollbarColor} from '../../ui/utils.mjs'
 import Script from '../scripts/script.mjs'
 import * as resize from '../../events/resize'
 import {DOM} from '../../globals.mjs'
@@ -362,6 +363,13 @@ class Panel extends Container() {
                 return
 
         }
+
+    }
+
+    setCssVariables() {
+
+        super.setCssVariables()
+        setScrollbarColor(this.container)
 
     }
 
