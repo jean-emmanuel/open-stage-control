@@ -20,6 +20,7 @@
 
 - breaking change
     - dropped support for iOS 10.3
+    - scrollbars are no longer emulated iOS
 
 ## 1.29.8
 

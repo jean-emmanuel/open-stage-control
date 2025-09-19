@@ -1,4 +1,4 @@
-// Chromium
+// Legacy chromium
 
 ::-webkit-scrollbar {
     width: var(--scrollbar-size);
@@ -40,7 +40,7 @@
 }
 
 
-// Firefox
+// Modern browsers
 
 * {
     scrollbar-color: var(--color-scrollbar) var(--color-background);

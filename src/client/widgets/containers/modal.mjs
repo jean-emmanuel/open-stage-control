@@ -4,10 +4,7 @@ import Panel from './panel.mjs'
 import {icon, iconify} from '../../ui/utils.mjs'
 import * as resize from '../../events/resize.mjs'
 import doubleTap from '../mixins/double_tap'
-import iOS from '../../ui/ios.mjs'
 import {DOM, PXSCALE} from '../../globals.mjs'
-
-var iOS13 = iOS === 13
 
 class Modal extends Panel {
 
@@ -72,13 +69,6 @@ class Modal extends Panel {
         this.container.appendChild(this.popup)
         this.popupContent = DOM.get(this.popup, '.popup-content')[0]
 
-
-        if (iOS13 && this.getProp('scroll')) {
-            for (let dir in this.iosScrollbars) {
-                this.container.removeChild(this.iosScrollbars[dir].container)
-                this.popupContent.appendChild(this.iosScrollbars[dir].container)
-            }
-        }
 
         // convert dimensions / coordinates to rem
         var geometry = {}
