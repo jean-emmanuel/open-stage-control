@@ -1,8 +1,9 @@
 import {DOM} from '../globals.mjs'
 
-var zoom
+var zoom, editor
 ;(async()=>{
-    zoom = (await import('../ui/zoom')).default
+    zoom = (await import('../ui/zoom.mjs')).default
+    editor = (await import('../editor/index.mjs')).default
 })()
 
 // impot cssTransformCoords from './transform-coords.mjs'
@@ -11,6 +12,8 @@ const Touch = window.Touch || class Touch {}
 
 
 export function fix(e) {
+
+    var localZoom = editor.enabled  ? zoom.localZoom : 1
 
     return {
 
@@ -22,8 +25,8 @@ export function fix(e) {
         pageY: e.pageY,
         clientX: e.clientX,
         clientY: e.clientY,
-        movementX: e.movementX === undefined ? undefined : e.movementX / zoom.localZoom,
-        movementY: e.movementY === undefined ? undefined : e.movementY / zoom.localZoom,
+        movementX: e.movementX === undefined ? undefined : e.movementX / localZoom,
+        movementY: e.movementY === undefined ? undefined : e.movementY / localZoom,
         pointerId: e.pointerId,
         pointerType: e.pointerType,
         button: e.button,
