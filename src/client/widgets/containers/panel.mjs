@@ -46,7 +46,8 @@ class Panel extends Container() {
                 tabs: {type: 'array', value: [], help: 'Each element of the array must be a tab object. A panel cannot contain widgets and tabs simultaneously'},
             },
             scripting: {
-                onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the session is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
+                onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
+                onScroll: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is scrolled. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
             }
         })
 
@@ -101,10 +102,15 @@ class Panel extends Container() {
 
             if (this.getProp('scroll')) {
 
-                if (this.props.type !== 'modal') {
-                    this.value = [0, 0]
-                    this.scrollTimeout = null
+                if (this.getProp('onScroll')) {
+                    this.scripts.onScroll = new Script({
+                        widget: this,
+                        property: 'onScroll',
+                        code: this.getProp('onScroll'),
+                        context: {event: {}, value: 0}
+                    })
                 }
+
                 this.scroll = [0, 0]
                 this.scrollWidth = 1
                 this.scrollHeight = 1
@@ -118,19 +124,20 @@ class Panel extends Container() {
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                     this.scroll = [this.widget.scrollLeft, this.widget.scrollTop]
-                    var x = this.widget.scrollLeft / this.scrollWidth || 0,
-                        y = this.widget.scrollTop / this.scrollHeight || 0
-                    if (this.props.type !== 'modal') {
                         if (this.settingScroll) {
                             clearTimeout(this.settingScrollEnd)
                             this.settingScrollEnd = setTimeout(()=>{
                                 this.settingScroll = false
                             })
-                        } else {
-                            this.setValue([x, y], {sync: true, send:true, fromScroll:true})
+                        } else if (this.scripts.onScroll) {
+                            this.scripts.onScroll.run({
+                                value: this.value,
+                                event: {
+                                    x: this.widget.scrollLeft / this.scrollWidth || 0,
+                                    y: this.widget.scrollTop / this.scrollHeight || 0
+                                }
+                            }, {sync: true, send: true})
                         }
-
-                    }
                 }, {element: this.widget})
 
             }
@@ -274,17 +281,8 @@ class Panel extends Container() {
             if (options.send) this.sendValue()
             if (options.sync) this.changed(options)
 
-        } else if (this.getProp('scroll') && this.childrenType !== 'tab' && Array.isArray(v) && v.length === 2 && this.props.type !== 'modal') {
-
-            this.value = v
-            clearTimeout(this.scrollTimeout)
-            this.scrollTimeout = setTimeout(()=>{
-                if (this.scroll) this.setScroll(v[0] * this.scrollWidth, v[1] * this.scrollHeight, !options.fromScroll)
-            })
-
-            if (options.send) this.sendValue()
-            if (options.sync) this.changed(options)
         }
+
     }
 
     getScroll() {
@@ -297,11 +295,11 @@ class Panel extends Container() {
         this.settingScroll = true
         if (x !== undefined) {
             this.scroll[0] = x
-            if (updateDom) this.widget.scrollLeft = x
+            if (updateDom) this.widget.scrollLeft = x * this.scrollWidth
         }
         if (y !== undefined) {
             this.scroll[1] = y
-            if (updateDom) this.widget.scrollTop = y
+            if (updateDom) this.widget.scrollTop = y * this.scrollHeight
         }
 
     }

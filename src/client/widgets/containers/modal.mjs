@@ -162,6 +162,14 @@ class Modal extends Panel {
         this.setVisibility()
         if (this.value) {
             resize.check(this.widget, true)
+
+            if (this.getProp('scroll')) {
+                setTimeout(()=>{
+                    this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
+                    this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
+                    this.setScroll(this.scroll[0], this.scroll[1], true)
+                })
+            }
         }
 
 
@@ -275,13 +283,6 @@ class Modal extends Panel {
                 return
 
         }
-
-    }
-
-    setScroll(x, y) {
-
-        if (x !== undefined) this.popupContent.firstChild.scrollLeft = this.scroll[0] = x
-        if (y !== undefined) this.popupContent.firstChild.scrollTop = this.scroll[1] = y
 
     }
 
