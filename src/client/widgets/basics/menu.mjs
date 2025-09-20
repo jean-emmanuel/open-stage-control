@@ -33,8 +33,8 @@ class Menu extends MenuBase {
                 textAlign: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
                 menuAlignV: {type: 'string', value: 'center', choices: ['center', 'top', 'bottom'], help: 'Set to `top` or `bottom` to change menu alignment (otherwise center)'},
                 menuAlignH: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change menu alignment (otherwise center)'},
-                layout: {type: 'string', value: 'circular', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
-                    'Defines whether the menu\'s layout should be rendered in a circle or in a box'
+                layout: {type: 'string', value: 'vertical', choices: ['circular', 'horizontal', 'vertical', 'grid'], help: [
+                    'Defines how the menu\'s item are laid out'
                 ]},
                 gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns or a valid value for the css property "grid-template".'},
             },

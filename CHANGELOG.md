@@ -11,6 +11,7 @@
     - canvas: added `contextType` property
     - file: honor server's `remote-root` option (remove root path from displayed path and returned value)
     - matrix: if `scroll` is `true`, children's values no longer feed the matrix' value and onValue script, it will be used for scrolling state, like with panels
+    - menu: changed default `layout` to `vertical`
 
 - scripting
     - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)
