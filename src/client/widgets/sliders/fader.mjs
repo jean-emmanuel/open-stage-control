@@ -136,10 +136,15 @@ class Fader extends Slider {
             d = Math.round(this.percentToCoord(percent)),
             m = horizontal ? this.height / 2 : this.width / 2,
             knobHeight = this.cssVars.knobSize,
-            knobWidth = design ? knobHeight : knobHeight * .6
+            knobWidth = knobHeight * .6,
+            height = !horizontal ? this.height : this.width
 
-        if (design == 'compact') knobWidth = this.width
-
+        if (design == 'round') knobWidth = knobHeight
+        if (design == 'compact') {
+            knobWidth = this.width
+            // knob position range depends on knob size in compact mode
+            d = d / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
+        }
         if (horizontal) [knobWidth, knobHeight] = [knobHeight, knobWidth]
 
         // add extra tolerance pixels
@@ -151,9 +156,11 @@ class Fader extends Slider {
             condition
 
         if (horizontal) {
+            if (design == 'compact') knobX +=  knobWidth / 2
             condition = ((x >= knobX && x <= knobX + knobWidth) || (zone == 'gauge' || snap)) &&
                         y >= knobY && y <= knobY + knobHeight
         } else {
+            if (design == 'compact') knobY +=  knobHeight / 2
             condition = x >= knobX && x <= knobX + knobWidth &&
                         ((y >= knobY && y <= knobY + knobHeight) || (zone == 'gauge' || snap))
         }

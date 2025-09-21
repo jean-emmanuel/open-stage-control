@@ -6,6 +6,7 @@
     - server: fix resolving absolute file urls containing the remote-root path
     - prevent editor zoom level from affecting drag events when the editor is disabled
     - prevent changing editor zoom level when it's disabled
+    - fader: fix touchZone == knob for compact design
 
 - widgets
     - the html property is no longer restricted / sanitized
