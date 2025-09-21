@@ -29,6 +29,10 @@
 
 
 
+    &.hidden-scroll > inner {
+        scrollbar-width: none;
+    }
+
     &.no-scroll > inner {
         overflow: hidden;
     }

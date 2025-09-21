@@ -62,6 +62,15 @@ export default class Scrollbar extends StaticProperties(Fader, {
             }
 
         }, {context: this})
+
+        var widgets = widgetManager.getWidgetById(this.getProp('widgetId'))
+        for (var widget of widgets) {
+            if (widget.getProp('scroll')) {
+                this.unbindTarget()
+                this.bindTarget(widget)
+                break
+            }
+        }
     }
 
 
@@ -110,7 +119,7 @@ export default class Scrollbar extends StaticProperties(Fader, {
         super.cacheCanvasStyle(style)
 
         var size = this.getProp('horizontal') ? this.width : this.height
-        this.cssVars.knobSize = this.thumbSize * size
+        this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
         this.cssVars.alphaKnob = 0.25
 
     }
@@ -132,8 +141,6 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         this.scrollTarget = target
 
-        // listen for cloneTarget's deletion
-        // if it is just edited, its recreation will be caught by the global 'widget-created' event handler
         this.scrollTarget.on('widget-removed', (e)=>{
             if (this.scrollTarget === e.widget) {
                 this.unbindTarget()
@@ -147,8 +154,8 @@ export default class Scrollbar extends StaticProperties(Fader, {
                 size = this.getProp('horizontal') ? this.width : this.height
 
             this.thumbSize = this.scrollTarget.scrollThumb[index]
-            this.cssVars.knobSize = this.thumbSize * size
-            this.setValue(this.scrollTarget.scroll[index], {fromPanel:true, script:true})
+            this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
+            this.setValue(this.scrollTarget.scroll[index], {fromPanel:true, send:true, sync:true})
         }
 
         this.scrollTarget.on('scroll', onScroll)
@@ -166,9 +173,9 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         if (!options.fromPanel && this.scrollTarget) {
             if (this.getProp('horizontal')) {
-                this.scrollTarget.setScroll(this.value, undefined, true)
+                this.scrollTarget.setScroll(this.value, undefined, !options.fromPanel)
             } else {
-                this.scrollTarget.setScroll(undefined, this.value, true)
+                this.scrollTarget.setScroll(undefined, this.value, !options.fromPanel)
             }
 
         }

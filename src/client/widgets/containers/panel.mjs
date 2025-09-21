@@ -31,7 +31,7 @@ class Panel extends Container() {
                 justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
                 gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns or a valid value for the css property "grid-template".'},
                 contain: {type: 'boolean', value: true, help:'If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel.'},
-                scroll: {type: 'boolean', value: true, help: 'Set to `false` to disable scrollbars'},
+                scroll: {type: 'boolean|string', value: true, choices: [true, false, 'hidden'], help: 'Set to `false` to disable scrollbars, set to `hidden` to hide scrollbars while allowing to scroll (may not work on old browsers).'},
                 innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
                 tabsPosition: {type: 'string', value: 'top', choices: ['top', 'bottom', 'left', 'right', 'hidden'], help: 'Defines the position of the navigation bar if the panel contains tabs'},
             },
@@ -72,6 +72,7 @@ class Panel extends Container() {
 
         this.container.classList.toggle('no-inner-padding', !this.getProp('innerPadding'))
         this.container.classList.toggle('no-scroll', !this.getProp('scroll'))
+        this.container.classList.toggle('hidden-scroll', this.getProp('scroll') == 'hidden')
         this.container.classList.add('layout-' + this.getProp('layout'))
         this.container.classList.toggle('layout-contain', this.getProp('contain'))
 
