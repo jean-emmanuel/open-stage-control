@@ -70,3 +70,8 @@
     }
 
 }
+
+.scrollbar-container {
+    --alpha-fill-off: 0;
+    --alpha-fill-on: var(--alpha-scrollbar);
+}

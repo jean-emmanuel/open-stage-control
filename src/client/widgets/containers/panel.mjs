@@ -112,12 +112,10 @@ class Panel extends Container() {
                     this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
                 })
                 this.on('scroll', ()=>{
-                    fastdom.measure(()=>{
-                        this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
-                        this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
-                        this.scroll = [this.widget.scrollLeft / this.scrollWidth || 0, this.widget.scrollTop / this.scrollHeight || 0]
-                        this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
-                    })
+                    this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
+                    this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
+                    this.scroll = [this.widget.scrollLeft / this.scrollWidth || 0, this.widget.scrollTop / this.scrollHeight || 0]
+                    this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
                 }, {element: this.widget})
 
             }

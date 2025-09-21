@@ -1,13 +1,13 @@
+import fastdom from 'fastdom'
 import Fader from './fader.mjs'
 import StaticProperties from '../mixins/static_properties.mjs'
 import {clip} from '../utils.mjs'
 import widgetManager from '../../managers/widgets.mjs'
-import fastdom from 'fastdom'
+import {PXSCALE} from '../../globals.mjs'
 
 export default class Scrollbar extends StaticProperties(Fader, {
     range: {min: 0, max: 1},
     touchZone: 'all',
-    alphaFillOn: 0,
     snap: false,
     design: 'compact'
 }) {
@@ -45,6 +45,7 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         this.scrollTarget = null
         this.thumbSize = 1
+        this.lock = false
 
         if (!this.getProp('horizontal')) {
             this.rangeVals[0] = 1
@@ -134,6 +135,7 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         this.scrollTarget = null
 
+        this.lock = false
     }
 
     bindTarget(target) {
@@ -148,41 +150,162 @@ export default class Scrollbar extends StaticProperties(Fader, {
             }
         }, {context: this})
 
-        var onScroll = ()=>{
+        var onScroll = (e, init)=>{
             if (!this.scrollTarget) return
+
+            if (this.lock) {
+                this.lock = false
+                return
+            }
 
             var index = this.getProp('horizontal') ? 0 : 1,
                 size = this.getProp('horizontal') ? this.width : this.height
 
-            fastdom.measure(()=>{
-                fastdom.mutate(()=>{
-                    this.thumbSize = this.scrollTarget.scrollThumb[index]
-                    this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
-                    this.setValue(this.scrollTarget.scroll[index], {fromPanel:true, send:true, sync:true})
-                })
-            })
+            this.thumbSize = this.scrollTarget.scrollThumb[index]
+            this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
+            this.setValue(this.scrollTarget.scroll[index], {fromPanel:true, send:!init, sync:!init})
 
         }
 
         this.scrollTarget.on('scroll', onScroll)
-        onScroll()
+        fastdom.measure(()=>{
+            onScroll({}, true)
+        })
 
     }
-
-
 
     setValue(v, options={}) {
 
         super.setValue(v, options)
 
         if (!options.fromPanel && this.scrollTarget) {
+            var scroll = this.scrollTarget.getScroll()
             if (this.getProp('horizontal')) {
-                this.scrollTarget.setScroll(this.value, undefined, !options.fromPanel)
+                if (scroll[0] != this.value) {
+                    this.lock = true
+                    this.scrollTarget.setScroll(this.value, undefined, true)
+                }
             } else {
-                this.scrollTarget.setScroll(undefined, this.value, !options.fromPanel)
+                if (scroll[1] != this.value) {
+                    this.lock = true
+                    this.scrollTarget.setScroll(undefined, this.value, true)
+                }
+            }
+        }
+
+    }
+
+    draw() {
+
+        var width = this.getProp('horizontal') ? this.height : this.width,
+            height = !this.getProp('horizontal') ? this.height : this.width
+
+        var percent = this.steps ? this.valueToPercent(this.value) : this.percent,
+            d = Math.round(this.percentToCoord(percent)),
+            o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
+            m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
+            dashed = this.dashed,
+            knobHeight = this.cssVars.knobSize
+
+        this.clear()
+
+        // sharp border trick
+        if (width % 2 && parseInt(m) === m) m -= 0.5
+
+
+        this.ctx.strokeStyle = this.gaugeGradient || this.cssVars.colorFill
+
+        this.ctx.lineWidth = Math.round(width - this.gaugePadding * 2)
+
+
+        if (dashed) this.ctx.setLineDash([PXSCALE * dashed[0], PXSCALE * dashed[1]])
+
+
+        if (this.cssVars.alphaFillOff) {
+            // gaugo off
+            this.ctx.globalAlpha = this.cssVars.alphaFillOff
+            this.ctx.beginPath()
+            this.ctx.moveTo(m, height - this.gaugePadding)
+            this.ctx.lineTo(m, this.gaugePadding)
+            this.ctx.stroke()
+        }
+
+
+        if (dashed) this.ctx.setLineDash([])
+
+        // flat knob
+
+        this.ctx.globalAlpha = this.cssVars.alphaFillOn
+        this.ctx.fillStyle = this.cssVars.colorKnob
+
+        this.ctx.beginPath()
+        d = d / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
+        this.ctx.rect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight)
+        this.ctx.fill()
+
+        let x, y, w, h,
+            rad =  PXSCALE * this.cssVars.borderRadius
+
+        // border radius: clip gauge & knob
+        if (rad > 0) {
+            rad = Math.min(Math.min(height, width) / 2, rad)
+            x = this.gaugePadding
+            y = this.gaugePadding
+            w = width - this.gaugePadding * 2
+            h = height - this.gaugePadding * 2
+            this.ctx.beginPath()
+            this.ctx.moveTo(x + rad, y)
+            this.ctx.arcTo(x + w, y, x + w, y + h, rad)
+            this.ctx.arcTo(x + w, y + h, x, y + h, rad)
+            this.ctx.arcTo(x, y + h, x, y, rad)
+            this.ctx.arcTo(x, y, x + w, y, rad)
+            this.ctx.closePath()
+
+            var tmpOp = this.ctx.globalCompositeOperation
+            this.ctx.globalCompositeOperation = 'destination-in'
+            this.ctx.fillStyle = '#ffffff'
+            this.ctx.globalAlpha = 1
+            this.ctx.fill()
+            this.ctx.globalCompositeOperation = tmpOp
+        }
+
+        // stroke
+        if (this.cssVars.lineWidth) {
+
+            this.ctx.globalAlpha = this.cssVars.alphaStroke
+            this.ctx.strokeStyle = this.cssVars.colorStroke
+
+            // draw stroke
+            x = 0.5 * this.cssVars.lineWidth
+            y = 0.5 * this.cssVars.lineWidth
+            w = width - this.cssVars.lineWidth
+            h = height - this.cssVars.lineWidth
+
+            this.ctx.beginPath()
+            if (rad > 0) {
+                this.ctx.moveTo(x + rad, y)
+                this.ctx.arcTo(x + w, y, x + w, y + h, rad)
+                this.ctx.arcTo(x + w, y + h, x, y + h, rad)
+                this.ctx.arcTo(x, y + h, x, y, rad)
+                this.ctx.arcTo(x, y, x + w, y, rad)
+            } else {
+                this.ctx.moveTo(x, y)
+                this.ctx.lineTo(x + w, y)
+                this.ctx.lineTo(x + w, y + h)
+                this.ctx.lineTo(x, y + h)
             }
 
+            this.ctx.closePath()
+            this.ctx.lineWidth = this.cssVars.lineWidth
+            this.ctx.stroke()
+
         }
+
+
+
+        this.clearRect = [0, 0, width, height]
+
+
     }
 
     onRemove(){
