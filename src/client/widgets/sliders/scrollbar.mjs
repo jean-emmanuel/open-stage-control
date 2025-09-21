@@ -2,6 +2,7 @@ import Fader from './fader.mjs'
 import StaticProperties from '../mixins/static_properties.mjs'
 import {clip} from '../utils.mjs'
 import widgetManager from '../../managers/widgets.mjs'
+import fastdom from 'fastdom'
 
 export default class Scrollbar extends StaticProperties(Fader, {
     range: {min: 0, max: 1},
@@ -153,15 +154,18 @@ export default class Scrollbar extends StaticProperties(Fader, {
             var index = this.getProp('horizontal') ? 0 : 1,
                 size = this.getProp('horizontal') ? this.width : this.height
 
-            this.thumbSize = this.scrollTarget.scrollThumb[index]
-            this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
-            this.setValue(this.scrollTarget.scroll[index], {fromPanel:true, send:true, sync:true})
+            fastdom.measure(()=>{
+                fastdom.mutate(()=>{
+                    this.thumbSize = this.scrollTarget.scrollThumb[index]
+                    this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
+                    this.setValue(this.scrollTarget.scroll[index], {fromPanel:true, send:true, sync:true})
+                })
+            })
+
         }
 
         this.scrollTarget.on('scroll', onScroll)
-        setTimeout(()=>{
-            onScroll()
-        })
+        onScroll()
 
     }
 

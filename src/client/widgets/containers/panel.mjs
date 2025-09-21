@@ -47,7 +47,7 @@ class Panel extends Container() {
             },
             scripting: {
                 onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
-                onScroll: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is scrolled. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
+                // onScroll: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is scrolled. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
             }
         })
 
@@ -102,46 +102,22 @@ class Panel extends Container() {
             this.container.classList.add('contains-widgets')
 
             if (this.getProp('scroll')) {
-
-                if (this.getProp('onScroll')) {
-                    this.scripts.onScroll = new Script({
-                        widget: this,
-                        property: 'onScroll',
-                        code: this.getProp('onScroll'),
-                        context: {event: {}, value: 0}
-                    })
-                }
-
                 this.scroll = [0, 0]
                 this.scrollThumb = [1, 1]
                 this.scrollWidth = 1
                 this.scrollHeight = 1
-                this.settingScroll = false
-                this.settingScrollEnd = null
                 fastdom.measure(()=>{
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                     this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
                 })
                 this.on('scroll', ()=>{
-                    this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
-                    this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
-                    this.scroll = [this.widget.scrollLeft / this.scrollWidth || 0, this.widget.scrollTop / this.scrollHeight || 0]
-                    this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
-                        if (this.settingScroll) {
-                            clearTimeout(this.settingScrollEnd)
-                            this.settingScrollEnd = setTimeout(()=>{
-                                this.settingScroll = false
-                            })
-                        } else if (this.scripts.onScroll) {
-                            this.scripts.onScroll.run({
-                                value: this.value,
-                                event: {
-                                    x: this.scroll[0],
-                                    y: this.scroll[1]
-                                }
-                            }, {sync: true, send: true})
-                        }
+                    fastdom.measure(()=>{
+                        this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
+                        this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
+                        this.scroll = [this.widget.scrollLeft / this.scrollWidth || 0, this.widget.scrollTop / this.scrollHeight || 0]
+                        this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
+                    })
                 }, {element: this.widget})
 
             }
@@ -296,7 +272,7 @@ class Panel extends Container() {
     }
 
     setScroll(x, y, updateDom) {
-        this.settingScroll = true
+
         if (x !== undefined) {
             this.scroll[0] = x
             if (updateDom) this.widget.scrollLeft = x * this.scrollWidth

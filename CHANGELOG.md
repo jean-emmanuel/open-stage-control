@@ -15,7 +15,9 @@
     - file: honor server's `remote-root` option (remove root path from displayed path and returned value)
     - matrix: if `scroll` is `true`, children's values no longer feed the matrix' value and onValue script, it will be used for scrolling state, like with panels
     - menu: changed default `layout` to `vertical`
-    - root/panel/modal/tab: add `onScroll` script; value is no longer used for scrolling
+    - root/panel/modal/tab: support setting `scroll` to `hidden` (hides scrollbars and allows scrolling)
+    - add new `scrollbar` widget that connects to a scrolling container widget and acts as it scrollbar
+
 
 - scripting
     - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)
@@ -25,9 +27,10 @@
 
 - breaking change
     - dropped support for iOS 10.3
-    - scrollbars are no longer emulated iOS; in general now only the scrollbar color and width are set (using the standard css scrollbar-* properties) to be more in line with system scrollbars in general
     - macOS Catalina or abov is now required (the node package will work on older system)
-    - panels no longer use their value to set/get their scrolling state, not do they sync scrolling automatically. There's now a dedicated onScroll script that must be used instead, along with the setScroll and getScroll functions.
+    - scrollbars are no longer emulated iOS
+    - scrollbar styling is now done using only the standard css scrollbar-* properties) to be more in line with system scrollbars in general
+    - panels no longer use their value to set/get their scrolling state, not do they sync scrolling automatically. Instead there's now a dedicated scrollbar widget that can be used for this.
 
 ## 1.29.8
 
