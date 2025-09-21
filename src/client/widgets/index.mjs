@@ -45,6 +45,7 @@ import fader from './sliders/fader.mjs'
 import knob from './sliders/knob.mjs'
 import encoder from './sliders/encoder.mjs'
 import range from './sliders/range.mjs'
+import scrollbar from './sliders/scrollbar.mjs'
 
 // scripts
 import script from './scripts/script-widget.mjs'
@@ -100,6 +101,7 @@ export const widgets = {
     knob,
     encoder,
     range,
+    scrollbar,
 
     // scripts
     script,
@@ -114,7 +116,7 @@ export const categories = {
     'Graphs':['plot','eq','visualizer'],
     'Indicators':['led', 'text'],
     'Pads':['xy','rgb','multixy', 'canvas'],
-    'Sliders':['fader','knob', 'encoder', 'range'],
+    'Sliders':['fader','knob', 'encoder', 'range', 'scrollbar'],
     'Scripts':['script', 'variable'],
 }
 

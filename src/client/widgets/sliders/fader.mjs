@@ -119,9 +119,9 @@ class Fader extends Slider {
 
     }
 
-    shouldDrag(e) {
+    shouldDrag(e, testZone) {
 
-        var zone = this.getProp('touchZone'),
+        var zone = testZone || this.getProp('touchZone'),
             design = this.getProp('design'),
             horizontal = this.getProp('horizontal'),
             snap = this.getProp('snap')
@@ -309,7 +309,7 @@ class Fader extends Slider {
 
             // flat knob
 
-            this.ctx.globalAlpha = 1
+            this.ctx.globalAlpha = this.cssVars.alphaKnob || 1
             this.ctx.fillStyle = this.cssVars.colorKnob
 
             this.ctx.beginPath()

@@ -112,6 +112,7 @@ class Panel extends Container() {
                 }
 
                 this.scroll = [0, 0]
+                this.scrollThumb = [1, 1]
                 this.scrollWidth = 1
                 this.scrollHeight = 1
                 this.settingScroll = false
@@ -119,11 +120,13 @@ class Panel extends Container() {
                 fastdom.measure(()=>{
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
+                    this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
                 })
                 this.on('scroll', ()=>{
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
-                    this.scroll = [this.widget.scrollLeft, this.widget.scrollTop]
+                    this.scroll = [this.widget.scrollLeft / this.scrollWidth || 0, this.widget.scrollTop / this.scrollHeight || 0]
+                    this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
                         if (this.settingScroll) {
                             clearTimeout(this.settingScrollEnd)
                             this.settingScrollEnd = setTimeout(()=>{
@@ -133,8 +136,8 @@ class Panel extends Container() {
                             this.scripts.onScroll.run({
                                 value: this.value,
                                 event: {
-                                    x: this.widget.scrollLeft / this.scrollWidth || 0,
-                                    y: this.widget.scrollTop / this.scrollHeight || 0
+                                    x: this.scroll[0],
+                                    y: this.scroll[1]
                                 }
                             }, {sync: true, send: true})
                         }
