@@ -37,7 +37,6 @@ function openClient() {
         var win = window({
             address:address,
             shortcuts:true,
-            color:'#151a24',
             fullscreen: settings.read('fullscreen'),
             noFocus: settings.read('client-options') && settings.read('client-options').some(x=>x.match(/nofocus=1/i)),
             id: 'client'
@@ -173,7 +172,7 @@ function startLauncher() {
 
     app.on('ready', function(){
 
-        launcher = window({address:address, shortcuts:dev, width:680, height:(40 + 200 + 20 + 24 * Object.keys(settings.options).filter(x=>settings.options[x].launcher !== false).length / 2), node:true, color:'#151a24', id: 'launcher'})
+        launcher = window({address:address, shortcuts:dev, width:680, height:(40 + 200 + 20 + 24 * Object.keys(settings.options).filter(x=>settings.options[x].launcher !== false).length / 2), node:true, id: 'launcher'})
 
         electronRemote.enable(launcher.webContents)
 

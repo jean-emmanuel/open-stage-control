@@ -11,7 +11,7 @@ export default function(options={}) {
     window = new BrowserWindow({
         title: options.title || settings.infos.productName,
         icon: path.resolve(__dirname + '/../../assets/logo.png'),
-        backgroundColor: options.color,
+        backgroundColor: '#21252B',
         type: options.type,
         useContentSize: true,
         darkTheme: true,
