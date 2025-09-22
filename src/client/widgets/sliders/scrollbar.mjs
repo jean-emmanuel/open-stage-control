@@ -177,7 +177,6 @@ export default class Scrollbar extends StaticProperties(Fader, {
         super.setValue(v, options)
 
         if (!options.fromScrollEvent && this.scrollTarget) {
-            var scroll = this.scrollTarget.getScroll()
             if (this.getProp('horizontal')) {
                 this.scrollTarget.setScroll(this.value, undefined, true)
             } else {
@@ -194,7 +193,6 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         var percent = this.steps ? this.valueToPercent(this.value) : this.percent,
             d = Math.round(this.percentToCoord(percent)),
-            o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
             m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
             dashed = this.dashed,
             knobHeight = this.cssVars.knobSize

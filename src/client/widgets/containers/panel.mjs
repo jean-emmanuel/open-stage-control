@@ -6,7 +6,6 @@ import parser from '../../parser.mjs'
 import {enableTraversingGestures, disableTraversingGestures} from '../../events/drag.mjs'
 import {setScrollbarColor} from '../../ui/utils.mjs'
 import Script from '../scripts/script.mjs'
-import * as resize from '../../events/resize'
 import {DOM} from '../../globals.mjs'
 
 class Panel extends Container() {
@@ -31,7 +30,6 @@ class Panel extends Container() {
                 justify: {type: 'string', value: 'start', choices: ['start', 'end', 'center', 'space-around', 'space-between'], help:'If `layout` is `vertical` or `horizontal`, defines how widgets should be justified.'},
                 gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns or a valid value for the css property "grid-template".'},
                 contain: {type: 'boolean', value: true, help:'If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel.'},
-                scroll: {type: 'boolean|string', value: true, choices: [true, false, 'hidden'], help: 'Set to `false` to disable scrollbars, set to `hidden` to hide scrollbars while allowing to scroll (may not work on old browsers).'},
                 scroll: {type: 'boolean|string', value: true, choices: [true, false, 'hidden', 'manual'], help: [
                     '- `true`: scrollbars are show and content is scrollble',
                     '- `false`: scrollbars are hidden and content is not scrollble',
@@ -390,7 +388,6 @@ class Panel extends Container() {
 
 
     onRemove() {
-        this.off('resize')
         super.onRemove()
     }
 
