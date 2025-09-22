@@ -9,7 +9,8 @@ export default class Scrollbar extends StaticProperties(Fader, {
     range: {min: 0, max: 1},
     touchZone: 'all',
     snap: false,
-    design: 'compact'
+    design: 'compact',
+    sensitivity: 1
 }) {
 
     static defaults() {
@@ -19,10 +20,7 @@ export default class Scrollbar extends StaticProperties(Fader, {
                 _separator_fader_style: 'Scrollbar style',
                 design: null,
                 knobSize: null,
-                // colorKnob: null,
                 pips: null,
-                dashed: null,
-                gradient: null,
             },
             class_specific: {
                 snap: null,
@@ -33,6 +31,7 @@ export default class Scrollbar extends StaticProperties(Fader, {
                 logScale: null,
                 steps: null,
                 origin: null,
+                sensitivity: null,
                 widgetId: {type: 'string', value: '', help: '`id` of the container widget to control'},
             }
         })
@@ -233,7 +232,7 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         this.ctx.beginPath()
         d = d / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
-        if (this.ctx.roundRect) {
+        if (this.cssVars.borderRadius > 0 && this.ctx.roundRect) {
             this.ctx.roundRect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight, PXSCALE * this.cssVars.borderRadius)
         } else {
             this.ctx.rect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight)
