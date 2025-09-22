@@ -228,7 +228,11 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         this.ctx.beginPath()
         d = d / (height - this.gaugePadding) * (height-this.gaugePadding - knobHeight)
-        this.ctx.rect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight)
+        if (this.ctx.roundRect) {
+            this.ctx.roundRect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight, PXSCALE * this.cssVars.borderRadius)
+        } else {
+            this.ctx.rect(this.gaugePadding, d, width - this.gaugePadding * 2, knobHeight)
+        }
         this.ctx.fill()
 
         let x, y, w, h,
