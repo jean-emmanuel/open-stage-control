@@ -155,8 +155,13 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
             this.thumbSize = this.scrollTarget.scrollThumb[index]
             this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
-            if (this.scrollTarget.scroll[index] != this.value) {
-                this.setValue(this.scrollTarget.scroll[index], {fromScrollEvent:true, send:!init, sync:!init})
+
+            if (init && this.value) {
+                // panel (re)createed: restore scroll state
+                this.setValue(this.value, {fromScrollEvent: false, send: false, sync: false})
+            } else if (this.scrollTarget.scroll[index] != this.value) {
+                // panel scrolling: update scroll state
+                this.setValue(this.scrollTarget.scroll[index], {fromScrollEvent: true, send: !init, sync: !init})
             }
 
         }
