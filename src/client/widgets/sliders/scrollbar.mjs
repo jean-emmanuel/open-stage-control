@@ -115,17 +115,6 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
     }
 
-    cacheCanvasStyle(style){
-
-        super.cacheCanvasStyle(style)
-
-        var size = this.getProp('horizontal') ? this.width : this.height
-        this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
-        this.cssVars.alphaKnob = 0.25
-
-    }
-
-
     unbindTarget() {
 
         if (!this.scrollTarget) return
@@ -152,9 +141,6 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
             var index = this.getProp('horizontal') ? 0 : 1,
                 size = this.getProp('horizontal') ? this.width : this.height
-
-            this.thumbSize = this.scrollTarget.scrollThumb[index]
-            this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
 
             if (init && this.value) {
                 // panel (re)createed: restore scroll state
@@ -190,15 +176,15 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
     draw() {
 
-        var width = this.getProp('horizontal') ? this.height : this.width,
-            height = !this.getProp('horizontal') ? this.height : this.width
-
-        var percent = this.steps ? this.valueToPercent(this.value) : this.percent,
+        var horizontal = this.getProp('horizontal'),
+            width = horizontal ? this.height : this.width,
+            height = !horizontal ? this.height : this.width,
+            percent = this.steps ? this.valueToPercent(this.value) : this.percent,
             d = Math.round(this.percentToCoord(percent)),
             o = Math.round(this.percentToCoord(this.valueToPercent(this.originValue))),
-            m = this.getProp('horizontal') ? this.height / 2 : this.width / 2,
+            m = horizontal ? this.height / 2 : this.width / 2,
             dashed = this.dashed,
-            knobHeight = this.cssVars.knobSize
+            knobHeight = Math.max(this.scrollTarget.scrollThumb[horizontal ? 0 : 1] * height, 30)
 
         this.clear()
 
