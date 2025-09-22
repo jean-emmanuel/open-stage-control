@@ -1,11 +1,6 @@
 import EventEmitter from '../events/event-emitter.mjs'
 import {DOM, PXSCALE, INITIALZOOM, setPXSCALE} from '../globals.mjs'
 
-var editor
-;(async()=>{
-    editor = (await import('../editor/index.mjs')).default
-})()
-
 var mod = (navigator.platform || '').match('Mac') ? 'metaKey' : 'ctrlKey'
 
 class Zoom extends EventEmitter {
@@ -16,6 +11,7 @@ class Zoom extends EventEmitter {
 
         this.localZoom = 1
         this.lastWheelZoom = 0
+        this.editor = null
 
         document.addEventListener('wheel', (event)=>{
             if (event.ctrlKey) event.preventDefault()
@@ -67,7 +63,7 @@ class Zoom extends EventEmitter {
 
     setLocalZoom(zoom) {
 
-        if (!editor.enabled) return
+        if (this.editor && !this.editor.enabled) return
 
         zoom = Math.max(Math.min(zoom, 4), 0.25)
         if (zoom !== this.localZoom) {

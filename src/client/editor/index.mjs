@@ -14,6 +14,7 @@ import locales from '../locales/index.mjs'
 import {leftUiSidePanel, rightUiSidePanel} from '../ui/index.mjs'
 import ipc from '../ipc/index.mjs'
 import {DOM, GRIDWIDTH, GRIDWIDTH_CSS, ENV, PXSCALE, setGRIDWIDTH, READ_ONLY} from '../globals.mjs'
+import zoom from '../ui/zoom.mjs'
 
 var sessionManager
 ;(async()=>{
@@ -27,6 +28,8 @@ const HISTORY_SIZE = 50
 class Editor {
 
     constructor() {
+
+        zoom.editor = this
 
         this.inspector = new UiInspector({selector: '#osc-inspector'})
         this.inspector.on('update', (event)=>{
