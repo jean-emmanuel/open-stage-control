@@ -12,7 +12,7 @@ import locales from '../../locales/index.mjs'
 import Session from './session.mjs'
 import EventEmitter from '../../events/event-emitter.mjs'
 import {deepEqual} from '../../utils.mjs'
-import {DOM, READ_ONLY, PACKAGE} from '../../globals.mjs'
+import {DOM, READ_ONLY, PACKAGE, CLIENT_SYNC} from '../../globals.mjs'
 
 var SessionManager = class SessionManager extends EventEmitter {
 
@@ -167,7 +167,7 @@ var SessionManager = class SessionManager extends EventEmitter {
 
         this.load(data.fileContent, ()=>{
             this.setSessionPath(data.path)
-            ipc.send('sessionOpened', {path: data.path})
+            ipc.send('sessionOpened', {path: data.path, sync: CLIENT_SYNC})
         })
 
     }

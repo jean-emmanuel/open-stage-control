@@ -174,7 +174,7 @@ export default class Callbacks {
             this.ipcServer.send('stateLoad', state, clientId)
         }
 
-        this.ipcServer.send('stateSend', null, null, clientId)
+        if (data.sync) this.ipcServer.send('stateSend', null, null, clientId)
 
         this.sessionSetPath({path: data.path}, clientId)
 
