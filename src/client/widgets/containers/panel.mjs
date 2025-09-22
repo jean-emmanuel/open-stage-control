@@ -32,6 +32,12 @@ class Panel extends Container() {
                 gridTemplate: {type: 'string|number', value: '', help:'If `layout` is `grid`, can be either a number of columns or a valid value for the css property "grid-template".'},
                 contain: {type: 'boolean', value: true, help:'If `layout` is `vertical` or `horizontal`, prevents children from overflowing the panel.'},
                 scroll: {type: 'boolean|string', value: true, choices: [true, false, 'hidden'], help: 'Set to `false` to disable scrollbars, set to `hidden` to hide scrollbars while allowing to scroll (may not work on old browsers).'},
+                scroll: {type: 'boolean|string', value: true, choices: [true, false, 'hidden', 'manual'], help: [
+                    '- `true`: scrollbars are show and content is scrollble',
+                    '- `false`: scrollbars are hidden and content is not scrollble',
+                    '- `"hidden"`: scrollbars are hidden (using css, may not work on old browsers) and content is scrollble',
+                    '- `"manual"`: scrollbars are hidden (using css, may not work on old browsers) and content is scrollble only using scripting or scrollbar widgets',
+                ]},
                 innerPadding: {type : 'boolean', value: true, help: 'Set to `false` to make the `padding` property apply only between children and not at the container\'s inner boundaries.'},
                 tabsPosition: {type: 'string', value: 'top', choices: ['top', 'bottom', 'left', 'right', 'hidden'], help: 'Defines the position of the navigation bar if the panel contains tabs'},
             },
@@ -47,7 +53,6 @@ class Panel extends Container() {
             },
             scripting: {
                 onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
-                // onScroll: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is scrolled. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
             }
         })
 
@@ -71,7 +76,7 @@ class Panel extends Container() {
         }
 
         this.container.classList.toggle('no-inner-padding', !this.getProp('innerPadding'))
-        this.container.classList.toggle('no-scroll', !this.getProp('scroll'))
+        this.container.classList.toggle('no-scroll', !this.getProp('scroll') || this.getProp('scroll') == 'manual')
         this.container.classList.toggle('hidden-scroll', this.getProp('scroll') == 'hidden')
         this.container.classList.add('layout-' + this.getProp('layout'))
         this.container.classList.toggle('layout-contain', this.getProp('contain'))
@@ -102,6 +107,8 @@ class Panel extends Container() {
             this.container.classList.add('contains-widgets')
 
             if (this.getProp('scroll')) {
+                this.scrollLock = false
+                this.scrollLockTimeout = null
                 this.scroll = [0, 0]
                 this.scrollThumb = [1, 1]
                 this.scrollWidth = 1
@@ -111,7 +118,8 @@ class Panel extends Container() {
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                     this.scrollThumb = [this.widget.clientWidth / this.widget.scrollWidth || 1, this.widget.clientHeight / this.widget.scrollHeight || 1]
                 })
-                this.on('scroll', ()=>{
+                this.on('scroll', (e)=>{
+                    if (this.scrollLock) e.locked = true
                     this.scrollWidth = this.widget.scrollWidth - this.widget.clientWidth
                     this.scrollHeight = this.widget.scrollHeight - this.widget.clientHeight
                     this.scroll = [this.widget.scrollLeft / this.scrollWidth || 0, this.widget.scrollTop / this.scrollHeight || 0]
@@ -269,15 +277,34 @@ class Panel extends Container() {
 
     }
 
-    setScroll(x, y, updateDom) {
+    setScroll(x, y, updateDom, lock=true) {
 
         if (x !== undefined) {
             this.scroll[0] = x
-            if (updateDom) this.widget.scrollLeft = x * this.scrollWidth
+            if (updateDom) {
+                if (this.widget.scrollLeft != x * this.scrollWidth) {
+                    this.scrollLock = !!lock
+                    this.widget.scrollLeft = x * this.scrollWidth
+                }
+            }
         }
         if (y !== undefined) {
             this.scroll[1] = y
-            if (updateDom) this.widget.scrollTop = y * this.scrollHeight
+            if (updateDom) {
+                if (this.widget.scrollTop != y * this.scrollHeight) {
+                    this.scrollLock = !!lock
+                    this.widget.scrollTop = y * this.scrollHeight
+                }
+            }
+        }
+
+        // unlock scroll events only after some time to prevent smooth scrolling
+        // issues in firefox and prevent feedback loops
+        if (this.scrollLock) {
+            clearTimeout(this.scrollLockTimeout)
+            this.scrollLockTimeout = setTimeout(()=>{
+                this.scrollLock = false
+            },100)
         }
 
     }

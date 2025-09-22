@@ -152,6 +152,8 @@ class Modal extends Panel {
             this.updatePopupLabel()
         }
 
+        if (this.getProp('scroll') && this.value) this.scrollLock = true
+
         this.popup.classList.toggle('show', this.value)
         this.container.classList.toggle('on', this.value)
 

@@ -25,6 +25,7 @@
 
     > inner {
         overflow: auto;
+        scroll-behavior: auto!important; // smooth mode breaks scrollbar widget
     }
 
 

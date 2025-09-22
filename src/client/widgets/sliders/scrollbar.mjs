@@ -45,7 +45,6 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         this.scrollTarget = null
         this.thumbSize = 1
-        this.lock = false
 
         if (!this.getProp('horizontal')) {
             this.rangeVals[0] = 1
@@ -134,8 +133,6 @@ export default class Scrollbar extends StaticProperties(Fader, {
         this.scrollTarget.off(undefined, undefined, this)
 
         this.scrollTarget = null
-
-        this.lock = false
     }
 
     bindTarget(target) {
@@ -149,26 +146,23 @@ export default class Scrollbar extends StaticProperties(Fader, {
                 this.unbindTarget()
             }
         }, {context: this})
-
         var onScroll = (e, init)=>{
-            if (!this.scrollTarget) return
 
-            if (this.lock) {
-                this.lock = false
-                return
-            }
+            if (!this.scrollTarget || e.locked) return
 
             var index = this.getProp('horizontal') ? 0 : 1,
                 size = this.getProp('horizontal') ? this.width : this.height
 
             this.thumbSize = this.scrollTarget.scrollThumb[index]
             this.cssVars.knobSize = Math.max(this.thumbSize * size, 30)
-            this.setValue(this.scrollTarget.scroll[index], {fromPanel:true, send:!init, sync:!init})
+            if (this.scrollTarget.scroll[index] != this.value) {
+                this.setValue(this.scrollTarget.scroll[index], {fromScrollEvent:true, send:!init, sync:!init})
+            }
 
         }
 
-        this.scrollTarget.on('scroll', onScroll)
         fastdom.measure(()=>{
+            this.scrollTarget.on('scroll', onScroll)
             onScroll({}, true)
         })
 
@@ -178,18 +172,12 @@ export default class Scrollbar extends StaticProperties(Fader, {
 
         super.setValue(v, options)
 
-        if (!options.fromPanel && this.scrollTarget) {
+        if (!options.fromScrollEvent && this.scrollTarget) {
             var scroll = this.scrollTarget.getScroll()
             if (this.getProp('horizontal')) {
-                if (scroll[0] != this.value) {
-                    this.lock = true
-                    this.scrollTarget.setScroll(this.value, undefined, true)
-                }
+                this.scrollTarget.setScroll(this.value, undefined, true)
             } else {
-                if (scroll[1] != this.value) {
-                    this.lock = true
-                    this.scrollTarget.setScroll(undefined, this.value, true)
-                }
+                this.scrollTarget.setScroll(undefined, this.value, true)
             }
         }
 
