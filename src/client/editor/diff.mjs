@@ -1,4 +1,4 @@
-import diff from 'jsondiffpatch'
+import {diff} from 'jsondiffpatch'
 
 export {diff}
 export function diffToWidget(widget, diff) {
