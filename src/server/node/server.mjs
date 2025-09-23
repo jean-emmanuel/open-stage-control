@@ -48,6 +48,11 @@ class WebServer extends EventEmitter {
 
         this.ipcServer = ipcServer
 
+
+        theme.on('update', ()=>{
+            ipcServer.send('reloadCss')
+        })
+
         this.server.listen(settings.read('port') || 8080)
 
         var proto = settings.read('use-ssl') ? https : http
