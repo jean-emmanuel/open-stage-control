@@ -215,7 +215,8 @@ class UiTree extends UiWidget {
 
         var node = DOM.get(this.list, `[data-widget="${widget.hash}"]`)
         if (node) {
-            var parent = node[0].parentNode
+            node = node[0]
+            var parent = node.parentNode
             while (parent !== this.list) {
                 if (parent.classList.contains('container')) {
                     parent.classList.add('expanded')
@@ -223,8 +224,15 @@ class UiTree extends UiWidget {
                 }
                 parent = parent.parentNode
             }
-            node[0].scrollIntoView({block: 'center'})
-            this.wrapper.scrollLeft = (node[0].depth - 1) * 20
+            var nodeRect = node.classList.contains('container') ? node.firstChild.getBoundingClientRect() : node.getBoundingClientRect(),
+                treeRect = this.wrapper.getBoundingClientRect()
+
+            if (nodeRect.top < treeRect.top) {
+                node.scrollIntoView({block: 'start'});
+            } else if (nodeRect.bottom > treeRect.bottom) {
+                node.scrollIntoView({block: 'nearest'});
+            }
+            this.wrapper.scrollLeft = (node.depth - 1) * 20
         }
 
         if (this.parent.minimized) this.parent.restore()
@@ -235,7 +243,6 @@ class UiTree extends UiWidget {
 
         DOM.each(this.list, '.editing', (el)=>{
             el.classList.add('editor-blink')
-            el.scrollIntoView({block: 'center'})
             this.wrapper.scrollLeft = (el.depth - 1) * 20
             setTimeout(()=>{
                 el.classList.remove('editor-blink')
