@@ -214,7 +214,7 @@ class UiTree extends UiWidget {
     showWidget(widget) {
 
         var node = DOM.get(this.list, `[data-widget="${widget.hash}"]`)
-        if (node) {
+        if (node.length) {
             node = node[0]
             var parent = node.parentNode
             while (parent !== this.list) {
