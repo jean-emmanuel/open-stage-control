@@ -18,6 +18,8 @@
     - root/panel/modal/tab: support setting `scroll` to `hidden` (hides scrollbars and allows scrolling)
     - add new `scrollbar` widget that connects to a scrolling container widget and acts as it scrollbar
 
+- editor
+    - selecting a widget automatically shows it in the widget tree if it's not minimized 
 
 - scripting
     - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)

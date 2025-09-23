@@ -672,6 +672,9 @@ class Editor {
         }
         this.widgetTree.select(this.selectedWidgets)
         this.widgetDragResize.create(this.selectedWidgets)
+        if (!this.widgetTree.parent.minimized) {
+            this.widgetTree.showWidget(editor.selectedWidgets[editor.selectedWidgets.length-1])
+        }
 
     }
 
