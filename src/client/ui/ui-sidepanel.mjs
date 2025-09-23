@@ -20,7 +20,7 @@ class UiSidePanel extends UiWidget {
 
         var size = cache.get(this.cacheKey + '.width') || 250
         this.minWidth = options.minSize !== undefined ? options.minSize : (options.size !== undefined ? options.size : 250)
-        this.width = size !== undefined ? size : (options.size !== undefined ? options.size : 250)
+        this.width = size !== undefined ? size : (options.size !== undefined ? options.size : 350)
 
         this.disabled = false
         var minimized = cache.get(this.cacheKey + '.minimized')
