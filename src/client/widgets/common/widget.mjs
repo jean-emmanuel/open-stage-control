@@ -163,7 +163,9 @@ class Widget extends EventEmitter {
                         if (this[i] === undefined) this[i] = {}
                         for (let j in obj[i]) {
                             if (obj[i][j] === null) delete this[i][j]
-                            else {
+                            else if (j[0] === '_') {
+                                this[i][j] = obj[i][j]
+                            } else {
                                 if (!this[i][j]) this[i][j] = {}
                                 Object.assign(this[i][j], obj[i][j])
                             }
