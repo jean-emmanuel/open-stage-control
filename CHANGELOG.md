@@ -14,13 +14,12 @@
     - input/textarea/select no longer have their appearance property reset in custom html
     - canvas: added `contextType` property
     - file: honor server's `remote-root` option (remove root path from displayed path and returned value)
-    - matrix: if `scroll` is `true`, children's values no longer feed the matrix' value and onValue script, it will be used for scrolling state, like with panels
     - menu: changed default `layout` to `vertical`
     - root/panel/modal/tab: support setting `scroll` to `hidden` (hides scrollbars and allows scrolling)
     - add new `scrollbar` widget that connects to a scrolling container widget and acts as it scrollbar
 
 - editor
-    - selecting a widget automatically shows it in the widget tree if it's not minimized 
+    - selecting a widget automatically shows it in the widget tree if it's not minimized
 
 - scripting
     - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)
