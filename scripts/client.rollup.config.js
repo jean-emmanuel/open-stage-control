@@ -19,6 +19,7 @@ module.exports = {
             entryFileNames: `[name]-${package.version}.js`,
             format: 'es',
             sourcemap: true,
+            sourcemapExcludeSources: true
 		},
 	],
     treeshake: false,
