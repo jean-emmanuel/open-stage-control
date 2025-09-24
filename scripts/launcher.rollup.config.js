@@ -13,6 +13,7 @@ module.exports = {
 	output: [
 		{
             dir: 'app/launcher/',
+            chunkFileNames: `[name]-${package.version}.js`,
             format: 'commonjs',
             sourcemap: true,
             sourcemapExcludeSources: true,
