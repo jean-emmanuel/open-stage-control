@@ -18,8 +18,8 @@ module.exports = {
             dir: 'app/server/',
             format: 'commonjs',
             sourcemap: true,
-            strict: false,
-            name: '_',
+            sourcemapExcludeSources: true,
+            strict: false
 		},
 	],
     treeshake: false,

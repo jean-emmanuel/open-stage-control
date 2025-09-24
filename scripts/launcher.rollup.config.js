@@ -14,8 +14,9 @@ module.exports = {
 		{
             dir: 'app/launcher/',
             format: 'commonjs',
-            strict: false,
-            name: '_',
+            sourcemap: true,
+            sourcemapExcludeSources: true,
+            strict: false
 		},
 	],
     treeshake: false,
