@@ -6,7 +6,7 @@ document = {
     createElement: x=>({
         ownerDocument: document,
         addEventListener: ()=>{},
-        style: {},
+        style: {setProperty: ()=>{}},
         nodeName: '',
         childNodes: [],
         setAttribute: ()=>{},
@@ -14,13 +14,14 @@ document = {
         lastChild: {},
         toString: ()=>' ',
         removeChild: ()=>{},
+        getPropertyValue: ()=>{},
         contentWindow: {
             document: {
                 open: ()=>{},
                 close: ()=>{},
                 write: ()=>{},
             }
-        }
+        },
     }),
     getElementById: ()=>document.createElement(),
     createTextNode: x=>({
@@ -48,18 +49,15 @@ document = {
         appendChild: ()=>{},
         addEventListener: ()=>{}
     },
-    location: {},
-    documentElement: {
-        appendChild: ()=>{},
-        removeChild: ()=>{}
-    }
+    location: {search: ''},
 }
+document.documentElement = document.createElement()
 
 // eslint-disable-next-line no-global-assign
 window = {
     screen: {width: 800, height: 600},
     addEventListener: ()=>{},
-    location: {},
+    location: {search: ''},
     Image: Function,
     document: document,
     navigator: {
@@ -75,6 +73,7 @@ window = {
         getItem(){return null},
         setItem(){},
     },
+    getComputedStyle: ()=>document.createElement(),
     MutationObserver: class MutationObserver{},
     ELECTRON_NOGPU: false,
     CANVAS_FRAMERATE: 1,
