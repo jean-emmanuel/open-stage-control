@@ -80,7 +80,7 @@
   "optionalDependencies": {
     "electron": "32.3.3",
     "electron-installer-debian": "3.1.0",
-    "electron-installer-redhat": "3.4.0"
+    "electron-installer-redhat": "github:jean-emmanuel/electron-installer-redhat"
   },
   "scripts": {
     "postinstall": "echo '\\033[36m=> Dependencies installed successfully. Run \"npm run build\" to build the assets.\\033[0m\n'",
@@ -88,8 +88,8 @@
     "build": "npm run build-css && npm run build-js && echo '\\033[36m=> JS and CSS assets built successfully. Run \"npm run package\" to build an executable or \"npm start\" to run the app.\\033[0m\n'",
     "package": "node scripts/package.js",
     "package-node": "node scripts/package-node.js",
-    "deb64": "electron-installer-debian --src dist/open-stage-control-linux-x64/ --arch amd64 --dest dist/open-stage-control-linux-x64/ --icon resources/images/logo.png",
-    "rpm64": "electron-installer-redhat --src dist/open-stage-control-linux-x64/ --arch x86_64 --dest dist/open-stage-control-linux-x64/ --icon resources/images/logo.png",
+    "deb64": "electron-installer-debian --src dist/open-stage-control-linux-x64/ --arch amd64 --dest dist/ --icon resources/images/logo.png",
+    "rpm64": "electron-installer-redhat --src dist/open-stage-control-linux-x64/ --arch x86_64 --dest dist/ --icon resources/images/logo.png",
     "build-css": "node scripts/build-css.js",
     "watch-css": "nodemon --watch src/scss -e scss -x \"npm run build-css -- --reload\"",
     "build-js": "npm run build-launcher-js && npm run build-client-js && npm run build-server-js",
