@@ -17,6 +17,10 @@ class Input extends Canvas {
                 _separator_input_style: 'Input style',
                 align: {type: 'string', value: 'center', choices: ['center', 'left', 'right'], help: 'Set to `left` or `right` to change text alignment (otherwise center)'},
                 unit: {type: 'string', value: '', help: 'Unit will be appended to the displayed widget\'s value (it doesn\'t affect osc messages)'},
+                noCanvas: {type: 'boolean', value: false, help: [
+                    'Set to `true` to not a use a canvas for rendering the value when not focused.',
+                    'Use this if the text renders blurry (less effecient when updating the value frequently).'
+                ]},
             },
             class_specific: {
                 asYouType: {type: 'boolean', value: false, help: 'Set to `true` to make the input send its value at each keystroke'},
@@ -48,47 +52,54 @@ class Input extends Canvas {
         this.stringValue = ''
         this.focused = false
         this.validation = null
+        this.useCanvas = !this.getProp('noCanvas')
 
         if (this.getProp('vertical')) this.widget.classList.add('vertical')
         if (this.getProp('align') === 'left') this.widget.classList.add('left')
         if (this.getProp('align') === 'right') this.widget.classList.add('right')
 
+        this.input = html`<input class="no-keybinding"></input>`
+
+        if (!this.useCanvas) {
+            this.widget.insertBefore(this.input, this.canvas)
+        }
+
+        if (this.getProp('numeric')) {
+            this.input.type = 'number'
+            this.input.pattern = '[0-9\.]*'
+            this.input.inputMode = 'decimal'
+            this.input.step = parseFloat(this.getProp('numeric')) || 1
+        }
+
+        if (this.getProp('maxLength') !== '') {
+            this.maxLength = parseInt(this.getProp('maxLength'))
+            this.input.maxLength = this.maxLength
+        } else {
+            this.maxLength = -1
+        }
+
+        var asYouType = this.getProp('asYouType')
+
+        if (this.getProp('validation') !== '') {
+            var validation = String(this.getProp('validation')),
+                flags = validation.match(/^\/.*\/.*$/) ? validation.split('/').pop() : 'gm',
+                regExpString = validation.match(/^\/.*\/.*$/) ? validation.replace(/^\/(.*)\/.*$/, '$1') : validation
+
+            if (!regExpString.match(/^\^.*\$$/)) regExpString = '^' + regExpString + '$'
+
+            this.validation = new RegExp(regExpString, flags)
+        }
 
         if (this.getProp('interaction')) {
 
-            this.widget.setAttribute('tabindex', 0)
+            if (this.useCanvas) {
+                this.widget.setAttribute('tabindex', 0)
+            }
+
             this.on('focus', this.focus.bind(this), {element: this.widget})
-            this.input = html`<input class="no-keybinding"></input>`
             this.on('blur', (e)=>{
                 this.blur(true)
             }, {element: this.input})
-
-            if (this.getProp('numeric')) {
-                this.input.type = 'number'
-                this.input.pattern = '[0-9\.]*'
-                this.input.inputMode = 'decimal'
-                this.input.step = parseFloat(this.getProp('numeric')) || 1
-            }
-
-            if (this.getProp('maxLength') !== '') {
-                this.maxLength = parseInt(this.getProp('maxLength'))
-                this.input.maxLength = this.maxLength
-            } else {
-                this.maxLength = -1
-            }
-
-            var asYouType = this.getProp('asYouType')
-
-            if (this.getProp('validation') !== '') {
-                var validation = String(this.getProp('validation')),
-                    flags = validation.match(/^\/.*\/.*$/) ? validation.split('/').pop() : 'gm',
-                    regExpString = validation.match(/^\/.*\/.*$/) ? validation.replace(/^\/(.*)\/.*$/, '$1') : validation
-
-                if (!regExpString.match(/^\^.*\$$/)) regExpString = '^' + regExpString + '$'
-
-                this.validation = new RegExp(regExpString, flags)
-            }
-
             this.input.addEventListener('keydown', (e)=>{
                 if (e.key == 'Enter') this.blur()
                 else if (e.key == 'Escape') this.blur(false)
@@ -98,7 +109,6 @@ class Input extends Canvas {
                     })
                 }
             })
-
         }
 
     }
@@ -108,11 +118,19 @@ class Input extends Canvas {
         if (this.focused) return
         this.focused = true
 
-        this.widget.setAttribute('tabindex','-1')
-        this.input.value = this.stringValue
-        this.widget.insertBefore(this.input, this.canvas)
-        this.input.focus()
-        if (!this.getProp('numeric')) this.input.setSelectionRange(0, this.input.value.length)
+        if (this.useCanvas) {
+            this.widget.insertBefore(this.input, this.canvas)
+            this.widget.setAttribute('tabindex','-1')
+            this.input.value = this.stringValue
+            this.input.focus()
+        }
+
+
+        if (!this.getProp('numeric')) {
+            setTimeout(()=>{
+                this.input.setSelectionRange(0, this.input.value.length)
+            })
+        }
 
     }
 
@@ -123,9 +141,12 @@ class Input extends Canvas {
 
         if (change) this.inputChange()
 
-        this.widget.setAttribute('tabindex','0')
-        this.widget.removeChild(this.input)
-
+        if (this.useCanvas) {
+            this.widget.removeChild(this.input)
+            this.widget.setAttribute('tabindex','0')
+        } else {
+            this.input.blur()
+        }
     }
 
     inputChange() {
@@ -134,29 +155,21 @@ class Input extends Canvas {
 
     }
 
+
+    cacheCanvasStyle(style){
+
+        if (!this.useCanvas) return
+
+        super.cacheCanvasStyle(style)
+
+    }
+
+
     resizeHandle(event){
 
-        // if (this.fontSize && event.height !== this.fontSize) {
-        //     // little hack to prevent flex layout issues
-        //     // alternate fix is to set css 'height: 100%;' on the canvas element
-        //     // but it produces a big drawing context for just one line of text.
-        //     event.height = this.fontSize
-        // }
+        if (!this.useCanvas) return
 
         super.resizeHandle(event)
-
-        // if (this.getProp('vertical')){
-        //
-        //     var ratio = CANVAS_SCALING * this.scaling
-        //
-        //     this.ctx.setTransform(1, 0, 0, 1, 0, 0)
-        //     this.ctx.rotate(-Math.PI/2)
-        //     this.ctx.translate(-this.height * ratio, 0)
-        //
-        //
-        //     if (ratio != 1) this.ctx.scale(ratio, ratio)
-        // }
-
 
     }
 
@@ -182,7 +195,11 @@ class Input extends Canvas {
 
         this.stringValue = this.getStringValue(this.value)
 
-        this.batchDraw()
+        if (this.useCanvas) {
+            this.batchDraw()
+        } else {
+            this.input.value = this.stringValue
+        }
 
         if (options.send && !options.fromSync) this.sendValue()
         if (options.sync) this.changed(options)
@@ -190,6 +207,8 @@ class Input extends Canvas {
     }
 
     draw() {
+
+        if (!this.useCanvas) return
 
         var v = this.stringValue,
             width = this.width,

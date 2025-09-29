@@ -17,6 +17,7 @@
     - menu: changed default `layout` to `vertical`
     - root/panel/modal/tab: support setting `scroll` to `hidden` (hides scrollbars and allows scrolling)
     - add new `scrollbar` widget that connects to a scrolling container widget and acts as it scrollbar
+    - input: add `noCanvas` option to avoid blurry text under some circumstances 
 
 - editor
     - selecting a widget automatically shows it in the widget tree if it's not minimized

@@ -645,7 +645,6 @@
         text-align:inherit;
         vertical-align: top;
         letter-spacing: 1rem;
-        color:var(--color-fill);
         caret-color: var(--color-fill);
         height: 100%;
         -webkit-appearance:none;
@@ -654,7 +653,9 @@
         -webkit-user-select: auto;
         -moz-user-select: auto;
         user-select: auto;
-
+        &:focus {
+            color:var(--color-fill);
+        }
         &:focus::selection {
             background: var(--color-fill);
             color: var(--color-text);
