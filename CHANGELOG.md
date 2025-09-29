@@ -17,7 +17,7 @@
     - menu: changed default `layout` to `vertical`
     - root/panel/modal/tab: support setting `scroll` to `hidden` (hides scrollbars and allows scrolling)
     - add new `scrollbar` widget that connects to a scrolling container widget and acts as it scrollbar
-    - input: add `noCanvas` option to avoid blurry text under some circumstances 
+    - input: add `noCanvas` option to avoid blurry text under some circumstances
 
 - editor
     - selecting a widget automatically shows it in the widget tree if it's not minimized
@@ -30,10 +30,10 @@
 
 - breaking change
     - dropped support for iOS 10.3
-    - macOS Catalina or abov is now required (the node package will work on older system)
-    - scrollbars are no longer emulated iOS
+    - macOS Catalina or above is now required (the node package will work on older system)
+    - scrollbars are no longer emulated on iOS
     - scrollbar styling is now done using only the standard css scrollbar-* properties) to be more in line with system scrollbars in general
-    - panels no longer use their value to set/get their scrolling state, not do they sync scrolling automatically. Instead there's now a dedicated scrollbar widget that can be used for this.
+    - panels no longer use their value to set/get their scrolling state, nor do they sync scrolling automatically. Instead there's now a dedicated scrollbar widget that can be used for this.
 
 ## 1.29.8
 
