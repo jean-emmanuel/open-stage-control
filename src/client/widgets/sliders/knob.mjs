@@ -19,7 +19,7 @@ class Knob extends Slider {
                     'Design style',
                     'Note: "solid" design uses "colorStroke" for the central knob color.'
                 ]},
-                colorKnob: {type: 'string', value: 'auto', help: 'Knob color'},
+                colorKnob: {type: 'string', value: 'auto', help: 'Knob color. Must be a valid css color.'},
                 pips: {type: 'boolean', value: false, help: 'Set to `true` to show the scale\'s breakpoints'},
                 dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
                 angle: {type: 'number', value: 270, help: 'Defines the angle\'s width of the knob, in degrees'},

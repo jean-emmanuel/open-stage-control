@@ -17,7 +17,7 @@ class Fader extends Slider {
                 _separator_fader_style: 'Fader style',
                 design: {type: 'string', value: 'default', choices: ['default', 'round', 'compact'], help: 'Design style'},
                 knobSize: {type: 'number', value: 'auto', help: 'Fader knob size'},
-                colorKnob: {type: 'string', value: 'auto', help: 'Fader knob color'},
+                colorKnob: {type: 'string', value: 'auto', help: 'Fader knob color. Must be a valid css color.'},
                 horizontal: {type: 'boolean', value: false, help: 'Set to `true` to display the fader horizontally'},
                 pips: {type: 'boolean', value: false, help: 'Set to `true` to show range breakpoints (ignored if `design` is `compact`)'},
                 dashed: {type: 'boolean|array', value: false, help: 'Set to `true` to display a dashed gauge. Can be set as an `array` of two numbers : `[dash_size, gap_size]`'},
