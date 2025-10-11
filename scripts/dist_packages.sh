@@ -17,9 +17,7 @@ cd dist
 
 # fetch & copy midi bins
 mkdir tmp && cd tmp
-wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-linux
-wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-windows.exe
-wget https://github.com/jean-emmanuel/open-stage-control-midi/releases/latest/download/osc-midi-osx
+cp ../../bin/osc-midi-* ./
 chmod +x *
 touch .expect-midi-bin
 cp {.expect-midi-bin,osc-midi-linux} ../open-stage-control-linux-x64/resources/app/server/python/
@@ -27,6 +25,7 @@ cp {.expect-midi-bin,osc-midi-windows.exe} ../open-stage-control-win32-x64/resou
 cp {.expect-midi-bin,osc-midi-osx} ../open-stage-control-darwin-x64/open-stage-control.app/Contents/Resources/app/server/python/
 cp {.expect-midi-bin,osc-midi-osx} ../open-stage-control-darwin-arm64/open-stage-control.app/Contents/Resources/app/server/python/
 cd ..
+rm -rf tmp
 
 # make packages
 mkdir packages
