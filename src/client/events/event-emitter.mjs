@@ -13,7 +13,7 @@ var customEvents = {
     'fast-click': domEvent('fast-click'),
     'focus': domEvent('focus', {capture: true}),
     'blur': domEvent('blur', {capture: true}),
-    'change': domEvent('change.mjs')
+    'change': domEvent('change')
 }
 
 // micro optimisation from eventemitter3
