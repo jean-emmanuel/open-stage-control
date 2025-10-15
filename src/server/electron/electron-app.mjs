@@ -1,4 +1,5 @@
 import {app, Menu, shell, BrowserWindow} from 'electron'
+import semver from 'semver'
 import * as settings from '../node/settings.mjs'
 
 app.setPath('userData', settings.configPath)
@@ -20,6 +21,10 @@ if (settings.read('force-gpu')) {
     app.commandLine.appendSwitch('--ignore-gpu-blacklist')
 }
 
+if (semver.gt(settings.infos.version, settings.read('version') || '0.0.0')) {
+    // set temporary flag to clean electron browser cache in case of update
+    settings.write('clearCache', true, true)
+}
 
 
 var template = [{

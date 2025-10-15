@@ -44,6 +44,13 @@ function openClient() {
         win.on('error', ()=>{
             console.log('ERR')
         })
+        if (settings.read('clearCache')) {
+            // clear browser cache and reload
+            win.webContents.session.clearCache().then(()=>{
+                settings.write('version', settings.infos.version)
+                win.webContents.reload()
+            })
+        }
         clientWindows.push(win)
     }
 
