@@ -2,7 +2,7 @@ Running the app from the sources slightly differs from using prebuilt binaries: 
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/en/#download) (v16)
+- [Node.js](https://nodejs.org/en/#download)
 - [git](https://git-scm.com/downloads)
 
 
