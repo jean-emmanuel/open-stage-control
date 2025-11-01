@@ -41,7 +41,9 @@ class MultiXy extends Pad {
                     '- color (shorthand for colorFill and colorStroke)',
                     '- alphaFillOn (background opacity)',
                     '- pointSize',
-                    '- label'
+                    '- label',
+                    '- clipX',
+                    '- clipY'
                 ]},
                 snap: {type: 'boolean', value: false, help: [
                     'By default, the points are dragged from their initial position.',
@@ -361,7 +363,7 @@ class MultiXy extends Pad {
                 a.label = legacyLabels ? this.getProp('points')[i] : String(i)
             }
 
-            for (var n of ['visible', 'axisLock', 'spring', 'colorFill', 'colorStroke', 'colorText', 'alphaFillOn', 'pointSize', 'label']) {
+            for (var n of ['visible', 'axisLock', 'spring', 'colorFill', 'colorStroke', 'colorText', 'alphaFillOn', 'pointSize', 'label', 'clipX', 'clipY']) {
                 this.pointsAttr[i][n] = a[n] === undefined ? this.getProp(n) : a[n]
 
                 if (this.pads[i].cachedProps[n] !==  this.pointsAttr[i][n]) {

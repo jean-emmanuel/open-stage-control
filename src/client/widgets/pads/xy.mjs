@@ -36,6 +36,8 @@ export default class Xy extends Pad {
                 logScaleY: {type: 'boolean|number', value: false, help: 'Set to `true` to use logarithmic scale for the y axis. Set to `-1` for exponential scale.'},
                 stepsX: {type: 'number|array|string', value: false, help: 'Defines `steps` for the x axis (see fader)'},
                 stepsY: {type: 'number|array|string', value: false, help: 'Defines `steps` for the x axis (see fader)'},
+                clipX: {type: 'object', value: '', help: 'Min and max boundaries for the x axis'},
+                clipY: {type: 'object', value: '', help: 'Min and max boundaries for the y axis'},
                 axisLock: {type: 'string', value: '', choices: ['', 'x', 'y', 'auto'], help: [
                     'Restrict movements to one of the axes only unless `Shift` is held.',
                     'When left empty, holding `Shift` while dragging will lock the pad according the first movement. `auto` will do the opposite.'
@@ -138,6 +140,8 @@ export default class Xy extends Pad {
             if (this.getProp('spring')) {
                 this.setValue([this.faders.x.getSpringValue(),this.faders.y.getSpringValue()],{sync:true, send:true, spring:true})
             } else {
+                if (this.getProp('clipX')) this.faders.x.setValue(this.value[0])
+                if (this.getProp('clipY')) this.faders.y.setValue(this.value[1])
                 this.batchDraw()
             }
         }, {element: this.canvas})
@@ -207,6 +211,7 @@ export default class Xy extends Pad {
         if (this.touched && !options.dragged && !options.doubleTap) return this.setValueTouchedQueue = [v, options]
 
         if (!options.dragged) {
+            this.clipValue(v)
             this.faders.x.setValue(v[0], {sync: false, send:false, dragged:false, doubleTap: options.doubleTap})
             this.faders.y.setValue(v[1], {sync: false, send:false, dragged:false, doubleTap: options.doubleTap})
         }
@@ -216,10 +221,25 @@ export default class Xy extends Pad {
             this.faders.y.value
         ]
 
+        this.clipValue(this.value)
+
         if (options.send) this.sendValue()
         if (options.sync) this.changed(options)
 
         this.batchDraw()
+
+    }
+
+    clipValue(v) {
+
+        if (this.getProp('clipX')) {
+            if (this.getProp('clipX').min !== undefined) v[0] = Math.max(this.getProp('clipX').min, v[0])
+            if (this.getProp('clipX').max !== undefined) v[0] = Math.min(this.getProp('clipX').max, v[0])
+        }
+        if (this.getProp('clipY')) {
+            if (this.getProp('clipY').min !== undefined) v[1] = Math.max(this.getProp('clipY').min, v[1])
+            if (this.getProp('clipY').max !== undefined) v[1] = Math.min(this.getProp('clipY').max, v[1])
+        }
 
     }
 
@@ -228,8 +248,8 @@ export default class Xy extends Pad {
         if (!this.visible) return
 
         var pointSize = this.pointSize,
-            x = this.faders.x.percentToCoord(this.faders.x.valueToPercent(this.faders.x.value)),
-            y = this.faders.y.percentToCoord(this.faders.y.valueToPercent(this.faders.y.value)),
+            x = this.faders.x.percentToCoord(this.faders.x.valueToPercent(this.value[0])),
+            y = this.faders.y.percentToCoord(this.faders.y.valueToPercent(this.value[1])),
             ephemeral = this.getProp('ephemeral')
 
         this.clear()

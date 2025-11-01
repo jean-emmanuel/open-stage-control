@@ -105,7 +105,9 @@ Pad.dynamicProps = Pad.prototype.constructor.dynamicProps.filter(n => n !== 'dec
     'spring',
     'axisLock',
     'pointSize',
-    'label'
+    'label',
+    'clipX',
+    'clipY'
 ])
 
 export default Pad
