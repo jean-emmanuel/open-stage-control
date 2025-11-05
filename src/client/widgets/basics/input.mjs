@@ -126,11 +126,9 @@ class Input extends Canvas {
         }
 
 
-        if (!this.getProp('numeric')) {
-            setTimeout(()=>{
-                this.input.setSelectionRange(0, this.input.value.length)
-            })
-        }
+        setTimeout(()=>{
+            this.input.select()
+        })
 
     }
 
