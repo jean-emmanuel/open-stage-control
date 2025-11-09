@@ -12,7 +12,7 @@ packager({
     name: appData.name,
     platform: all ? ['linux', 'win32', 'darwin'] : process.env.PLATFORM,
     arch: process.env.ARCH || 'x64',
-    electronVersion:  process.env.ARCH === 'armv7l' ? '1.7.11' : require('../package.json').optionalDependencies.electron,
+    electronVersion:  process.env.ELECTRON_VERSION || require('../package.json').optionalDependencies.electron,
     overwrite: true,
     out: path.resolve(__dirname + '/../dist'),
     icon: path.resolve(__dirname + '/../resources/images/logo'),
