@@ -143,7 +143,7 @@ function stopServerProcess() {
     var toClose = clientWindows.filter(w=>w && !w.isDestroyed()),
         closed = 0
 
-    if (toClose.length === 0) {
+    if (toClose.length === 0 && serverProcess) {
         serverProcess.kill('SIGINT')
         serverProcess = null
     }
