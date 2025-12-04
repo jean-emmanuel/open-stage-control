@@ -4,7 +4,8 @@ import cache from '../managers/cache.mjs'
 import {ENV} from '../globals.mjs'
 
 var notifications, locales, callbacks
-;(async()=>{
+
+var loadDeps = (async()=>{
     notifications = (await import('../ui/notifications.mjs')).default
     locales = (await import('../locales/index.mjs')).default
     callbacks = (await import('./callbacks.mjs')).default
@@ -49,24 +50,30 @@ class Ipc extends EventEmitter {
 
         document.cookie = 'client_id=' + uuid + ';samesite=strict'
 
-        try {
-            this.open()
-        } catch(e) {
-            console.warn('Could not open a WebSocket connection')
-            console.log(e)
-        }
-
 
     }
 
-    init() {
+    init(callback) {
 
-        for (let i in callbacks) {
-            let callback = callbacks[i]
-            this.on(i, (data)=>{
-                callback(data)
-            })
-        }
+        loadDeps.then(()=>{
+
+            for (let i in callbacks) {
+                let callback = callbacks[i]
+                this.on(i, (data)=>{
+                    callback(data)
+                })
+            }
+
+            try {
+                this.open()
+            } catch(e) {
+                console.warn('Could not open a WebSocket connection')
+                console.log(e)
+            }
+
+            callback()
+
+        })
 
     }
 

@@ -13,18 +13,20 @@ function init() {
 
     setTimeout(()=>{
 
-        ipc.init()
+        ipc.init(()=>{
 
-        document.title = TITLE
 
-        ipc.send('open', {hotReload: backup.exists})
+            document.title = TITLE
 
-        window.onunload = ()=>{
-            ipc.send('close')
-        }
+            ipc.send('open', {hotReload: backup.exists})
 
-        backup.load()
+            window.onunload = ()=>{
+                ipc.send('close')
+            }
 
+            backup.load()
+
+        })
 
     }, 100)
 
