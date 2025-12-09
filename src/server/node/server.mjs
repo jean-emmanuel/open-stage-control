@@ -216,7 +216,15 @@ class WebServer extends EventEmitter {
                         return true
                     } catch(e) {}
 
+
                     console.error(`(ERROR, HTTP) File not found: ${url}`)
+
+                    if (url.match(/\/client\/index.*\.js/)) {
+                        console.warn('(WARNING) It seems a client attempted to load an older version of the app,',
+                            'this may occur when using a homescreen bookmark on mobile devices.',
+                            'If that\'s the case, please delete it and browse to the app\'s url again.')
+                    }
+
                     res.writeHead(404)
                     res.end()
 
