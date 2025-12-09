@@ -41,6 +41,12 @@ class WebServer extends EventEmitter {
         // add remote root or absolute
         this.resolveDirs.push(this.remoteRoot || '')
 
+        this.ignoredNotFound = [
+            '/apple-touch-icon-precomposed.png',
+            '/favicon.ico',
+            '/apple-touch-icon.png'
+        ]
+
 
     }
 
@@ -255,7 +261,10 @@ class WebServer extends EventEmitter {
                         } catch(e) {}
                     }
 
-                    console.error(`(ERROR, HTTP) File not found: ${url}`)
+                    if (!this.ignoredNotFound.includes(url)) {
+                        console.error(`(ERROR, HTTP) File not found: ${url}`)
+                    }
+
                     res.writeHead(404)
                     res.end()
 
