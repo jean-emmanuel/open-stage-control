@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import chokidar from 'chokidar'
 import {EventEmitter} from 'events'
+import crypto from 'crypto'
 import * as settings from './settings.mjs'
 
 class Theme extends EventEmitter {
@@ -17,6 +18,7 @@ class Theme extends EventEmitter {
         this.watcher = null
         this.themes = settings.read('theme') || []
         this.files = []
+        this.hash = ''
 
         if (!this.themes.length) return this
 
@@ -65,6 +67,8 @@ class Theme extends EventEmitter {
             }
 
         }
+
+        this.hash = crypto.createHash('sha1').update(this.get()).digest('base64')
 
     }
 

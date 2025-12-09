@@ -15,8 +15,8 @@ module.exports = {
 	output: [
 		{
             dir: 'app/client/',
-            chunkFileNames: `[name]-${package.version}.js`,
-            entryFileNames: `[name]-${package.version}.js`,
+            chunkFileNames: `[name].js`,
+            entryFileNames: `[name].js`,
             format: 'es',
             sourcemap: true,
             sourcemapExcludeSources: true

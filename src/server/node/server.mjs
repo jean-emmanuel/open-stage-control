@@ -127,7 +127,21 @@ class WebServer extends EventEmitter {
 
         res.sendFile = (path)=>{
             var fpath = path.split('?')[0]
-            if (!fs.existsSync(fpath)) throw `File "${fpath}" not found.`
+            var stats = fs.statSync(fpath)
+            if (!stats || !stats.isFile()) {
+                throw `File "${fpath}" not found.`
+            }
+            var lastModified = new Date(stats.mtime)
+            lastModified.setMilliseconds(0)
+            res.setHeader('Cache-Control', 'no-cache')
+            res.setHeader("Last-Modified", lastModified.toUTCString())
+            if (
+                req.headers['if-modified-since'] && new Date(req.headers['if-modified-since']).getTime() >= lastModified.getTime()
+            ) {
+                res.statusCode = 304
+                res.end()
+                return
+            }
             return send(req, fpath).pipe(res)
         }
 
@@ -152,6 +166,7 @@ class WebServer extends EventEmitter {
                     clientOptions[k] = v
                 }
             }
+            res.setHeader('Cache-Control', 'no-store')
             fs.createReadStream(path.resolve(__dirname + '/../../client/index.html'))
               .pipe(replaceStream('</body>', `
                 <script>
@@ -166,8 +181,7 @@ class WebServer extends EventEmitter {
         } else {
 
             if (
-                url.indexOf('__OSC_ASSET__=1') != -1 ||
-                url.indexOf('open-stage-control-client.js.map') != -1 ||
+                url.indexOf('/assets/') == 0 ||
                 url.indexOf('/client/') == 0
             ) {
 
@@ -176,6 +190,16 @@ class WebServer extends EventEmitter {
                 if (url.indexOf('theme.css') != -1) {
 
                     res.setHeader('Content-Type', 'text/css')
+
+                    var etag = settings.read('theme') ? theme.hash : 'empty-theme'
+                    res.setHeader('Cache-Control', 'no-cache')
+                    res.setHeader('ETag', etag)
+                    if (req.headers['if-none-match'] && req.headers['if-none-match'] === etag) {
+                        res.statusCode = 304
+                        res.end()
+                        return
+                    }
+
                     if (settings.read('theme')) {
                         let str = theme.get(),
                             buf = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from(str) : new Buffer(str)
@@ -187,7 +211,6 @@ class WebServer extends EventEmitter {
 
                 } else {
 
-                    if (this.prod) res.setHeader('Cache-Control', 'public, max-age=2592000')
                     try {
                         res.sendFile(path.resolve(__dirname + '/../../' + url))
                         return true
