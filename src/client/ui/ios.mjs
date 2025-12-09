@@ -2,7 +2,7 @@ import {DOM} from '../globals.mjs'
 import {device, os} from './utils.mjs'
 
 
-iOS = (device.is('mobile') || device.is('tablet')) && os.is('ios')
+var iOS = (device.is('mobile') || device.is('tablet')) && os.is('ios')
 
 // Prevent iOS Pull-To-Refresh
 

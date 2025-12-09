@@ -140,7 +140,7 @@ class WebServer extends EventEmitter {
             var lastModified = new Date(stats.mtime)
             lastModified.setMilliseconds(0)
             res.setHeader('Cache-Control', 'no-cache')
-            res.setHeader("Last-Modified", lastModified.toUTCString())
+            res.setHeader('Last-Modified', lastModified.toUTCString())
             if (
                 req.headers['if-modified-since'] && new Date(req.headers['if-modified-since']).getTime() >= lastModified.getTime()
             ) {

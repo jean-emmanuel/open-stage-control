@@ -228,9 +228,9 @@ class UiTree extends UiWidget {
                 treeRect = this.wrapper.getBoundingClientRect()
 
             if (nodeRect.top < treeRect.top) {
-                node.scrollIntoView({block: 'start'});
+                node.scrollIntoView({block: 'start'})
             } else if (nodeRect.bottom > treeRect.bottom) {
-                node.scrollIntoView({block: 'nearest'});
+                node.scrollIntoView({block: 'nearest'})
             }
             this.wrapper.scrollLeft = (node.depth - 1) * 20
         }
