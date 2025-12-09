@@ -1,6 +1,11 @@
 import chroma from 'chroma-js'
 import fastdom from 'fastdom'
+import {UAParser} from 'ua-parser-js'
 import {DOM} from '../globals.mjs'
+
+var {device, os} = UAParser().withFeatureCheck()
+
+export {device, os}
 
 export function icon(i) {
     var iclass = i.split('.').join(' fa-')

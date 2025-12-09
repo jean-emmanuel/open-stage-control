@@ -1,18 +1,15 @@
 import {DOM} from '../globals.mjs'
+import {device, os} from './utils.mjs'
+
+
+iOS = (device.is('mobile') || device.is('tablet')) && os.is('ios')
 
 // Prevent iOS Pull-To-Refresh
 
-var iOS13 = (
-        navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1 // safari iPad
-        || navigator.userAgent.match(/iPhone OS (1[3-9])/) // iPhone
-        || navigator.userAgent.match(/i(Pad|Phone); CPU OS 1[3-9]/) // chrome iPad
-    ) ? 13 : 0,
-    iOS = iOS13 || navigator.platform.match(/iPhone|iPod|iPad/)
-
-if (iOS && !iOS13) {
+if (iOS && parseInt(os.version.split('.')[0]) < 13) {
 
     // prevent overscroll
-    // breaks scrolling on iOS13 (besides it doesn't seem to be needed)
+    // breaks scrolling on iOS <= 13 (besides it doesn't seem to be needed)
 
     var supportsPassiveOption = false
     try {
@@ -58,7 +55,5 @@ if (iOS) {
         }
     }
 }
-
-if (iOS13) document.body.classList.add('iOS13')
 
 export default iOS

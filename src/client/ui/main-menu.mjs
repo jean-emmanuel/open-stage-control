@@ -10,6 +10,8 @@ import stateManager from '../managers/state.mjs'
 import {leftUiSidePanel, rightUiSidePanel} from '../ui/index.mjs'
 import uiConsole from '../ui/ui-console.mjs'
 import {READ_ONLY, KIOSK, VIRTUAL_KEYBOARD, setVIRTUAL_KEYBOARD} from '../globals.mjs'
+import {device} from './utils.mjs'
+
 
 var recentSessions = [{label: locales('file_open_recent_wait'), class: 'disabled'}]
 var menuEntries = [
@@ -228,7 +230,7 @@ var menuEntries = [
 
 ]
 
-if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+if (device.is('mobile') || device.is('tablet')) {
 
 
     var noSleep = new NoSleep(),

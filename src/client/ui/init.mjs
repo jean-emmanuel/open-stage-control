@@ -5,10 +5,10 @@ import './notifications.mjs'
 import './ui-workspace.mjs'
 import './main-menu.mjs'
 import './ui-console.mjs'
-import {updateMobileThemeColor} from './utils.mjs'
+import {updateMobileThemeColor, device} from './utils.mjs'
 
 updateMobileThemeColor()
 
-if (!navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+if (!device.is('mobile') && !device.is('tablet')) {
     import('./ui-keyboard.mjs')
 }
