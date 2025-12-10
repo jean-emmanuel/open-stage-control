@@ -357,8 +357,7 @@ Triggers toolbar action at specified index.
     - `toolbar(0, 0)` -> Open a new session
     - `toolbar(4)` -> Toggle full screen
 
-    Actions will only be triggered if initiated with a user interaction. Fullscreen cannot be toggled with a simulated interaction (i.e. using `/SET`)
-
+    Some actions will only be triggered if initiated with a physical user interaction, check the console for errors if it doesn't work as expected. 
 ----
 
 #### `openUrl(url)`
