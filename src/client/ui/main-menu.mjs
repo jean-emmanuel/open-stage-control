@@ -246,6 +246,9 @@ if (device.is('mobile') || device.is('tablet')) {
                 if ('wakeLock' in navigator) {
                     navigator.wakeLock.request('screen').then((l)=>{
                         wakeLock = l
+                        wakeLock.addEventListener("release", ()=>{
+                            noSleepState = false
+                        })
                     }).catch((err)=>{
                         console.error(`Could not acquire wake lock:\n${err.name}, ${err.message}`)
                         wakeLock = null
