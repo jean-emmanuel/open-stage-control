@@ -476,6 +476,19 @@ class ScriptVm extends Vm {
 
         }
 
+
+        function getToolbarActionById(id, entries) {
+            for (var a of entries) {
+                if (a.id == id) {
+                    return a
+                }
+                if (Array.isArray(a.action)) {
+                    var ret = getToolbarActionById(id, a.action)
+                    if (ret) return ret
+                }
+            }
+        }
+
         this.sandbox.contentWindow.toolbar = (...args)=>{
 
             this.checkContext('toolbar')
@@ -486,13 +499,39 @@ class ScriptVm extends Vm {
 
             var action = toolbar.entries.filter(x=>!x.separator)
 
-            for (var i of args) {
-                if (action[i]) action = action[i].action
-                if (!Array.isArray(action)) break
-                action = action.filter(x=>!x.separator)
+            if (typeof args[0] == 'string') {
+
+                action = getToolbarActionById(args[0], action)
+                if (action) action = action.action // get callback
+                if (action && typeof action.class == 'function') {
+                    if (action.class().match(/disabled/)) action = null
+                }
+
+            } else {
+
+                for (var i of args) {
+                    if (action[i]) action = action[i].action
+                    if (!Array.isArray(action)) break
+                    action = action.filter(x=>!x.separator)
+                }
+
             }
 
             if (typeof action === 'function') action()
+
+        }
+
+        this.sandbox.contentWindow.getToolbar = (id)=>{
+
+            this.checkContext('toolbar')
+
+            var options = this.getValueOptions()
+
+            if (!options.send) return
+
+            var action = getToolbarActionById(id, toolbar.entries.filter(x=>!x.separator))
+
+            if (action && typeof action.class == 'function') return action.class().split(' ').includes('on')
 
         }
 
@@ -591,8 +630,8 @@ class ScriptVm extends Vm {
         this.globals = {}
 
         for (var imports of ['set', 'get', 'getProp', 'getIndex', 'updateProp', 'send', 'httpGet', 'stateGet', 'stateSet', 'storage',
-            'setInterval', 'clearInterval', 'setTimeout', 'cthislearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
-            'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas', 'getNavigator', 'browseFile']) {
+            'setInterval', 'clearInterval', 'setTimeout', 'clearTimeout', 'setFocus', 'unfocus' , 'setFocusable', 'setScroll', 'getScroll', 'toolbar',
+            'getToolbar', 'openUrl', 'getVar', 'setVar', 'runAs', 'reload', 'Image', 'updateCanvas', 'getNavigator', 'browseFile']) {
             this.globals[imports] = true
         }
 

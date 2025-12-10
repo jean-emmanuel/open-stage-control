@@ -347,18 +347,38 @@ Scrollable panels expose their scroll position normalized between 0 and 1 with t
 
 ----
 
-#### `toolbar(i1, i2, ...)`
-- `iX`: menu entry index
+#### `toolbar(id)`
+- `id` menu entry id (string)
 
-Triggers toolbar action at specified index.
+Triggers toobar action if currently available (ie accessible from the menu). `id` can be one of the following:
 
-!!! example "Examples"
+- `session-new`,`session-open`, `session-save`, `session-save-as`, `session-fragment`, `session-backup`, `session-import`, `session-export`
+- `state-store`, `state-recall`, `state-send`, `state-open`, `state-save`, `state-save-as`, `state-import`, `state-export`
+- `editor-enabled`, `editor-grid`, `editor-tree`, `editor-inspector`, `editor-percents`
+- `console-enabled`, `console-clear`
+- `fullscreen`, `notifictions`, `prevent-sleep`, `virtual-keyboard`
+
+Some actions will only be triggered if initiated with a physical user interaction, check the console for errors if it doesn't work as expected.
+
+
+=== "Legacy syntax: `toolbar(i1, i2, ...)`"
+
+    - `iX`: menu entry index
+
+    Triggers toolbar action at specified index.
+
+    !!! example "Examples"
 
     - `toolbar(0, 0)` -> Open a new session
     - `toolbar(4)` -> Toggle full screen
 
-    Some actions will only be triggered if initiated with a physical user interaction, check the console for errors if it doesn't work as expected. 
+
 ----
+
+#### `getToolbar(id)`
+- `id` menu entry id (string)
+
+Returns `true` if the toolbar entry exists and is currently activated.
 
 #### `openUrl(url)`
 - `url`: http(s) url

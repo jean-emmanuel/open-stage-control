@@ -25,6 +25,8 @@
 
 - scripting
     - user scripts are longer protected against infinite loop and the main window object may be reached (it's not supported to break out of scripting context, but resources are no longer wasted to prevent it)
+    - `toolbar()` can now target menu actions by id instead of index
+    - `getToolbar()` function added (returns the state of a menu entry toggle)
 
 - midi
     - add `no_auto_note_off` option

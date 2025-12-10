@@ -23,6 +23,7 @@ var menuEntries = [
             {
                 label: locales('session_new'),
                 action: sessionManager.create.bind(sessionManager),
+                id: 'session-new'
             },
             {
                 separator: true
@@ -31,6 +32,7 @@ var menuEntries = [
                 label: locales('file_open'),
                 action: sessionManager.browse.bind(sessionManager),
                 shortcut: 'mod + o',
+                id: 'session-open'
             },
             {
                 label: locales('file_open_recent'),
@@ -44,18 +46,21 @@ var menuEntries = [
                 label: locales('file_save'),
                 action: sessionManager.save.bind(sessionManager),
                 shortcut: 'mod + s',
-                class: ()=>{return sessionManager.session === null ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null ? 'disabled' :''},
+                id: 'session-save'
             },
             {
                 label: locales('file_save_as'),
                 action: sessionManager.saveAs.bind(sessionManager),
                 shortcut: 'mod + shift + s',
-                class: ()=>{return sessionManager.session === null ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null ? 'disabled' :''},
+                id: 'session-save-as'
             },
             {
                 label: locales('fragment_mode'),
                 class: ()=>{return 'toggle ' + (sessionManager.saveMode === 'fragment' ? 'on' : 'off')},
-                action: ()=>{sessionManager.setSaveMode(sessionManager.saveMode === 'session' ? 'fragment' : 'session')}
+                action: ()=>{sessionManager.setSaveMode(sessionManager.saveMode === 'session' ? 'fragment' : 'session')},
+                id: 'session-fragment'
             },
             {
                 separator: true
@@ -64,7 +69,8 @@ var menuEntries = [
                 label: locales('file_backup'),
                 action: sessionManager.saveBackup.bind(sessionManager),
                 shortcut: 'mod + b',
-                class: ()=>{return sessionManager.session === null || !sessionManager.sessionPath ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null || !sessionManager.sessionPath ? 'disabled' :''},
+                id: 'session-backup'
             },
             {
                 separator: true
@@ -72,11 +78,13 @@ var menuEntries = [
             {
                 label: locales('file_import'),
                 action: sessionManager.import.bind(sessionManager),
+                id: 'session-import'
             },
             {
                 label: locales('file_export'),
                 action: sessionManager.export.bind(sessionManager),
-                class: ()=>{return sessionManager.session === null ? 'disabled' :''}
+                class: ()=>{return sessionManager.session === null ? 'disabled' :''},
+                id: 'session-export'
             },
 
         ]
@@ -88,12 +96,14 @@ var menuEntries = [
         action: [
             {
                 label: locales('state_store'),
-                action: stateManager.quickSave.bind(stateManager)
+                action: stateManager.quickSave.bind(stateManager),
+                id: 'state-store'
             },
             {
                 label: locales('state_recall'),
                 class: ()=>{return stateManager.quickState === null ? 'disabled' : ''},
-                action: stateManager.quickLoad.bind(stateManager)
+                action: stateManager.quickLoad.bind(stateManager),
+                id: 'state-recall'
             },
             {
                 label: locales('state_send'),
@@ -103,7 +113,8 @@ var menuEntries = [
                         icon: 'sliders-h',
                         message: locales('state_sendsuccess')
                     })
-                }
+                },
+                id: 'state-send'
             },
             {
                 separator: true
@@ -111,14 +122,17 @@ var menuEntries = [
             {
                 label: locales('file_open'),
                 action: stateManager.browse.bind(stateManager),
+                id: 'state-open'
             },
             {
                 label: locales('file_save'),
                 action: stateManager.save.bind(stateManager),
+                id: 'state-save'
             },
             {
                 label: locales('file_save_as'),
                 action: stateManager.saveAs.bind(stateManager),
+                id: 'state-save-as'
             },
             {
                 separator: true
@@ -126,10 +140,12 @@ var menuEntries = [
             {
                 label: locales('file_import'),
                 action: stateManager.import.bind(stateManager),
+                id: 'state-import'
             },
             {
                 label: locales('file_export'),
                 action: stateManager.export.bind(stateManager),
+                id: 'state-export'
             },
         ]
     },
@@ -145,7 +161,8 @@ var menuEntries = [
                     if (editor.enabled) editor.disable()
                     else editor.enable()
                 },
-                shortcut: 'mod + e'
+                shortcut: 'mod + e',
+                id: 'editor-enabled'
             },
             {
                 separator: true
@@ -154,22 +171,22 @@ var menuEntries = [
                 label: locales('editor_grid'),
                 class: ()=>{return 'toggle ' + (editor.grid ? 'on' : 'off')},
                 action: editor.toggleGrid.bind(editor),
-                shortcut: 'mod + g'
-
+                shortcut: 'mod + g',
+                id: 'editor-grid'
             },
             {
                 label: locales('editor_tree'),
                 class: ()=>{return 'toggle ' + (leftUiSidePanel.minimized ? 'off' : 'on')},
                 action: ()=>{return leftUiSidePanel.minimized ? leftUiSidePanel.restore() : leftUiSidePanel.minimize()},
-                shortcut: 'mod + t'
-
-
+                shortcut: 'mod + t',
+                id: 'editor-tree'
             },
             {
                 label: locales('editor_inspector'),
                 class: ()=>{return 'toggle ' + (rightUiSidePanel.minimized ? 'off' : 'on')},
                 action: ()=>{return rightUiSidePanel.minimized ? rightUiSidePanel.restore() : rightUiSidePanel.minimize()},
-                shortcut: 'mod + i'
+                shortcut: 'mod + i',
+                id: 'editor-inspector'
             },
             {
                 separator: true
@@ -177,7 +194,8 @@ var menuEntries = [
             {
                 label: locales('editor_percents'),
                 class: ()=>{return 'toggle ' + (editor.usePercents ? 'on' : 'off')},
-                action: ()=>{editor.usePercents = !editor.usePercents}
+                action: ()=>{editor.usePercents = !editor.usePercents},
+                id: 'editor-percents'
             }
         ]
     },
@@ -196,7 +214,8 @@ var menuEntries = [
                         uiConsole.minimize()
                     }
                 },
-                shortcut: 'mod + k'
+                shortcut: 'mod + k',
+                id: 'console-enabled'
             },
             {
                 separator: true
@@ -204,7 +223,9 @@ var menuEntries = [
             {
                 label: locales('console_clear'),
                 action: uiConsole.clear.bind(uiConsole),
-                shortcut: 'mod + l'
+                shortcut: 'mod + l',
+                id: 'console-clear'
+
             },
         ]
     },
@@ -218,14 +239,16 @@ var menuEntries = [
         action: ()=>{
             if (fullscreen.isEnabled) fullscreen.toggle()
         },
-        shortcut: 'f11'
+        shortcut: 'f11',
+        id: 'fullscreen'
     },
     {
         label: locales('notifications'),
         class: ()=>{return 'toggle ' + (notifications.visible ? 'on' : 'off')},
         action: ()=>{
             notifications.setVisibility(!notifications.visible)
-        }
+        },
+        id: 'notifications'
     }
 
 ]
@@ -264,7 +287,8 @@ if (device.is('mobile') || device.is('tablet')) {
                     noSleep.disable()
                 }
             }
-        }
+        },
+        id: 'prevent-sleep'
     })
 
 } else {
@@ -274,7 +298,8 @@ if (device.is('mobile') || device.is('tablet')) {
         class: ()=>{return 'toggle ' + (VIRTUAL_KEYBOARD ? 'on' : 'off')},
         action: ()=>{
             setVIRTUAL_KEYBOARD(!VIRTUAL_KEYBOARD)
-        }
+        },
+        id: 'virtual-keyboard'
     })
 
 }
