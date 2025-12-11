@@ -49,10 +49,6 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         if (this.getProp('allow')) this.frame.setAttribute('allow', this.getProp('allow'))
 
-        this.errorText = html`<span>${locales('iframe_unauthorized')}<span>`
-        this.errorTextMounted = false
-
-
     }
 
     setValue(v, options={}) {
@@ -61,16 +57,8 @@ class Frame extends StaticProperties(Widget, {bypass: true}) {
 
         if (this.value) {
             this.frame.setAttribute('src', this.value)
-            this.widget.classList.remove('error')
-            if (this.errorTextMounted) {
-                this.widget.removeChild(this.errorText)
-                this.errorTextMounted = false
-            }
         } else {
             this.frame.setAttribute('src', '')
-            this.widget.classList.add('error')
-            this.widget.appendChild(this.errorText)
-            this.errorTextMounted = true
         }
 
         if (options.sync) this.changed(options)
