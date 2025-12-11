@@ -9,6 +9,11 @@ var loadDeps = (async()=>{
     notifications = (await import('../ui/notifications.mjs')).default
     locales = (await import('../locales/index.mjs')).default
     callbacks = (await import('./callbacks.mjs')).default
+
+    // wait for other js chunks too since we'll connect to the server once this provise resolves
+    await import('../editor/context-menu.mjs')
+    await import('../remote-control.mjs')
+    await import('../ui/ui-keyboard.mjs')
 })()
 
 var uuid, localUuid = ENV.id || cache.get('osc.uuid', false)
