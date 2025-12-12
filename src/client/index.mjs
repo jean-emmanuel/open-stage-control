@@ -11,24 +11,20 @@ uiLoading(locales('loading_server'))
 
 function init() {
 
-    setTimeout(()=>{
-
-        ipc.init(()=>{
+    ipc.init(()=>{
 
 
-            document.title = TITLE
+        document.title = TITLE
 
-            ipc.send('open', {hotReload: backup.exists})
+        ipc.send('open', {hotReload: backup.exists})
 
-            window.onunload = ()=>{
-                ipc.send('close')
-            }
+        window.onunload = ()=>{
+            ipc.send('close')
+        }
 
-            backup.load()
+        backup.load()
 
-        })
-
-    }, 100)
+    })
 
 }
 
