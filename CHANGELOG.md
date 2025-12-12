@@ -33,6 +33,7 @@
 
 - breaking change
     - dropped support for iOS 10.3
+    - minimum chromium version requirement raised to 70
     - macOS 11 (Big Sur) or above is now required (the node package will work on older system)
     - scrollbars are no longer emulated on iOS
     - scrollbar styling is now done using only the standard css scrollbar-* properties) to be more in line with system scrollbars in general

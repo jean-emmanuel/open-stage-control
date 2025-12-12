@@ -42,9 +42,10 @@ module.exports = {
             presets: [[
                 '@babel/preset-env',
                 {
+                    debug: true,
                     targets: {
                         ios: '11',
-                        chrome: '61'
+                        chrome: '70'
                     },
                     useBuiltIns: 'usage',
                     corejs: 3,
