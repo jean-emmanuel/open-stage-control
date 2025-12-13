@@ -187,8 +187,7 @@ class WebServer extends EventEmitter {
         } else {
 
             if (
-                url.indexOf('/assets/') == 0 ||
-                url.indexOf('/client/') == 0
+                path.resolve(url).match(/^\/assets|client\//)
             ) {
 
                 // osc asset files
