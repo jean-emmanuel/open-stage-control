@@ -51,6 +51,9 @@ class Button extends Widget {
                     'From a script property, feedback messages can be simulated with:',
                     '`set("widget_id", value, {external: true})`'
                 ]},
+            },
+            scripting: {
+                onTouch: {type: 'script', value: '', editor:'javascript', help: ['Script executed when the panel is touched and released, and when the pointer moves when the widget is touched. See <a href="https://openstagecontrol.ammd.net/docs/widgets/canvas/">documentation</a>.',]},
             }
         })
 
@@ -82,6 +85,10 @@ class Button extends Widget {
             this.on('resize', (e)=>{
                 this.buttonSize = [e.width, e.height]
             }, {element: this.widget})
+        }
+
+        if (this.getProp('onTouch')) {
+            this.on('draginit',(e)=>this.onTouch(e, 'start'), {element: this.container})
         }
 
         var mode = this.getProp('mode'),
@@ -219,8 +226,24 @@ class Button extends Widget {
 
         }
 
+        if (this.getProp('onTouch')) {
+            this.on('dragend',(e)=>this.onTouch(e, 'stop'), {element: this.container})
+        }
+
     }
 
+    onTouch(e, name) {
+
+        var event = {...e}
+
+        event.type = name
+
+        this.scripts.onTouch.run({
+            value: this.value,
+            event: event
+        }, {sync: true, send: true})
+
+    }
 
     get value() {
 
