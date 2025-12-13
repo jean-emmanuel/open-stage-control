@@ -2,9 +2,10 @@ import {deepCopy} from '../utils.mjs'
 import {ENV, IP} from '../globals.mjs'
 
 var sessionManager
-;(async()=>{
+setTimeout(async()=>{
+    // use setTimeout to fix init order in safari...
     sessionManager = (await import('../managers/session/index.mjs')).default
-})()
+})
 
 
 var globals

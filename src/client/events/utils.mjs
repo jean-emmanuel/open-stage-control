@@ -1,9 +1,10 @@
 import {DOM} from '../globals.mjs'
 
 var zoom
-;(async()=>{
+setTimeout(async()=>{
+    // use setTimeout to fix init order in safari...
     zoom = (await import('../ui/zoom.mjs')).default
-})()
+})
 
 // impot cssTransformCoords from './transform-coords.mjs'
 

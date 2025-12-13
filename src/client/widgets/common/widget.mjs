@@ -16,13 +16,14 @@ import {PXSCALE, JSON5} from '../../globals.mjs'
 var updateWidget = ()=>{},
     uiConsole, widgetTree, widgetDragResize, sessionManager
 
-;(async()=>{
+setTimeout(async()=>{
+    // use setTimeout to fix init order in safari...
     updateWidget = (await import('../../editor/data-workers.mjs')).updateWidget
     uiConsole = (await import('../../ui/ui-console.mjs')).default
     widgetTree = (await import('../../editor/index.mjs')).default.widgetTree
     widgetDragResize = (await import('../../editor/index.mjs')).default.widgetDragResize
     sessionManager = (await import('../../managers/session/index.mjs')).default
-})()
+})
 
 var vm = new Vm()
 
@@ -36,10 +37,6 @@ var OSCProps = [
     'target',
     'bypass'
 ]
-
-setTimeout(()=>{
-
-})
 
 class Widget extends EventEmitter {
 

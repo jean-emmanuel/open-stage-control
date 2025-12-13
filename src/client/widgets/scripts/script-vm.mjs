@@ -9,9 +9,10 @@ import uiFilebrowser from '../../ui/ui-filebrowser.mjs'
 import {setFOCUSABLE} from '../../globals.mjs'
 
 var toolbar
-;(async()=>{
+setTimeout(async()=>{
+    // use setTimeout to fix init order in safari...
     toolbar = (await import('../../ui/main-menu.mjs')).default
-})()
+})
 
 class ScriptVm extends Vm {
 
