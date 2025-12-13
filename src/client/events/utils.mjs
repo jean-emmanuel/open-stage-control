@@ -66,7 +66,7 @@ export function normalizeDragEvent(event, previousEvent) {
 
         resetEventOffset(event, event.target)
 
-    } else if (event.isTouch && previousEvent) {
+    } else if (previousEvent) {
 
         event.offsetX = previousEvent.offsetX + event.movementX
         event.offsetY = previousEvent.offsetY + event.movementY
